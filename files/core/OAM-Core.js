@@ -42,7 +42,7 @@ var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
 minimeon = false;
-var development = true;
+var development = false;
 
 function openSmallWindow() {
 	swal({

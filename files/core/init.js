@@ -35,7 +35,7 @@ ui.color = function(code) {
 tinyWindow = getUrlVar("tinyWindow");
 
 
-console.info("You like to look under the hood? Why not help us ? :-) https://github.com/Mindgamesnl/OpenAudioMc")
+console.info("You like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/")
 
 function getUrlVar(variable) {
   var query = window.location.search.substring(1);
@@ -90,10 +90,10 @@ if (getUrlVar("session").includes(":")) {
 }
 
 function enableMain(clientJs) {
-	$.getScript("files/core/OAM-Core.js", function() {
-			logInit("Login-sucess");
-			enable();
-			loadBg();
+	$.getScript("files/core/OAM-Core.js?v=1.4", function() {
+		logInit("Login-sucess");
+		enable();
+		loadBg();
 	});
 }
 

@@ -42,6 +42,7 @@ var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
 minimeon = false;
+var development = true;
 
 function openSmallWindow() {
 	swal({
@@ -62,10 +63,10 @@ function openSmallWindow() {
 
 function showPlus() {
 	swal(
-  'Do you want to customize?',
-  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
-  'question'
-)
+	  'Do you want to customize?',
+	  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
+	  'question'
+	)
 }
 
 window.onresize = function() {
@@ -90,6 +91,17 @@ function openYt() {
 
 function openTwitter() {
 	window.open(twitter);
+}
+
+if (development) {
+	swal({
+		title: 'You are using a development version!',
+		text: "There may be some functions that may be too buggy!",
+		type: 'warning',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: 'OK'
+	});
+	development = false;
 }
 
 function SetDesignColor(code) {
@@ -234,18 +246,17 @@ function onSoundEnd() {
 openaudio.sartBackground = function(url) {
 	var regionsound = soundManager.createSound({
 		id: "oa_back_",
-		volume: 100,
+		volume: volume,
 		url: url
 	});
 
 	function loopSound(sound) {
 		sound.play({
 			onfinish: function() {
-				loopSound(sound);
+				loopSound(regionsound);
 			}
 		});
 	}
-	loopSound(regionsound);
 	fadeIdTarget("oa_back_", volume);
 }
 
@@ -553,12 +564,18 @@ openaudio.decode = function(msg) {
 	}
 }
 
-openaudio.playRegion = function(url, id) {
+openaudio.playRegion = function(url, id, defaultTime) {
 	if (!regions[id]) {
 		var regionsound = soundManager.createSound({
 			id: "oa_region_" + id,
-			volume: 100,
-			url: url
+			url: url,
+			volume: volume,
+			from: defaultTime * 1000,
+			autoPlay: true,
+			onplay: function() {
+				soundManager.getSoundById("oa_region_" + id, volume).metadata.region = true;
+				console.log("[OpenAudioRegionManager] Starting Region Sounds");
+			}
 		});
 		regions[id] = true;
 
@@ -566,7 +583,9 @@ openaudio.playRegion = function(url, id) {
 			sound.play({
 				onfinish: function() {
 					loopSound(regionsound);
+					console.log("[OpenAudioRegionManager] Stopping Region Sounds");
 					fadeIdTarget("oa_region_" + id, volume);
+					console.log("[OpenAudioRegionManager] Region Sounds Stopped");
 				}
 			}, 1000);
 		}
@@ -612,11 +631,11 @@ openaudio.setGlobalVolume = function(volume) {
 }
 
 
-openaudio.newspeaker = function(src_to_file, defaultTime, startingvoluem) {
+openaudio.newspeaker = function(src_to_file, defaultTime) {
 	var speakersound = soundManager.createSound({
 		id: "speaker_ding",
 		url: src_to_file,
-		volume: startingvoluem,
+		volume: volume,
 		from: defaultTime * 1000,
 		autoPlay: true,
 		onplay: function() {

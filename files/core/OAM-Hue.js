@@ -81,24 +81,28 @@ function loop_hue_connection() {
 	if (window.location.protocol == "http:") {
 		HueTestTry = 0;
 		document.getElementById("DetectHueButton").style.display = "none";
+		document.getElementById("DirectConnectHue").style.display = "none";
 		hue_connect_loop = window.setInterval(function() {
 			HueTestTry++;
 			console.info("[Philips-Hue] Hue connect attempt: " + HueTestTry);
 			if (!hue_connected || !StopHueLoop) {
 				if (+HueTestTry < +5) {
 					document.getElementById("DetectHueButton").style.display = "none";
+					document.getElementById("DirectConnectHue").style.display = "none";
 					ConnectToHueBridge();
 				} else {
 					window.clearInterval(hue_connect_loop);
 					console.info("[Philips-Hue] Failed to detect hue bridge :(");
 					document.getElementById("hue_modal_text").innerHTML = langpack.hue.not_found;
 					document.getElementById("DetectHueButton").style.display = "";
+					document.getElementById("DirectConnectHue").style.display = "";
 				}
 			} else {
 				window.clearInterval(hue_connect_loop);
 				console.info("[Philips-Hue] Failed to detect hue bridge :(");
 				document.getElementById("hue_modal_text").innerHTML = langpack.hue.not_found;
 				document.getElementById("DetectHueButton").style.display = "";
+				document.getElementById("DirectConnectHue").style.display = "";
 			}
 		}, 5000);
 	}
@@ -106,6 +110,16 @@ function loop_hue_connection() {
 		console.info("[Philips-Hue] There is no support over a secure connection :(");
 		document.getElementById("hue_modal_text").innerHTML = "<h2>There is no support over a secure connection :(</h2>";
 	}
+}
+
+function direct_hue_connection() {
+	swal({
+		title: 'OOPSIE',
+		text: "This Feature is coming soon™!",
+		type: 'warning',
+		confirmButtonColor: '#3085d6',
+		confirmButtonText: 'OK'
+	});
 }
 
 

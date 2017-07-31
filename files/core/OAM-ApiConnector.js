@@ -105,11 +105,11 @@ socketIo.connect = function() {
 			}
 			setTimeout(function() {
 				if (settings.hue != "off") {
-          $.getScript("files/core/OAM-Hue.js", function() {
-            loop_hue_connection();
-					hueicon = new trayItem("fa-lightbulb-o", "openhue");
-					hue_enabled = true;
-          });
+					$.getScript("files/core/OAM-Hue.js", function() {
+						loop_hue_connection();
+						hueicon = new trayItem("fa-lightbulb-o", "openhue");
+						hue_enabled = true;
+					});
 				} else {
 					document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
 				}
@@ -170,7 +170,7 @@ socketIo.connect = function() {
 		} else {
 			var message = JSON.parse(msg);
 
-			//Whoah, why is this in the code?
+			//Whoah, why is thi in the code?
 			//So we can ban servers/users who use openaudio for bad things
 			//You can remove it if you wanna :3
 

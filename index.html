@@ -15,31 +15,34 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<!-- Title -->
 	<title>OpenAudioMC</title>
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="files/css/bootstrap.css?v=1.2" />
+	<link rel="stylesheet" type="text/css" href="files/css/bootstrap.css?v=1.5" />
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	<link href="files/css/main.css?v=1.2" rel="stylesheet" />
-	<link href="files/css/animate.css?v=1.2" rel="stylesheet" />
-	<link href="files/css/swall.css?v=1.2" rel="stylesheet" />
+	<link href="files/css/main.css?v=1.5" rel="stylesheet" />
+	<link href="files/css/animate.css?v=1.5" rel="stylesheet" />
+	<link href="files/css/swall.css?v=1.5" rel="stylesheet" />
+	<link href="files/css/swal-forms.css?v=1.5" rel="stylesheet" />
 	<!-- META -->
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- ICON -->
-	<link rel="icon" href="files/images/small_logo.png?v=1.2" />
-	<link rel="image" href="files/images/small_logo.png?v=1.2" />
+	<link rel="icon" href="files/images/small_logo.png?v=1.5" />
+	<link rel="image" href="files/images/small_logo.png?v=1.5" />
 	<!-- JS -->
-	<script src="files/js/jquery.js?v=1.2"></script>
-	<script src="https://craftmend.com/nophp-openaudiomc.js?v=1.2"></script>
-	<script src="files/core/init.js?v=1.16"></script>
-	<script src="files/js/bootstrap.js?v=1.2"></script>
-	<script src="files/js/swall.js?v=1.2"></script>
-	<script src="files/js/jqueryui.js?v=1.2"></script>
-	<script src="files/js/hueapi.js?v=1.2"></script>
-	<script src="files/js/soundmanager2.js?v=1.2"></script>
+	<script src="files/js/jquery.js?v=1.5"></script>
+	<script src="https://craftmend.com/nophp-openaudiomc.js?v=1.5"></script>
+	<script src="files/core/init.js?v=1.5"></script>
+	<script src="files/js/bootstrap.js?v=1.5"></script>
+	<script src="files/js/swall.js?v=1.5"></script>
+	<script src="files/js/swal-forms.js?v=1.5"></script>
+	<script src="files/js/jqueryui.js?v=1.5"></script>
+	<script src="files/js/hueapi.js?v=1.5"></script>
+	<script src="files/js/soundmanager2.js?v=1.5"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.slim.js"></script>
 </head>
 
@@ -85,7 +88,8 @@
 					<div id="HueControlls">
 						<div id="HueLightList"></div>
 					</div>
-					<button type="button" class="btn btn-primary" id="DetectHueButton" onclick="loop_hue_connection();">Retry</button>
+					<button type="button" class="btn btn-primary" id="DetectHueButton" onclick="loop_hue_connection();">Retry Auto Detect</button>
+					<button type="button" class="btn btn-primary" id="DirectConnectHue" onclick="direct_hue_connection();">Direct Connect</button>
 				</div>
 				<div class="modal-footer">
 					<div class="btn-group btn-group-justified" role="group" aria-label="group button">
@@ -104,9 +108,10 @@
 </body>
 	<!-- Make sure that OpenAudioMc is mentioned in the footer somewhere or your server will be banned until it's fixed as it was stated in the license. To appeal, email us at contact@openaudiomc.net. Thanks, ~OpenAudioMc developers -->
 <footer id="footer">
-	<span>OpenAudioMc&#9400; 2.6 (Build 1.4) - <a href="http://openaudiomc.net/" id="client-title">OpenAudioMc</a></span>
+	<span>OpenAudioMc&#9400; 2.6 (Build 1.5-Dev) - <a href="http://openaudiomc.net/" id="client-title">OpenAudioMC</a></span>
 	<img class="footer-logo" id="logo" src="files/images/footer_logo.png">
 	<img id="sc-cover" class="sc-cover" src="files/images/soundcloud.png" style="display: none;" onclick="open_soundcloud();"  onerror="this.onerror=null;this.src='files/images/sc-default.png';"/>
 	<p id="sc-title" class="sc-title" style="display: none;" onclick="open_soundcloud();">Song Title</p>
 </footer>
 </html>
+

@@ -13,6 +13,11 @@
  */
 
 socketIo.connect = function() {
+	
+	socketIo.log = function(data) {
+	console.info("[Socket.Io] " + data);
+}
+	
 	socket = io.connect(socket_io, {
 		secure: true
 	});

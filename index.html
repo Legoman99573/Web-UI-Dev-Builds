@@ -10,7 +10,7 @@
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
- */ -->
+ */ --> 
 
 
 <!DOCTYPE html>
@@ -24,8 +24,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link href="files/css/main.css?v=1.5" rel="stylesheet" />
 	<link href="files/css/animate.css?v=1.5" rel="stylesheet" />
-	<link href="files/css/swall.css?v=1.5" rel="stylesheet" />
-	<link href="files/css/swal-forms.css?v=1.5" rel="stylesheet" />
+	<link href="files/css/swall.css?v=1.6" rel="stylesheet" />
 	<!-- META -->
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
@@ -36,14 +35,15 @@
 	<!-- JS -->
 	<script src="files/js/jquery.js?v=1.5"></script>
 	<script src="https://craftmend.com/nophp-openaudiomc.js?v=1.5"></script>
-	<script src="files/core/init.js?v=1.5"></script>
 	<script src="files/js/bootstrap.js?v=1.5"></script>
-	<script src="files/js/swall.js?v=1.5"></script>
-	<script src="files/js/swal-forms.js?v=1.5"></script>
+	<script src="files/js/swall.js?v=1.7"></script>
 	<script src="files/js/jqueryui.js?v=1.5"></script>
 	<script src="files/js/hueapi.js?v=1.5"></script>
-	<script src="files/js/soundmanager2.js?v=1.5"></script>
+	<script src="files/js/soundmanager2.js?v=1.11"></script>
+	<script src="files/core/OAM-Core.js?v=1.83"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.slim.js"></script>
+	<script src="files/core/OAM-Hue.js"></script>
+	<script src="files/core/OAM-ApiConnector.js"></script>
 </head>
 
 <body id="body">
@@ -113,5 +113,6 @@
 	<img id="sc-cover" class="sc-cover" src="files/images/soundcloud.png" style="display: none;" onclick="open_soundcloud();"  onerror="this.onerror=null;this.src='files/images/sc-default.png';"/>
 	<p id="sc-title" class="sc-title" style="display: none;" onclick="open_soundcloud();">Song Title</p>
 </footer>
+<script src="files/core/init.js?v=1.5"></script>
 </html>
 

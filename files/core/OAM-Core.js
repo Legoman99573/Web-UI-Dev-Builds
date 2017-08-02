@@ -80,7 +80,6 @@ function onSoundPlay() {
 function onSoundEnd() {
 	ambtimer = setTimeout(function() {
 		if (listSounds().length == 0 && ambiance != "") {
-
 			if (ambiance.includes("soundcloud.com")) {
 				var scurl = ambiance;
 				getSoundcloud(scurl, function(newurl) {
@@ -164,6 +163,8 @@ var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
 var development = true;
+setTimeout(dev, 1000);
+setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
 	$("#footer").animate({
@@ -461,13 +462,11 @@ openaudio.playRegion = function(url, id, defaultTime) {
 		function loopSound(sound) {
 			sound.play({
 				onfinish: function() {
-					loopSound(regionsound);
-					console.log("[OpenAudioRegionManager] Stopping Region Sounds");
-					//fadeIdTarget("oa_region_" + id, volume);
-					console.log("[OpenAudioRegionManager] Region Sounds Stopped");
+					loopSound(sound);
 				}
-			}, 1000);
+			});
 		}
+		loopSound(regionsound);
 	}
 }
 
@@ -525,10 +524,11 @@ openaudio.newspeaker = function(src_to_file, defaultTime) {
 	function loopSound(sound) {
 		sound.play({
 			onfinish: function() {
-				loopSound(speakersound);
+				loopSound(sound);
 			}
-		}, 1000);
+		});
 	}
+	loopSound(speakersound);
 }
 
 
@@ -679,28 +679,31 @@ openaudio.message = function(text) {
 	}
 }
 
-openaudio.loop = function(src_fo_file) {
+openaudio.loop = function(url, defaultTime) {
 	var soundId = "loop";
 	if (isFading[soundId] === true) {
 		stopFading[soundId] = true;
 	}
 
-	soundManager.stop('loop');
-	soundManager.destroySound('loop');
-	loop_active = true;
+	soundManager.stop('loopnu');
+	soundManager.destroySound('loopnu');
+
 	var loopnu = soundManager.createSound({
-		id: "loop",
+		id: 'loopnu',
 		volume: volume,
-		url: src_fo_file
+		url: url,
+		from: defaultTime,
+		autoPlay: true
 	});
 
 	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(loopnu);
-			}
-		}, 1000);
+	  sound.play({
+		onfinish: function() {
+		  loopSound(sound);
+		}
+	  });
 	}
+	loopSound(loopnu);
 }
 
 //all the fading c
@@ -1011,7 +1014,7 @@ function showPlus() {
 	  'Do you want to customize?',
 	  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
 	  'question'
-	)
+	);
 }
 
 window.onresize = function() {
@@ -1038,56 +1041,54 @@ function openTwitter() {
 	window.open(twitter);
 }
 
-if (development) {
-	swal({
-		title: 'You are using a development version!',
-		text: "There may be some functions that may be too buggy!",
-		type: 'warning',
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: 'OK'
-	});
-	development = false;
+function dev() {
+	if (development) {
+		swal('You are using a development version!', 'There may be some functions that may be too buggy!', 'warning');
+		development = false;
+	}
 }
 
 function SetDesignColor(code) {
 	document.getElementById("box").style = "background-color: " + code + ";";
 }
 
-document.body.onkeydown = function(data) {
+function keyfix() {
+	document.body.onkeydown = function(data) {
 
-	if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
-		var slider = document.getElementById("slider");
-		slider.value = slider.value - 1;
-		openaudio.set_volume(slider.value);
-		sliderValue(slider.value);
-	}
+		if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
+			var slider = document.getElementById("slider");
+			slider.value = slider.value - 1;
+			openaudio.set_volume(slider.value);
+			sliderValue(slider.value);
+		}
 
-	if (data.key == "h") {
-		if (hue_enabled) {
-			openhue();
+		if (data.key == "h") {
+			if (hue_enabled) {
+				openhue();
+			}
+			else {
+				swal("Hue is disabled.");
+			}
 		}
-		else {
-			swal("Hue is disabled.");
+		
+		if (data.key == "m") {
+			if (minimeon) {
+				openSmallWindow();
+			} else {
+				swal("Minimi is disabled by the server admin.");
+			}
 		}
-	}
-	
-	if (data.key == "m") {
-		if (minimeon) {
-			openSmallWindow();
-		} else {
-			swal("Minimi is disabled by the server admin.");
-		}
-	}
 
-	if (data.key == "ArrowUp" || data.key == "ArrowRight") {
-		var slider = document.getElementById("slider");
-		var val = ++slider.value;
-		slider.value = val;
-		openaudio.set_volume(slider.value);
-		sliderValue(slider.value);
+		if (data.key == "ArrowUp" || data.key == "ArrowRight") {
+			var slider = document.getElementById("slider");
+			var val = ++slider.value;
+			slider.value = val;
+			openaudio.set_volume(slider.value);
+			sliderValue(slider.value);
+		}
 	}
 }
-
+	
 function loadAllFromJson(pack) {
 	var json = JSON.parse(pack);
 	var jsfiles = json.js;

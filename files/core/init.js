@@ -50,25 +50,29 @@ function getUrlVar(variable) {
   return "(none)";
 }
 
-if (getUrlVar("session").includes(":")) {
+onload = initialize;
+
+function initialize() {
+	if (getUrlVar("session").includes(":")) {
   var username = getUrlVar("name");
   if (username.length >= 3) {
     if (/^\w+$/i.test(username)) {
       //save to load, i gues?
       if (apijson != null) {
         logInit("Trying login.");
-        try {
+        //try {
           var api = apijson;
           session = getUrlVar("session");
           socket_io = api.socket;
           mcname = getUrlVar("name");
           socketio_client_js = api.clientJS;
           enableMain(api.clientJS);
-        } catch (e) {
+        /*} catch (e) {
           console.error(e);
-          location.href = "files/pages/serverError.html";
+		  alert(e)
+          //location.href = "files/pages/serverError.html";
           logInit("Login fail!");
-        }
+        }*/
       } else {
         location.href = "files/pages/serverError.html";
         logInit("Failed to get api data.");
@@ -88,13 +92,13 @@ if (getUrlVar("session").includes(":")) {
   location.href = "files/pages/urlError.html";
   logInit("Invalid url.");
 }
+}
 
 function enableMain(clientJs) {
-	$.getScript("files/core/OAM-Core.js?v=1.4", function() {
+	
 		logInit("Login-sucess");
 		enable();
 		loadBg();
-	});
 }
 
 function logInit(msg) {

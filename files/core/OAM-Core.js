@@ -11,6 +11,126 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
+ 
+ function getSoundcloud(Url, callback) {
+	console.info("[Soundcloud] Attempting api call!");
+	$.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
+		setTimeout(function() {
+			var data = lastSoundCloud;
+			if (data === "") {
+				soundcloud_title = "-";
+				soundcloud_icon = "files/images/sc-default.png";
+				soundcloud_url = "https://soundcloud.com/stream";
+				console.info("[Soundcloud] Failed to get sound.");
+			} else {
+				var api = data;
+				soundcloud_title = api.title;
+				soundcloud_icon = api.artwork_url;
+				if (api.artwork_url == null) {
+					if (api.avatar_url != null) {
+						soundcloud_icon = api.avatar_url;
+					} else {
+						soundcloud_icon = "files/images/sc-default.png"
+					}
+				}
+				soundcloud_url = api.permalink_url;
+				callback("https://api.soundcloud.com/tracks/" + api.id + "/stream?client_id=a0bc8bd86e876335802cfbb2a7b35dd2");
+				document.getElementById("sc-cover").src = soundcloud_icon;
+				document.getElementById("sc-title").innerHTML = soundcloud_title;
+				document.getElementById("sc-cover").style.display = "";
+				document.getElementById("sc-title").style.display = "";
+				console.info("[Soundcloud] Successfull api call!");
+			}
+		}, 50);
+	});
+}
+
+ 
+ soundManager.setup({
+	defaultOptions: {
+		onfinish: function() {
+			handleSoundEnd(this.id);
+			soundManager.destroySound(this.id);
+			if (this.id != "oa_back_") {
+				onSoundEnd();
+			}
+		},
+		onplay: function() {
+			if (this.id != "oa_back_") {
+				onSoundPlay();
+			}
+		},
+		onstop: function() {
+			if (this.id != "oa_back_") {
+				onSoundEnd();
+			}
+		}
+	}
+});
+
+function onSoundPlay() {
+	if (listSounds().includes("oa_back_") && ambiance != "") {
+		openaudio.stopBackground();
+	}
+	try {
+		clearTimeout(ambtimer);
+	} catch(e) {}
+}
+
+function onSoundEnd() {
+	ambtimer = setTimeout(function() {
+		if (listSounds().length == 0 && ambiance != "") {
+			if (ambiance.includes("soundcloud.com")) {
+				var scurl = ambiance;
+				getSoundcloud(scurl, function(newurl) {
+					openaudio.sartBackground(newurl);
+				});
+			} else {
+				openaudio.sartBackground(ambiance);
+			}
+		}
+	}, ambdelay);
+}
+
+
+
+function handleSoundEnd(fullId) {
+	var id = fullId.split("_")[2];
+	if (id != "undefined") {
+		var whisper = {};
+		whisper.command = "SoundEnded";
+		whisper.id = id;
+		openaudio.whisper(JSON.stringify(whisper));
+	}
+}
+
+
+langpack = {};
+langpack.hue = {};
+langpack.message = {};
+langpack.notification = {};
+
+langpack.message.welcome = "Connected as %name%! Welcome! :)";
+langpack.message.notconnected = "You're not connected to the server...";
+langpack.message.server_is_offline = "Server is offline.";
+langpack.message.inavlid_url = "Invalid url.";
+langpack.message.invalid_connection = "Invalid connection!";
+langpack.message.reconnect_prompt = "Sorry but your url is not valid :( Please request a new url via <b>/audio</b> or <b>/connect</b>.";
+langpack.message.socket_closed = "Disconnected from the server, please wait";
+langpack.message.mobile_qr = "Qr code for mobile client";
+langpack.message.listen_on_soundcloud = "Listen on soundcloud!";
+
+langpack.notification.header = "OpenAudioMc | %username%";
+langpack.notification.img = 'files/images/footer_logo.png';
+
+langpack.hue.disabled = "philips hue lights are disabled by the server admin!";
+langpack.hue.please_link = "<h2>philips hue lights detected!</h2><h3>Please press the link button!</h3>";
+langpack.hue.connecting = "<h2>Connecting to hue bridge...</h2>";
+langpack.hue.re_search_bridge = "<h2>No philips hue bridge found :(</h2><h4>Searching for a hue bridge in your network...</h4>";
+langpack.hue.cant_connect = "<h2>Could not connect to hue bridge :(</h2>";
+langpack.hue.not_found = "<h2>No philips hue bridge found :(</h2>";
+langpack.hue.connected_with_bridge = "<h3>You are now connected with your %bridgename% bridge.<br />have fun! :)</h3>";
+
 
 var openaudio = {};
 var socketIo = {};
@@ -41,169 +161,10 @@ var website = "";
 var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
-minimeon = false;
+var minimeon = false;
 var development = true;
-
-function openSmallWindow() {
-	swal({
-		title: 'Are you sure?',
-		text: "Current sounds may stop!",
-		type: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Open mini-audio'
-	}).then(function () {
-		minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
-	minime.onload = function() {
-		window.location.href = "http://closeme.openaudiomc.net/";
-	}
-	})
-}
-
-function showPlus() {
-	swal(
-	  'Do you want to customize?',
-	  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
-	  'question'
-	)
-}
-
-window.onresize = function() {
-	if (tinyWindow != "(none)") {
-		window.resizeTo(566, 681);
-	}
-	
-}
-window.onclick = function() {
-	if (tinyWindow != "(none)") {
-		window.resizeTo(566, 681);
-	}
-}
-
-function openSite() {
-	window.open(website);
-}
-
-function openYt() {
-	window.open(youtube);
-}
-
-function openTwitter() {
-	window.open(twitter);
-}
-
-if (development) {
-	swal({
-		title: 'You are using a development version!',
-		text: "There may be some functions that may be too buggy!",
-		type: 'warning',
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: 'OK'
-	});
-	development = false;
-}
-
-function SetDesignColor(code) {
-	document.getElementById("box").style = "background-color: " + code + ";";
-}
-
-document.body.onkeydown = function(data) {
-
-	if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
-		var slider = document.getElementById("slider");
-		slider.value = slider.value - 1;
-		openaudio.set_volume(slider.value);
-		sliderValue(slider.value);
-	}
-
-	if (data.key == "h") {
-		if (hue_enabled) {
-			openhue();
-		}
-		else {
-			swal("Hue is disabled.");
-		}
-	}
-	
-	if (data.key == "m") {
-		if (minimeon) {
-			openSmallWindow();
-		} else {
-			swal("Minimi is disabled by the server admin.");
-		}
-	}
-
-	if (data.key == "ArrowUp" || data.key == "ArrowRight") {
-		var slider = document.getElementById("slider");
-		var val = ++slider.value;
-		slider.value = val;
-		openaudio.set_volume(slider.value);
-		sliderValue(slider.value);
-	}
-}
-
-function loadAllFromJson(pack) {
-	var json = JSON.parse(pack);
-	var jsfiles = json.js;
-	var cssfiles = json.css;
-	for (var i = 0; i < jsfiles.length; i++) {
-		addJs(jsfiles[i]);
-	}
-	for (var i2 = 0; i2 < cssfiles.length; i2++) {
-		addCss(cssfiles[i2]);
-	}
-}
-
-var langpack = {};
-langpack.hue = {};
-langpack.message = {};
-langpack.notification = {};
-
-langpack.message.welcome = "Connected as %name%! Welcome! :)";
-langpack.message.notconnected = "You're not connected to the server...";
-langpack.message.server_is_offline = "Server is offline.";
-langpack.message.inavlid_url = "Invalid url.";
-langpack.message.invalid_connection = "Invalid connection!";
-langpack.message.reconnect_prompt = "Sorry but your url is not valid :( Please request a new url via <b>/audio</b> or <b>/connect</b>.";
-langpack.message.socket_closed = "Disconnected from the server, please wait";
-langpack.message.mobile_qr = "Qr code for mobile client";
-langpack.message.listen_on_soundcloud = "Listen on soundcloud!";
-
-langpack.notification.header = "OpenAudioMc | %username%";
-langpack.notification.img = 'files/images/footer_logo.png';
-
-langpack.hue.disabled = "philips hue lights are disabled by the server admin!";
-langpack.hue.please_link = "<h2>philips hue lights detected!</h2><h3>Please press the link button!</h3>";
-langpack.hue.connecting = "<h2>Connecting to hue bridge...</h2>";
-langpack.hue.re_search_bridge = "<h2>No philips hue bridge found :(</h2><h4>Searching for a hue bridge in your network...</h4>";
-langpack.hue.cant_connect = "<h2>Could not connect to hue bridge :(</h2>";
-langpack.hue.not_found = "<h2>No philips hue bridge found :(</h2>";
-langpack.hue.connected_with_bridge = "<h3>You are now connected with your %bridgename% bridge.<br />have fun! :)</h3>";
-
-
-
-soundManager.setup({
-	defaultOptions: {
-		onfinish: function() {
-			handleSoundEnd(this.id);
-			soundManager.destroySound(this.id);
-			if (this.id != "oa_back_") {
-				onSoundEnd();
-			}
-		},
-		onplay: function() {
-			if (this.id != "oa_back_") {
-				onSoundPlay();
-			}
-		},
-		onstop: function() {
-			if (this.id != "oa_back_") {
-				onSoundEnd();
-			}
-		}
-	}
-});
+setTimeout(dev, 1000);
+setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
 	$("#footer").animate({
@@ -217,146 +178,6 @@ openaudio.color = function(code) {
 		duration: 500
 	});
 }
-
-function onSoundPlay() {
-	if (listSounds().includes("oa_back_") && ambiance != "") {
-		openaudio.stopBackground();
-	}
-	try {
-		clearTimeout(ambtimer);
-	} catch(e) {}
-}
-
-function onSoundEnd() {
-	ambtimer = setTimeout(function() {
-		if (listSounds().length == 0 && ambiance != "") {
-
-			if (ambiance.includes("soundcloud.com")) {
-				var scurl = ambiance;
-				getSoundcloud(scurl, function(newurl) {
-					openaudio.sartBackground(newurl);
-				});
-			} else {
-				openaudio.sartBackground(ambiance);
-			}
-		}
-	}, ambdelay);
-}
-
-openaudio.sartBackground = function(url) {
-	var regionsound = soundManager.createSound({
-		id: "oa_back_",
-		volume: volume,
-		url: url
-	});
-
-	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(regionsound);
-			}
-		});
-	}
-	fadeIdTarget("oa_back_", volume);
-}
-
-openaudio.stopBackground = function() {
-	fadeIdOut("oa_back_");
-}
-
-function handleSoundEnd(fullId) {
-	var id = fullId.split("_")[2];
-	if (id != "undefined") {
-		var whisper = {};
-		whisper.command = "SoundEnded";
-		whisper.id = id;
-		openaudio.whisper(JSON.stringify(whisper));
-	}
-}
-
-function enable() {
-	//setup vars
-	status_span = document.getElementById("status-span");
-	volume_text = document.getElementById("volume");
-
-	if (getCookie("volume") != null) {
-		openaudio.set_volume(getCookie("volume"));
-	}
-
-	//setup session data
-	var [a, b] = session.split(':');
-	clientID = a;
-	clientTOKEN = b;
-
-	
-	document.getElementById("DetectHueButton").style.display = "none";
-
-	document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
-
-	if (Notification.permission !== "granted") {
-		Notification.requestPermission();
-	}
-	
-	document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
-  
-  $.getScript("files/core/OAM-ApiConnector.js", function() {
-    //connect to the craftmend server
-	  socketIo.connect();
-  }, 1000);
-}
-
-
-openaudio.whisper = function(message) {
-	socket.emit("whisperToServer", message);
-	console.info("[Socket.io] Whisper send.");
-}
-
-socketIo.log = function(data) {
-	console.info("[Socket.Io] " + data);
-}
-
-
-
-function listSounds() {
-	var obj = soundManager.sounds;
-	var str = '';
-	for (var p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			if (soundManager.getSoundById(p).metadata.speaker !== true) {
-				str += p + ",";
-			}
-		}
-	}
-	return str;
-}
-
-function listSpeakerSounds() {
-	var obj = soundManager.sounds;
-	var str = '';
-	for (var p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			if (soundManager.getSoundById(p).metadata.speaker !== false) {
-				str += p + ",";
-			}
-		}
-	}
-	return str;
-}
-
-
-openaudio.skipTo = function(id, timeInS) {
-	openaudio.setIdAtribute(id, function(fullID) {
-		var s = parseInt(timeInS);
-		var t = s * 1000;
-		soundManager.setPosition(fullID, t);
-	});
-}
-
-
-function openhue() {
-	$('#Hue').modal('show');
-}
-
 
 openaudio.decode = function(msg) {
 	request = JSON.parse(msg);
@@ -564,6 +385,66 @@ openaudio.decode = function(msg) {
 	}
 }
 
+openaudio.play = function(src_fo_file, soundID, defaultTime) {
+	if (soundID === null) {
+		var soundID = 'default';
+	}
+
+	if (defaultTime === null) {
+		var defaultTime = 0;
+	}
+
+	var soundId = "play";
+	if (isFading[soundId] === true) {
+		stopFading[soundId] = true;
+	}
+	var mySoundObject = soundManager.createSound({
+		id: "play_" + Math.floor(Math.random() * 60) + 1 + "_" + soundID,
+		url: src_fo_file,
+		volume: volume,
+		from: defaultTime,
+		autoPlay: true,
+	});
+}
+
+openaudio.sartBackground = function(url) {
+	var regionsound = soundManager.createSound({
+		id: "oa_back_",
+		volume: volume,
+		url: url
+	});
+
+	function loopSound(sound) {
+		sound.play({
+			onfinish: function() {
+				loopSound(regionsound);
+			}
+		});
+	}
+	fadeIdTarget("oa_back_", volume);
+}
+
+openaudio.stopBackground = function() {
+	fadeIdOut("oa_back_");
+}
+
+openaudio.whisper = function(message) {
+	socket.emit("whisperToServer", message);
+	console.info("[Socket.io] Whisper send.");
+}
+
+socketIo.log = function(data) {
+	console.info("[Socket.Io] " + data);
+}
+
+openaudio.skipTo = function(id, timeInS) {
+	openaudio.setIdAtribute(id, function(fullID) {
+		var s = parseInt(timeInS);
+		var t = s * 1000;
+		soundManager.setPosition(fullID, t);
+	});
+}
+
 openaudio.playRegion = function(url, id, defaultTime) {
 	if (!regions[id]) {
 		var regionsound = soundManager.createSound({
@@ -578,17 +459,14 @@ openaudio.playRegion = function(url, id, defaultTime) {
 			}
 		});
 		regions[id] = true;
-
 		function loopSound(sound) {
 			sound.play({
 				onfinish: function() {
-					loopSound(regionsound);
-					console.log("[OpenAudioRegionManager] Stopping Region Sounds");
-					fadeIdTarget("oa_region_" + id, volume);
-					console.log("[OpenAudioRegionManager] Region Sounds Stopped");
+					loopSound(sound);
 				}
-			}, 1000);
+			});
 		}
+		loopSound(regionsound);
 	}
 }
 
@@ -646,10 +524,11 @@ openaudio.newspeaker = function(src_to_file, defaultTime) {
 	function loopSound(sound) {
 		sound.play({
 			onfinish: function() {
-				loopSound(speakersound);
+				loopSound(sound);
 			}
-		}, 1000);
+		});
 	}
+	loopSound(speakersound);
 }
 
 
@@ -657,28 +536,6 @@ openaudio.removeSpeaker = function(id) {
 	soundManager.destroySound("speaker_ding");
 }
 
-
-openaudio.play = function(src_fo_file, soundID, defaultTime) {
-	if (soundID === null) {
-		var soundID = 'default';
-	}
-
-	if (defaultTime === null) {
-		var defaultTime = 0;
-	}
-
-	var soundId = "play";
-	if (isFading[soundId] === true) {
-		stopFading[soundId] = true;
-	}
-	var mySoundObject = soundManager.createSound({
-		id: "play_" + Math.floor(Math.random() * 60) + 1 + "_" + soundID,
-		url: src_fo_file,
-		volume: volume,
-		from: defaultTime,
-		autoPlay: true,
-	});
-}
 
 
 
@@ -822,68 +679,32 @@ openaudio.message = function(text) {
 	}
 }
 
-
-
-//thanks to chrome bugs we need to detect if the browser is actife
-var vis = (function() {
-	var stateKey,
-		eventKey,
-		keys = {
-			hidden: "visibilitychange",
-			webkitHidden: "webkitvisibilitychange",
-			mozHidden: "mozvisibilitychange",
-			msHidden: "msvisibilitychange"
-		};
-	for (stateKey in keys) {
-		if (stateKey in document) {
-			eventKey = keys[stateKey];
-			break;
-		}
+openaudio.loop = function(url, defaultTime) {
+	var soundId = "loop";
+	if (isFading[soundId] === true) {
+		stopFading[soundId] = true;
 	}
-	return function(c) {
-		if (c) document.addEventListener(eventKey, c);
-		return !document[stateKey];
-	}
-})();
 
+	soundManager.stop('loopnu');
+	soundManager.destroySound('loopnu');
 
-
-vis(function() {
-	if (vis()) {
-		setTimeout(function() {
-			FadeEnabled = true;
-		}, 300);
-	} else {
-		FadeEnabled = false;
-	}
-});
-
-
-
-var notIE = (document.documentMode === undefined),
-	isChromium = window.chrome;
-if (notIE && !isChromium) {
-	$(window).on("focusin", function() {
-		setTimeout(function() {
-			FadeEnabled = true;
-		}, 300);
-	}).on("focusout", function() {
-		FadeEnabled = false;
+	var loopnu = soundManager.createSound({
+		id: 'loopnu',
+		volume: volume,
+		url: url,
+		from: defaultTime,
+		autoPlay: true
 	});
-} else {
-	if (window.addEventListener) {} else {
-		window.attachEvent("focus", function(event) {
-			setTimeout(function() {
-				FadeEnabled = true;
-			}, 300);
-		});
-		window.attachEvent("blur", function(event) {
-			FadeEnabled = false;
-		});
+
+	function loopSound(sound) {
+	  sound.play({
+		onfinish: function() {
+		  loopSound(sound);
+		}
+	  });
 	}
+	loopSound(loopnu);
 }
-
-
 
 //all the fading c
 $(document).ready(function() {
@@ -1096,68 +917,6 @@ $(document).ready(function() {
 	}
 });
 
-
-function showqr() {
-	swal({
-		title: langpack.message.mobile_qr,
-		text: '<center><div id="qrcode"></div></center>',
-		CancelButton: false,
-		allowOutsideClick: true,
-		allowEscapeKey: true,
-		showConfirmButton: true,
-		html: '<center><div id="qrcode"></div></center>'
-	}, function() {});
-	var qrcode = new QRCode(document.getElementById("qrcode"), {
-		text: document.URL,
-		width: 150,
-		height: 150,
-		colorDark: "#000000",
-		colorLight: "#ffffff",
-		correctLevel: QRCode.CorrectLevel.H
-	});
-}
-
-
-function getCookie(name) {
-	var value = "; " + document.cookie;
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) {
-		return parts.pop().split(";").shift();
-	}
-}
-
-openaudio.loop = function(src_fo_file) {
-	var soundId = "loop";
-	if (isFading[soundId] === true) {
-		stopFading[soundId] = true;
-	}
-
-	soundManager.stop('loop');
-	soundManager.destroySound('loop');
-	loop_active = true;
-	var loopnu = soundManager.createSound({
-		id: "loop",
-		volume: volume,
-		url: src_fo_file
-	});
-
-	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(loopnu);
-			}
-		}, 1000);
-	}
-}
-
-function sliderValue(vol) {
-	//Joww, it's ja boy liturkey doing all the math boi
-	var output = document.querySelector("#volumevalue");
-	output.value = vol;
-	output.style.left = vol * 2.4 + 'px';
-}
-
-
 /*
 AUTO DJ SCRIPT FROM
 https://github.com/Mindgamesnl/SM2_Playlist_Thingy
@@ -1231,38 +990,262 @@ AutoDj.PlayNext = function() {
 	}
 }
 
-function getSoundcloud(Url, callback) {
-	console.info("[Soundcloud] Attempting api call!");
-	$.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
-		setTimeout(function() {
-			var data = lastSoundCloud;
-			if (data === "") {
-				soundcloud_title = "-";
-				soundcloud_icon = "files/images/sc-default.png";
-				soundcloud_url = "https://soundcloud.com/stream";
-				console.info("[Soundcloud] Failed to get sound.");
-			} else {
-				var api = data;
-				soundcloud_title = api.title;
-				soundcloud_icon = api.artwork_url;
-				if (api.artwork_url == null) {
-					if (api.avatar_url != null) {
-						soundcloud_icon = api.avatar_url;
-					} else {
-						soundcloud_icon = "files/images/sc-default.png"
-					}
-				}
-				soundcloud_url = api.permalink_url;
-				callback("https://api.soundcloud.com/tracks/" + api.id + "/stream?client_id=a0bc8bd86e876335802cfbb2a7b35dd2");
-				document.getElementById("sc-cover").src = soundcloud_icon;
-				document.getElementById("sc-title").innerHTML = soundcloud_title;
-				document.getElementById("sc-cover").style.display = "";
-				document.getElementById("sc-title").style.display = "";
-				console.info("[Soundcloud] Successfull api call!");
+//goto
+
+function openSmallWindow() {
+	swal({
+		title: 'Are you sure?',
+		text: "Current sounds may stop!",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Open mini-audio'
+	}).then(function () {
+		minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
+	minime.onload = function() {
+		window.location.href = "http://closeme.openaudiomc.net/";
+	}
+	})
+}
+
+function showPlus() {
+	swal(
+	  'Do you want to customize?',
+	  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
+	  'question'
+	);
+}
+
+window.onresize = function() {
+	if (tinyWindow != "(none)") {
+		window.resizeTo(566, 681);
+	}
+	
+}
+window.onclick = function() {
+	if (tinyWindow != "(none)") {
+		window.resizeTo(566, 681);
+	}
+}
+
+function openSite() {
+	window.open(website);
+}
+
+function openYt() {
+	window.open(youtube);
+}
+
+function openTwitter() {
+	window.open(twitter);
+}
+
+function dev() {
+	if (development) {
+		swal('You are using a development version!', 'There may be some functions that may be too buggy!', 'warning');
+		development = false;
+	}
+}
+
+function SetDesignColor(code) {
+	document.getElementById("box").style = "background-color: " + code + ";";
+}
+
+function keyfix() {
+	document.body.onkeydown = function(data) {
+
+		if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
+			var slider = document.getElementById("slider");
+			slider.value = slider.value - 1;
+			openaudio.set_volume(slider.value);
+			sliderValue(slider.value);
+		}
+
+		if (data.key == "h") {
+			if (hue_enabled) {
+				openhue();
 			}
-		}, 50);
+			else {
+				swal("Hue is disabled.");
+			}
+		}
+		
+		if (data.key == "m") {
+			if (minimeon) {
+				openSmallWindow();
+			} else {
+				swal("Minimi is disabled by the server admin.");
+			}
+		}
+
+		if (data.key == "ArrowUp" || data.key == "ArrowRight") {
+			var slider = document.getElementById("slider");
+			var val = ++slider.value;
+			slider.value = val;
+			openaudio.set_volume(slider.value);
+			sliderValue(slider.value);
+		}
+	}
+}
+	
+function loadAllFromJson(pack) {
+	var json = JSON.parse(pack);
+	var jsfiles = json.js;
+	var cssfiles = json.css;
+	for (var i = 0; i < jsfiles.length; i++) {
+		addJs(jsfiles[i]);
+	}
+	for (var i2 = 0; i2 < cssfiles.length; i2++) {
+		addCss(cssfiles[i2]);
+	}
+}
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
+
+function listSounds() {
+	var obj = soundManager.sounds;
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			if (soundManager.getSoundById(p).metadata.speaker !== true) {
+				str += p + ",";
+			}
+		}
+	}
+	return str;
+}
+
+function listSpeakerSounds() {
+	var obj = soundManager.sounds;
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			if (soundManager.getSoundById(p).metadata.speaker !== false) {
+				str += p + ",";
+			}
+		}
+	}
+	return str;
+}
+
+
+function openhue() {
+	$('#Hue').modal('show');
+}
+
+//thanks to chrome bugs we need to detect if the browser is actife
+var vis = (function() {
+	var stateKey,
+		eventKey,
+		keys = {
+			hidden: "visibilitychange",
+			webkitHidden: "webkitvisibilitychange",
+			mozHidden: "mozvisibilitychange",
+			msHidden: "msvisibilitychange"
+		};
+	for (stateKey in keys) {
+		if (stateKey in document) {
+			eventKey = keys[stateKey];
+			break;
+		}
+	}
+	return function(c) {
+		if (c) document.addEventListener(eventKey, c);
+		return !document[stateKey];
+	}
+})();
+
+
+
+vis(function() {
+	if (vis()) {
+		setTimeout(function() {
+			FadeEnabled = true;
+		}, 300);
+	} else {
+		FadeEnabled = false;
+	}
+});
+
+
+
+var notIE = (document.documentMode === undefined),
+	isChromium = window.chrome;
+if (notIE && !isChromium) {
+	$(window).on("focusin", function() {
+		setTimeout(function() {
+			FadeEnabled = true;
+		}, 300);
+	}).on("focusout", function() {
+		FadeEnabled = false;
+	});
+} else {
+	if (window.addEventListener) {} else {
+		window.attachEvent("focus", function(event) {
+			setTimeout(function() {
+				FadeEnabled = true;
+			}, 300);
+		});
+		window.attachEvent("blur", function(event) {
+			FadeEnabled = false;
+		});
+	}
+}
+
+
+
+
+
+
+function showqr() {
+	swal({
+		title: langpack.message.mobile_qr,
+		text: '<center><div id="qrcode"></div></center>',
+		CancelButton: false,
+		allowOutsideClick: true,
+		allowEscapeKey: true,
+		showConfirmButton: true,
+		html: '<center><div id="qrcode"></div></center>'
+	}, function() {});
+	var qrcode = new QRCode(document.getElementById("qrcode"), {
+		text: document.URL,
+		width: 150,
+		height: 150,
+		colorDark: "#000000",
+		colorLight: "#ffffff",
+		correctLevel: QRCode.CorrectLevel.H
 	});
 }
+
+
+function getCookie(name) {
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length == 2) {
+		return parts.pop().split(";").shift();
+	}
+}
+
+function sliderValue(vol) {
+	//Joww, it's ja boy liturkey doing all the math boi
+	var output = document.querySelector("#volumevalue");
+	output.value = vol;
+	output.style.left = vol * 2.4 + 'px';
+}
+
+
+
+
+
 
 function open_soundcloud() {
 	swal({
@@ -1311,4 +1294,34 @@ function trayItem(icon, callback) {
 	this.destroy = function() {
 		this.li.remove();
 	}
+}
+
+
+function enable() {
+	//setup vars
+	status_span = document.getElementById("status-span");
+	volume_text = document.getElementById("volume");
+
+	if (getCookie("volume") != null) {
+		openaudio.set_volume(getCookie("volume"));
+	}
+
+	//setup session data
+	var [a, b] = session.split(':');
+	clientID = a;
+	clientTOKEN = b;
+
+	
+	document.getElementById("DetectHueButton").style.display = "none";
+
+	document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
+
+	if (Notification.permission !== "granted") {
+		Notification.requestPermission();
+	}
+	
+	document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
+  
+    //connect to the craftmend server
+	socketIo.connect();
 }

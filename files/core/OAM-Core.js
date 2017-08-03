@@ -162,7 +162,7 @@ var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
-var development = true;
+var development = false;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 

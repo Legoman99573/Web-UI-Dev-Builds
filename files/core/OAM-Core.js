@@ -41,7 +41,7 @@
 				document.getElementById("sc-title").style.display = "";
 				console.info("[Soundcloud] Successfull api call!");
 			}
-		}, 50);
+		});
 	});
 }
 
@@ -408,6 +408,10 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
 }
 
 openaudio.sartBackground = function(url) {
+	
+	soundManager.stop('regionsound');
+	soundManager.destroySound('regionsound');
+	
 	var regionsound = soundManager.createSound({
 		id: "oa_back_",
 		volume: volume,
@@ -417,11 +421,12 @@ openaudio.sartBackground = function(url) {
 	function loopSound(sound) {
 		sound.play({
 			onfinish: function() {
-				loopSound(regionsound);
+				loopSound(sound);
 			}
 		});
 	}
 	fadeIdTarget("oa_back_", volume);
+	loopSound(regionsound);
 }
 
 openaudio.stopBackground = function() {
@@ -447,15 +452,14 @@ openaudio.skipTo = function(id, timeInS) {
 
 openaudio.playRegion = function(url, id, defaultTime) {
 	if (!regions[id]) {
-		var regionsound = soundManager.createSound({
+		var regionsounds = soundManager.createSound({
 			id: "oa_region_" + id,
 			url: url,
 			volume: volume,
 			from: defaultTime * 1000,
-			autoPlay: true,
+			stream: true,
 			onplay: function() {
 				soundManager.getSoundById("oa_region_" + id, volume).metadata.region = true;
-				console.log("[OpenAudioRegionManager] Starting Region Sounds");
 			}
 		});
 		regions[id] = true;
@@ -466,7 +470,7 @@ openaudio.playRegion = function(url, id, defaultTime) {
 				}
 			});
 		}
-		loopSound(regionsound);
+		loopSound(regionsounds);
 	}
 }
 
@@ -509,18 +513,17 @@ openaudio.setGlobalVolume = function(volume) {
 }
 
 
-openaudio.newspeaker = function(src_to_file, defaultTime) {
+openaudio.newspeaker = function(src_to_file) {
 	var speakersound = soundManager.createSound({
 		id: "speaker_ding",
 		url: src_to_file,
 		volume: volume,
-		from: defaultTime * 1000,
-		autoPlay: true,
+		stream: true,
 		onplay: function() {
 			soundManager.getSoundById("speaker_ding").metadata.speaker = true;
 		}
 	});
-
+	
 	function loopSound(sound) {
 		sound.play({
 			onfinish: function() {
@@ -693,15 +696,15 @@ openaudio.loop = function(url, defaultTime) {
 		volume: volume,
 		url: url,
 		from: defaultTime,
-		autoPlay: true
+		stream: true
 	});
 
 	function loopSound(sound) {
-	  sound.play({
-		onfinish: function() {
-		  loopSound(sound);
-		}
-	  });
+		sound.play({
+			onfinish: function() {
+				loopSound(sound);
+			}
+		});
 	}
 	loopSound(loopnu);
 }
@@ -1077,6 +1080,10 @@ function keyfix() {
 			} else {
 				swal("Minimi is disabled by the server admin.");
 			}
+		}
+		
+		if (data.key == "d") {
+			$("#debugger").modal();
 		}
 
 		if (data.key == "ArrowUp" || data.key == "ArrowRight") {

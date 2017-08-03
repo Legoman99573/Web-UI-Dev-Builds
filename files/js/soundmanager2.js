@@ -67,10 +67,10 @@ function SoundManager(smURL, smID) {
 
     'url': (smURL || null),             // path (directory) where SoundManager 2 SWFs exist, eg., /path/to/swfs/
     'flashVersion': 8,                  // flash build to use (8 or 9.) Some API features require 9.
-    'debugMode': false,                  // enable debugging output (console.log() with HTML fallback)
-    'debugFlash': false,                // enable debugging output inside SWF, troubleshoot Flash/browser issues
+    'debugMode': true,                  // enable debugging output (console.log() with HTML fallback)
+    'debugFlash': true,                // enable debugging output inside SWF, troubleshoot Flash/browser issues
     'useConsole': false,                 // use console.log() if available (otherwise, writes to #soundmanager-debug element)
-    'consoleOnly': false,                // if console is being used, do not create/write to #soundmanager-debug
+    'consoleOnly': true,                // if console is being used, do not create/write to #soundmanager-debug
     'waitForWindowLoad': false,         // force SM2 to wait for window.onload() before trying to call soundManager.onload()
     'bgColor': '#ffffff',               // SWF background color. N/A when wmode = 'transparent'
     'useHighPerformance': false,        // position:fixed flash movie can help increase js/flash speed, minimize lag
@@ -112,8 +112,8 @@ function SoundManager(smURL, smID) {
     'onstop': null,           // callback for "user stop"
     'onfailure': null,        // callback function for when playing fails
     'onfinish': null,         // callback function for "sound finished playing"
-    'multiShot': false,        // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
-    'multiShotEvents': false, // fire multiple sound events (currently onfinish() only) when multiShot is enabled
+    'multiShot': true,        // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
+    'multiShotEvents': true, // fire multiple sound events (currently onfinish() only) when multiShot is enabled
     'position': null,         // offset (milliseconds) to seek to within loaded sound data.
     'pan': 0,                 // "pan" settings, left-to-right, -100 to 100
     'stream': true,           // allows playing before entire file has loaded (recommended)
@@ -4727,15 +4727,14 @@ function SoundManager(smURL, smID) {
       oDebug.style.display = (sm2.debugMode ? 'block' : 'none');
 
       if (sm2.debugMode && !id(oD.id)) {
-        try {
-          oTarget = getDocument();
-          oTarget.appendChild(oD);
-        } catch(e2) {
-          throw new Error(str('domError') + ' \n' + e2.toString());
-        }
-        oTarget.appendChild(oDebug);
+		try { 
+			oTarget = getDocument(); 
+			oTarget.appendChild(oD);
+		} catch(e2) {
+			throw new Error(str('domError') + ' \n' + e2.toString());
+		}
       }
-
+	  oTarget.appendChild(oDebug);
     }
 
     oTarget = null;

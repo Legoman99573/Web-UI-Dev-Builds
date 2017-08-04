@@ -260,8 +260,7 @@ openaudio.decode = function(msg) {
 			for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
 				listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
 				if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
-                    var volumeTarget = (volume/100) * request.volume;
-                    fadeSpeaker2(listSpeakerSounds().split(',')[i], volumeTarget);
+                    fadeSpeaker2(listSpeakerSounds().split(',')[i], request.volume);
 				}
 			}
 		} else if (request.type == "stop") {
@@ -776,7 +775,7 @@ $(document).ready(function() {
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
-        x.value = volume;
+        x.value = soundManager.getSoundById(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/')).volume;
         x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);

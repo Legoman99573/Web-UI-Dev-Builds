@@ -261,7 +261,7 @@ openaudio.decode = function(msg) {
 				listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
 				if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
                     var volumeTarget = (volume/100) * request.volume;
-					soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
+                    fadeSpeaker2(listSpeakerSounds().split(',')[i], volumeTarget);
 				}
 			}
 		} else if (request.type == "stop") {
@@ -769,6 +769,41 @@ $(document).ready(function() {
 	}
 
 
+    window.fadeSpeaker2 = function(soundId, volumeTarget) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
+
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: volumeTarget
+            }, {
+                duration: 400,
+                step: function(currentLeft, animProperties) {
+                    if (stopFading[soundId + "_Slider_type_2"] !== true) {
+                        soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
+                    }
+                },
+                done: function() {
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+                    x.remove();
+                }
+            });
+        } else {
+            soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+            x.remove();
+        }
+    }
 
 
 	window.fadeIdTarget = function(soundId, volumeTarget) {

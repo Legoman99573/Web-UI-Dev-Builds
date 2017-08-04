@@ -162,7 +162,7 @@ var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
-var development = false;
+var development = true;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
@@ -513,14 +513,15 @@ openaudio.setGlobalVolume = function(volume) {
 }
 
 
-openaudio.newspeaker = function(src_to_file) {
+openaudio.newspeaker = function(url, defaultTime) {
 	var speakersound = soundManager.createSound({
 		id: "speaker_ding",
-		url: src_to_file,
+		url: url,
 		volume: volume,
+		from: defaultTime * 1000,
 		stream: true,
 		onplay: function() {
-			soundManager.getSoundById("speaker_ding").metadata.speaker = true;
+			soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
 		}
 	});
 	
@@ -977,7 +978,7 @@ AutoDj.SoundManager_Play = function(fnc_file) {
 		id: "AutoDj",
 		url: fnc_file,
 		volume: volume,
-		autoPlay: true,
+		stream: true,
 		onfinish: AutoDj.PlayNext
 	});
 }

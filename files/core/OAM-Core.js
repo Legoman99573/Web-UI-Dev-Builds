@@ -260,7 +260,8 @@ openaudio.decode = function(msg) {
 			for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
 				listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
 				if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
-					soundManager.setVolume(listSpeakerSounds().split(',')[i], request.volume);
+                    var volumeTarget = (volume/100) * request.volume;
+					soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
 				}
 			}
 		} else if (request.type == "stop") {
@@ -500,16 +501,24 @@ openaudio.playAction = function(action_is_fnc) {
 }
 
 
-openaudio.setGlobalVolume = function(volume) {
+openaudio.setGlobalVolume = function(volumeNew) {
 	for (var i = 0; i < listSounds().split(',').length; i++) {
 		listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
 		try {
-			soundManager.getSoundById(listSounds().split(',')[i]).setVolume(volume);
+			soundManager.getSoundById(listSounds().split(',')[i]).setVolume(volumeNew);
 		} catch (e) {
 			//no sounds avalible
 		}
 		
 	}
+
+    for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
+        listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
+            var volumeTarget = (volume/100) * volumeNew;
+            soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
+        }
+    }
 }
 
 
@@ -847,6 +856,11 @@ $(document).ready(function() {
 
 
 	window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
+
+
+
+
+
 		var x = document.createElement("INPUT");
 		x.setAttribute("type", "range");
 		document.body.appendChild(x);

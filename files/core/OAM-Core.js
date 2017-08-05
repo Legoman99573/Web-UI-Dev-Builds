@@ -162,6 +162,7 @@ var iconcolor = "#242424";
 var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
+var lastSpeakerVolume = 0;
 var development = true;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
@@ -267,6 +268,7 @@ openaudio.decode = function(msg) {
 				listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
 				if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
                     fadeSpeaker2(listSpeakerSounds().split(',')[i], request.volume);
+                    lastSpeakerVolume = request.volume;
 				}
 			}
 		} else if (request.type == "stop") {
@@ -520,7 +522,8 @@ openaudio.setGlobalVolume = function(volumeNew) {
     for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
         listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
         if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
-            var volumeTarget = (volume/100) * volumeNew;
+            var volumeTarget = (lastSpeakerVolume / 100) * volumeNew;
+            console.log("Nu " + lastSpeakerVolume + " --- oud " + volumeTarget)
             soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
         }
     }
@@ -537,7 +540,7 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
 		stream: true,
 		onplay: function() {
 			soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
-			fadeSpeaker2("speaker_ding", ((volume / 100) * requestvol))
+			fadeSpeaker2("speaker_ding", ((requestvol / 100) * volume))
 		}, onfinish: function() {
 			this.stream = true;
 			this.from = 0;
@@ -823,13 +826,15 @@ $(document).ready(function() {
 
         var volumeTarget = (vt / 100) * volume;
 
+		console.log("Nu " + soundManager.getSoundById("speaker_ding").volume + " --- oud " + volumeTarget)
+
         var x = document.createElement("INPUT");
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
-        x.value = soundManager.getSoundById(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/')).volume;
+        x.value = soundManager.getSoundById("speaker_ding").volume;
         x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);

@@ -132,10 +132,6 @@ function direct_hue_connection() {
     })
 }
 
-
-
-
-
 function on_hue_link(name) {
 	if (hue_start_animation) {
 		hue_get_lights();

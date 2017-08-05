@@ -180,6 +180,12 @@ openaudio.color = function(code) {
 }
 
 openaudio.decode = function(msg) {
+
+	if (msg.includes("clyp.it")) {
+		console.error("Clypit is no longer supported!");
+		return;
+	}
+
 	request = JSON.parse(msg);
 	if (request.command == "play_normal") {
 		if (request.src.includes("soundcloud.com")) {
@@ -521,31 +527,31 @@ openaudio.setGlobalVolume = function(volumeNew) {
 }
 
 
-openaudio.newspeaker = function(url, defaultTime) {
+openaudio.newspeaker = function(url, defaultTime, requestvol) {
 	var speakersound = soundManager.createSound({
 		id: "speaker_ding",
 		url: url,
-		volume: volume,
+		volume: 0,
+        autoPlay: true,
 		from: defaultTime * 1000,
 		stream: true,
 		onplay: function() {
+			console.log("newspeaker")
 			soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
-		}
+			fadeSpeaker2("speaker_ding", requestvol)
+		}, onfinish: function() {
+			this.stream = true;
+			this.from = 0;
+			this.play();
+        }
 	});
-	
-	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(sound);
-			}
-		});
-	}
-	loopSound(speakersound);
+
 }
 
 
 openaudio.removeSpeaker = function(id) {
-	soundManager.destroySound("speaker_ding");
+    fadeSpeakerOut("speaker_ding")
+
 }
 
 
@@ -767,8 +773,57 @@ $(document).ready(function() {
 		}
 	}
 
+    window.fadeSpeakerOut = function(soundId) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId + "_Slider";
+        x.min = 0;
+        x.max = 100;
+        x.value = soundManager.getSoundById(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/')).volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId + "_Slider");
+        document.getElementById('faders').appendChild(x);
 
-    window.fadeSpeaker2 = function(soundId, volumeTarget) {
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId, currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId);
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
+                soundManager.stop(soundId);
+                soundManager.destroySound(soundId);
+            } catch (e) {}
+            x.remove();
+        }
+    }
+
+    window.fadeSpeaker2 = function(soundId, vt) {
+
+        var volumeTarget = (vt / 100) * volume;
+
         var x = document.createElement("INPUT");
         x.setAttribute("type", "range");
         document.body.appendChild(x);

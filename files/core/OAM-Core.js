@@ -536,7 +536,6 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
 		from: defaultTime * 1000,
 		stream: true,
 		onplay: function() {
-			console.log("newspeaker")
 			soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
 			fadeSpeaker2("speaker_ding", ((volume / 100) * requestvol))
 		}, onfinish: function() {
@@ -1283,6 +1282,8 @@ vis(function() {
 			FadeEnabled = true;
 		}, 300);
 	} else {
+        openaudio.whisper("eventMinni");
+        openaudio.whisper(JSON.stringify(whisper))
 		FadeEnabled = false;
 	}
 });

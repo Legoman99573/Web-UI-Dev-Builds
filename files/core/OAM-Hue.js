@@ -113,14 +113,26 @@ function loop_hue_connection() {
 }
 
 function direct_hue_connection() {
-	swal({
-		title: 'OOPSIE',
-		text: "This Feature is coming soon™!",
-		type: 'warning',
-		confirmButtonColor: '#3085d6',
-		confirmButtonText: 'OK'
-	});
+    swal({
+        title: 'Please input your bridge ip',
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        preConfirm: function (email) {
+            return new Promise(function (resolve, reject) {
+                localStorage.MyHueBridgeIP = email;
+                setTimeout(function() {
+                    ConnectToHueBridge();
+				}, 500);
+                swal("manual hue ip is set to: " +email)
+            })
+        },
+        allowOutsideClick: false
+    })
 }
+
+
 
 
 

@@ -901,7 +901,7 @@ function SoundManager(smURL, smID) {
     if (!idCheck(sID)) {
       return false;
     }
-    return sm2.sounds[sID].setPan(nPan);
+    return StereoPannerNode.setPan(nPan);
 
   };
 
@@ -913,6 +913,10 @@ function SoundManager(smURL, smID) {
    * @param {number} nVol The volume value (0 to 100)
    * @return {SMSound} The SMSound object
    */
+
+  this.getSmInstance = function() {
+    return sm2;
+  }
 
   this.setVolume = function(sID, nVol) {
 

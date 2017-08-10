@@ -11,97 +11,101 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
- 
- function getSoundcloud(Url, callback) {
-	console.info("[Soundcloud] Attempting api call!");
-	$.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
-		setTimeout(function() {
-			var data = lastSoundCloud;
-			if (data === "") {
-				soundcloud_title = "-";
-				soundcloud_icon = "files/images/sc-default.png";
-				soundcloud_url = "https://soundcloud.com/stream";
-				console.info("[Soundcloud] Failed to get sound.");
-			} else {
-				var api = data;
-				soundcloud_title = api.title;
-				soundcloud_icon = api.artwork_url;
-				if (api.artwork_url == null) {
-					if (api.avatar_url != null) {
-						soundcloud_icon = api.avatar_url;
-					} else {
-						soundcloud_icon = "files/images/sc-default.png"
-					}
-				}
-				soundcloud_url = api.permalink_url;
-				callback("https://api.soundcloud.com/tracks/" + api.id + "/stream?client_id=a0bc8bd86e876335802cfbb2a7b35dd2");
-				document.getElementById("sc-cover").src = soundcloud_icon;
-				document.getElementById("sc-title").innerHTML = soundcloud_title;
-				document.getElementById("sc-cover").style.display = "";
-				document.getElementById("sc-title").style.display = "";
-				console.info("[Soundcloud] Successfull api call!");
-			}
-		});
-	});
+
+function getSoundcloud(Url, callback) {
+    console.info("[Soundcloud] Attempting api call!");
+    $.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
+        setTimeout(function() {
+            var data = lastSoundCloud;
+            if (data === "") {
+                soundcloud_title = "-";
+                soundcloud_icon = "files/images/sc-default.png";
+                soundcloud_url = "https://soundcloud.com/stream";
+                console.info("[Soundcloud] Failed to get sound.");
+            } else {
+                var api = data;
+                soundcloud_title = api.title;
+                soundcloud_icon = api.artwork_url;
+                if (api.artwork_url == null) {
+                    if (api.avatar_url != null) {
+                        soundcloud_icon = api.avatar_url;
+                    } else {
+                        soundcloud_icon = "files/images/sc-default.png"
+                    }
+                }
+                soundcloud_url = api.permalink_url;
+                callback("https://api.soundcloud.com/tracks/" + api.id + "/stream?client_id=a0bc8bd86e876335802cfbb2a7b35dd2");
+                document.getElementById("sc-cover").src = soundcloud_icon;
+                document.getElementById("sc-title").innerHTML = soundcloud_title;
+                document.getElementById("sc-cover").style.display = "";
+                document.getElementById("sc-title").style.display = "";
+                console.info("[Soundcloud] Successfull api call!");
+            }
+        });
+    });
 }
 
- 
- soundManager.setup({
-	defaultOptions: {
-		onfinish: function() {
-			handleSoundEnd(this.id);
-			soundManager.destroySound(this.id);
-			if (this.id != "oa_back_") {
-				onSoundEnd();
-			}
-		},
-		onplay: function() {
-			if (this.id != "oa_back_") {
-				onSoundPlay();
-			}
-		},
-		onstop: function() {
-			if (this.id != "oa_back_") {
-				onSoundEnd();
-			}
-		}
-	}
+
+soundManager.setup({
+    defaultOptions: {
+        onfinish: function() {
+            handleSoundEnd(this.id);
+            soundManager.destroySound(this.id);
+            if (this.id != "oa_back_") {
+                onSoundEnd();
+            }
+        },
+        onplay: function() {
+            if (this.id != "oa_back_") {
+                onSoundPlay();
+            }
+        },
+        onstop: function() {
+            if (this.id != "oa_back_") {
+                onSoundEnd();
+            }
+        }
+    }
 });
 
 function onSoundPlay() {
-	if (listSounds().includes("oa_back_") && ambiance != "") {
-		openaudio.stopBackground();
-	}
-	try {
-		clearTimeout(ambtimer);
-	} catch(e) {}
+    if (listSounds().includes("oa_back_") && ambiance != "") {
+        openaudio.stopBackground();
+    }
+    try {
+        clearTimeout(ambtimer);
+    } catch(e) {}
 }
 
 function onSoundEnd() {
-	ambtimer = setTimeout(function() {
-		if (listSounds().length == 0 && ambiance != "") {
-			if (ambiance.includes("soundcloud.com")) {
-				var scurl = ambiance;
-				getSoundcloud(scurl, function(newurl) {
-					openaudio.sartBackground(newurl);
-				});
-			} else {
-				openaudio.sartBackground(ambiance);
-			}
-		}
-	}, ambdelay);
+    ambtimer = setTimeout(function() {
+        if (listSounds().length == 0 && ambiance != "") {
+            if (ambiance.includes("soundcloud.com")) {
+                var scurl = ambiance;
+                getSoundcloud(scurl, function(newurl) {
+                    openaudio.sartBackground(newurl);
+                });
+            } else {
+                openaudio.sartBackground(ambiance);
+            }
+        }
+    }, ambdelay);
 }
 
 
 
 function handleSoundEnd(fullId) {
-	var id = fullId.split("_")[2];
-	if (id != "undefined") {
-		var whisper = {};
-		whisper.command = "SoundEnded";
-		whisper.id = id;
-		openaudio.whisper(JSON.stringify(whisper));
-	}
+    var id = fullId.split("_")[2];
+    if (id != "undefined") {
+        var whisper = {};
+        whisper.command = "SoundEnded";
+        whisper.id = id;
+        openaudio.whisper(JSON.stringify(whisper));
+    }
+}
+
+function getYoutbe(youtubeId) {
+    return "http://oa-yt.snowdns.de/?v=" + youtubeId;
 }
 
 
@@ -168,356 +172,412 @@ setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
-	$("#footer").animate({
-		"background-color": code
-	}, {
-		duration: 1000
-	});
-	$("#box").animate({
-		"background-color": code
-	}, {
-		duration: 500
-	});
+    $("#footer").animate({
+        "background-color": code
+    }, {
+        duration: 1000
+    });
+    $("#box").animate({
+        "background-color": code
+    }, {
+        duration: 500
+    });
 }
 
 openaudio.decode = function(msg) {
 
-	if (msg.includes("clyp.it")) {
-		console.error("Clypit is no longer supported!");
-		return;
-	}
+    if (msg.includes("clyp.it")) {
+        console.error("Clypit is no longer supported!");
+        return;
+    }
 
-	request = JSON.parse(msg);
-	if (request.command == "play_normal") {
-		if (request.src.includes("soundcloud.com")) {
-			var scurl = request.src;
-			getSoundcloud(scurl, function(newurl) {
-				request.src = newurl;
-				openaudio.play(request.src);
-			});
-		} else {
-			openaudio.play(request.src);
-		}
-	} else if (request.command == "stop") {
-		openaudio.playAction("stop");
-		try {
-			loadedsound.stop();
-		} catch (e) {}
-		try {
-			soundManager.stop('loop');
-			soundManager.destroySound('loop');
-		} catch (e) {}
-		try {
-			soundManager.stop('AutoDj');
-			soundManager.destroySound('AutoDj');
-		} catch (e) {}
-	} else if (request.command == "custom") {
-		var str = request.string;
-		console.log("Custom json for developers: " + str);
-	} else if (request.command == "loadmod") {
-		if (request.type == "css") {
-			addCss(request.src);
-		} else if (request.type == "js") {
-			addJs(request.src);
-		}
-	} else if (request.command == "playlist") {
-		var myStringArray = request.array;
-		var arrayLength = myStringArray.length;
-		PlayList_songs = {};
-		for (var i = 0; i < arrayLength; i++) {
-			var song = myStringArray[i];
-			if (song.includes("soundcloud.com")) {
-				var scurl2 = request.src;
-				getSoundcloud(scurl2, function(newurl) {
-					song = newurl;
-				});
+    request = JSON.parse(msg);
+    if (request.command == "play_normal") {
+        if (request.src.includes("soundcloud.com")) {
+            var scurl = request.src;
+            getSoundcloud(scurl, function(newurl) {
+                request.src = newurl;
+                openaudio.play(request.src);
+            });
+        } else if (request.src.includes("youtube.com")) {
+            var youtubeId = request.src.split("?v=");
+            openaudio.play(getYoutbe(youtubeId[1]));
+        } else if (request.src.includes("youtu.be")) {
+            var youtubeId = request.src.split("/");
+            openaudio.play(getYoutbe(youtubeId[3]));
+        } else {
+            openaudio.play(request.src);
+        }
+    } else if (request.command == "stop") {
+        openaudio.playAction("stop");
+        try {
+            loadedsound.stop();
+        } catch (e) {}
+        try {
+            soundManager.stop('loop');
+            soundManager.destroySound('loop');
+        } catch (e) {}
+        try {
+            soundManager.stop('AutoDj');
+            soundManager.destroySound('AutoDj');
+        } catch (e) {}
+    } else if (request.command == "custom") {
+        var str = request.string;
+        console.log("Custom json for developers: " + str);
+    } else if (request.command == "loadmod") {
+        if (request.type == "css") {
+            addCss(request.src);
+        } else if (request.type == "js") {
+            addJs(request.src);
+        }
+    } else if (request.command == "playlist") {
+        var myStringArray = request.array;
+        var arrayLength = myStringArray.length;
+        PlayList_songs = {};
+        for (var i = 0; i < arrayLength; i++) {
+            var song = myStringArray[i];
+            if (song.includes("soundcloud.com")) {
+                var scurl2 = request.src;
+                getSoundcloud(scurl2, function(newurl) {
+                    song = newurl;
+                });
+            }
+            if (song.includes("soundcloud.com")) {
+                var scurl = request.src;
+                getSoundcloud(scurl, function(newurl) {
+                    AutoDj.AddSong(newurl);
+                });
+            }
+            // YouTube Integration
+            if (song.includes("youtube.com")) {
+                var youtubeId2 = request.src.split("?v=");
+                song = getYoutbe(youtubeId2[1]);
+            }
+            if (song.includes("youtube.com")) {
+                var youtubeId = request.src.split("?v=");
+                AutoDj.getYoutbe(youtubeId[1]);
+            }
+            if (song.includes("youtu.be")) {
+                var youtubeId2 = request.src.split("/");
+                song = getYoutbe(youtubeId2[3]);
+            }
+            if (song.includes("youtu.be")) {
+                var youtubeId = request.src.split("/");
+                AutoDj.getYoutbe(youtubeId[3]);
+            }
+            else {
+                AutoDj.AddSong(song);
+            }
+            var valid = true;
+        }
+        if (valid) {
+            AutoDj.AddedCount = 1;
+            AutoDj.IdOfNowPlaying = 1;
+            AutoDj.LoadAll();
+            AutoDj.PlayNext();
+        } else {
+            console.error("error while loading autodj")
+        }
+    } else if (request.command == "message") {
+        //Browser messages
+        openaudio.message(request.string);
+    } else if (request.command == "speaker") {
+        if (request.type == "add") {
+            if (request.src.includes("soundcloud.com")) {
+                var scurl = request.src;
+                getSoundcloud(scurl, function (newurl) {
+                    openaudio.newspeaker(newurl, request.time, request.volume);
+                });
+            } else if (request.src.includes("youtube.com")) {
+                var youtubeId = request.src.split("?v=");
+                openaudio.newspeaker(getYoutbe(youtubeId[1]), request.time, request.volume);
+        	} else if (request.src.includes("youtu.be")) {
+                var youtubeId = request.src.split("/");
+                openaudio.newspeaker(getYoutbe(youtubeId[3]), request.time, request.volume);
 			}
-			if (song.includes("soundcloud.com")) {
-				var scurl = request.src;
-				getSoundcloud(scurl, function(newurl) {
-					AutoDj.AddSong(newurl);
-				});
-			} else {
-				AutoDj.AddSong(song);
-			}
-			var valid = true;
-		}
-		if (valid) {
-			AutoDj.AddedCount = 1;
-			AutoDj.IdOfNowPlaying = 1;
-			AutoDj.LoadAll();
-			AutoDj.PlayNext();
-		} else {
-			console.error("error while loading autodj")
-		}
-	} else if (request.command == "message") {
-		//Browser messages
-		openaudio.message(request.string);
-	} else if (request.command == "speaker") {
-		if (request.type == "add") {
-			if (request.src.includes("soundcloud.com")) {
-				var scurl = request.src;
-				getSoundcloud(scurl, function(newurl) {
-					openaudio.newspeaker(newurl, request.time, request.volume);
-				});
-			} else {
-				openaudio.newspeaker(request.src, request.time, request.volume);
-			}
-		} else if (request.type == "volume") {
-			for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
-				listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-				if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
+        	else {
+                openaudio.newspeaker(request.src, request.time, request.volume);
+            }
+        } else if (request.type == "volume") {
+            for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
+                listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+                if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
                     fadeSpeaker2(listSpeakerSounds().split(',')[i], request.volume);
                     lastSpeakerVolume = request.volume;
-				}
-			}
-		} else if (request.type == "stop") {
-			openaudio.removeSpeaker("speaker");
-		} else if (request.type == "stopall") {
-			openaudio.removeSpeaker("speaker");
-		}
-	} else if (request.command == "skipto") {
-		//skip to
-		openaudio.skipTo(request.id, request.timeStamp);
-	} else if (request.command == "setvolumeid") {
-		openaudio.set_directed_volume(request.id, request.volume);
-	} else if (request.command == "forcevolume") {
-		openaudio.set_volume(request.volume);
-	} else if (request.command == "play_normal_id") {
-		if (request.src.includes("soundcloud.com")) {
-			var scurl = request.src;
-			getSoundcloud(scurl, function(newurl) {
-				openaudio.play(newurl, request.id, request.time);
-			});
+                }
+            }
+        } else if (request.type == "stop") {
+            openaudio.removeSpeaker("speaker");
+        } else if (request.type == "stopall") {
+            openaudio.removeSpeaker("speaker");
+        }
+    } else if (request.command == "skipto") {
+        //skip to
+        openaudio.skipTo(request.id, request.timeStamp);
+    } else if (request.command == "setvolumeid") {
+        openaudio.set_directed_volume(request.id, request.volume);
+    } else if (request.command == "forcevolume") {
+        openaudio.set_volume(request.volume);
+    } else if (request.command == "play_normal_id") {
+        if (request.src.includes("soundcloud.com")) {
+            var scurl = request.src;
+            getSoundcloud(scurl, function(newurl) {
+                openaudio.play(newurl, request.id, request.time);
+            });
+        } else if (request.src.includes("youtube.com")) {
+            var youtubeId = request.src.split("?v=");
+        	openaudio.play(getYoutbe(youtubeId[1]), request.id, request.time);
+		} else if (request.src.includes("youtu.be")) {
+            var youtubeId = request.src.split("/");
+            openaudio.play(getYoutbe(youtubeId[3]), request.id, request.time);
+        } else {
+            openaudio.play(request.src, request.id, request.time);
+        }
+    } else if (request.command == "stop_id") {
+        openaudio.stop_id(request.id);
+    } else if (request.command == "toggle") {
+        //I KNOW TOOGLE IS A TYPO
+        openaudio.toogle_id(request.id);
+    } else if (request.command == "loop") {
+        if (request.src.includes("soundcloud.com")) {
+            var scurl = request.src;
+            getSoundcloud(scurl, function(newurl) {
+                openaudio.loop(newurl);
+            });
+        } else if (request.src.includes("youtube.com")) {
+            var youtubeId = request.src.split("?v=");
+            openaudio.loop(getYoutbe(youtubeId[1]));
+		} else if (request.src.includes("youtu.be")) {
+            var youtubeId = request.src.split("/");
+            openaudio.loop(getYoutbe(youtubeId[3]));
 		} else {
-			openaudio.play(request.src, request.id, request.time);
-		}
-	} else if (request.command == "stop_id") {
-		openaudio.stop_id(request.id);
-	} else if (request.command == "toggle") {
-		//I KNOW TOOGLE IS A TYPO
-		openaudio.toogle_id(request.id);
-	} else if (request.command == "loop") {
-		if (request.src.includes("soundcloud.com")) {
-			var scurl = request.src;
-			getSoundcloud(scurl, function(newurl) {
-				openaudio.loop(newurl);
-			});
-		} else {
-			openaudio.loop(request.src);
-		}
-	} else if (request.type == "region") {
+            openaudio.loop(request.src);
+        }
+    } else if (request.type == "region") {
 
-		//TODO: REGION HANDLER
+        //TODO: REGION HANDLER
 
-		if (request.command == "startRegion") {
+        if (request.command == "startRegion") {
 
-			if (request.src.includes("soundcloud.com")) {
-				var scurl = request.src;
-				getSoundcloud(scurl, function(newurl) {
-					request.src = newurl;
-					openaudio.playRegion(request.src, request.id);
-				});
+            if (request.src.includes("soundcloud.com")) {
+                var scurl = request.src;
+                getSoundcloud(scurl, function(newurl) {
+                    request.src = newurl;
+                    openaudio.playRegion(request.src, request.id);
+                });
+            } else if (request.src.includes("youtube.com")) {
+                var youtubeId = request.src.split("?v=");
+                openaudio.playRegion(getYoutbe(youtubeId[1]), request.id);
+			} else if (request.src.includes("youtu.be")) {
+                var youtubeId = request.src.split("/");
+                openaudio.playRegion(getYoutbe(youtubeId[3]), request.id);
 			} else {
-				openaudio.playRegion(request.src, request.id);
-			}
+                openaudio.playRegion(request.src, request.id);
+            }
 
 
-		} else if (request.command == "stopOldRegion") {
-			openaudio.stopRegion(request.id);
-		} else {
-			openaudio.regionsStop();
-		}
-	} else if (request.command == "volume") {
-		fadeAllTarget(request.volume);
-	} else if (request.type == "buffer") {
-		if (request.command == "play") {
-			openaudio.playbuffer();
-		} else if (request.command == "create") {
+        } else if (request.command == "stopOldRegion") {
+            openaudio.stopRegion(request.id);
+        } else {
+            openaudio.regionsStop();
+        }
+    } else if (request.command == "volume") {
+        fadeAllTarget(request.volume);
+    } else if (request.type == "buffer") {
+        if (request.command == "play") {
+            openaudio.playbuffer();
+        } else if (request.command == "create") {
 
-			if (request.src.includes("soundcloud.com")) {
-				var scurl = request.src;
-				getSoundcloud(scurl, function(newurl) {
-					openaudio.createBuffer(newurl);
-				});
+            if (request.src.includes("soundcloud.com")) {
+                var scurl = request.src;
+                getSoundcloud(scurl, function(newurl) {
+                    openaudio.createBuffer(newurl);
+                });
+            } else if (request.src.includes("youtube.com")) {
+                var youtubeId = request.src.split("?v=");
+                openaudio.createBuffer(getYoutbe(youtubeId[1]));
+			} else if (request.src.includes("youtu.be")) {
+                var youtubeId = request.src.split("/");
+            	openaudio.createBuffer(getYoutbe(youtubeId[3]));
 			} else {
-				openaudio.createBuffer(request.src);
-			}
-		}
-	} else if (request.command == "hue") {
-		if (request.type == "set") {
-			var values = request.target.split(':');
-			var colorcode = values[0];
-			try {
-				//light is specified
-				var light = values[1];
-				hue_set_color(colorcode, light);
-			} catch (e) {
-				//no light code
-				hue_set_color(colorcode);
-			}
-		} else if (request.type == "reset") {
-			hue_set_color(HueDefaultColor);
-		} else if (request.type == "blink") {
-			for (var key in MyHue.Lights) {
-				if (MyHue.Lights.hasOwnProperty(key)) {
-					if (hue_lights[key].enabled) {
-						MyHue.LightAlertLSelect(key);
-					}
-				}
-			}
-		} else if (request.type == "cyclecolors") {
-			for (var key in MyHue.Lights) {
-				if (MyHue.Lights.hasOwnProperty(key)) {
-					if (hue_lights[key].enabled) {
-						MyHue.LightEffectColorloop(key);
-					}
-				}
-			}
-		} else if (request.type == "stop") {
-			for (var key in MyHue.Lights) {
-				if (MyHue.Lights.hasOwnProperty(key)) {
-					if (hue_lights[key].enabled) {
-						MyHue.LightAlertNone(key);
-						MyHue.LightEffectNone(key);
-					}
-				}
-			}
-		}
-	} else if (request.command == "setbg") {
-		if (request.type == "set") {
-			document.body.background = request.target;
-		} else if (request.type == "reset") {
-			document.body.background = "";
-		}
-	}
+                openaudio.createBuffer(request.src);
+            }
+        }
+    } else if (request.command == "hue") {
+        if (request.type == "set") {
+            var values = request.target.split(':');
+            var colorcode = values[0];
+            try {
+                //light is specified
+                var light = values[1];
+                hue_set_color(colorcode, light);
+            } catch (e) {
+                //no light code
+                hue_set_color(colorcode);
+            }
+        } else if (request.type == "reset") {
+            hue_set_color(HueDefaultColor);
+        } else if (request.type == "blink") {
+            for (var key in MyHue.Lights) {
+                if (MyHue.Lights.hasOwnProperty(key)) {
+                    if (hue_lights[key].enabled) {
+                        MyHue.LightAlertLSelect(key);
+                    }
+                }
+            }
+        } else if (request.type == "cyclecolors") {
+            for (var key in MyHue.Lights) {
+                if (MyHue.Lights.hasOwnProperty(key)) {
+                    if (hue_lights[key].enabled) {
+                        MyHue.LightEffectColorloop(key);
+                    }
+                }
+            }
+        } else if (request.type == "stop") {
+            for (var key in MyHue.Lights) {
+                if (MyHue.Lights.hasOwnProperty(key)) {
+                    if (hue_lights[key].enabled) {
+                        MyHue.LightAlertNone(key);
+                        MyHue.LightEffectNone(key);
+                    }
+                }
+            }
+        }
+    } else if (request.command == "setbg") {
+        if (request.type == "set") {
+            document.body.background = request.target;
+        } else if (request.type == "reset") {
+            document.body.background = "";
+        }
+    }
 }
 
 openaudio.play = function(src_fo_file, soundID, defaultTime) {
-	if (soundID === null) {
-		var soundID = 'default';
-	}
+    if (soundID === null) {
+        var soundID = 'default';
+    }
 
-	if (defaultTime === null) {
-		var defaultTime = 0;
-	}
+    if (defaultTime === null) {
+        var defaultTime = 0;
+    }
 
-	var soundId = "play";
-	if (isFading[soundId] === true) {
-		stopFading[soundId] = true;
-	}
-	var mySoundObject = soundManager.createSound({
-		id: "play_" + Math.floor(Math.random() * 60) + 1 + "_" + soundID,
-		url: src_fo_file,
-		volume: volume,
-		from: defaultTime,
-		autoPlay: true,
-	});
+    var soundId = "play";
+    if (isFading[soundId] === true) {
+        stopFading[soundId] = true;
+    }
+    var mySoundObject = soundManager.createSound({
+        id: "play_" + Math.floor(Math.random() * 60) + 1 + "_" + soundID,
+        url: src_fo_file,
+        volume: volume,
+        from: defaultTime,
+        autoPlay: true,
+    });
 }
 
 openaudio.sartBackground = function(url) {
-	
-	soundManager.stop('regionsound');
-	soundManager.destroySound('regionsound');
-	
-	var regionsound = soundManager.createSound({
-		id: "oa_back_",
-		volume: volume,
-		url: url
-	});
 
-	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(sound);
-			}
-		});
-	}
-	fadeIdTarget("oa_back_", volume);
-	loopSound(regionsound);
+    soundManager.stop('regionsound');
+    soundManager.destroySound('regionsound');
+
+    var regionsound = soundManager.createSound({
+        id: "oa_back_",
+        volume: volume,
+        url: url,
+		stream: true
+    });
+
+    function loopSound(sound) {
+        sound.play({
+            onfinish: function() {
+                loopSound(sound);
+            }
+        });
+    }
+    fadeIdTarget("oa_back_", volume);
+    loopSound(regionsound);
 }
 
 openaudio.stopBackground = function() {
-	fadeIdOut("oa_back_");
+    fadeIdOut("oa_back_");
 }
 
 openaudio.whisper = function(message) {
-	socket.emit("whisperToServer", message);
-	console.info("[Socket.io] Whisper send.");
+    socket.emit("whisperToServer", message);
+    console.info("[Socket.io] Whisper send.");
 }
 
 socketIo.log = function(data) {
-	console.info("[Socket.Io] " + data);
+    console.info("[Socket.Io] " + data);
 }
 
 openaudio.skipTo = function(id, timeInS) {
-	openaudio.setIdAtribute(id, function(fullID) {
-		var s = parseInt(timeInS);
-		var t = s * 1000;
-		soundManager.setPosition(fullID, t);
-	});
+    openaudio.setIdAtribute(id, function(fullID) {
+        var s = parseInt(timeInS);
+        var t = s * 1000;
+        soundManager.setPosition(fullID, t);
+    });
 }
 
 openaudio.playRegion = function(url, id, defaultTime) {
-	if (!regions[id]) {
-		var regionsounds = soundManager.createSound({
-			id: "oa_region_" + id,
-			url: url,
-			volume: volume,
-			from: defaultTime * 1000,
-			stream: true,
-			onplay: function() {
-				soundManager.getSoundById("oa_region_" + id, volume).metadata.region = true;
-			}
-		});
-		regions[id] = true;
-		function loopSound(sound) {
-			sound.play({
-				onfinish: function() {
-					loopSound(sound);
-				}
-			});
-		}
-		loopSound(regionsounds);
-	}
+    if (!regions[id]) {
+        var regionsounds = soundManager.createSound({
+            id: "oa_region_" + id,
+            url: url,
+            volume: volume,
+            from: defaultTime * 1000,
+            stream: true,
+            onplay: function() {
+                soundManager.getSoundById("oa_region_" + id, volume).metadata.region = true;
+            }
+        });
+        regions[id] = true;
+        function loopSound(sound) {
+            sound.play({
+                onfinish: function() {
+                    loopSound(sound);
+                }
+            });
+        }
+        loopSound(regionsounds);
+    }
 }
 
 openaudio.stopRegion = function(id) {
-	regions[id] = false;
-	fadeIdOut("oa_region_" + id);
+    regions[id] = false;
+    fadeIdOut("oa_region_" + id);
 }
 
 openaudio.regionsStop = function() {
-	for (var i = 0; i < listSounds().split(',').length; i++) {
-		listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-		if (listSounds().split(',')[i].indexOf("oa_region_") !== -1) {
-			fadeIdOut(listSounds().split(',')[i]);
-		}
-	}
+    for (var i = 0; i < listSounds().split(',').length; i++) {
+        listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        if (listSounds().split(',')[i].indexOf("oa_region_") !== -1) {
+            fadeIdOut(listSounds().split(',')[i]);
+        }
+    }
 }
 
 openaudio.playAction = function(action_is_fnc) {
-	for (var i = 0; i < listSounds().split(',').length; i++) {
-		listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-		if (listSounds().split(',')[i].indexOf("play_") !== -1) {
-			if (action_is_fnc === "stop") {
-				fadeIdOut(listSounds().split(',')[i]);
-			}
-		}
-	}
+    for (var i = 0; i < listSounds().split(',').length; i++) {
+        listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        if (listSounds().split(',')[i].indexOf("play_") !== -1) {
+            if (action_is_fnc === "stop") {
+                fadeIdOut(listSounds().split(',')[i]);
+            }
+        }
+    }
 }
 
 
 openaudio.setGlobalVolume = function(volumeNew) {
-	for (var i = 0; i < listSounds().split(',').length; i++) {
-		listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-		try {
-			soundManager.getSoundById(listSounds().split(',')[i]).setVolume(volumeNew);
-		} catch (e) {
-			//no sounds avalible
-		}
-		
-	}
+    for (var i = 0; i < listSounds().split(',').length; i++) {
+        listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        try {
+            soundManager.getSoundById(listSounds().split(',')[i]).setVolume(volumeNew);
+        } catch (e) {
+            //no sounds avalible
+        }
+
+    }
 
     for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
         listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
@@ -531,22 +591,22 @@ openaudio.setGlobalVolume = function(volumeNew) {
 
 
 openaudio.newspeaker = function(url, defaultTime, requestvol) {
-	var speakersound = soundManager.createSound({
-		id: "speaker_ding",
-		url: url,
-		volume: 0,
+    var speakersound = soundManager.createSound({
+        id: "speaker_ding",
+        url: url,
+        volume: 0,
         autoPlay: true,
-		from: defaultTime * 1000,
-		stream: true,
-		onplay: function() {
-			soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
-			fadeSpeaker2("speaker_ding", ((requestvol / 100) * volume))
-		}, onfinish: function() {
-			this.stream = true;
-			this.from = 0;
-			this.play();
+        from: defaultTime * 1000,
+        stream: true,
+        onplay: function() {
+            soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
+            fadeSpeaker2("speaker_ding", ((requestvol / 100) * volume))
+        }, onfinish: function() {
+            this.stream = true;
+            this.from = 0;
+            this.play();
         }
-	});
+    });
 
 }
 
@@ -560,220 +620,220 @@ openaudio.removeSpeaker = function(id) {
 
 
 openaudio.setIdAtribute = function(ID, callback) {
-	if (!ID.includes("/")) {
-		for (var i = 0; i < listSounds().split(',').length; i++) {
-			listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-			if (listSounds().split(',')[i].indexOf(ID) !== -1 && (listSounds().split(',')[i].indexOf("play_") !== -1 || listSounds().split(',')[i].indexOf("oa_region_") !== -1)) {
-				callback(listSounds().split(',')[i])
-			}
-		}
-	} else {
-		var string = ID;
-		string = string.split("/");
-		var stringArray = [];
-		for (var loopids = 0; loopids < string.length; loopids++) {
-			stringArray.push(string[loopids]);
-		}
-		stringArray.forEach(function(entry) {
-			for (var i = 0; i < listSounds().split(',').length; i++) {
-				listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-				if (listSounds().split(',')[i].indexOf(entry) !== -1 && (listSounds().split(',')[i].indexOf("play_") !== -1 || listSounds().split(',')[i].indexOf("oa_region_") !== -1)) {
-					callback(listSounds().split(',')[i])
-				}
+    if (!ID.includes("/")) {
+        for (var i = 0; i < listSounds().split(',').length; i++) {
+            listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+            if (listSounds().split(',')[i].indexOf(ID) !== -1 && (listSounds().split(',')[i].indexOf("play_") !== -1 || listSounds().split(',')[i].indexOf("oa_region_") !== -1)) {
+                callback(listSounds().split(',')[i])
+            }
+        }
+    } else {
+        var string = ID;
+        string = string.split("/");
+        var stringArray = [];
+        for (var loopids = 0; loopids < string.length; loopids++) {
+            stringArray.push(string[loopids]);
+        }
+        stringArray.forEach(function(entry) {
+            for (var i = 0; i < listSounds().split(',').length; i++) {
+                listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+                if (listSounds().split(',')[i].indexOf(entry) !== -1 && (listSounds().split(',')[i].indexOf("play_") !== -1 || listSounds().split(',')[i].indexOf("oa_region_") !== -1)) {
+                    callback(listSounds().split(',')[i])
+                }
 
-			}
-		});
-	}
+            }
+        });
+    }
 }
 
 
 openaudio.set_directed_volume = function(volume, ID) {
-	var volume = parseInt(volume);
-	if (volume > 100) {
-		openaudio.setIdAtribute(ID, function(fullID) {
-			soundManager.setVolume(fullID, 100);
-		});
-	} else if (volume < 0) {
-		openaudio.setIdAtribute(ID, function(fullID) {
-			soundManager.setVolume(fullID, 0);
-		});
-	} else {
-		openaudio.setIdAtribute(ID, function(fullID) {
-			soundManager.setVolume(fullID, volume);
-		});
-	}
+    var volume = parseInt(volume);
+    if (volume > 100) {
+        openaudio.setIdAtribute(ID, function(fullID) {
+            soundManager.setVolume(fullID, 100);
+        });
+    } else if (volume < 0) {
+        openaudio.setIdAtribute(ID, function(fullID) {
+            soundManager.setVolume(fullID, 0);
+        });
+    } else {
+        openaudio.setIdAtribute(ID, function(fullID) {
+            soundManager.setVolume(fullID, volume);
+        });
+    }
 }
 
 
 
 openaudio.stop_id = function(ID) {
-	openaudio.setIdAtribute(ID, function(fullID) {
-		fadeIdOut(fullID);
-	});
+    openaudio.setIdAtribute(ID, function(fullID) {
+        fadeIdOut(fullID);
+    });
 }
 
 
 
 openaudio.toogle_id = function(id) {
-	openaudio.setIdAtribute(id, function(fullID) {
-		soundManager.togglePause(fullID);
-	});
+    openaudio.setIdAtribute(id, function(fullID) {
+        soundManager.togglePause(fullID);
+    });
 }
 
 
 
 openaudio.set_volume = function(volume_var) {
-	volume_text = document.getElementById("volume");
-	if (volume_var > 100) {
-		document.getElementById("slider").value = 100;
-		openaudio.setGlobalVolume(100);
-		document.getElementById("volumevalue").innerHTML = 100;
-		document.getElementById("volumevalue").style.left = 100 * 2.425 + 'px';
-		volume = 100;
-	} else if (volume_var < 0) {
-		document.getElementById("slider").value = 0;
-		openaudio.setGlobalVolume(0);
-		volume = 0;
-		document.getElementById("volumevalue").innerHTML = 0;
-		document.getElementById("volumevalue").style.left = 0 * 2.425 + 'px';
-	} else {
-		document.getElementById("slider").value = volume_var;
-		document.getElementById("volumevalue").innerHTML = volume_var;
-		document.getElementById("volumevalue").style.left = volume_var * 2.425 + 'px';
-		volume = volume_var;
-		openaudio.setGlobalVolume(volume_var);
-	}
+    volume_text = document.getElementById("volume");
+    if (volume_var > 100) {
+        document.getElementById("slider").value = 100;
+        openaudio.setGlobalVolume(100);
+        document.getElementById("volumevalue").innerHTML = 100;
+        document.getElementById("volumevalue").style.left = 100 * 2.425 + 'px';
+        volume = 100;
+    } else if (volume_var < 0) {
+        document.getElementById("slider").value = 0;
+        openaudio.setGlobalVolume(0);
+        volume = 0;
+        document.getElementById("volumevalue").innerHTML = 0;
+        document.getElementById("volumevalue").style.left = 0 * 2.425 + 'px';
+    } else {
+        document.getElementById("slider").value = volume_var;
+        document.getElementById("volumevalue").innerHTML = volume_var;
+        document.getElementById("volumevalue").style.left = volume_var * 2.425 + 'px';
+        volume = volume_var;
+        openaudio.setGlobalVolume(volume_var);
+    }
 }
 
 
 
 openaudio.set_volume2 = function(volume_var) {
-	if (volume_var > 100) {
-		document.getElementById("slider").value = 100;
-		openaudio.setGlobalVolume(100);
-		volume = 100;
-	} else if (volume_var < 0) {
-		document.getElementById("slider").value = 0;
-		openaudio.setGlobalVolume(0);
-		volume = 0;
-	} else {
-		document.getElementById("slider").value = volume_var;
-		volume = volume_var;
-		openaudio.setGlobalVolume(volume_var);
-	}
+    if (volume_var > 100) {
+        document.getElementById("slider").value = 100;
+        openaudio.setGlobalVolume(100);
+        volume = 100;
+    } else if (volume_var < 0) {
+        document.getElementById("slider").value = 0;
+        openaudio.setGlobalVolume(0);
+        volume = 0;
+    } else {
+        document.getElementById("slider").value = volume_var;
+        volume = volume_var;
+        openaudio.setGlobalVolume(volume_var);
+    }
 }
 
 
 
 openaudio.playbuffer = function() {
-	try {
-		loadedsound.play({
-			volume: volume
-		});
-	} catch (e) {
+    try {
+        loadedsound.play({
+            volume: volume
+        });
+    } catch (e) {
 
-	}
+    }
 }
 
 
 
 openaudio.createBuffer = function(file_to_load) {
-	loadedsound = soundManager.createSound({
-		id: 'loader',
-		url: file_to_load
-	});
-	soundManager.load('loader');
-	loadedsound.load();
+    loadedsound = soundManager.createSound({
+        id: 'loader',
+        url: file_to_load
+    });
+    soundManager.load('loader');
+    loadedsound.load();
 }
 
 
 
 openaudio.message = function(text) {
-	if (Notification.permission !== "granted") {
-		Notification.requestPermission();
-	} else {
-		var notification = new Notification(langpack.notification.header.replace(/%username%/g, mcname), {
-			icon: langpack.notification.img,
-			body: text,
-		});
-	}
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    } else {
+        var notification = new Notification(langpack.notification.header.replace(/%username%/g, mcname), {
+            icon: langpack.notification.img,
+            body: text,
+        });
+    }
 }
 
 openaudio.loop = function(url, defaultTime) {
-	var soundId = "loop";
-	if (isFading[soundId] === true) {
-		stopFading[soundId] = true;
-	}
+    var soundId = "loop";
+    if (isFading[soundId] === true) {
+        stopFading[soundId] = true;
+    }
 
-	soundManager.stop('loopnu');
-	soundManager.destroySound('loopnu');
+    soundManager.stop('loopnu');
+    soundManager.destroySound('loopnu');
 
-	var loopnu = soundManager.createSound({
-		id: 'loopnu',
-		volume: volume,
-		url: url,
-		from: defaultTime,
-		stream: true
-	});
+    var loopnu = soundManager.createSound({
+        id: 'loopnu',
+        volume: volume,
+        url: url,
+        from: defaultTime,
+        stream: true
+    });
 
-	function loopSound(sound) {
-		sound.play({
-			onfinish: function() {
-				loopSound(sound);
-			}
-		});
-	}
-	loopSound(loopnu);
+    function loopSound(sound) {
+        sound.play({
+            onfinish: function() {
+                loopSound(sound);
+            }
+        });
+    }
+    loopSound(loopnu);
 }
 
 //all the fading c
 $(document).ready(function() {
-	window.fadeIdOut = function(soundId) {
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "range");
-		document.body.appendChild(x);
-		x.id = soundId + "_Slider";
-		x.min = 0;
-		x.max = 100;
-		x.value = volume;
-		x.style = "display:none;";
-		var backAudio = $('#' + soundId + "_Slider");
-		document.getElementById('faders').appendChild(x);
+    window.fadeIdOut = function(soundId) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId + "_Slider";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId + "_Slider");
+        document.getElementById('faders').appendChild(x);
 
-		if (FadeEnabled) {
-			isFading[soundId] = true;
-			backAudio.animate({
-				value: 0
-			}, {
-				duration: 1000,
-				step: function(currentLeft, animProperties) {
-					//call event when a sound started
-					if (stopFading[soundId] !== true) {
-						try {
-							soundManager.setVolume(soundId, currentLeft);
-						} catch (e) {}
-					}
-				},
-				done: function() {
-					if (stopFading[soundId] !== true) {
-						try {
-							soundManager.stop(soundId);
-							soundManager.destroySound(soundId);
-						} catch (e) {}
-					}
-					isFading[soundId] = false;
-					stopFading[soundId] = false;
-					x.remove();
-				}
-			});
-		} else {
-			try {
-				soundManager.stop(soundId);
-				soundManager.destroySound(soundId);
-			} catch (e) {}
-			x.remove();
-		}
-	}
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId, currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId);
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
+                soundManager.stop(soundId);
+                soundManager.destroySound(soundId);
+            } catch (e) {}
+            x.remove();
+        }
+    }
 
     window.fadeSpeakerOut = function(soundId) {
         var x = document.createElement("INPUT");
@@ -826,7 +886,7 @@ $(document).ready(function() {
 
         var volumeTarget = (vt / 100) * volume;
 
-		console.log("Nu " + soundManager.getSoundById("speaker_ding").volume + " --- oud " + volumeTarget)
+        console.log("Nu " + soundManager.getSoundById("speaker_ding").volume + " --- oud " + volumeTarget)
 
         var x = document.createElement("INPUT");
         x.setAttribute("type", "range");
@@ -864,168 +924,168 @@ $(document).ready(function() {
     }
 
 
-	window.fadeIdTarget = function(soundId, volumeTarget) {
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "range");
-		document.body.appendChild(x);
-		x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
-		x.min = 0;
-		x.max = 100;
-		x.value = volume;
-		x.style = "display:none;";
-		var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
-		document.getElementById('faders').appendChild(x);
+    window.fadeIdTarget = function(soundId, volumeTarget) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
 
-		if (FadeEnabled) {
-			isFading[soundId] = true;
-			backAudio.animate({
-				value: volumeTarget
-			}, {
-				duration: 1000,
-				step: function(currentLeft, animProperties) {
-					if (stopFading[soundId + "_Slider_type_2"] !== true) {
-						soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
-					}
-				},
-				done: function() {
-					isFading[soundId] = false;
-					stopFading[soundId] = false;
-					soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
-					x.remove();
-				}
-			});
-		} else {
-			soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
-			x.remove();
-		}
-	}
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: volumeTarget
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    if (stopFading[soundId + "_Slider_type_2"] !== true) {
+                        soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
+                    }
+                },
+                done: function() {
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+                    x.remove();
+                }
+            });
+        } else {
+            soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+            x.remove();
+        }
+    }
 
-	window.fadeIdOutWithSpeaker = function(soundId) {
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "range");
-		document.body.appendChild(x);
-		x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
-		x.min = 0;
-		x.max = 100;
-		x.value = volume;
-		x.style = "display:none;";
-		var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
-		document.getElementById('faders').appendChild(x);
+    window.fadeIdOutWithSpeaker = function(soundId) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
 
-		if (FadeEnabled) {
-			isFading[soundId] = true;
-			backAudio.animate({
-				value: 0
-			}, {
-				duration: 100,
-				step: function(currentLeft, animProperties) {
-					//call event when a sound started
-					if (stopFading[soundId] !== true) {
-						try {
-							soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
-						} catch (e) {}
-					}
-				},
-				done: function() {
-					if (stopFading[soundId] !== true) {
-						try {
-							soundManager.stop(soundId);
-							soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
-						} catch (e) {}
-					}
-					isFading[soundId] = false;
-					stopFading[soundId] = false;
-					x.remove();
-				}
-			});
-		} else {
-			try {
-				soundManager.stop(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
-				soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
-			} catch (e) {}
-			x.remove();
-		}
-	}
-
-
-	window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 100,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
+                soundManager.stop(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+                soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+            } catch (e) {}
+            x.remove();
+        }
+    }
 
 
+    window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
 
 
 
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "range");
-		document.body.appendChild(x);
-		x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
-		x.min = 0;
-		x.max = 100;
-		x.value = soundManager.getSoundById(soundId).volume;
-		x.style = "display:none;";
-		var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
-		document.getElementById('faders').appendChild(x);
-
-		if (FadeEnabled) {
-			isFading[soundId] = true;
-			backAudio.animate({
-				value: volumeTarget
-			}, {
-				duration: 500,
-				step: function(currentLeft, animProperties) {
-					if (stopFading[soundId + "_Slider_type_2"] !== true) {
-						soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
-					}
-				},
-				done: function() {
-					isFading[soundId] = false;
-					stopFading[soundId] = false;
-					soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
-					x.remove();
-				}
-			});
-		} else {
-			soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
-			x.remove();
-		}
-	}
 
 
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = soundManager.getSoundById(soundId).volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
 
-	window.fadeAllTarget = function(volumeTarget) {
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "range");
-		document.body.appendChild(x);
-		x.id = "global_Slider_type_2";
-		x.min = 0;
-		x.max = 100;
-		x.value = volume;
-		x.style = "display:none;";
-		var backAudio = $('#' + "global_Slider_type_2");
-		document.getElementById('faders').appendChild(x);
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: volumeTarget
+            }, {
+                duration: 500,
+                step: function(currentLeft, animProperties) {
+                    if (stopFading[soundId + "_Slider_type_2"] !== true) {
+                        soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
+                    }
+                },
+                done: function() {
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+                    x.remove();
+                }
+            });
+        } else {
+            soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
+            x.remove();
+        }
+    }
 
-		if (FadeEnabled) {
-			isFading["global_Slider_type_2"] = true;
-			backAudio.animate({
-				value: volumeTarget
-			}, {
-				duration: 1000,
-				step: function(currentLeft, animProperties) {
-					if (stopFading["global_Slider_type_2"] !== true) {
-						openaudio.set_volume2(currentLeft);
-					}
-				},
-				done: function() {
-					isFading["global_Slider_type_2"] = false;
-					stopFading["global_Slider_type_2"] = false;
-					openaudio.set_volume(volumeTarget);
-					x.remove();
-				}
-			});
-		} else {
-			openaudio.set_volume(volumeTarget);
-			x.remove();
-		}
-	}
+
+
+    window.fadeAllTarget = function(volumeTarget) {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = "global_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        x.style = "display:none;";
+        var backAudio = $('#' + "global_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
+
+        if (FadeEnabled) {
+            isFading["global_Slider_type_2"] = true;
+            backAudio.animate({
+                value: volumeTarget
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    if (stopFading["global_Slider_type_2"] !== true) {
+                        openaudio.set_volume2(currentLeft);
+                    }
+                },
+                done: function() {
+                    isFading["global_Slider_type_2"] = false;
+                    stopFading["global_Slider_type_2"] = false;
+                    openaudio.set_volume(volumeTarget);
+                    x.remove();
+                }
+            });
+        } else {
+            openaudio.set_volume(volumeTarget);
+            x.remove();
+        }
+    }
 });
 
 /*
@@ -1036,184 +1096,184 @@ var AutoDj = {};
 AutoDj.AddedCount = 1;
 AutoDj.IdOfNowPlaying = 1;
 AutoDj.AddSong = function(File) {
-	PlayList_songs["_" + AutoDj.AddedCount] = {
-		"File": File
-	};
-	this.AddedCount++
-		PlayList_songs["_" + AutoDj.AddedCount] = "end";
+    PlayList_songs["_" + AutoDj.AddedCount] = {
+        "File": File
+    };
+    this.AddedCount++
+    PlayList_songs["_" + AutoDj.AddedCount] = "end";
 }
 AutoDj.LoadAll = function() {
-	var thiscount = 1;
-	while (PlayList_songs["_" + thiscount] != "end") {
-		var this_item = PlayList_songs["_" + thiscount]
-		AutoDj["SongData_" + thiscount] = {
-			"File": this_item.File,
-			"CanBePlayed": true
-		}
-		console.log("AutoDj: Song loaded with ID:" + thiscount)
-		thiscount++
-	}
-	if (PlayList_songs["_" + thiscount] == "end") {
-		var loadedcount = thiscount - 1
-		console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)")
-	}
+    var thiscount = 1;
+    while (PlayList_songs["_" + thiscount] != "end") {
+        var this_item = PlayList_songs["_" + thiscount]
+        AutoDj["SongData_" + thiscount] = {
+            "File": this_item.File,
+            "CanBePlayed": true
+        }
+        console.log("AutoDj: Song loaded with ID:" + thiscount)
+        thiscount++
+    }
+    if (PlayList_songs["_" + thiscount] == "end") {
+        var loadedcount = thiscount - 1
+        console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)")
+    }
 }
 AutoDj.Check = function(song_id) {
-	if (AutoDj["SongData_" + song_id] != null) {
-		var thisdata = AutoDj["SongData_" + song_id];
-		if (thisdata.CanBePlayed === true) {
-			return true;
-		} else {
-			return false;
-		}
-	} else {
-		return false;
-	}
+    if (AutoDj["SongData_" + song_id] != null) {
+        var thisdata = AutoDj["SongData_" + song_id];
+        if (thisdata.CanBePlayed === true) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 AutoDj.Play = function(FNC_ID) {
-	if (this.Check(FNC_ID) === true) {
-		var thisdata = AutoDj["SongData_" + FNC_ID];
-		AutoDj.SoundManager_Play(thisdata.File)
-	} else {
-		console.log("not playing")
-	}
+    if (this.Check(FNC_ID) === true) {
+        var thisdata = AutoDj["SongData_" + FNC_ID];
+        AutoDj.SoundManager_Play(thisdata.File)
+    } else {
+        console.log("not playing")
+    }
 }
 AutoDj.SoundManager_Play = function(fnc_file) {
-	var VolumeNow = this.Volume;
-	soundManager.destroySound('AutoDj');
-	var mySoundObject = soundManager.createSound({
-		id: "AutoDj",
-		url: fnc_file,
-		volume: volume,
-		stream: true,
-		onfinish: AutoDj.PlayNext
-	});
+    var VolumeNow = this.Volume;
+    soundManager.destroySound('AutoDj');
+    var mySoundObject = soundManager.createSound({
+        id: "AutoDj",
+        url: fnc_file,
+        volume: volume,
+        stream: true,
+        onfinish: AutoDj.PlayNext
+    });
 }
 AutoDj.PlayNext = function() {
-	var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;
-	if (AutoDj.Check(VolgendeLiedje) === true) {
-		AutoDj.Play(VolgendeLiedje);
-		AutoDj.IdOfNowPlaying++
-	} else {
-		AutoDj.IdOfNowPlaying = 1;
-		AutoDj.Play(AutoDj.IdOfNowPlaying);
+    var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;
+    if (AutoDj.Check(VolgendeLiedje) === true) {
+        AutoDj.Play(VolgendeLiedje);
+        AutoDj.IdOfNowPlaying++
+    } else {
+        AutoDj.IdOfNowPlaying = 1;
+        AutoDj.Play(AutoDj.IdOfNowPlaying);
 
-	}
+    }
 }
 
 //goto
 
 function openSmallWindow() {
-	swal({
-		title: 'Are you sure?',
-		text: "Current sounds may stop!",
-		type: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Open mini-audio'
-	}).then(function () {
-		minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
-	minime.onload = function() {
-		window.location.href = "http://closeme.openaudiomc.net/";
-	}
-	})
+    swal({
+        title: 'Are you sure?',
+        text: "Current sounds may stop!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Open mini-audio'
+    }).then(function () {
+        minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
+        minime.onload = function() {
+            window.location.href = "http://closeme.openaudiomc.net/";
+        }
+    })
 }
 
 function showPlus() {
-	swal(
-	  'Do you want to customize?',
-	  '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
-	  'question'
-	);
+    swal(
+        'Do you want to customize?',
+        '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
+        'question'
+    );
 }
 
 window.onresize = function() {
-	if (tinyWindow != "(none)") {
-		window.resizeTo(566, 681);
-	}
-	
+    if (tinyWindow != "(none)") {
+        window.resizeTo(566, 681);
+    }
+
 }
 window.onclick = function() {
-	if (tinyWindow != "(none)") {
-		window.resizeTo(566, 681);
-	}
+    if (tinyWindow != "(none)") {
+        window.resizeTo(566, 681);
+    }
 }
 
 function openSite() {
-	window.open(website);
+    window.open(website);
 }
 
 function openYt() {
-	window.open(youtube);
+    window.open(youtube);
 }
 
 function openTwitter() {
-	window.open(twitter);
+    window.open(twitter);
 }
 
 function dev() {
-	if (development) {
-		swal('You are using a development version!', 'There may be some functions that may be too buggy!', 'warning');
-		development = false;
-	}
+    if (development) {
+        swal('You are using a development version!', 'There may be some functions that may be too buggy!', 'warning');
+        development = false;
+    }
 }
 
 function SetDesignColor(code) {
-	document.getElementById("box").style = "background-color: " + code + ";";
+    document.getElementById("box").style = "background-color: " + code + ";";
 }
 
 function keyfix() {
-	document.body.onkeydown = function(data) {
+    document.body.onkeydown = function(data) {
 
-		if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
-			var slider = document.getElementById("slider");
-			slider.value = slider.value - 1;
-			openaudio.set_volume(slider.value);
-			sliderValue(slider.value);
-		}
+        if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
+            var slider = document.getElementById("slider");
+            slider.value = slider.value - 1;
+            openaudio.set_volume(slider.value);
+            sliderValue(slider.value);
+        }
 
-		if (data.key == "h") {
-			if (hue_enabled) {
-				openhue();
-			}
-			else {
-				swal("Hue is disabled.");
-			}
-		}
-		
-		if (data.key == "m") {
-			if (minimeon) {
-				openSmallWindow();
-			} else {
-				swal("Minimi is disabled by the server admin.");
-			}
-		}
-		
-		if (data.key == "d") {
-			$("#debugger").modal();
-		}
+        if (data.key == "h") {
+            if (hue_enabled) {
+                openhue();
+            }
+            else {
+                swal("Hue is disabled.");
+            }
+        }
 
-		if (data.key == "ArrowUp" || data.key == "ArrowRight") {
-			var slider = document.getElementById("slider");
-			var val = ++slider.value;
-			slider.value = val;
-			openaudio.set_volume(slider.value);
-			sliderValue(slider.value);
-		}
-	}
+        if (data.key == "m") {
+            if (minimeon) {
+                openSmallWindow();
+            } else {
+                swal("Minimi is disabled by the server admin.");
+            }
+        }
+
+        if (data.key == "d") {
+            $("#debugger").modal();
+        }
+
+        if (data.key == "ArrowUp" || data.key == "ArrowRight") {
+            var slider = document.getElementById("slider");
+            var val = ++slider.value;
+            slider.value = val;
+            openaudio.set_volume(slider.value);
+            sliderValue(slider.value);
+        }
+    }
 }
-	
+
 function loadAllFromJson(pack) {
-	var json = JSON.parse(pack);
-	var jsfiles = json.js;
-	var cssfiles = json.css;
-	for (var i = 0; i < jsfiles.length; i++) {
-		addJs(jsfiles[i]);
-	}
-	for (var i2 = 0; i2 < cssfiles.length; i2++) {
-		addCss(cssfiles[i2]);
-	}
+    var json = JSON.parse(pack);
+    var jsfiles = json.js;
+    var cssfiles = json.css;
+    for (var i = 0; i < jsfiles.length; i++) {
+        addJs(jsfiles[i]);
+    }
+    for (var i2 = 0; i2 < cssfiles.length; i2++) {
+        addCss(cssfiles[i2]);
+    }
 }
 
 Object.size = function(obj) {
@@ -1227,95 +1287,95 @@ Object.size = function(obj) {
 
 
 function listSounds() {
-	var obj = soundManager.sounds;
-	var str = '';
-	for (var p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			if (soundManager.getSoundById(p).metadata.speaker !== true) {
-				str += p + ",";
-			}
-		}
-	}
-	return str;
+    var obj = soundManager.sounds;
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            if (soundManager.getSoundById(p).metadata.speaker !== true) {
+                str += p + ",";
+            }
+        }
+    }
+    return str;
 }
 
 function listSpeakerSounds() {
-	var obj = soundManager.sounds;
-	var str = '';
-	for (var p in obj) {
-		if (obj.hasOwnProperty(p)) {
-			if (soundManager.getSoundById(p).metadata.speaker !== false) {
-				str += p + ",";
-			}
-		}
-	}
-	return str;
+    var obj = soundManager.sounds;
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            if (soundManager.getSoundById(p).metadata.speaker !== false) {
+                str += p + ",";
+            }
+        }
+    }
+    return str;
 }
 
 
 function openhue() {
-	$('#Hue').modal('show');
+    $('#Hue').modal('show');
 }
 
 //thanks to chrome bugs we need to detect if the browser is actife
 var vis = (function() {
-	var stateKey,
-		eventKey,
-		keys = {
-			hidden: "visibilitychange",
-			webkitHidden: "webkitvisibilitychange",
-			mozHidden: "mozvisibilitychange",
-			msHidden: "msvisibilitychange"
-		};
-	for (stateKey in keys) {
-		if (stateKey in document) {
-			eventKey = keys[stateKey];
-			break;
-		}
-	}
-	return function(c) {
-		if (c) document.addEventListener(eventKey, c);
-		return !document[stateKey];
-	}
+    var stateKey,
+        eventKey,
+        keys = {
+            hidden: "visibilitychange",
+            webkitHidden: "webkitvisibilitychange",
+            mozHidden: "mozvisibilitychange",
+            msHidden: "msvisibilitychange"
+        };
+    for (stateKey in keys) {
+        if (stateKey in document) {
+            eventKey = keys[stateKey];
+            break;
+        }
+    }
+    return function(c) {
+        if (c) document.addEventListener(eventKey, c);
+        return !document[stateKey];
+    }
 })();
 
 
 
 vis(function() {
-	if (vis()) {
-		setTimeout(function() {
-			FadeEnabled = true;
-		}, 300);
-	} else {
+    if (vis()) {
+        setTimeout(function() {
+            FadeEnabled = true;
+        }, 300);
+    } else {
         openaudio.whisper("eventMinni");
         openaudio.whisper(JSON.stringify(whisper))
-		FadeEnabled = false;
-	}
+        FadeEnabled = false;
+    }
 });
 
 
 
 var notIE = (document.documentMode === undefined),
-	isChromium = window.chrome;
+    isChromium = window.chrome;
 if (notIE && !isChromium) {
-	$(window).on("focusin", function() {
-		setTimeout(function() {
-			FadeEnabled = true;
-		}, 300);
-	}).on("focusout", function() {
-		FadeEnabled = false;
-	});
+    $(window).on("focusin", function() {
+        setTimeout(function() {
+            FadeEnabled = true;
+        }, 300);
+    }).on("focusout", function() {
+        FadeEnabled = false;
+    });
 } else {
-	if (window.addEventListener) {} else {
-		window.attachEvent("focus", function(event) {
-			setTimeout(function() {
-				FadeEnabled = true;
-			}, 300);
-		});
-		window.attachEvent("blur", function(event) {
-			FadeEnabled = false;
-		});
-	}
+    if (window.addEventListener) {} else {
+        window.attachEvent("focus", function(event) {
+            setTimeout(function() {
+                FadeEnabled = true;
+            }, 300);
+        });
+        window.attachEvent("blur", function(event) {
+            FadeEnabled = false;
+        });
+    }
 }
 
 
@@ -1324,39 +1384,39 @@ if (notIE && !isChromium) {
 
 
 function showqr() {
-	swal({
-		title: langpack.message.mobile_qr,
-		text: '<center><div id="qrcode"></div></center>',
-		CancelButton: false,
-		allowOutsideClick: true,
-		allowEscapeKey: true,
-		showConfirmButton: true,
-		html: '<center><div id="qrcode"></div></center>'
-	}, function() {});
-	var qrcode = new QRCode(document.getElementById("qrcode"), {
-		text: document.URL,
-		width: 150,
-		height: 150,
-		colorDark: "#000000",
-		colorLight: "#ffffff",
-		correctLevel: QRCode.CorrectLevel.H
-	});
+    swal({
+        title: langpack.message.mobile_qr,
+        text: '<center><div id="qrcode"></div></center>',
+        CancelButton: false,
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+        showConfirmButton: true,
+        html: '<center><div id="qrcode"></div></center>'
+    }, function() {});
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: document.URL,
+        width: 150,
+        height: 150,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
 }
 
 
 function getCookie(name) {
-	var value = "; " + document.cookie;
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) {
-		return parts.pop().split(";").shift();
-	}
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) {
+        return parts.pop().split(";").shift();
+    }
 }
 
 function sliderValue(vol) {
-	//Joww, it's ja boy liturkey doing all the math boi
-	var output = document.querySelector("#volumevalue");
-	output.value = vol;
-	output.style.left = vol * 2.4 + 'px';
+    //Joww, it's ja boy liturkey doing all the math boi
+    var output = document.querySelector("#volumevalue");
+    output.value = vol;
+    output.style.left = vol * 2.4 + 'px';
 }
 
 
@@ -1365,80 +1425,80 @@ function sliderValue(vol) {
 
 
 function open_soundcloud() {
-	swal({
-		title: soundcloud_title,
-		imageUrl: soundcloud_icon,
-		showCancelButton: true,
-		confirmButtonColor: "#3fa5ff",
-		confirmButtonText: langpack.message.listen_on_soundcloud,
-	}).then(function() {
-		window.open(soundcloud_url);
-	});
+    swal({
+        title: soundcloud_title,
+        imageUrl: soundcloud_icon,
+        showCancelButton: true,
+        confirmButtonColor: "#3fa5ff",
+        confirmButtonText: langpack.message.listen_on_soundcloud,
+    }).then(function() {
+        window.open(soundcloud_url);
+    });
 }
 
 function addJs(url) {
-	console.info("[ModManager] Attempting to add js file.");
-	$.getScript(url, function() {
-		console.info("[ModManager] Added js file.");
-	});
+    console.info("[ModManager] Attempting to add js file.");
+    $.getScript(url, function() {
+        console.info("[ModManager] Added js file.");
+    });
 }
 
 function addCss(url) {
-	console.info("[ModManager] Attempting to add css file.");
-	$('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
-	console.info("[ModManager] Added css file. From location" + url + " successfully");
+    console.info("[ModManager] Attempting to add css file.");
+    $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
+    console.info("[ModManager] Added css file. From location" + url + " successfully");
 }
 
 Element.prototype.remove = function() {
-	this.parentElement.removeChild(this);
+    this.parentElement.removeChild(this);
 }
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-	for (var i = this.length - 1; i >= 0; i--) {
-		if (this[i] && this[i].parentElement) {
-			this[i].parentElement.removeChild(this[i]);
-		}
-	}
+    for (var i = this.length - 1; i >= 0; i--) {
+        if (this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
 }
 
 
 function trayItem(icon, callback) {
-	this.ul = document.getElementById("icons");
-	this.li = document.createElement("li");
-	this.ul.appendChild(document.createTextNode(''));
-	this.ul.appendChild(this.li);
-	this.li.innerHTML = '<i class="fa ' + icon + ' fa-2x footer-icon fa-qr-check" aria-hidden="true" onclick="' + callback + '();"></i>';
-	this.li.style.color = "#" + iconcolor;
-	this.destroy = function() {
-		this.li.remove();
-	}
+    this.ul = document.getElementById("icons");
+    this.li = document.createElement("li");
+    this.ul.appendChild(document.createTextNode(''));
+    this.ul.appendChild(this.li);
+    this.li.innerHTML = '<i class="fa ' + icon + ' fa-2x footer-icon fa-qr-check" aria-hidden="true" onclick="' + callback + '();"></i>';
+    this.li.style.color = "#" + iconcolor;
+    this.destroy = function() {
+        this.li.remove();
+    }
 }
 
 
 function enable() {
-	//setup vars
-	status_span = document.getElementById("status-span");
-	volume_text = document.getElementById("volume");
+    //setup vars
+    status_span = document.getElementById("status-span");
+    volume_text = document.getElementById("volume");
 
-	if (getCookie("volume") != null) {
-		openaudio.set_volume(getCookie("volume"));
-	}
+    if (getCookie("volume") != null) {
+        openaudio.set_volume(getCookie("volume"));
+    }
 
-	//setup session data
-	var [a, b] = session.split(':');
-	clientID = a;
-	clientTOKEN = b;
+    //setup session data
+    var [a, b] = session.split(':');
+    clientID = a;
+    clientTOKEN = b;
 
-	
-	document.getElementById("DetectHueButton").style.display = "none";
 
-	document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
+    document.getElementById("DetectHueButton").style.display = "none";
 
-	if (Notification.permission !== "granted") {
-		Notification.requestPermission();
-	}
-	
-	document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
-  
+    document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
+
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
+
+    document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
+
     //connect to the craftmend server
-	socketIo.connect();
+    socketIo.connect();
 }

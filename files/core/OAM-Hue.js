@@ -120,14 +120,14 @@ function direct_hue_connection() {
         showCancelButton: true,
         confirmButtonText: 'Submit',
         showLoaderOnConfirm: true,
-        preConfirm: function (email) {
+        preConfirm: function (hueIP) {
             return new Promise(function (resolve, reject) {
-                localStorage.MyHueBridgeIP = email;
+                localStorage.MyHueBridgeIP = hueIP;
                 setTimeout(function() {
                     $('#Hue').modal('show');
-                    ConnectToHueBridge();
+                    loop_hue_connection(hueIP);
 				}, 500);
-                swal("manual hue ip is set to: " +email)
+                swal("manual hue ip is set to: " + hueIP)
             })
         },
         allowOutsideClick: false

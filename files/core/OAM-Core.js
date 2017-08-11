@@ -187,7 +187,7 @@ openaudio.color = function(code) {
 openaudio.decode = function(msg) {
 
     if (msg.includes("clyp.it")) {
-        console.error("Clypit is no longer supported!");
+        console.error("Clypit is no longer supported! Do not ask for support.");
         return;
     }
 
@@ -363,19 +363,17 @@ openaudio.decode = function(msg) {
                 var scurl = request.src;
                 getSoundcloud(scurl, function(newurl) {
                     request.src = newurl;
-                    openaudio.playRegion(request.src, request.id);
+                    openaudio.playRegion(request.src, request.time, request.id);
                 });
             } else if (request.src.includes("youtube.com")) {
                 var youtubeId = request.src.split("?v=");
-                openaudio.playRegion(getYoutbe(youtubeId[1]), request.id);
+                openaudio.playRegion(getYoutbe(youtubeId[1]), request.time, request.id);
 			} else if (request.src.includes("youtu.be")) {
                 var youtubeId = request.src.split("/");
-                openaudio.playRegion(getYoutbe(youtubeId[3]), request.id);
+                openaudio.playRegion(getYoutbe(youtubeId[3]), request.time, request.id);
 			} else {
-                openaudio.playRegion(request.src, request.id);
+                openaudio.playRegion(request.src, request.time, request.id);
             }
-
-
         } else if (request.command == "stopOldRegion") {
             openaudio.stopRegion(request.id);
         } else {
@@ -476,14 +474,10 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
 
 openaudio.sartBackground = function(url) {
 
-    soundManager.stop('regionsound');
-    soundManager.destroySound('regionsound');
-
     var regionsound = soundManager.createSound({
         id: "oa_back_",
         volume: volume,
-        url: url,
-		stream: true
+        url: url
     });
 
     function loopSound(sound) {
@@ -493,7 +487,7 @@ openaudio.sartBackground = function(url) {
             }
         });
     }
-    fadeIdTarget("oa_back_", volume);
+    fadeIdTarget("oa_back_");
     loopSound(regionsound);
 }
 
@@ -527,7 +521,7 @@ openaudio.playRegion = function(url, id, defaultTime) {
             from: defaultTime * 1000,
             stream: true,
             onplay: function() {
-                soundManager.getSoundById("oa_region_" + id, volume).metadata.region = true;
+                soundManager.getSoundById("oa_region_" + id).metadata.region = true;
             }
         });
         regions[id] = true;
@@ -543,8 +537,8 @@ openaudio.playRegion = function(url, id, defaultTime) {
 }
 
 openaudio.stopRegion = function(id) {
-    regions[id] = false;
     fadeIdOut("oa_region_" + id);
+    regions[id] = false;
 }
 
 openaudio.regionsStop = function() {
@@ -583,7 +577,6 @@ openaudio.setGlobalVolume = function(volumeNew) {
         listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
         if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
             var volumeTarget = (lastSpeakerVolume / 100) * volumeNew;
-            console.log("Nu " + lastSpeakerVolume + " --- oud " + volumeTarget)
             soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
         }
     }
@@ -765,11 +758,11 @@ openaudio.loop = function(url, defaultTime) {
         stopFading[soundId] = true;
     }
 
-    soundManager.stop('loopnu');
-    soundManager.destroySound('loopnu');
+    soundManager.stop('loop');
+    soundManager.destroySound('loop');
 
     var loopnu = soundManager.createSound({
-        id: 'loopnu',
+        id: 'loop',
         volume: volume,
         url: url,
         from: defaultTime,
@@ -885,9 +878,6 @@ $(document).ready(function() {
     window.fadeSpeaker2 = function(soundId, vt) {
 
         var volumeTarget = (vt / 100) * volume;
-
-        console.log("Nu " + soundManager.getSoundById("speaker_ding").volume + " --- oud " + volumeTarget)
-
         var x = document.createElement("INPUT");
         x.setAttribute("type", "range");
         document.body.appendChild(x);
@@ -1339,8 +1329,6 @@ var vis = (function() {
     }
 })();
 
-
-
 vis(function() {
     if (vis()) {
         setTimeout(function() {
@@ -1352,8 +1340,6 @@ vis(function() {
         FadeEnabled = false;
     }
 });
-
-
 
 var notIE = (document.documentMode === undefined),
     isChromium = window.chrome;
@@ -1377,11 +1363,6 @@ if (notIE && !isChromium) {
         });
     }
 }
-
-
-
-
-
 
 function showqr() {
     swal({
@@ -1418,11 +1399,6 @@ function sliderValue(vol) {
     output.value = vol;
     output.style.left = vol * 2.4 + 'px';
 }
-
-
-
-
-
 
 function open_soundcloud() {
     swal({

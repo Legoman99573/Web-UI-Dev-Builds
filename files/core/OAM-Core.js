@@ -45,28 +45,29 @@ function getSoundcloud(Url, callback) {
     });
 }
 
+var bgID = Math.floor(Math.random() * 60) + 1 + "_";
 
 soundManager.setup({
     defaultOptions: {
         onfinish: function() {
             handleSoundEnd(this.id);
             soundManager.destroySound(this.id);
-            if (this.id != "oa_back_") {
+            if (this.id != "oa_back_" + bgID) {
                 onSoundEnd();
             }
         },
         onplay: function() {
-            if (this.id != "oa_back_") {
+            if (this.id != "oa_back_" + bgID) {
                 onSoundPlay();
             }
         },
         onstop: function() {
-            if (this.id != "oa_back_") {
+            if (this.id != "oa_back_" + bgID) {
                 onSoundEnd();
             }
         },
         onerror: function(code, description) {
-            if (this.id != "oa_back_") {
+            if (this.id != "oa_back_" + bgID) {
                 console.error("[SoundManager2] " + this.id + " failed?", code, description);
                 if (this.loaded) {
                     this.stop();
@@ -79,7 +80,7 @@ soundManager.setup({
 });
 
 function onSoundPlay() {
-    if (listSounds().includes("oa_back_") && ambiance != "") {
+    if (listSounds().includes("oa_back_" + bgID) && ambiance != "") {
         openaudio.stopBackground();
     }
     try {
@@ -482,9 +483,10 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
 }
 
 openaudio.sartBackground = function(url) {
-
+    soundManager.stop("oa_region_" + bgID);
+    soundManager.destroySound("oa_back_" + bgID);
     var regionsound = soundManager.createSound({
-        id: "oa_back_",
+        id: "oa_back_" + bgID,
         volume: volume,
         url: url
     });
@@ -495,21 +497,21 @@ openaudio.sartBackground = function(url) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                console.error("[SoundManager2] oa_back_ failed?", code, description);
+                console.error("[SoundManager2] oa_back_" + bgID + " failed?", code, description);
                 if (this.loaded) {
                     this.stop();
                 } else {
-                    console.error("[SoundManager2] Unable to decode oa_back_. Well shit.");
+                    console.error("[SoundManager2] Unable to decode oa_back_" + bgID + ". Well shit.");
                 }
             }
         });
     }
-    fadeIdTarget("oa_back_");
+    fadeIdTarget("oa_back_" + bgID);
     loopSound(regionsound);
 }
 
 openaudio.stopBackground = function() {
-    fadeIdOut("oa_back_");
+    fadeIdOut("oa_back_" + bgID);
 }
 
 openaudio.whisper = function(message) {
@@ -532,8 +534,10 @@ openaudio.skipTo = function(id, timeInS) {
 var regionID = Math.floor(Math.random() * 60) + 1 + "_";
 
 openaudio.playRegion = function(url, defaultTime) {
+    soundManager.stop("oa_region_" + regionID);
+    soundManager.destroySound("oa_region_" + regionID);
     var regionsounds = soundManager.createSound({
-        id: "oa_region_" + regionID ,
+        id: "oa_region_" + regionID,
         url: url,
         volume: volume,
         from: defaultTime * 1000,
@@ -608,6 +612,8 @@ openaudio.setGlobalVolume = function(volumeNew) {
 var speakerID = Math.floor(Math.random() * 60) + 1 + "_";
 
 openaudio.newspeaker = function(url, defaultTime, requestvol) {
+    soundManager.stop("speaker_ding_" + speakerID);
+    soundManager.destroySound("speaker_ding_" + speakerID);
     var speakersound = soundManager.createSound({
         id: "speaker_ding_" + speakerID,
         url: url,
@@ -779,6 +785,8 @@ openaudio.message = function(text) {
 var loopID = Math.floor(Math.random() * 60) + 1 + "_";
 
 openaudio.loop = function(url, defaultTime) {
+    soundManager.stop("loop_" + loopID);
+    soundManager.destroySound("loop_" + loopID);
     var loopnu = soundManager.createSound({
         id: "loop_" + loopID,
         volume: volume,
@@ -1029,11 +1037,6 @@ $(document).ready(function() {
 
 
     window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
-
-
-
-
-
         var x = document.createElement("INPUT");
         x.setAttribute("type", "range");
         document.body.appendChild(x);

@@ -182,7 +182,7 @@ var ambdelay = 800;
 var minimeon = false;
 var lastSpeakerVolume = 0;
 var development = true;
-setTimeout(dev, 1000);
+setTimeout(dev, 0);
 setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
@@ -1243,7 +1243,7 @@ function openTwitter() {
 
 function dev() {
     if (development) {
-        swal('You are using a development version!', 'There may be some functions that may be too buggy!', 'warning');
+        $('#header').css('display', 'inline-block');
         development = false;
     }
 }

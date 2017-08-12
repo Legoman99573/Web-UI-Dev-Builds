@@ -30,11 +30,11 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4696">
-              <caret line="581" column="57" lean-forward="false" selection-start-line="581" selection-start-column="57" selection-end-line="581" selection-end-column="57" />
+            <state relative-caret-position="-2675">
+              <caret line="226" column="36" lean-forward="false" selection-start-line="226" selection-start-column="36" selection-end-line="226" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+                <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
               </folding>
             </state>
           </provider>
@@ -311,7 +311,7 @@
       <workItem from="1501963397831" duration="922000" />
       <workItem from="1502354993392" duration="10085000" />
       <workItem from="1502366711284" duration="607000" />
-      <workItem from="1502368241672" duration="24355000" />
+      <workItem from="1502368241672" duration="26889000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -383,11 +383,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502509925488</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Speakers now have IDS (Wasn't that ez)">
+      <created>1502510710886</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1502510710886</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45954000" />
+    <option name="totallyTimeSpent" value="48488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -461,7 +468,8 @@
     <MESSAGE value="Hue fixes and Fixes" />
     <MESSAGE value="Regions Fix" />
     <MESSAGE value="Broke speakers (OOPSIE)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Broke speakers (OOPSIE)" />
+    <MESSAGE value="Speakers now have IDS (Wasn't that ez)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Speakers now have IDS (Wasn't that ez)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -484,7 +492,7 @@
           <caret line="1325" column="12" lean-forward="false" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -527,7 +535,7 @@
           <caret line="1325" column="12" lean-forward="true" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -570,7 +578,7 @@
           <caret line="524" column="49" lean-forward="false" selection-start-line="524" selection-start-column="49" selection-end-line="524" selection-end-column="49" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -581,7 +589,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -592,7 +600,7 @@
           <caret line="790" column="111" lean-forward="false" selection-start-line="790" selection-start-column="111" selection-end-line="790" selection-end-column="111" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -603,7 +611,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>
@@ -666,11 +674,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4696">
-          <caret line="581" column="57" lean-forward="false" selection-start-line="581" selection-start-column="57" selection-end-line="581" selection-end-column="57" />
+        <state relative-caret-position="-2675">
+          <caret line="226" column="36" lean-forward="false" selection-start-line="226" selection-start-column="36" selection-end-line="226" selection-end-column="36" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1502510522074" expanded="true" signature="40932:40943" ph="..." />
+            <marker date="1502513081318" expanded="true" signature="42804:42815" ph="..." />
           </folding>
         </state>
       </provider>

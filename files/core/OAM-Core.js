@@ -64,6 +64,16 @@ soundManager.setup({
             if (this.id != "oa_back_") {
                 onSoundEnd();
             }
+        },
+        onerror: function(code, description) {
+            if (this.id != "oa_back_") {
+                console.error("[SoundManager2] " + this.id + " failed?", code, description);
+                if (this.loaded) {
+                    this.stop();
+                } else {
+                    console.error("[SoundManager2] Unable to decode " + this.id + ". Well shit.");
+                }
+            }
         }
     }
 });
@@ -214,8 +224,7 @@ openaudio.decode = function(msg) {
             loadedsound.stop();
         } catch (e) {}
         try {
-            soundManager.stop('loop');
-            soundManager.destroySound('loop');
+            openaudio.stopLoop('loop');
         } catch (e) {}
         try {
             soundManager.stop('AutoDj');
@@ -484,6 +493,14 @@ openaudio.sartBackground = function(url) {
         sound.play({
             onfinish: function() {
                 loopSound(sound);
+            },
+            onerror: function(code, description) {
+                console.error("[SoundManager2] oa_back_ failed?", code, description);
+                if (this.loaded) {
+                    this.stop();
+                } else {
+                    console.error("[SoundManager2] Unable to decode oa_back_. Well shit.");
+                }
             }
         });
     }
@@ -512,8 +529,9 @@ openaudio.skipTo = function(id, timeInS) {
     });
 }
 
+var regionID = Math.floor(Math.random() * 60) + 1 + "_";
+
 openaudio.playRegion = function(url, defaultTime) {
-    var regionID = Math.floor(Math.random() * 60) + 1 + "_";
     var regionsounds = soundManager.createSound({
         id: "oa_region_" + regionID ,
         url: url,
@@ -528,20 +546,28 @@ openaudio.playRegion = function(url, defaultTime) {
         sound.play({
             onfinish: function() {
                 loopSound(sound);
+            },
+            onerror: function(code, description) {
+                console.error("[SoundManager2] oa_region_" + regionID + " failed?", code, description);
+                if (this.loaded) {
+                    fadeIdOut("oa_region_" + regionID );
+                } else {
+                    console.error("[SoundManager2] Unable to decode oa_region_" + regionID + ". Well shit.");
+                }
             }
         });
     }
     loopSound(regionsounds);
+}
 
-    openaudio.stopRegion = function() {
-        fadeIdOut("oa_region_" + regionID );
-    }
+openaudio.stopRegion = function() {
+    fadeIdOut("oa_region_" + regionID );
 }
 
 openaudio.regionsStop = function() {
     for (var i = 0; i < listSounds().split(',').length; i++) {
         listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-        if (listSounds().split(',')[i].indexOf("oa_region_") !== -1) {
+        if (listSounds().split(',')[i].indexOf("oa_region_" + regionID) !== -1) {
             fadeIdOut(listSounds().split(',')[i]);
         }
     }
@@ -595,15 +621,20 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
             this.stream = true;
             this.from = 0;
             this.play();
+        }, onerror: function(code, description) {
+            console.error("[SoundManager2] speaker_ding_" + speakerID + " failed?", code, description);
+            if (this.loaded) {
+                fadeSpeakerOut("speaker_ding_" + speakerID)
+            } else {
+                console.error("[SoundManager2] Unable to decode speaker_ding_" + speakerID + ". Well shit.");
+            }
         }
     });
-    openaudio.removeSpeaker = function(id) {
-        fadeSpeakerOut("speaker_ding_" + speakerID)
-    }
 }
 
-
-
+openaudio.removeSpeaker = function(id) {
+    fadeSpeakerOut("speaker_ding_" + speakerID);
+}
 
 openaudio.setIdAtribute = function(ID, callback) {
     if (!ID.includes("/")) {
@@ -745,20 +776,14 @@ openaudio.message = function(text) {
     }
 }
 
+var loopID = Math.floor(Math.random() * 60) + 1 + "_";
+
 openaudio.loop = function(url, defaultTime) {
-    var soundId = "loop";
-    if (isFading[soundId] === true) {
-        stopFading[soundId] = true;
-    }
-
-    soundManager.stop('loop');
-    soundManager.destroySound('loop');
-
     var loopnu = soundManager.createSound({
-        id: 'loop',
+        id: "loop_" + loopID,
         volume: volume,
         url: url,
-        from: defaultTime,
+        from: defaultTime * 1000,
         stream: true
     });
 
@@ -766,10 +791,22 @@ openaudio.loop = function(url, defaultTime) {
         sound.play({
             onfinish: function() {
                 loopSound(sound);
+            },
+            onerror: function(code, description) {
+                console.error("[SoundManager2] loop_" + loopID  + " failed?", code, description);
+                if (this.loaded) {
+                    fadeIdOut("loop_" + loopID);
+                } else {
+                    console.error("[SoundManager2] Unable to decode loop_" + loopID + ". Well shit.");
+                }
             }
         });
     }
     loopSound(loopnu);
+}
+
+openaudio.stopLoop = function() {
+    fadeIdOut("loop_" + loopID);
 }
 
 //all the fading c

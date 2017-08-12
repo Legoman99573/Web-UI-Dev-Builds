@@ -16,6 +16,7 @@ socketIo.connect = function() {
 	
 	socketIo.log = function(data) {
 	console.info("[Socket.Io] " + data);
+	soundManager._writeDebug("[Socket.Io] " + data);
 }
 	
 	socket = io.connect(socket_io, {
@@ -141,10 +142,6 @@ socketIo.connect = function() {
 			}, 1000);
 		} else {
 			ba = new trayItem("fa-warning", "showPlus");
-			ba = new trayItem("fa-warning", "showPlus");
-			ba = new trayItem("fa-warning", "showPlus");
-			ba = new trayItem("fa-warning", "showPlus");
-			ba = new trayItem("fa-warning", "showPlus");
 			swal('Account info!','This web site has not been claimed yet!<br /><a style="color:red" href="https://plus.openaudiomc.net/">click here to claim this account</a>!<br /> It only takes 1 minute of your time.','error');
 		}
 	});
@@ -153,11 +150,13 @@ socketIo.connect = function() {
 
 	socket.on('oaError', function(msg) {
 		socketIo.log("Received error.");
+        soundManager._writeDebug("Received error.", 3);
 		if (msg == "server-offline") {
 			closedwreason = true;
 			status_span.innerHTML = langpack.message.server_is_offline;
 			status_span.className = "label label-danger";
 			socketIo.log("Received offline server data");
+            soundManager._writeDebug("Received offline server data", 3);
 		} else if (msg == "kicked") {
 			closedwreason = true;
 			status_span.innerHTML = langpack.message.inavlid_url;
@@ -197,6 +196,7 @@ socketIo.connect = function() {
 
 	socket.on('disconnect', function() {
 		socketIo.log("Disconnected!");
+        soundManager._writeDebug("Disconnected!", 3);
 		status_span.innerHTML = langpack.message.socket_closed;
 		status_span.className = "status-span status-danger";
 	});

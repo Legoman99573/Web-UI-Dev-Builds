@@ -1329,10 +1329,10 @@
 
             if (sTypeOrObject) {
                 if (sTypeOrObject >= 2) {
-                    oItem.style.fontWeight = 'bold';
+                    oItem.style.color = '#c7c816';
                 }
                 if (sTypeOrObject === 3) {
-                    oItem.style.color = '#ff3333';
+                    oItem.style.color = '#c62d2d';
                 }
             }
 

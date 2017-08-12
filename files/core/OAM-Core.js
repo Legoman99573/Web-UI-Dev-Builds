@@ -14,6 +14,7 @@
 
 function getSoundcloud(Url, callback) {
     console.info("[Soundcloud] Attempting api call!");
+    soundManager._writeDebug("[Soundcloud] Attempting api call!");
     $.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
         setTimeout(function() {
             var data = lastSoundCloud;
@@ -22,6 +23,7 @@ function getSoundcloud(Url, callback) {
                 soundcloud_icon = "files/images/sc-default.png";
                 soundcloud_url = "https://soundcloud.com/stream";
                 console.info("[Soundcloud] Failed to get sound.");
+                soundManager._writeDebug("[Soundcloud] Failed to get sound.", 3);
             } else {
                 var api = data;
                 soundcloud_title = api.title;
@@ -40,6 +42,7 @@ function getSoundcloud(Url, callback) {
                 document.getElementById("sc-cover").style.display = "";
                 document.getElementById("sc-title").style.display = "";
                 console.info("[Soundcloud] Successfull api call!");
+                soundManager._writeDebug("[Soundcloud] Successfull api call!");
             }
         });
     });
@@ -68,11 +71,11 @@ soundManager.setup({
         },
         onerror: function(code, description) {
             if (this.id != "oa_back_" + bgID) {
-                console.error("[SoundManager2] " + this.id + " failed?", code, description);
+                soundManager._writeDebug("[SoundManager2] " + this.id + " failed?", 3, code, description);
                 if (this.loaded) {
                     this.stop();
                 } else {
-                    console.error("[SoundManager2] Unable to decode " + this.id + ". Well shit.");
+                    soundManager._writeDebug("Unable to decode " + this.id + ". Well shit.", 3);
                 }
             }
         }
@@ -198,7 +201,7 @@ openaudio.color = function(code) {
 openaudio.decode = function(msg) {
 
     if (msg.includes("clyp.it")) {
-        console.error("Clypit is no longer supported! Do not ask for support.");
+        soundManager._writeDebug("Clypit is no longer supported! Do not ask for support.", 2);
         return;
     }
 
@@ -286,7 +289,7 @@ openaudio.decode = function(msg) {
             AutoDj.LoadAll();
             AutoDj.PlayNext();
         } else {
-            console.error("error while loading autodj")
+            soundManager._writeDebug("Error occured while loading AutoDj", 3);
         }
     } else if (request.command == "message") {
         //Browser messages
@@ -497,11 +500,11 @@ openaudio.sartBackground = function(url) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                console.error("[SoundManager2] oa_back_" + bgID + " failed?", code, description);
+                soundManager._writeDebug("oa_back_" + bgID + " failed?", 3, code, description);
                 if (this.loaded) {
                     this.stop();
                 } else {
-                    console.error("[SoundManager2] Unable to decode oa_back_" + bgID + ". Well shit.");
+                    soundManager._writeDebug("Unable to decode oa_back_" + bgID + ". Well shit.", 3);
                 }
             }
         });
@@ -552,11 +555,11 @@ openaudio.playRegion = function(url, defaultTime) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                console.error("[SoundManager2] oa_region_" + regionID + " failed?", code, description);
+                soundManager._writeDebug("oa_region_" + regionID + " failed?", 3, code, description);
                 if (this.loaded) {
                     fadeIdOut("oa_region_" + regionID );
                 } else {
-                    console.error("[SoundManager2] Unable to decode oa_region_" + regionID + ". Well shit.");
+                    soundManager._writeDebug("Unable to decode oa_region_" + regionID + ". Well shit.", 3);
                 }
             }
         });
@@ -628,11 +631,11 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
             this.from = 0;
             this.play();
         }, onerror: function(code, description) {
-            console.error("[SoundManager2] speaker_ding_" + speakerID + " failed?", code, description);
+            soundManager._writeDebug("speaker_ding_" + speakerID + " failed?", 3, code, description);
             if (this.loaded) {
                 fadeSpeakerOut("speaker_ding_" + speakerID)
             } else {
-                console.error("[SoundManager2] Unable to decode speaker_ding_" + speakerID + ". Well shit.");
+                soundManager._writeDebug("Unable to decode speaker_ding_" + speakerID + ". Well shit.", 3);
             }
         }
     });
@@ -801,11 +804,11 @@ openaudio.loop = function(url, defaultTime) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                console.error("[SoundManager2] loop_" + loopID  + " failed?", code, description);
+                soundManager._writeDebug("loop_" + loopID  + " failed?", 3, code, description);
                 if (this.loaded) {
                     fadeIdOut("loop_" + loopID);
                 } else {
-                    console.error("[SoundManager2] Unable to decode loop_" + loopID + ". Well shit.");
+                    soundManager._writeDebug("Unable to decode loop_" + loopID + ". Well shit.", 3);
                 }
             }
         });
@@ -1133,12 +1136,14 @@ AutoDj.LoadAll = function() {
             "File": this_item.File,
             "CanBePlayed": true
         }
-        console.log("AutoDj: Song loaded with ID:" + thiscount)
+        console.log("AutoDj: Song loaded with ID:" + thiscount);
+        soundManager._writeDebug("AutoDj: Song loaded with ID:" + thiscount);
         thiscount++
     }
     if (PlayList_songs["_" + thiscount] == "end") {
         var loadedcount = thiscount - 1
-        console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)")
+        console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
+        soundManager._writeDebug("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
     }
 }
 AutoDj.Check = function(song_id) {
@@ -1158,7 +1163,8 @@ AutoDj.Play = function(FNC_ID) {
         var thisdata = AutoDj["SongData_" + FNC_ID];
         AutoDj.SoundManager_Play(thisdata.File)
     } else {
-        console.log("not playing")
+        console.log("AutoDj: " + FNC_ID + "not playing");
+        soundManager._writeDebug("AutoDj: " + FNC_ID + "not playing", 3);
     }
 }
 AutoDj.SoundManager_Play = function(fnc_file) {
@@ -1457,15 +1463,19 @@ function open_soundcloud() {
 
 function addJs(url) {
     console.info("[ModManager] Attempting to add js file.");
+    soundManager._writeDebug("[ModManager] Attempting to add js file.");
     $.getScript(url, function() {
-        console.info("[ModManager] Added js file.");
+        console.info("[ModManager] Added js file from " + url + " successfully.");
+        soundManager._writeDebug("[ModManager] Added js file from " + url + " successfully.");
     });
 }
 
 function addCss(url) {
     console.info("[ModManager] Attempting to add css file.");
+    soundManager._writeDebug("[ModManager] Attempting to add css file.");
     $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
-    console.info("[ModManager] Added css file. From location" + url + " successfully");
+    console.info("[ModManager] Added css file from location" + url + " successfully");
+    soundManager._writeDebug("[ModManager] Added css file from location" + url + " successfully");
 }
 
 Element.prototype.remove = function() {

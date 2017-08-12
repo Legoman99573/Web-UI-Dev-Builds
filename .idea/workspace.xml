@@ -336,7 +336,7 @@
       <workItem from="1501963397831" duration="922000" />
       <workItem from="1502354993392" duration="10085000" />
       <workItem from="1502366711284" duration="607000" />
-      <workItem from="1502368241672" duration="35706000" />
+      <workItem from="1502368241672" duration="35743000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -436,11 +436,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502524220591</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Debugging debugs all basically ;D">
+      <created>1502526453827</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1502526453827</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57305000" />
+    <option name="totallyTimeSpent" value="57342000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -518,7 +525,8 @@
     <MESSAGE value="Loops now stop correctly :)" />
     <MESSAGE value="IDs added to BG, Region Sounds, and Loops" />
     <MESSAGE value="Debugging, BugFixes, and Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debugging, BugFixes, and Changes" />
+    <MESSAGE value="Debugging debugs all basically ;D" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debugging debugs all basically ;D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -579,30 +579,27 @@ openaudio.setGlobalVolume = function(volumeNew) {
     }
 }
 
+var speakerID = Math.floor(Math.random() * 60) + 1 + "_";
 
 openaudio.newspeaker = function(url, defaultTime, requestvol) {
     var speakersound = soundManager.createSound({
-        id: "speaker_ding",
+        id: "speaker_ding_" + speakerID,
         url: url,
         volume: 0,
         autoPlay: true,
         from: defaultTime * 1000,
         onplay: function() {
-            soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
-            fadeSpeaker2("speaker_ding", ((requestvol / 100) * volume))
+            soundManager.getSoundById("speaker_ding_" + speakerID, volume).metadata.speaker = true;
+            fadeSpeaker2("speaker_ding_" + speakerID, ((requestvol / 100) * volume))
         }, onfinish: function() {
             this.stream = true;
             this.from = 0;
             this.play();
         }
     });
-
-}
-
-
-openaudio.removeSpeaker = function(id) {
-    fadeSpeakerOut("speaker_ding")
-
+    openaudio.removeSpeaker = function(id) {
+        fadeSpeakerOut("speaker_ding_" + speakerID)
+    }
 }
 
 
@@ -880,7 +877,7 @@ $(document).ready(function() {
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
-        x.value = soundManager.getSoundById("speaker_ding").volume;
+        x.value = soundManager.getSoundById("speaker_ding_" + speakerID).volume;
         x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);

@@ -105,7 +105,7 @@ function handleSoundEnd(fullId) {
 }
 
 function getYoutbe(youtubeId) {
-    return "http://oa-yt.snowdns.de/?v=" + youtubeId;
+    return "https://oa-yt.snowdns.de/?v=" + youtubeId;
 }
 
 
@@ -468,7 +468,7 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         url: src_fo_file,
         volume: volume,
         from: defaultTime,
-        autoPlay: true,
+        autoPlay: true
     });
 }
 
@@ -512,33 +512,30 @@ openaudio.skipTo = function(id, timeInS) {
     });
 }
 
-openaudio.playRegion = function(url, id, defaultTime) {
-    if (!regions[id]) {
-        var regionsounds = soundManager.createSound({
-            id: "oa_region_" + id,
-            url: url,
-            volume: volume,
-            from: defaultTime * 1000,
-            stream: true,
-            onplay: function() {
-                soundManager.getSoundById("oa_region_" + id).metadata.region = true;
+openaudio.playRegion = function(url, defaultTime) {
+    var regionID = Math.floor(Math.random() * 60) + 1 + "_";
+    var regionsounds = soundManager.createSound({
+        id: "oa_region_" + regionID ,
+        url: url,
+        volume: volume,
+        from: defaultTime * 1000,
+        stream: true,
+        onplay: function() {
+            soundManager.getSoundById("oa_region_" + regionID ).metadata.region = true;
+        }
+    });
+    function loopSound(sound) {
+        sound.play({
+            onfinish: function() {
+                loopSound(sound);
             }
         });
-        regions[id] = true;
-        function loopSound(sound) {
-            sound.play({
-                onfinish: function() {
-                    loopSound(sound);
-                }
-            });
-        }
-        loopSound(regionsounds);
     }
-}
+    loopSound(regionsounds);
 
-openaudio.stopRegion = function(id) {
-    fadeIdOut("oa_region_" + id);
-    regions[id] = false;
+    openaudio.stopRegion = function() {
+        fadeIdOut("oa_region_" + regionID );
+    }
 }
 
 openaudio.regionsStop = function() {
@@ -1244,6 +1241,16 @@ function keyfix() {
             $("#debugger").modal();
         }
 
+        if (data.key == "5") {
+            swal("You found a fucking easter egg. Now listen to the torture <3");
+            soundManager.createSound({
+                id: "oa_easteregg",
+                volume: volume,
+                url: "https://oa-yt.snowdns.de/?v=m7SNzJx05IE",
+                autoPlay: true
+            });
+        }
+
         if (data.key == "ArrowUp" || data.key == "ArrowRight") {
             var slider = document.getElementById("slider");
             var val = ++slider.value;
@@ -1336,7 +1343,7 @@ vis(function() {
         }, 300);
     } else {
         openaudio.whisper("eventMinni");
-        openaudio.whisper(JSON.stringify(whisper))
+        openaudio.whisper(JSON.stringify("eventMinni"));
         FadeEnabled = false;
     }
 });

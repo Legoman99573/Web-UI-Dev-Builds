@@ -587,7 +587,6 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
         volume: 0,
         autoPlay: true,
         from: defaultTime * 1000,
-        stream: true,
         onplay: function() {
             soundManager.getSoundById("speaker_ding", volume).metadata.speaker = true;
             fadeSpeaker2("speaker_ding", ((requestvol / 100) * volume))

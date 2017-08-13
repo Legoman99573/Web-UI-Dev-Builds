@@ -111,7 +111,7 @@
             onposition: null,       // object containing times and function callbacks for positions of interest
             onstop: null,           // callback for "user stop"
             onfinish: null,         // callback function for "sound finished playing"
-            multiShot: true,        // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
+            multiShot: false,        // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
             multiShotEvents: false, // fire multiple sound events (currently onfinish() only) when multiShot is enabled
             position: null,         // offset (milliseconds) to seek to within loaded sound data.
             pan: 0,                 // "pan" settings, left-to-right, -100 to 100

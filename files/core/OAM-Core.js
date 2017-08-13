@@ -182,7 +182,7 @@ var ambdelay = 800;
 var minimeon = false;
 var lastSpeakerVolume = 0;
 var development = true;
-setTimeout(dev, 0);
+setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {

@@ -713,7 +713,7 @@ output {
 }
 
 header {
-  background-color: #333;
+  background-color: #242424;
   padding: 10px;
   position: absolute;
   width: 100%;
@@ -780,7 +780,7 @@ footer {
   animation: icons 0.5s 3.5s forwards;
 }
 
-@-webkit-keyframes .icons {
+@-webkit-keyframes icons {
   0% {
     visibility: hidden;
   }

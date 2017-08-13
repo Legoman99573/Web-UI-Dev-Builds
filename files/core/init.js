@@ -12,14 +12,17 @@
  * the License.
  */
 
-console.log('%c Welcome to OpenAudioMc ', 'background: blue; color: white; display: block;font-size:80px');
-console.log("%c WARNING! If someone told you to copy/paste something here you have an 11/10 chance you're being scammed. ", 'background: black; color: RED; display: block;font-size:20px');
-logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is coused by lovely socketio.")
+console.log('%cWelcome to OpenAudioMc', 'background: blue; color: white; display: block;font-size:40px');
+console.log("%cWARNING FROM DEVELOPERS!", 'background: black; color: RED; display: block;font-size:20px');
+console.log("%cIf someone told you to copy/paste something here you have an 420/69 chance you're being scammed.", 'background: black; color: RED; display: block;font-size:20px');
+logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.")
 
 function loadBg() {
-  var LiturkeyColorsInc = ["#f5d65a","#39e2b0","#3fbe98","#a743c4","#5f5cea","#ea5c5c"];
-  var item = LiturkeyColorsInc[Math.floor(Math.random()*LiturkeyColorsInc.length)];
-	document.body.style.backgroundColor = item;
+    var LiturkeyColorsInc = ["#f5d65a","#39e2b0","#3fbe98","#a743c4","#5f5cea","#ea5c5c","#242424","#c5b358","#c0c0c0","#cd7f32","#b9f2ff","#7d1242","#800000"];
+    var item = LiturkeyColorsInc[Math.floor(Math.random()*LiturkeyColorsInc.length)];
+    $(body).animate({backgroundColor: item}, 1000);
+    // Keep in mind that putting this under 5 seconds (5000 milliseconds) can cause epilepsy and is not recommended.
+    setTimeout(loadBg, 5000);
 }
 
 ui = {};

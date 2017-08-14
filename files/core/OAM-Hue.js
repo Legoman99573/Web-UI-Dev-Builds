@@ -113,6 +113,8 @@ function loop_hue_connection() {
 		console.info("[Philips-Hue] There is no support over a secure connection :(");
         soundManager._writeDebug("[Philips-Hue] There is no support over a secure connection :(", 2);
 		document.getElementById("hue_modal_text").innerHTML = "<h2>There is no support over a secure connection :(</h2>";
+        document.getElementById("DetectHueButton").style.display = "none";
+        document.getElementById("DirectConnectHue").style.display = "none";
 	}
 }
 

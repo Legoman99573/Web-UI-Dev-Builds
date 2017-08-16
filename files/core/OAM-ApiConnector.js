@@ -16,7 +16,6 @@ socketIo.connect = function() {
 	
 	socketIo.log = function(data) {
 	console.info("[Socket.Io] " + data);
-	soundManager._writeDebug("[Socket.Io] " + data);
 }
 	
 	socket = io.connect(socket_io, {
@@ -150,13 +149,11 @@ socketIo.connect = function() {
 
 	socket.on('oaError', function(msg) {
 		socketIo.log("Received error.");
-        soundManager._writeDebug("Received error.", 3);
 		if (msg == "server-offline") {
 			closedwreason = true;
 			status_span.innerHTML = langpack.message.server_is_offline;
 			status_span.className = "label label-danger";
 			socketIo.log("Received offline server data");
-            soundManager._writeDebug("Received offline server data", 3);
 		} else if (msg == "kicked") {
 			closedwreason = true;
 			status_span.innerHTML = langpack.message.inavlid_url;

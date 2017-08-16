@@ -14,7 +14,6 @@
 
 function getSoundcloud(Url, callback) {
     console.info("[Soundcloud] Attempting api call!");
-    soundManager._writeDebug("[Soundcloud] Attempting api call!");
     $.getScript("https://craftmend.com/api_SSL/soundcloud/js.php?file=" + Url, function() {
         setTimeout(function() {
             var data = lastSoundCloud;
@@ -23,7 +22,6 @@ function getSoundcloud(Url, callback) {
                 soundcloud_icon = "files/images/sc-default.png";
                 soundcloud_url = "https://soundcloud.com/stream";
                 console.info("[Soundcloud] Failed to get sound.");
-                soundManager._writeDebug("[Soundcloud] Failed to get sound.", 3);
             } else {
                 var api = data;
                 soundcloud_title = api.title;
@@ -42,7 +40,6 @@ function getSoundcloud(Url, callback) {
                 document.getElementById("sc-cover").style.display = "";
                 document.getElementById("sc-title").style.display = "";
                 console.info("[Soundcloud] Successfull api call!");
-                soundManager._writeDebug("[Soundcloud] Successfull api call!");
             }
         });
     });
@@ -1137,13 +1134,11 @@ AutoDj.LoadAll = function() {
             "CanBePlayed": true
         }
         console.log("AutoDj: Song loaded with ID:" + thiscount);
-        soundManager._writeDebug("AutoDj: Song loaded with ID:" + thiscount);
         thiscount++
     }
     if (PlayList_songs["_" + thiscount] == "end") {
         var loadedcount = thiscount - 1
         console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
-        soundManager._writeDebug("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
     }
 }
 AutoDj.Check = function(song_id) {
@@ -1164,7 +1159,6 @@ AutoDj.Play = function(FNC_ID) {
         AutoDj.SoundManager_Play(thisdata.File)
     } else {
         console.log("AutoDj: " + FNC_ID + "not playing");
-        soundManager._writeDebug("AutoDj: " + FNC_ID + "not playing", 3);
     }
 }
 AutoDj.SoundManager_Play = function(fnc_file) {
@@ -1280,7 +1274,12 @@ function keyfix() {
         }
 
         if (data.key == "d") {
-            $("#debugger").modal();
+            if (development) {
+                $("#debugger").modal();
+                development = false;
+            } else {
+                swal("Debugger is only available on development builds.");
+            }
         }
 
         if (data.key == "5") {
@@ -1462,20 +1461,16 @@ function open_soundcloud() {
 }
 
 function addJs(url) {
-    console.info("[ModManager] Attempting to add js file.");
-    soundManager._writeDebug("[ModManager] Attempting to add js file.");
+    console.info("[ModManager] Attempting to add js file from " + url + ".");
     $.getScript(url, function() {
         console.info("[ModManager] Added js file from " + url + " successfully.");
-        soundManager._writeDebug("[ModManager] Added js file from " + url + " successfully.");
     });
 }
 
 function addCss(url) {
-    console.info("[ModManager] Attempting to add css file.");
-    soundManager._writeDebug("[ModManager] Attempting to add css file.");
+    console.info("[ModManager] Attempting to add css file from " + url + ".");
     $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
-    console.info("[ModManager] Added css file from location" + url + " successfully");
-    soundManager._writeDebug("[ModManager] Added css file from location" + url + " successfully");
+    console.info("[ModManager] Added css file from location " + url + " successfully");
 }
 
 Element.prototype.remove = function() {

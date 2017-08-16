@@ -951,12 +951,8 @@ footer {
   padding-right: 5px;
 }
 
-#soundmanager-debug div{
+#soundmanager-debug div {
   color: #58b543;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-#soundmanager-debug {
-  background-color: #242424;
 }

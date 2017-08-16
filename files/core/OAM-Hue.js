@@ -85,7 +85,6 @@ function loop_hue_connection() {
 		hue_connect_loop = window.setInterval(function() {
 			HueTestTry++;
 			console.info("[Philips-Hue] Hue connect attempt: " + HueTestTry);
-            soundManager._writeDebug("[Philips-Hue] Hue connect attempt: " + HueTestTry);
 			if (!hue_connected || !StopHueLoop) {
 				if (+HueTestTry < +5) {
 					document.getElementById("DetectHueButton").style.display = "none";
@@ -94,7 +93,6 @@ function loop_hue_connection() {
 				} else {
 					window.clearInterval(hue_connect_loop);
 					console.info("[Philips-Hue] Failed to detect hue bridge :(");
-                    soundManager._writeDebug("[Philips-Hue] Failed to detect hue bridge :(", 3);
 					document.getElementById("hue_modal_text").innerHTML = langpack.hue.not_found;
 					document.getElementById("DetectHueButton").style.display = "";
 					document.getElementById("DirectConnectHue").style.display = "";
@@ -102,7 +100,6 @@ function loop_hue_connection() {
 			} else {
 				window.clearInterval(hue_connect_loop);
 				console.info("[Philips-Hue] Failed to detect hue bridge :(");
-                soundManager._writeDebug("[Philips-Hue] Failed to detect hue bridge :(", 3);
 				document.getElementById("hue_modal_text").innerHTML = langpack.hue.not_found;
 				document.getElementById("DetectHueButton").style.display = "";
 				document.getElementById("DirectConnectHue").style.display = "";
@@ -111,7 +108,6 @@ function loop_hue_connection() {
 	}
 	else if (window.location.protocol == "https:") {
 		console.info("[Philips-Hue] There is no support over a secure connection :(");
-        soundManager._writeDebug("[Philips-Hue] There is no support over a secure connection :(", 2);
 		document.getElementById("hue_modal_text").innerHTML = "<h2>There is no support over a secure connection :(</h2>";
         document.getElementById("DetectHueButton").style.display = "none";
         document.getElementById("DirectConnectHue").style.display = "none";
@@ -145,7 +141,6 @@ function on_hue_link(name) {
 		hue_get_lights();
 		window.clearInterval(hue_connect_loop);
 		console.info("[Philips-Hue] Hue connected!");
-        soundManager._writeDebug("[Philips-Hue] Hue connected!");
 		openaudio.whisper("hueConnected");
 		document.getElementById("HueControlls").style.display = "";
 		document.getElementById("hue_modal_text").innerHTML = langpack.hue.connected_with_bridge.replace("%bridgename%", name);
@@ -313,7 +308,6 @@ function hue_set_color(args, id) {
 			}
 		} catch (e) {
 			console.info("[Philips-Hue] Unable to decode hue color code... well shit.");
-            soundManager._writeDebug("[Philips-Hue] Unable to decode hue color code... well shit.", 3);
 		}
 	}
 }

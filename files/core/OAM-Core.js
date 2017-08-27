@@ -45,34 +45,39 @@ function getSoundcloud(Url, callback) {
     });
 }
 
-var bgID = Math.floor(Math.random() * 60) + 1 + "_";
+// YouTube Integration
+function getYoutbe(youtubeId) {
+    return "https://oa-yt.snowdns.de/?v=" + youtubeId + ".mp3";
+}
+
+var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
 
 soundManager.setup({
     defaultOptions: {
         onfinish: function() {
             handleSoundEnd(this.id);
             soundManager.destroySound(this.id);
-            if (this.id != "oa_back_" + bgID) {
+            if (this.id != "oa_back_" + randomID) {
                 onSoundEnd();
             }
         },
         onplay: function() {
-            if (this.id != "oa_back_" + bgID) {
+            if (this.id != "oa_back_" + randomID) {
                 onSoundPlay();
             }
         },
         onstop: function() {
-            if (this.id != "oa_back_" + bgID) {
+            if (this.id != "oa_back_" + randomID) {
                 onSoundEnd();
             }
         },
         onerror: function(code, description) {
-            if (this.id != "oa_back_" + bgID) {
-                soundManager._writeDebug("[SoundManager2] " + this.id + " failed?", 3, code, description);
+            if (this.id != "oa_back_" + randomID) {
+                soundManager._writeDebug("[SoundManager2] oa_back_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    this.stop();
+                    openaudio.stopBackground();
                 } else {
-                    soundManager._writeDebug("Unable to decode " + this.id + ". Well shit.", 3);
+                    soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
                 }
             }
         }
@@ -80,7 +85,7 @@ soundManager.setup({
 });
 
 function onSoundPlay() {
-    if (listSounds().includes("oa_back_" + bgID) && ambiance != "") {
+    if (listSounds().includes("oa_back_" + randomID) && ambiance != "") {
         openaudio.stopBackground();
     }
     try {
@@ -114,11 +119,6 @@ function handleSoundEnd(fullId) {
         openaudio.whisper(JSON.stringify(whisper));
     }
 }
-
-function getYoutbe(youtubeId) {
-    return "https://oa-yt.snowdns.de/?v=" + youtubeId;
-}
-
 
 langpack = {};
 langpack.hue = {};
@@ -171,6 +171,7 @@ var regions = {};
 var soundcloud_url = "https://soundcloud.com/stream";
 var ambiance = "";
 var twitter = "";
+var DirectIP = false;
 var youtube = "";
 var website = "";
 var iconcolor = "#242424";
@@ -178,7 +179,7 @@ var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
 var lastSpeakerVolume = 0;
-var development = true;
+var development = false;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
@@ -193,12 +194,19 @@ openaudio.color = function(code) {
     }, {
         duration: 500
     });
-}
+};
 
 openaudio.decode = function(msg) {
 
     if (msg.includes("clyp.it")) {
-        soundManager._writeDebug("Clypit is no longer supported! Do not ask for support.", 2);
+        soundManager._writeDebug("Clyp.it is no longer supported! Do not ask for support.", 2);
+        swal("Uh oh", "Clyp.it is no longer supported! Do not ask for support.", "error");
+        return;
+    }
+
+    if (msg.includes("spotify.com")) {
+        soundManager._writeDebug("Spotify links do not work. Support is coming soon™.", 2);
+        swal("Uh oh", "Spotify links do not work. Support is coming soon™", "error");
         return;
     }
 
@@ -334,13 +342,15 @@ openaudio.decode = function(msg) {
             getSoundcloud(scurl, function(newurl) {
                 openaudio.play(newurl, request.id, request.time);
             });
-        } else if (request.src.includes("youtube.com")) {
+        } // YouTube Integration Start
+        else if (request.src.includes("youtube.com")) {
             var youtubeId = request.src.split("?v=");
         	openaudio.play(getYoutbe(youtubeId[1]), request.id, request.time);
 		} else if (request.src.includes("youtu.be")) {
             var youtubeId = request.src.split("/");
             openaudio.play(getYoutbe(youtubeId[3]), request.id, request.time);
-        } else {
+        } // YouTube Integration End
+        else {
             openaudio.play(request.src, request.id, request.time);
         }
     } else if (request.command == "stop_id") {
@@ -354,13 +364,15 @@ openaudio.decode = function(msg) {
             getSoundcloud(scurl, function(newurl) {
                 openaudio.loop(newurl);
             });
-        } else if (request.src.includes("youtube.com")) {
+        } // YouTube Integration Start
+         else if (request.src.includes("youtube.com")) {
             var youtubeId = request.src.split("?v=");
             openaudio.loop(getYoutbe(youtubeId[1]));
 		} else if (request.src.includes("youtu.be")) {
             var youtubeId = request.src.split("/");
             openaudio.loop(getYoutbe(youtubeId[3]));
-		} else {
+		} // YouTube Integration End
+		else {
             openaudio.loop(request.src);
         }
     } else if (request.type == "region") {
@@ -375,13 +387,15 @@ openaudio.decode = function(msg) {
                     request.src = newurl;
                     openaudio.playRegion(request.src, request.time, request.id);
                 });
-            } else if (request.src.includes("youtube.com")) {
+            } // YouTube Integration Start
+            else if (request.src.includes("youtube.com")) {
                 var youtubeId = request.src.split("?v=");
                 openaudio.playRegion(getYoutbe(youtubeId[1]), request.time, request.id);
 			} else if (request.src.includes("youtu.be")) {
                 var youtubeId = request.src.split("/");
                 openaudio.playRegion(getYoutbe(youtubeId[3]), request.time, request.id);
-			} else {
+			} // YouTube Integration End
+			else {
                 openaudio.playRegion(request.src, request.time, request.id);
             }
         } else if (request.command == "stopOldRegion") {
@@ -401,13 +415,15 @@ openaudio.decode = function(msg) {
                 getSoundcloud(scurl, function(newurl) {
                     openaudio.createBuffer(newurl);
                 });
-            } else if (request.src.includes("youtube.com")) {
+            } // YouTube Integration Start
+            else if (request.src.includes("youtube.com")) {
                 var youtubeId = request.src.split("?v=");
                 openaudio.createBuffer(getYoutbe(youtubeId[1]));
 			} else if (request.src.includes("youtu.be")) {
                 var youtubeId = request.src.split("/");
             	openaudio.createBuffer(getYoutbe(youtubeId[3]));
-			} else {
+			} // YouTube Integration End
+			else {
                 openaudio.createBuffer(request.src);
             }
         }
@@ -458,7 +474,7 @@ openaudio.decode = function(msg) {
             document.body.background = "";
         }
     }
-}
+};
 
 openaudio.play = function(src_fo_file, soundID, defaultTime) {
     if (soundID === null) {
@@ -474,19 +490,19 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         stopFading[soundId] = true;
     }
     var mySoundObject = soundManager.createSound({
-        id: "play_" + Math.floor(Math.random() * 60) + 1 + "_" + soundID,
+        id: "play_" + randomID + soundID,
         url: src_fo_file,
         volume: volume,
         from: defaultTime,
         autoPlay: true
     });
-}
+};
 
 openaudio.sartBackground = function(url) {
-    soundManager.stop("oa_region_" + bgID);
-    soundManager.destroySound("oa_back_" + bgID);
+    soundManager.stop("oa_region_" + randomID);
+    soundManager.destroySound("oa_back_" + randomID);
     var regionsound = soundManager.createSound({
-        id: "oa_back_" + bgID,
+        id: "oa_back_" + randomID,
         volume: volume,
         url: url
     });
@@ -497,31 +513,31 @@ openaudio.sartBackground = function(url) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                soundManager._writeDebug("oa_back_" + bgID + " failed?", 3, code, description);
+                soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    this.stop();
+                    fadeIdOut("oa_back_" + randomID);
                 } else {
-                    soundManager._writeDebug("Unable to decode oa_back_" + bgID + ". Well shit.", 3);
+                    soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
                 }
             }
         });
     }
-    fadeIdTarget("oa_back_" + bgID);
+    fadeIdTarget("oa_back_" + randomID);
     loopSound(regionsound);
-}
+};
 
 openaudio.stopBackground = function() {
-    fadeIdOut("oa_back_" + bgID);
-}
+    fadeIdOut("oa_back_" + randomID);
+};
 
 openaudio.whisper = function(message) {
     socket.emit("whisperToServer", message);
     console.info("[Socket.io] Whisper send.");
-}
+};
 
 socketIo.log = function(data) {
     console.info("[Socket.Io] " + data);
-}
+};
 
 openaudio.skipTo = function(id, timeInS) {
     openaudio.setIdAtribute(id, function(fullID) {
@@ -529,21 +545,19 @@ openaudio.skipTo = function(id, timeInS) {
         var t = s * 1000;
         soundManager.setPosition(fullID, t);
     });
-}
-
-var regionID = Math.floor(Math.random() * 60) + 1 + "_";
+};
 
 openaudio.playRegion = function(url, defaultTime) {
-    soundManager.stop("oa_region_" + regionID);
-    soundManager.destroySound("oa_region_" + regionID);
+    soundManager.stop("oa_region_" + randomID);
+    soundManager.destroySound("oa_region_" + randomID);
     var regionsounds = soundManager.createSound({
-        id: "oa_region_" + regionID,
+        id: "oa_region_" + randomID,
         url: url,
         volume: volume,
         from: defaultTime * 1000,
         stream: true,
         onplay: function() {
-            soundManager.getSoundById("oa_region_" + regionID ).metadata.region = true;
+            soundManager.getSoundById("oa_region_" + randomID ).metadata.region = true;
         }
     });
     function loopSound(sound) {
@@ -552,30 +566,30 @@ openaudio.playRegion = function(url, defaultTime) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                soundManager._writeDebug("oa_region_" + regionID + " failed?", 3, code, description);
+                soundManager._writeDebug("oa_region_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    fadeIdOut("oa_region_" + regionID );
+                    fadeIdOut("oa_region_" + randomID );
                 } else {
-                    soundManager._writeDebug("Unable to decode oa_region_" + regionID + ". Well shit.", 3);
+                    soundManager._writeDebug("Unable to decode oa_region_" + randomID + ". Well shit.", 3);
                 }
             }
         });
     }
     loopSound(regionsounds);
-}
+};
 
 openaudio.stopRegion = function() {
-    fadeIdOut("oa_region_" + regionID );
-}
+    fadeIdOut("oa_region_" + randomID );
+};
 
 openaudio.regionsStop = function() {
     for (var i = 0; i < listSounds().split(',').length; i++) {
         listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-        if (listSounds().split(',')[i].indexOf("oa_region_" + regionID) !== -1) {
+        if (listSounds().split(',')[i].indexOf("oa_region_" + randomID) !== -1) {
             fadeIdOut(listSounds().split(',')[i]);
         }
     }
-}
+};
 
 openaudio.playAction = function(action_is_fnc) {
     for (var i = 0; i < listSounds().split(',').length; i++) {
@@ -586,7 +600,7 @@ openaudio.playAction = function(action_is_fnc) {
             }
         }
     }
-}
+};
 
 
 openaudio.setGlobalVolume = function(volumeNew) {
@@ -607,40 +621,38 @@ openaudio.setGlobalVolume = function(volumeNew) {
             soundManager.setVolume(listSpeakerSounds().split(',')[i], volumeTarget);
         }
     }
-}
-
-var speakerID = Math.floor(Math.random() * 60) + 1 + "_";
+};
 
 openaudio.newspeaker = function(url, defaultTime, requestvol) {
-    soundManager.stop("speaker_ding_" + speakerID);
-    soundManager.destroySound("speaker_ding_" + speakerID);
+    soundManager.stop("speaker_ding_" + randomID);
+    soundManager.destroySound("speaker_ding_" + randomID);
     var speakersound = soundManager.createSound({
-        id: "speaker_ding_" + speakerID,
+        id: "speaker_ding_" + randomID,
         url: url,
         volume: 0,
         autoPlay: true,
         from: defaultTime * 1000,
         onplay: function() {
-            soundManager.getSoundById("speaker_ding_" + speakerID, volume).metadata.speaker = true;
-            fadeSpeaker2("speaker_ding_" + speakerID, ((requestvol / 100) * volume))
+            soundManager.getSoundById("speaker_ding_" + randomID, volume).metadata.speaker = true;
+            fadeSpeaker2("speaker_ding_" + randomID, ((requestvol / 100) * volume))
         }, onfinish: function() {
             this.stream = true;
             this.from = 0;
             this.play();
         }, onerror: function(code, description) {
-            soundManager._writeDebug("speaker_ding_" + speakerID + " failed?", 3, code, description);
+            soundManager._writeDebug("speaker_ding_" + randomID + " failed?", 3, code, description);
             if (this.loaded) {
-                fadeSpeakerOut("speaker_ding_" + speakerID)
+                fadeSpeakerOut("speaker_ding_" + randomID)
             } else {
-                soundManager._writeDebug("Unable to decode speaker_ding_" + speakerID + ". Well shit.", 3);
+                soundManager._writeDebug("Unable to decode speaker_ding_" + randomID + ". Well shit.", 3);
             }
         }
     });
-}
+};
 
 openaudio.removeSpeaker = function(id) {
-    fadeSpeakerOut("speaker_ding_" + speakerID);
-}
+    fadeSpeakerOut("speaker_ding_" + randomID);
+};
 
 openaudio.setIdAtribute = function(ID, callback) {
     if (!ID.includes("/")) {
@@ -667,7 +679,7 @@ openaudio.setIdAtribute = function(ID, callback) {
             }
         });
     }
-}
+};
 
 
 openaudio.set_directed_volume = function(volume, ID) {
@@ -685,7 +697,7 @@ openaudio.set_directed_volume = function(volume, ID) {
             soundManager.setVolume(fullID, volume);
         });
     }
-}
+};
 
 
 
@@ -693,7 +705,7 @@ openaudio.stop_id = function(ID) {
     openaudio.setIdAtribute(ID, function(fullID) {
         fadeIdOut(fullID);
     });
-}
+};
 
 
 
@@ -701,7 +713,7 @@ openaudio.toogle_id = function(id) {
     openaudio.setIdAtribute(id, function(fullID) {
         soundManager.togglePause(fullID);
     });
-}
+};
 
 
 
@@ -726,7 +738,7 @@ openaudio.set_volume = function(volume_var) {
         volume = volume_var;
         openaudio.setGlobalVolume(volume_var);
     }
-}
+};
 
 
 
@@ -744,7 +756,7 @@ openaudio.set_volume2 = function(volume_var) {
         volume = volume_var;
         openaudio.setGlobalVolume(volume_var);
     }
-}
+};
 
 
 
@@ -756,7 +768,7 @@ openaudio.playbuffer = function() {
     } catch (e) {
 
     }
-}
+};
 
 
 
@@ -767,7 +779,7 @@ openaudio.createBuffer = function(file_to_load) {
     });
     soundManager.load('loader');
     loadedsound.load();
-}
+};
 
 
 
@@ -780,15 +792,13 @@ openaudio.message = function(text) {
             body: text,
         });
     }
-}
-
-var loopID = Math.floor(Math.random() * 60) + 1 + "_";
+};
 
 openaudio.loop = function(url, defaultTime) {
-    soundManager.stop("loop_" + loopID);
-    soundManager.destroySound("loop_" + loopID);
+    soundManager.stop("loop_" + randomID);
+    soundManager.destroySound("loop_" + randomID);
     var loopnu = soundManager.createSound({
-        id: "loop_" + loopID,
+        id: "loop_" + randomID,
         volume: volume,
         url: url,
         from: defaultTime * 1000,
@@ -801,21 +811,21 @@ openaudio.loop = function(url, defaultTime) {
                 loopSound(sound);
             },
             onerror: function(code, description) {
-                soundManager._writeDebug("loop_" + loopID  + " failed?", 3, code, description);
+                soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    fadeIdOut("loop_" + loopID);
+                    fadeIdOut("loop_" + randomID);
                 } else {
-                    soundManager._writeDebug("Unable to decode loop_" + loopID + ". Well shit.", 3);
+                    soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
                 }
             }
         });
     }
     loopSound(loopnu);
-}
+};
 
 openaudio.stopLoop = function() {
-    fadeIdOut("loop_" + loopID);
-}
+    fadeIdOut("loop_" + randomID);
+};
 
 //all the fading c
 $(document).ready(function() {
@@ -864,7 +874,7 @@ $(document).ready(function() {
             } catch (e) {}
             x.remove();
         }
-    }
+    };
 
     window.fadeSpeakerOut = function(soundId) {
         var x = document.createElement("INPUT");
@@ -911,7 +921,7 @@ $(document).ready(function() {
             } catch (e) {}
             x.remove();
         }
-    }
+    };
 
     window.fadeSpeaker2 = function(soundId, vt) {
 
@@ -922,7 +932,7 @@ $(document).ready(function() {
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
-        x.value = soundManager.getSoundById("speaker_ding_" + speakerID).volume;
+        x.value = soundManager.getSoundById("speaker_ding_" + randomID).volume;
         x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);
@@ -949,7 +959,7 @@ $(document).ready(function() {
             soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
             x.remove();
         }
-    }
+    };
 
 
     window.fadeIdTarget = function(soundId, volumeTarget) {
@@ -986,7 +996,7 @@ $(document).ready(function() {
             soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
             x.remove();
         }
-    }
+    };
 
     window.fadeIdOutWithSpeaker = function(soundId) {
         var x = document.createElement("INPUT");
@@ -1033,7 +1043,7 @@ $(document).ready(function() {
             } catch (e) {}
             x.remove();
         }
-    }
+    };
 
 
     window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
@@ -1070,7 +1080,7 @@ $(document).ready(function() {
             soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), volumeTarget);
             x.remove();
         }
-    }
+    };
 
 
 
@@ -1122,25 +1132,25 @@ AutoDj.AddSong = function(File) {
     PlayList_songs["_" + AutoDj.AddedCount] = {
         "File": File
     };
-    this.AddedCount++
+    this.AddedCount++;
     PlayList_songs["_" + AutoDj.AddedCount] = "end";
-}
+};
 AutoDj.LoadAll = function() {
     var thiscount = 1;
     while (PlayList_songs["_" + thiscount] != "end") {
-        var this_item = PlayList_songs["_" + thiscount]
+        var this_item = PlayList_songs["_" + thiscount];
         AutoDj["SongData_" + thiscount] = {
             "File": this_item.File,
             "CanBePlayed": true
-        }
+        };
         console.log("AutoDj: Song loaded with ID:" + thiscount);
         thiscount++
     }
     if (PlayList_songs["_" + thiscount] == "end") {
-        var loadedcount = thiscount - 1
+        var loadedcount = thiscount - 1;
         console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
     }
-}
+};
 AutoDj.Check = function(song_id) {
     if (AutoDj["SongData_" + song_id] != null) {
         var thisdata = AutoDj["SongData_" + song_id];
@@ -1152,7 +1162,7 @@ AutoDj.Check = function(song_id) {
     } else {
         return false;
     }
-}
+};
 AutoDj.Play = function(FNC_ID) {
     if (this.Check(FNC_ID) === true) {
         var thisdata = AutoDj["SongData_" + FNC_ID];
@@ -1160,7 +1170,7 @@ AutoDj.Play = function(FNC_ID) {
     } else {
         console.log("AutoDj: " + FNC_ID + "not playing");
     }
-}
+};
 AutoDj.SoundManager_Play = function(fnc_file) {
     var VolumeNow = this.Volume;
     soundManager.destroySound('AutoDj');
@@ -1171,7 +1181,7 @@ AutoDj.SoundManager_Play = function(fnc_file) {
         stream: true,
         onfinish: AutoDj.PlayNext
     });
-}
+};
 AutoDj.PlayNext = function() {
     var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;
     if (AutoDj.Check(VolgendeLiedje) === true) {
@@ -1182,7 +1192,7 @@ AutoDj.PlayNext = function() {
         AutoDj.Play(AutoDj.IdOfNowPlaying);
 
     }
-}
+};
 
 //goto
 
@@ -1216,12 +1226,12 @@ window.onresize = function() {
         window.resizeTo(566, 681);
     }
 
-}
+};
 window.onclick = function() {
     if (tinyWindow != "(none)") {
         window.resizeTo(566, 681);
     }
-}
+};
 
 function openSite() {
     window.open(website);
@@ -1236,9 +1246,8 @@ function openTwitter() {
 }
 
 function dev() {
-    if (development) {
+    if (!(development !== true)) {
         $('#header').css('display', 'inline-block');
-        development = false;
     }
 }
 
@@ -1257,32 +1266,40 @@ function keyfix() {
         }
 
         if (data.key == "h") {
-            if (hue_enabled) {
+            if (!(hue_enabled) !== true) {
                 openhue();
             }
             else {
-                swal("Hue is disabled.");
+                swal({
+                    title: langpack.hue.disabled,
+                    type: 'error'
+                });
             }
         }
 
         if (data.key == "m") {
-            if (minimeon) {
+            if (!(minimeon) !== true) {
                 openSmallWindow();
             } else {
-                swal("Minimi is disabled by the server admin.");
+                swal({
+                    title: 'Minimi is disabled by the server admin.',
+                    type: 'error'
+                });
             }
         }
 
         if (data.key == "d") {
-            if (development) {
+            if (!(development !== true)) {
                 $("#debugger").modal();
-                development = false;
             } else {
-                swal("Debugger is only available on development builds.");
+                swal({
+                    title: 'Debugger is only available on development builds.',
+                    type: 'error'
+                });
             }
         }
 
-        if (data.key == "5") {
+        if (data.key == "l") {
             swal("You found a fucking easter egg. Now listen to the torture <3");
             soundManager.createSound({
                 id: "oa_easteregg",
@@ -1352,7 +1369,14 @@ function listSpeakerSounds() {
 
 
 function openhue() {
-    $('#Hue').modal('show');
+    if (hue_enabled != false) {
+        hue_menu();
+    } else {
+        swal({
+            title: langpack.hue.disabled,
+            type: 'error'
+        })
+    }
 }
 
 //thanks to chrome bugs we need to detect if the browser is actife
@@ -1475,14 +1499,14 @@ function addCss(url) {
 
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
-}
+};
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     for (var i = this.length - 1; i >= 0; i--) {
         if (this[i] && this[i].parentElement) {
             this[i].parentElement.removeChild(this[i]);
         }
     }
-}
+};
 
 
 function trayItem(icon, callback) {
@@ -1512,16 +1536,11 @@ function enable() {
     clientID = a;
     clientTOKEN = b;
 
-
-    document.getElementById("DetectHueButton").style.display = "none";
-
     document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
 
     if (Notification.permission !== "granted") {
         Notification.requestPermission();
     }
-
-    document.getElementById("hue_modal_text").innerHTML = "<h2>" + langpack.hue.disabled + "</h2>";
 
     //connect to the craftmend server
     socketIo.connect();

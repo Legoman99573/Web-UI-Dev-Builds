@@ -956,3 +956,17 @@ footer {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+#progressBar {
+  width: 90%;
+  margin: 10px auto;
+  height: 22px;
+  background-color: #CBEA00;
+}
+
+#progressBar div {
+  height: 100%;
+  width: 0;
+  background-color: #0A5F44;
+  box-sizing: border-box;
+}

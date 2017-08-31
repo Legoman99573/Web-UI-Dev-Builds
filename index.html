@@ -40,16 +40,16 @@
 	<script src="files/js/jqueryui.js?v=1.5"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 	<script src="files/js/hueapi.js?v=1.5"></script>
-	<script src="files/core/OAM-Hue.js?v=1.5"></script>
+	<script src="files/core/OAM-Hue.js?v=1.11"></script>
 	<script src="files/js/soundmanager2.js?v=1.30"></script>
-	<script src="files/core/OAM-Core.js?v=2.22"></script>
+	<script src="files/core/OAM-Core.js?v=2.30"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.slim.js"></script>
-	<script src="files/core/OAM-ApiConnector.js"></script>
+	<script src="files/core/OAM-ApiConnector.js?v=1.2"></script>
 </head>
 
 <body id="body">
 	<header id="header">
-		<span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> This server is using a Beta Build! There may be some bugs in this build! </span>
+		<i class="fa fa-exclamation-triangle" aria-hidden="true" style="padding-right: 5px;"></i> <span id="notifications">...</span><i class="fa fa-window-close-o" aria-hidden="true" style="padding-left: 10px;" onclick="dismiss_notification();"></i>
 	</header>
 	<div id="UserBox">
 		<aside class="profile-card" id="box">

@@ -47,7 +47,7 @@ function getSoundcloud(Url, callback) {
 
 // YouTube Integration
 function getYoutbe(youtubeId) {
-    return "https://oa-yt.snowdns.de/?v=" + youtubeId + ".mp3";
+    return "https://oa-yt.snowdns.de/?v=" + youtubeId;
 }
 
 var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
@@ -179,7 +179,10 @@ var ambtimer = 0;
 var ambdelay = 800;
 var minimeon = false;
 var lastSpeakerVolume = 0;
-var development = false;
+var development = true;
+var hue_set = false;
+var direct = true;
+var connecting = true;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
@@ -781,16 +784,33 @@ openaudio.createBuffer = function(file_to_load) {
     loadedsound.load();
 };
 
+function dismiss_notification() {
+    $('#header').slideUp(800);
+}
 
+function notification_open() {
+    $('#header').slideDown(800);
+}
 
 openaudio.message = function(text) {
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
+    if (window.location.protocol == "https:") {
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        } else {
+            var notification = new Notification(langpack.notification.header.replace(/%username%/g, mcname), {
+                icon: langpack.notification.img,
+                body: text,
+            });
+        }
     } else {
-        var notification = new Notification(langpack.notification.header.replace(/%username%/g, mcname), {
-            icon: langpack.notification.img,
-            body: text,
+        $('#notifications').text('To ' + mcname + ': ' +text);
+        soundManager.createSound({
+            id: 'mySound2',
+            url: '',
+            volume: volume
         });
+        soundManager.play('mySound2');
+        notification_open();
     }
 };
 
@@ -1247,7 +1267,8 @@ function openTwitter() {
 
 function dev() {
     if (!(development !== true)) {
-        $('#header').css('display', 'inline-block');
+        $('#notifications').text('This server is using a Beta Build! There may be some bugs in this build');
+        notification_open();
     }
 }
 
@@ -1512,9 +1533,12 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 function trayItem(icon, callback) {
     this.ul = document.getElementById("icons");
     this.li = document.createElement("li");
+    $('.icons').each(function () {
+            $('.icons li').addClass('fa-mobile-hide');
+    });
     this.ul.appendChild(document.createTextNode(''));
     this.ul.appendChild(this.li);
-    this.li.innerHTML = '<i class="fa ' + icon + ' fa-2x footer-icon fa-qr-check" aria-hidden="true" onclick="' + callback + '();"></i>';
+    this.li.innerHTML = '<i class="fa ' + icon + ' fa-2x footer-icon" aria-hidden="true" onclick="' + callback + '();"></i>';
     this.li.style.color = "#" + iconcolor;
     this.destroy = function() {
         this.li.remove();

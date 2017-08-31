@@ -12,11 +12,6 @@
  * the License.
  */
 
-hue_set = false;
-connecting = true;
-link = true;
-direct = true;
-
 function ConnectToHueBridge() {
     if (!localStorage.MyHueBridgeIP) { // No Cached BridgeIP?
         MyHue.PortalDiscoverLocalBridges().then(function BridgesDiscovered() {
@@ -29,60 +24,77 @@ function ConnectToHueBridge() {
                         localStorage.MyHueBridgeIP = MyHue.BridgeIP; // Cache BridgeIP
                         on_hue_link(MyHue.BridgeName);
                     }, function UnableToCreateUseronBridge() {
-                        if (!(link) !== true) {
-                            link = false;
-                            swal({
-                                title: langpack.hue.please_link,
-                                type: 'question',
-                                allowOutsideClick: false,
-                                showConfirmButton: false
-                            });
-                        }
+                        swal({
+                            title: langpack.hue.please_link,
+                            type: 'question',
+                            allowOutsideClick: false,
+                            showConfirmButton: false
+                        });
+                        return;
                     });
                 });
             }, function UnableToRetreiveBridgeConfig() {
                 no_hue_link();
+                return;
             });
         }, function UnableToDiscoverLocalBridgesViaPortal() {
             no_hue_link();
+            return;
         });
     } else {
         MyHue.BridgeIP = localStorage.MyHueBridgeIP;
-        if (!(connecting) !== true) {
-            connecting = false;
-            if (!(direct) !== true) {
-                swal({
-                    title: langpack.hue.connecting,
-                    type: 'info',
-                    allowOutsideClick: false,
-                    showConfirmButton: false
-                });
-            }
-        }
         MyHue.BridgeGetConfig().then(function CachedBridgeConfigReceived() {
             MyHue.BridgeGetData().then(function CachedBridgeDataReceived() {
                 on_hue_link(MyHue.BridgeName);
             }, function UnableToRetreiveCachedBridgeData() {
-                no_hue_link();
+                invalid_hue_link();
+                return;
             });
         }, function UnableToRetreiveCachedBridgeConfig() {
-            no_hue_link();
-
+            invalid_hue_link();
+            return;
         });
     }
 }
 
-function no_hue_link() {
-    if (!(connecting) !== true) {
-        connecting = false;
-        if (!(direct) !== true) {
-            swal({
-                html: langpack.hue.re_search_bridge,
-                type: 'info',
-                allowOutsideClick: false,
-                showConfirmButton: false
+function ConnectToHueDirectIP() {
+    MyHue.PortalDiscoverLocalBridges().then(function BridgesDiscovered() {
+        MyHue.BridgeGetConfig().then(function BridgeConfigReceived() {
+            MyHue.BridgeGetData().then(function BridgeDataReceived() {
+                on_hue_link();
+            }, function UnableToRetreiveBridgeData() {
+                MyHue.BridgeCreateUser().then(function BridegeUserCreated() {
+                    on_hue_link(MyHue.BridgeName);
+                }, function UnableToCreateUseronBridge() {
+                    swal({
+                        title: langpack.hue.please_link,
+                        type: 'question',
+                        allowOutsideClick: false,
+                        showConfirmButton: false
+                    });
+                    return;
+                });
             });
-        }
+        }, function UnableToRetreiveBridgeConfig() {
+            invalid_hue_link();
+            return;
+        });
+    }, function UnableToDiscoverLocalBridgesViaPortal() {
+        no_hue_link();
+        return;
+    });
+}
+
+
+
+function no_hue_link() {
+    if (!(direct) !== true) {
+        swal({
+            html: langpack.hue.re_search_bridge,
+            type: 'info',
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
     }
     hue_start_animation = true;
 }
@@ -91,12 +103,11 @@ function invalid_hue_link() {
     window.clearInterval(hue_connect_loop);
     delete localStorage.MyHueBridgeIP;
     StopHueLoop = true;
+    direct = false;
     connecting = true;
-    direct = true;
-    link = true;
     swal({
         title: langpack.hue.cant_connect,
-        html: '<div type="button" class="btn btn-primary" onclick="loop_hue_connection();">Retry Auto Detect</div>' +
+        html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
         '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
         type: 'error',
         showConfirmButton: false
@@ -110,13 +121,16 @@ function loop_hue_connection() {
             HueTestTry++;
             console.info("[Philips-Hue] Hue connect attempt: " + HueTestTry);
             if (+HueTestTry < +5) {
-                ConnectToHueBridge();
+                if (!(direct) !== true) {
+                    ConnectToHueBridge();
+                } else {
+                    ConnectToHueDirectIP();
+                }
             } else {
                 window.clearInterval(hue_connect_loop);
                 StopHueLoop = true;
+                direct = false;
                 connecting = true;
-                direct = true;
-                link = true;
                 delete localStorage.MyHueBridgeIP;
                 console.info("[Philips-Hue] Failed to detect hue bridge :(");
                 swal({
@@ -159,17 +173,37 @@ function direct_hue_connection() {
     }).then(function (result) {
         localStorage.MyHueBridgeIP = result;
         direct = false;
-        link = true;
-        setTimeout(function() {
-            swal({
-                type: 'info',
-                title: 'Attempting to connect to bridge IP: ' + result + '...',
-                showConfirmButton: false,
-                allowOutsideClick: false
-            });
-            loop_hue_connection();
-        }, 500);
-    })
+        swal({
+            type: 'info',
+            title: 'Attempting to connect to bridge IP: ' + result + '...',
+            showConfirmButton: false,
+            allowOutsideClick: false
+        });
+        $.ajax({
+            url: 'http://' + result + '/api/',
+            success: function() {
+                swal({
+                    type: 'info',
+                    title: 'Found bridge IP ' + result,
+                    text: 'Connecting...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
+                loop_hue_connection();
+                return true;
+            },
+            error:function() {
+                swal({
+                    title: 'Failed to connect to bridge IP ' + result + '...',
+                    html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
+                    '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
+                    type: 'error',
+                    showConfirmButton: false
+                });
+                return false;
+            }
+        });
+    });
 }
 
 function on_hue_link(name) {
@@ -237,17 +271,14 @@ function hue_set_brightes(number) {
 
 function hue_get_lights() {
     for (var key in MyHue.Lights) {
-        if (MyHue.Lights.hasOwnProperty(key)) {
-            hue_lights[key] = {};
-            hue_lights[key].name = MyHue.Lights[key].name;
-            hue_lights[key].state = MyHue.Lights[key].state;
-            hue_lights[key].color2 = HueDefaultColor;
-            hue_lights[key].enabled = true;
-            $('.hue').each(function () {
-                $('.HueLightList', this).append('<div class="alert alert-success" onclick="hue_list_click_handeler(this);" id="ListLightHue_' + key + '"><strong id="ListLightHue_' + key + '_state">Enabled</strong> ' + MyHue.Lights[key].name + '</div>');
-                hue_set_color(hue_lights[key].color2, key);
-            });
-        }
+        hue_lights[key] = this;
+        hue_lights[key].name = MyHue.Lights[key].name;
+        hue_lights[key].state = MyHue.Lights[key].state;
+        hue_lights[key].color2 = HueDefaultColor;
+        hue_lights[key].enabled = true;
+        $('.hue').each(function () {
+            $('.HueLightList', this).append('<div class="alert alert-success" onclick="hue_list_click_handeler(this);" id="ListLightHue_' + key + '"><strong id="ListLightHue_' + key + '_state">Enabled</strong> ' + hue_lights[key].name + '</div>');
+        });
     }
 }
 

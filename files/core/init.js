@@ -32,7 +32,7 @@ var debug = getUrlVar("debug") == null;
 
 ui.color = function(code) {
     $("#footer").animate({"backgroundColor":code},{duration:1000});
-    $("header").animate({"backgroundColor":code},{duration:500});
+    $("#header").animate({"backgroundColor":code},{duration:500});
     $("#box").animate({"backgroundColor":code},{duration:300});
 };
 
@@ -61,7 +61,7 @@ function initialize() {
         var username = getUrlVar("name");
         if (username.length >= 3) {
             if (/^\w+$/i.test(username)) {
-                //save to load, i gues?
+                //save to load, i guess?
                 if (apijson != null) {
                     logInit("Trying login.");
                     //try {

@@ -14,21 +14,21 @@
 
 @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
 
-.fa-qr-check {
-  display: block;
+.fa-mobile-hide {
+  display: inline-block;
 }
 
-@media (max-width: 500px) {
-  .fa-qr-check {
-    display: none;
-    visibility: hidden;
+@media (min-width: 500px) {
+  .fa-mobile-hide {
+    display: inline-block;
   }
 }
 
-@media (max-height: 479px) {
-  .fa-qr-check {
+@media (max-width: 500px) {
+  .fa-mobile-hide {
     display: none;
-    visibility: hidden;
+    visibility: collapse;
+    padding: 0px;
   }
 }
 
@@ -828,7 +828,7 @@ footer {
   transform-style: preserve-3d;
 }
 
-.card .card-image img{
+.card .card-image img {
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   -ms-transition: all 0.4s ease;
@@ -836,7 +836,7 @@ footer {
   transition: all 0.4s ease;
 }
 
-.card .card-image:hover img{
+.card .card-image:hover img {
   -webkit-transform: scale(1.2) rotate(-7deg);
   -moz-transform: scale(1.2) rotate(-7deg);
   -ms-transform: scale(1.2) rotate(-7deg);
@@ -844,7 +844,7 @@ footer {
   transform: scale(1.2) rotate(-7deg);
 }
 
-.card{
+.card {
   font-family: 'Roboto', sans-serif;
   margin-top: 10px;
   position: relative;
@@ -857,16 +857,16 @@ footer {
   padding: 10px;
 }
 
-.card .card-content .card-title, .card-reveal .card-title{
+.card .card-content .card-title, .card-reveal .card-title {
   font-size: 24px;
   font-weight: 200;
 }
 
-.card .card-action{
+.card .card-action {
   padding: 20px;
   border-top: 1px solid rgba(160, 160, 160, 0.2);
 }
-.card .card-action a{
+.card .card-action a {
   font-size: 15px;
   color: #ffab40;
   text-transform:uppercase;
@@ -882,7 +882,7 @@ footer {
   text-decoration:none;
 }
 
-.card .card-reveal{
+.card .card-reveal {
   padding: 20px;
   position: absolute;
   background-color: #FFF;
@@ -896,12 +896,12 @@ footer {
   display: none;
 }
 
-.card .card-reveal p{
+.card .card-reveal p {
   color: rgba(0, 0, 0, 0.71);
   margin:20px;
 }
 
-.btn-custom{
+.btn-custom {
   background-color: transparent;
   font-size:18px;
 }

@@ -58,7 +58,7 @@ socketIo.connect = function() {
     });
 
     socket.on('oaSettings', function(msg) {
-
+        $( ".fa-mobile-hide" ).remove();
         if (msg != null) {
             var settings = JSON.parse(msg);
             addJs("https://rawgit.com/OpenAudioMc/Lang-packs/master/" + settings.language + ".js");

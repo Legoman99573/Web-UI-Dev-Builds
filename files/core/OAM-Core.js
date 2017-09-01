@@ -46,8 +46,8 @@ function getSoundcloud(Url, callback) {
 }
 
 // YouTube Integration
-function getYoutbe(youtubeId) {
-    return "https://oa-yt.snowdns.de/?v=" + youtubeId;
+function getYoutbe(youtubeId, callback) {
+    return "https://oa-yt.snowdns.de/?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId;
 }
 
 var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
@@ -1272,6 +1272,10 @@ function dev() {
     }
 }
 
+function soundmanager2_debugger() {
+    $("#debugger").modal();
+}
+
 function SetDesignColor(code) {
     document.getElementById("box").style = "background-color: " + code + ";";
 }
@@ -1311,7 +1315,7 @@ function keyfix() {
 
         if (data.key == "d") {
             if (!(development !== true)) {
-                $("#debugger").modal();
+                soundmanager2_debugger();
             } else {
                 swal({
                     title: 'Debugger is only available on development builds.',

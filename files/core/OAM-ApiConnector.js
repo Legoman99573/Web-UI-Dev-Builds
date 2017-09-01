@@ -72,6 +72,10 @@ socketIo.connect = function() {
                 ambdelay = settings.ambdelay;
             }
 
+            if (development == true) {
+                sm_debugger = new trayItem("fa-terminal", "soundmanager2_debugger");
+            }
+
             if (settings.twitter != "" && settings.twitter != null) {
                 twitterIcon = new trayItem("fa-twitter", "openTwitter");
                 twitter = settings.twitter;
@@ -80,11 +84,9 @@ socketIo.connect = function() {
             if (settings.minime == "on" && settings.minime != null) {
                 if (tinyWindow == "(none)") {
                     minimeon = true;
-                    minimeicon = new trayItem("fa-window-minimize", "openSmallWindow");
+                    minimeicon = new trayItem("fa-window-maximize", "openSmallWindow");
                 }
             }
-
-
 
             if (settings.qrcode != null && settings.qrcode != "off") {
                 $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa-qrcode", "showqr");});

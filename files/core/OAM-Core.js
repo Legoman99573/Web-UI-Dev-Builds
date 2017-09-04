@@ -47,7 +47,7 @@ function getSoundcloud(Url, callback) {
 
 // YouTube Integration
 function getYoutbe(youtubeId, callback) {
-    return "https://oa-yt.snowdns.de/?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId;
+    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId;
 }
 
 var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio

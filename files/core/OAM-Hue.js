@@ -23,6 +23,14 @@ function ConnectToHueBridge() {
                     MyHue.BridgeCreateUser().then(function BridegeUserCreated() {
                         localStorage.MyHueBridgeIP = MyHue.BridgeIP; // Cache BridgeIP
                         on_hue_link(MyHue.BridgeName);
+                        MyHue.LightsGetData().then(function LightsDataFound() {
+                            hue_get_lights();
+                        }, function UnableToGetLightData() {
+                            swal({
+                                html: langpack.hue.light_data_fail,
+                                type: 'error'
+                            });
+                        });
                     }, function UnableToCreateUseronBridge() {
                         swal({
                             title: langpack.hue.please_link,
@@ -46,12 +54,15 @@ function ConnectToHueBridge() {
         MyHue.BridgeGetConfig().then(function CachedBridgeConfigReceived() {
             MyHue.BridgeGetData().then(function CachedBridgeDataReceived() {
                 on_hue_link(MyHue.BridgeName);
+                    MyHue.LightsGetData().then(function CachedLightsDataFound() {
+                        hue_get_lights();
+                    });
             }, function UnableToRetreiveCachedBridgeData() {
-                invalid_hue_link();
+                no_hue_link();
                 return;
             });
         }, function UnableToRetreiveCachedBridgeConfig() {
-            invalid_hue_link();
+            no_hue_link();
             return;
         });
     }
@@ -146,8 +157,7 @@ function loop_hue_connection() {
     else if (window.location.protocol == "https:") {
         console.info("[Philips-Hue] There is no support over a secure connection :(");
         swal({
-            title: 'There is no support over a secure connection :(',
-            text: 'Phillips HUE support is automatically disabled.',
+            html: langpack.hue.ssl_error,
             type: 'error'
         });
     }
@@ -155,7 +165,7 @@ function loop_hue_connection() {
 
 function direct_hue_connection() {
     swal({
-        title: 'Please input your bridge ip',
+        html: langpack.hue.direct_ip_prompt,
         input: 'text',
         showCancelButton: true,
         confirmButtonText: 'Connect',
@@ -165,7 +175,7 @@ function direct_hue_connection() {
                 if (value) {
                     resolve();
                 } else {
-                    reject('Please enter a Bridge IP');
+                    reject(langpack.hue.direct_ip_prompt_empty);
                 }
             })
         },
@@ -175,7 +185,7 @@ function direct_hue_connection() {
         direct = false;
         swal({
             type: 'info',
-            title: 'Attempting to connect to bridge IP: ' + result + '...',
+            html: langpack.hue.direct_ip_lookup.replace("%ip%", result),
             showConfirmButton: false,
             allowOutsideClick: false
         });
@@ -184,8 +194,7 @@ function direct_hue_connection() {
             success: function() {
                 swal({
                     type: 'info',
-                    title: 'Found bridge IP ' + result,
-                    text: 'Connecting...',
+                    text: langpack.hue.direct_ip_lookup_success.replace("%ip%", result),
                     showConfirmButton: false,
                     allowOutsideClick: false
                 });
@@ -194,7 +203,7 @@ function direct_hue_connection() {
             },
             error:function() {
                 swal({
-                    title: 'Failed to connect to bridge IP ' + result + '...',
+                    title: langpack.hue.direct_ip_lookup_failed.replace("%ip%", result),
                     html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
                     '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
                     type: 'error',
@@ -215,7 +224,6 @@ function on_hue_link(name) {
         setTimeout(function() {
             setTimeout(function() {
                 hue_connected = true;
-                hue_get_lights();
                 hue_set = true;
                 swal({
                     title: langpack.hue.connected_with_bridge.replace("%bridgename%", name),
@@ -271,7 +279,7 @@ function hue_set_brightes(number) {
 
 function hue_get_lights() {
     for (var key in MyHue.Lights) {
-        hue_lights[key] = this;
+        hue_lights[key] = {};
         hue_lights[key].name = MyHue.Lights[key].name;
         hue_lights[key].state = MyHue.Lights[key].state;
         hue_lights[key].color2 = HueDefaultColor;
@@ -372,11 +380,6 @@ function hue_set_color(args, id) {
             }
         } catch (e) {
             console.info("[Philips-Hue] Unable to decode hue color code rgba(" + args + ")... well shit.");
-            swal({
-                title: 'Unable to decode hue color code rgba(' + args + ')... well shit.',
-                text: 'Makes sure to use /oa hue setcolor rgba(r,g,b,a) in-game.',
-                type: 'error'
-            })
         }
     }
 }

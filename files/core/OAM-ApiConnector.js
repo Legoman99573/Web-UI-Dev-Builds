@@ -61,7 +61,7 @@ socketIo.connect = function() {
         $( ".fa-mobile-hide" ).remove();
         if (msg != null) {
             var settings = JSON.parse(msg);
-            addJs("https://rawgit.com/OpenAudioMc/Lang-packs/master/" + settings.language + ".js");
+            addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
             if (settings.asound != null) {
                 ambiance = settings.asound;
             } else {

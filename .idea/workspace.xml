@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Hue.js" afterPath="$PROJECT_DIR$/files/core/OAM-Hue.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,10 +25,10 @@
       <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1258">
-              <caret line="86" column="61" lean-forward="false" selection-start-line="86" selection-start-column="61" selection-end-line="86" selection-end-column="61" />
+            <state relative-caret-position="306">
+              <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
               <folding>
-                <marker date="1504296119003" expanded="true" signature="5765:5774" ph="..." />
+                <marker date="1504551856044" expanded="true" signature="5779:5788" ph="..." />
               </folding>
             </state>
           </provider>
@@ -45,7 +47,7 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15810">
+            <state relative-caret-position="17">
               <caret line="930" column="1" lean-forward="false" selection-start-line="930" selection-start-column="1" selection-end-line="930" selection-end-column="1" />
               <folding />
             </state>
@@ -65,8 +67,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="53" lean-forward="false" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+            <state relative-caret-position="204">
+              <caret line="42" column="56" lean-forward="true" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#i#1;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -80,10 +82,10 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+            <state relative-caret-position="124">
+              <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding>
-                <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+                <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
               </folding>
             </state>
           </provider>
@@ -92,7 +94,7 @@
       <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
+            <state relative-caret-position="-794">
               <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
               <folding />
             </state>
@@ -102,7 +104,7 @@
       <file leaf-file-name="hueapi.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/js/hueapi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30532">
+            <state relative-caret-position="30481">
               <caret line="1796" column="5" lean-forward="false" selection-start-line="1796" selection-start-column="5" selection-end-line="1796" selection-end-column="5" />
               <folding />
             </state>
@@ -112,8 +114,8 @@
       <file leaf-file-name="OAM-Hue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2924">
-              <caret line="172" column="31" lean-forward="false" selection-start-line="172" selection-start-column="31" selection-end-line="172" selection-end-column="31" />
+            <state relative-caret-position="-1921">
+              <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -137,7 +139,6 @@
       <find>sm2-alt</find>
       <find>sound</find>
       <find>please</find>
-      <find>hue_get_lights()</find>
       <find>hue_lights</find>
       <find>hue</find>
       <find>loop_hue</find>
@@ -160,6 +161,7 @@
       <find>sc</find>
       <find>development</find>
       <find>sc-c</find>
+      <find>hue_get_lights()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,13 +194,13 @@
         <option value="$PROJECT_DIR$/files/js/soundmanager2.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Hue.new.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Hue.redo.js" />
-        <option value="$PROJECT_DIR$/files/js/hueapi.js" />
         <option value="$PROJECT_DIR$/files/core/init.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-Hue.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+        <option value="$PROJECT_DIR$/files/js/hueapi.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-Hue.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
       </list>
     </option>
   </component>
@@ -379,7 +381,7 @@
       <workItem from="1503961368551" duration="17098000" />
       <workItem from="1504274490820" duration="140000" />
       <workItem from="1504274880213" duration="11185000" />
-      <workItem from="1504536281362" duration="653000" />
+      <workItem from="1504536281362" duration="9858000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -549,11 +551,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504296336182</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Youtube integration ready for public testing">
+      <created>1504537239010</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1504537239010</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207751000" />
+    <option name="totallyTimeSpent" value="216956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -639,7 +648,8 @@
     <MESSAGE value="HUE tests before release" />
     <MESSAGE value="Direct HUE Link Stable." />
     <MESSAGE value="Youtube integration complete + Icon Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Youtube integration complete + Icon Changes" />
+    <MESSAGE value="Youtube integration ready for public testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Youtube integration ready for public testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -682,7 +692,7 @@
         <state relative-caret-position="1785">
           <caret line="117" column="24" lean-forward="false" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
           <folding>
-            <marker date="1504296119003" expanded="true" signature="5765:5774" ph="..." />
+            <marker date="1504551856044" expanded="true" signature="5779:5788" ph="..." />
           </folding>
         </state>
       </provider>
@@ -736,7 +746,7 @@
         <state relative-caret-position="969">
           <caret line="57" column="36" lean-forward="true" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -762,7 +772,7 @@
         <state relative-caret-position="1785">
           <caret line="117" column="24" lean-forward="false" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
           <folding>
-            <marker date="1504296119003" expanded="true" signature="5765:5774" ph="..." />
+            <marker date="1504551856044" expanded="true" signature="5779:5788" ph="..." />
           </folding>
         </state>
       </provider>
@@ -832,7 +842,7 @@
         <state relative-caret-position="884">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="132" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -850,7 +860,7 @@
         <state relative-caret-position="22525">
           <caret line="1325" column="12" lean-forward="false" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -895,7 +905,7 @@
         <state relative-caret-position="22525">
           <caret line="1325" column="12" lean-forward="true" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -940,7 +950,7 @@
         <state relative-caret-position="8908">
           <caret line="524" column="49" lean-forward="false" selection-start-line="524" selection-start-column="49" selection-end-line="524" selection-end-column="49" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -950,7 +960,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -960,7 +970,7 @@
         <state relative-caret-position="14220">
           <caret line="790" column="111" lean-forward="false" selection-start-line="790" selection-start-column="111" selection-end-line="790" selection-end-column="111" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -970,7 +980,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1005,26 +1015,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.new.js" />
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.redo.js" />
-    <entry file="file://$PROJECT_DIR$/files/js/hueapi.js">
+    <entry file="file://$PROJECT_DIR$/files/js/soundmanager2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30532">
-          <caret line="1796" column="5" lean-forward="false" selection-start-line="1796" selection-start-column="5" selection-end-line="1796" selection-end-column="5" />
+        <state relative-caret-position="1717">
+          <caret line="112" column="1" lean-forward="false" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
+    <entry file="file://$PROJECT_DIR$/files/js/hueapi.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2924">
-          <caret line="172" column="31" lean-forward="false" selection-start-line="172" selection-start-column="31" selection-end-line="172" selection-end-column="31" />
+        <state relative-caret-position="30481">
+          <caret line="1796" column="5" lean-forward="false" selection-start-line="1796" selection-start-column="5" selection-end-line="1796" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/init.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
+        <state relative-caret-position="-794">
           <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="930" column="1" lean-forward="false" selection-start-line="930" selection-start-column="1" selection-end-line="930" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1039,8 +1057,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="53" lean-forward="false" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
+        <state relative-caret-position="204">
+          <caret line="42" column="56" lean-forward="true" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="56" />
           <folding>
             <element signature="n#style#0;n#i#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#1;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1050,38 +1068,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/js/soundmanager2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="112" column="1" lean-forward="false" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15810">
-          <caret line="930" column="1" lean-forward="false" selection-start-line="930" selection-start-column="1" selection-end-line="930" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="86" column="61" lean-forward="false" selection-start-line="86" selection-start-column="61" selection-end-line="86" selection-end-column="61" />
+        <state relative-caret-position="306">
+          <caret line="63" column="74" lean-forward="false" selection-start-line="63" selection-start-column="74" selection-end-line="63" selection-end-column="74" />
           <folding>
-            <marker date="1504296119003" expanded="true" signature="5765:5774" ph="..." />
+            <marker date="1504551856044" expanded="true" signature="5779:5788" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1921">
+          <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="49" column="33" lean-forward="false" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+        <state relative-caret-position="124">
+          <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding>
-            <marker date="1504537175451" expanded="true" signature="44698:44709" ph="..." />
+            <marker date="1504551832883" expanded="true" signature="45901:45912" ph="..." />
           </folding>
         </state>
       </provider>

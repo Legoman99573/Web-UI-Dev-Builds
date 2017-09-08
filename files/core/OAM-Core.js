@@ -47,6 +47,13 @@ function getSoundcloud(Url, callback) {
 
 // YouTube Integration
 function getYoutbe(youtubeId, callback) {
+    $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId, function(data) {
+        var json = JSON.parse(data);
+        document.getElementById("sc-cover").src = json["thumbnail"];
+        document.getElementById("sc-title").innerHTML = json["title"];
+        document.getElementById("sc-cover").style.display = "";
+        document.getElementById("sc-title").style.display = "";
+    });
     return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId;
 }
 

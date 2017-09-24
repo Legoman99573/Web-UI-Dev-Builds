@@ -35,6 +35,7 @@ function ConnectToHueBridge() {
                         swal({
                             title: langpack.hue.please_link,
                             type: 'question',
+                            html: '<img src="files/images/pushlink_bridgev2.svg" width="auto" height="80px">',
                             allowOutsideClick: false,
                             showConfirmButton: false
                         });
@@ -42,11 +43,11 @@ function ConnectToHueBridge() {
                     });
                 });
             }, function UnableToRetreiveBridgeConfig() {
-                no_hue_link();
+                // no_hue_link();
                 return;
             });
         }, function UnableToDiscoverLocalBridgesViaPortal() {
-            no_hue_link();
+            // no_hue_link();
             return;
         });
     } else {
@@ -54,15 +55,15 @@ function ConnectToHueBridge() {
         MyHue.BridgeGetConfig().then(function CachedBridgeConfigReceived() {
             MyHue.BridgeGetData().then(function CachedBridgeDataReceived() {
                 on_hue_link(MyHue.BridgeName);
-                    MyHue.LightsGetData().then(function CachedLightsDataFound() {
-                        hue_get_lights();
-                    });
+                MyHue.LightsGetData().then(function CachedLightsDataFound() {
+                    hue_get_lights();
+                });
             }, function UnableToRetreiveCachedBridgeData() {
-                no_hue_link();
+                // no_hue_link();
                 return;
             });
         }, function UnableToRetreiveCachedBridgeConfig() {
-            no_hue_link();
+            // no_hue_link();
             return;
         });
     }
@@ -80,6 +81,7 @@ function ConnectToHueDirectIP() {
                     swal({
                         title: langpack.hue.please_link,
                         type: 'question',
+                        html: '<img src="files/images/pushlink_bridgev2.svg" width="auto" height="80px">',
                         allowOutsideClick: false,
                         showConfirmButton: false
                     });
@@ -87,11 +89,11 @@ function ConnectToHueDirectIP() {
                 });
             });
         }, function UnableToRetreiveBridgeConfig() {
-            invalid_hue_link();
+            // no_hue_link();
             return;
         });
     }, function UnableToDiscoverLocalBridgesViaPortal() {
-        no_hue_link();
+        // no_hue_link();
         return;
     });
 }
@@ -118,8 +120,8 @@ function invalid_hue_link() {
     connecting = true;
     swal({
         title: langpack.hue.cant_connect,
-        html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
-        '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
+        html: '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="hue_menu();">Retry Auto Detect</div> ' +
+        '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="direct_hue_connection();">Direct Connect</div>',
         type: 'error',
         showConfirmButton: false
     });
@@ -146,8 +148,8 @@ function loop_hue_connection() {
                 console.info("[Philips-Hue] Failed to detect hue bridge :(");
                 swal({
                     title: langpack.hue.not_found,
-                    html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
-                    '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
+                    html: '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="hue_menu();">Retry Auto Detect</div> ' +
+                    '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="direct_hue_connection();">Direct Connect</div>',
                     type: 'error',
                     showConfirmButton: false
                 });
@@ -194,7 +196,7 @@ function direct_hue_connection() {
             success: function() {
                 swal({
                     type: 'info',
-                    text: langpack.hue.direct_ip_lookup_success.replace("%ip%", result),
+                    html: langpack.hue.direct_ip_lookup_success.replace("%ip%", result),
                     showConfirmButton: false,
                     allowOutsideClick: false
                 });
@@ -204,8 +206,8 @@ function direct_hue_connection() {
             error:function() {
                 swal({
                     title: langpack.hue.direct_ip_lookup_failed.replace("%ip%", result),
-                    html: '<div type="button" class="btn btn-primary" onclick="hue_menu();">Retry Auto Detect</div> ' +
-                    '<div type="button" class="btn btn-primary" onclick="direct_hue_connection();">Direct Connect</div>',
+                    html: '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="hue_menu();">Retry Auto Detect</div> ' +
+                    '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="direct_hue_connection();">Direct Connect</div>',
                     type: 'error',
                     showConfirmButton: false
                 });
@@ -285,7 +287,7 @@ function hue_get_lights() {
         hue_lights[key].color2 = HueDefaultColor;
         hue_lights[key].enabled = true;
         $('.hue').each(function () {
-            $('.HueLightList', this).append('<div class="alert alert-success" onclick="hue_list_click_handeler(this);" id="ListLightHue_' + key + '"><strong id="ListLightHue_' + key + '_state">Enabled</strong> ' + hue_lights[key].name + '</div>');
+            $('.HueLightList', this).append('<div class="alert alert-success" style="padding: 5px;" onclick="hue_list_click_handeler(this);" id="ListLightHue_' + key + '"><img id="ListLightHue_' + key + '_state" src="files/images/bulbEnabled.png" width="auto" height="50px"> ' + hue_lights[key].name + '</div>');
         });
     }
 }
@@ -297,7 +299,7 @@ function hue_list_click_handeler(object) {
         var lightID = object.id.match(/\d+/)[0];
         hue_lights[lightID].enabled = false;
         object.className = "alert alert-danger";
-        document.getElementById(object.id + "_state").innerHTML = "Disabled";
+        document.getElementById(object.id + "_state").src = "files/images/bulbDisabled.png";
         hue_reset_state(lightID);
 
     } else {
@@ -306,7 +308,7 @@ function hue_list_click_handeler(object) {
         var lightID = object.id.match(/\d+/)[0];
         hue_lights[lightID].enabled = true;
         object.className = "alert alert-success";
-        document.getElementById(object.id + "_state").innerHTML = "Enabled";
+        document.getElementById(object.id + "_state").src = "files/images/bulbEnabled.png";
         hue_set_color(hue_lights[lightID].color2, lightID);
     }
 }
@@ -386,7 +388,11 @@ function hue_set_color(args, id) {
 
 function hue_menu() {
     if (!(hue_set) !== true) {
-        $("#hue").modal()
+        var dialog = document.querySelector('#dialog-hue');
+        dialog.showModal();
+        dialog.querySelector('#dialog-close-hue').addEventListener('click', function () {
+            dialog.close();
+        });
     } else {
         if (!(connecting) !== true) {
             connecting = false;
@@ -398,5 +404,25 @@ function hue_menu() {
             });
         }
         loop_hue_connection();
+    }
+}
+
+function loop_hue_connection_on_load() {
+    if (window.location.protocol == "http:") {
+        HueTestTry = 0;
+        hue_connect_loop = window.setInterval(function() {
+            HueTestTry++;
+            console.info("[Philips-Hue] Hue connect attempt: " + HueTestTry);
+            if (+HueTestTry < +5) {
+                ConnectToHueBridge();
+            } else {
+                window.clearInterval(hue_connect_loop);
+                StopHueLoop = true;
+                direct = false;
+                connecting = true;
+                delete localStorage.MyHueBridgeIP;
+                console.info("[Philips-Hue] Failed to detect hue bridge :(");
+            }
+        }, 5000);
     }
 }

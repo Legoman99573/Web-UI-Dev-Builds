@@ -18,27 +18,15 @@ function getSoundcloud(Url, callback) {
         setTimeout(function() {
             var data = lastSoundCloud;
             if (data === "") {
-                soundcloud_title = "-";
-                soundcloud_icon = "files/images/sc-default.png";
-                soundcloud_url = "https://soundcloud.com/stream";
                 console.info("[Soundcloud] Failed to get sound.");
             } else {
                 var api = data;
-                soundcloud_title = api.title;
-                soundcloud_icon = api.artwork_url;
-                if (api.artwork_url == null) {
-                    if (api.avatar_url != null) {
-                        soundcloud_icon = api.avatar_url;
-                    } else {
-                        soundcloud_icon = "files/images/sc-default.png"
-                    }
-                }
-                soundcloud_url = api.permalink_url;
                 callback("https://api.soundcloud.com/tracks/" + api.id + "/stream?client_id=a0bc8bd86e876335802cfbb2a7b35dd2");
-                document.getElementById("sc-cover").src = soundcloud_icon;
-                document.getElementById("sc-title").innerHTML = soundcloud_title;
-                document.getElementById("sc-cover").style.display = "";
-                document.getElementById("sc-title").style.display = "";
+                OpenAudioAPI.songNotification({
+                    songTitle: api.title,
+                    songURL: api.permalink_url,
+                    songImage: api.artwork_url
+                });
                 console.info("[Soundcloud] Successfull api call!");
             }
         });
@@ -46,8 +34,32 @@ function getSoundcloud(Url, callback) {
 }
 
 // YouTube Integration
-function getYoutbe(youtubeId, callback) {
-    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + ":" + clientTOKEN + "&v=" + youtubeId;
+function getYoutbe(youtubeId) {
+    $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId, function(data) {
+        let json = JSON.parse(data);
+        OpenAudioAPI.songNotification({
+            songTitle: json["title"],
+            songURL: 'https://www.youtube.com/watch?v=' + youtubeId,
+            songImage: json["thumbnail"]
+        });
+    });
+    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId
+}
+
+// YouTube Playlist Integration
+// Warning: This will only work with /oa playlist
+function getYouTubePlaylist(playlistID) {
+    $.ajax({
+        url: 'https://apocalypsje.ga/YouTubePlayList.php?playlistId=' + playlistID,
+        type: 'get',
+        async: false,
+        success: function (data) {
+            var ids = data;
+            $.each(ids, function(key, value) {
+                AutoDj.AddSong("https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + value);
+            });
+        }
+    });
 }
 
 var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
@@ -75,7 +87,8 @@ soundManager.setup({
             if (this.id != "oa_back_" + randomID) {
                 soundManager._writeDebug("[SoundManager2] oa_back_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    openaudio.stopBackground();
+                    openaudio.stopBackground("oa_back_" + randomID);
+                    soundManager.destroySound("oa_back_" + randomID);
                 } else {
                     soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
                 }
@@ -126,7 +139,7 @@ langpack.message = {};
 langpack.notification = {};
 
 
-langpack.message.devbuild = "This server is using a Development Build! Some functions may or may not work."
+langpack.message.devbuild = "This server is using a Development Build! Some functions may or may not work.";
 langpack.message.welcome = "Connected as %name%! Welcome!";
 langpack.message.notconnected = "You're not connected to the server...";
 langpack.message.server_is_offline = "Server is offline.";
@@ -136,11 +149,11 @@ langpack.message.reconnect_prompt = "Sorry but your url is not valid  Please req
 langpack.message.socket_closed = "Disconnected from the server, please wait";
 langpack.message.mobile_qr = "Qr code for mobile client";
 langpack.message.listen_on_soundcloud = "Listen on soundcloud!";
-langpack.message.clypit_url = "<h2>Uh oh</h2> <h3>Clyp.it is no longer supported! <b>Do not ask for support.</b></h3>"
-langpack.message.spotify_url = "<h2>Uh oh</h2> <h3>Spotify links do not currently work. <b>Support is coming soon™</b></h3>"
-langpack.message.minime_disabled = "<h2>Minimi is disabled by the server admin.</h2>"
-langpack.message.debugger_off = "<h2>Debugger is only available on development builds.</h2>"
-langpack.message.easter_egg = "<h2>You found an EasterEgg.</h2><h3>Now listen to the torture >:)</h3>"
+langpack.message.clypit_url = "<h2>Uh oh</h2> <h3>Clyp.it is no longer supported! <b>Do not ask for support.</b></h3>";
+langpack.message.spotify_url = "<h2>Uh oh</h2> <h3>Spotify links do not currently work. <b>Support is coming soon™</b></h3>";
+langpack.message.minime_disabled = "<h2>Minimi is disabled by the server admin.</h2>";
+langpack.message.debugger_off = "<h2>Debugger is only available on development builds.</h2>";
+langpack.message.easter_egg = "<h2>You found an EasterEgg.</h2><h3>Now listen to the torture >:)</h3>";
 
 langpack.notification.header = "OpenAudioMc | %username%";
 langpack.notification.img = 'files/images/footer_logo.png';
@@ -152,17 +165,18 @@ langpack.hue.re_search_bridge = "<h2>No philips hue bridge found</h2><h4>Searchi
 langpack.hue.cant_connect = "<h2>Could not connect to hue bridge</h2>";
 langpack.hue.not_found = "<h2>No philips hue bridge found</h2>";
 langpack.hue.connected_with_bridge = "<h3>You are now connected with your %bridgename% bridge. Have fun!</h3>";
-langpack.hue.ssl_error = "<h2>There is no support over a secure connection :(</h2><h4>Phillips HUE support is automatically disabled.</h4>"
-langpack.hue.direct_ip_prompt = "<h2>Please input your bridge IP</h2>"
-langpack.hue.direct_ip_prompt_empty = "<h2>Please enter a Bridge IP</h2>"
-langpack.hue.direct_ip_lookup = "<h2>Attempting to connect to bridge IP %ip%...</h2>"
-langpack.hue.direct_ip_lookup_success = "<h2>Found bridge IP %ip%</h2><h3>Connecting...</h3>"
-langpack.hue.direct_ip_lookup_failed = "<h2>Failed to connect to bridge IP %ip%...</h2>"
-langpack.hue.light_data_fail = "<h2>Unable to retrieve Light Data.</h2><h3>Press <b>F5</b> to refresh</h3>"
+langpack.hue.ssl_error = "<h2>There is no support over a secure connection :(</h2><h4>Phillips HUE support is automatically disabled.</h4>";
+langpack.hue.direct_ip_prompt = "<h2>Please input your bridge IP</h2>";
+langpack.hue.direct_ip_prompt_empty = "<h2>Please enter a Bridge IP</h2>";
+langpack.hue.direct_ip_lookup = "<h2>Attempting to connect to bridge IP %ip%...</h2>";
+langpack.hue.direct_ip_lookup_success = "<h2>Found bridge IP %ip%</h2><h3>Connecting...</h3>";
+langpack.hue.direct_ip_lookup_failed = "<h2>Failed to connect to bridge IP %ip%...</h2>";
+langpack.hue.light_data_fail = "<h2>Unable to retrieve Light Data.</h2><h3>Press <b>F5</b> to refresh</h3>";
 
 
 var openaudio = {};
 var socketIo = {};
+var apijson = {"ver":"1.0","clientJS":"https://craftmendserver.eu:3000/socket.io/socket.io.js","socket":"https://craftmendserver.eu:3000/","secureSocket":"https://craftmendserver.eu:3000/"};
 var ui = {};
 var fadingData = {};
 var stopFading = {};
@@ -179,13 +193,8 @@ var hue_enabled = false;
 var StopHueLoop = false;
 var hue_start_animation = true;
 var audio = [];
-var soundcloud_title = "-";
-var soundcloud_icon = "files/images/soundcloud-2.png";
-var regions = {};
-var soundcloud_url = "https://soundcloud.com/stream";
 var ambiance = "";
 var twitter = "";
-var DirectIP = false;
 var youtube = "";
 var website = "";
 var iconcolor = "#242424";
@@ -197,6 +206,7 @@ var development = true;
 var hue_set = false;
 var direct = true;
 var connecting = true;
+var loop = false;
 setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
@@ -238,9 +248,6 @@ openaudio.decode = function(msg) {
         } else if (request.src.includes("youtube.com")) {
             var youtubeId = request.src.split("?v=");
             openaudio.play(getYoutbe(youtubeId[1]));
-        } else if (request.src.includes("youtu.be")) {
-            var youtubeId = request.src.split("/");
-            openaudio.play(getYoutbe(youtubeId[3]));
         } else {
             openaudio.play(request.src);
         }
@@ -250,11 +257,15 @@ openaudio.decode = function(msg) {
             loadedsound.stop();
         } catch (e) {}
         try {
+            openaudio.stopPlay();
+        } catch (e) {}
+        try {
             openaudio.stopLoop('loop');
         } catch (e) {}
         try {
             soundManager.stop('AutoDj');
             soundManager.destroySound('AutoDj');
+            soundManager.destroy('AutoDj');
         } catch (e) {}
     } else if (request.command == "custom") {
         var str = request.string;
@@ -273,45 +284,24 @@ openaudio.decode = function(msg) {
             var song = myStringArray[i];
             if (song.includes("soundcloud.com")) {
                 var scurl2 = request.src;
-                getSoundcloud(scurl2, function(newurl) {
-                    song = newurl;
-                });
-            }
-            if (song.includes("soundcloud.com")) {
-                var scurl = request.src;
-                getSoundcloud(scurl, function(newurl) {
-                    AutoDj.AddSong(newurl);
-                });
+                AutoDj.AddSong(getSoundcloud(scurl2, song));
             }
             // YouTube Integration
             if (song.includes("youtube.com")) {
-                var youtubeId2 = request.src.split("?v=");
-                song = getYoutbe(youtubeId2[1]);
-            }
-            if (song.includes("youtube.com")) {
-                var youtubeId = request.src.split("?v=");
-                AutoDj.getYoutbe(youtubeId[1]);
-            }
-            if (song.includes("youtu.be")) {
-                var youtubeId2 = request.src.split("/");
-                song = getYoutbe(youtubeId2[3]);
-            }
-            if (song.includes("youtu.be")) {
-                var youtubeId = request.src.split("/");
-                AutoDj.getYoutbe(youtubeId[3]);
-            }
-            else {
+                if (song.includes("?list=")) {
+                    curl = song.toString().split('list=')[1];
+                    getYouTubePlaylist(curl);
+                } else {
+                    curl = song.toString().split('?v=')[1];
+                    AutoDj.AddSong(AutoDj.AddSong(curl));
+                }
+            } else {
                 AutoDj.AddSong(song);
             }
-            var valid = true;
-        }
-        if (valid) {
             AutoDj.AddedCount = 1;
-            AutoDj.IdOfNowPlaying = 1;
+            AutoDj.IdOfNowPlaying = 0;
             AutoDj.LoadAll();
             AutoDj.PlayNext();
-        } else {
-            soundManager._writeDebug("Error occured while loading AutoDj", 3);
         }
     } else if (request.command == "message") {
         //Browser messages
@@ -365,7 +355,7 @@ openaudio.decode = function(msg) {
         	openaudio.play(getYoutbe(youtubeId[1]), request.id, request.time);
 		} else if (request.src.includes("youtu.be")) {
             var youtubeId = request.src.split("/");
-            openaudio.play(getYoutbe(youtubeId[3]), request.id, request.time);
+            openaudio.play(getYoutbe(youtubeId[1]), request.id, request.time);
         } // YouTube Integration End
         else {
             openaudio.play(request.src, request.id, request.time);
@@ -387,7 +377,7 @@ openaudio.decode = function(msg) {
             openaudio.loop(getYoutbe(youtubeId[1]));
 		} else if (request.src.includes("youtu.be")) {
             var youtubeId = request.src.split("/");
-            openaudio.loop(getYoutbe(youtubeId[3]));
+            openaudio.loop(getYoutbe(youtubeId[1]));
 		} // YouTube Integration End
 		else {
             openaudio.loop(request.src);
@@ -410,7 +400,7 @@ openaudio.decode = function(msg) {
                 openaudio.playRegion(getYoutbe(youtubeId[1]), request.time, request.id);
 			} else if (request.src.includes("youtu.be")) {
                 var youtubeId = request.src.split("/");
-                openaudio.playRegion(getYoutbe(youtubeId[3]), request.time, request.id);
+                openaudio.playRegion(getYoutbe(youtubeId[1]), request.time, request.id);
 			} // YouTube Integration End
 			else {
                 openaudio.playRegion(request.src, request.time, request.id);
@@ -438,7 +428,7 @@ openaudio.decode = function(msg) {
                 openaudio.createBuffer(getYoutbe(youtubeId[1]));
 			} else if (request.src.includes("youtu.be")) {
                 var youtubeId = request.src.split("/");
-            	openaudio.createBuffer(getYoutbe(youtubeId[3]));
+            	openaudio.createBuffer(getYoutbe(youtubeId[1]));
 			} // YouTube Integration End
 			else {
                 openaudio.createBuffer(request.src);
@@ -495,11 +485,11 @@ openaudio.decode = function(msg) {
 
 openaudio.play = function(src_fo_file, soundID, defaultTime) {
     if (soundID === null) {
-        var soundID = 'default';
+        soundID = 'default';
     }
 
     if (defaultTime === null) {
-        var defaultTime = 0;
+        defaultTime = 0;
     }
 
     var soundId = "play";
@@ -514,6 +504,11 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         autoPlay: true
     });
 };
+
+openaudio.stopPlay = function(soundID) {
+    fadeIdOut("play_" + randomID + soundID);
+    soundManager.destroySound("play_" + randomID + soundID);
+}
 
 openaudio.sartBackground = function(url) {
     soundManager.stop("oa_region_" + randomID);
@@ -532,7 +527,7 @@ openaudio.sartBackground = function(url) {
             onerror: function(code, description) {
                 soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    fadeIdOut("oa_back_" + randomID);
+                    openaudio.stopBackground();
                 } else {
                     soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
                 }
@@ -545,6 +540,7 @@ openaudio.sartBackground = function(url) {
 
 openaudio.stopBackground = function() {
     fadeIdOut("oa_back_" + randomID);
+    soundManager.destroySound("oa_back_" + randomID);
 };
 
 openaudio.whisper = function(message) {
@@ -585,7 +581,7 @@ openaudio.playRegion = function(url, defaultTime) {
             onerror: function(code, description) {
                 soundManager._writeDebug("oa_region_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    fadeIdOut("oa_region_" + randomID );
+                    openaudio.stopRegion();
                 } else {
                     soundManager._writeDebug("Unable to decode oa_region_" + randomID + ". Well shit.", 3);
                 }
@@ -597,6 +593,7 @@ openaudio.playRegion = function(url, defaultTime) {
 
 openaudio.stopRegion = function() {
     fadeIdOut("oa_region_" + randomID );
+    soundManager.destroySound("oa_region_" + randomID );
 };
 
 openaudio.regionsStop = function() {
@@ -659,7 +656,7 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
         }, onerror: function(code, description) {
             soundManager._writeDebug("speaker_ding_" + randomID + " failed?", 3, code, description);
             if (this.loaded) {
-                fadeSpeakerOut("speaker_ding_" + randomID)
+                openaudio.removeSpeaker();
             } else {
                 soundManager._writeDebug("Unable to decode speaker_ding_" + randomID + ". Well shit.", 3);
             }
@@ -669,6 +666,7 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
 
 openaudio.removeSpeaker = function(id) {
     fadeSpeakerOut("speaker_ding_" + randomID);
+    soundManager.destroySound("speaker_ding_" + randomID);
 };
 
 openaudio.setIdAtribute = function(ID, callback) {
@@ -740,18 +738,15 @@ openaudio.set_volume = function(volume_var) {
         document.getElementById("slider").value = 100;
         openaudio.setGlobalVolume(100);
         document.getElementById("volumevalue").innerHTML = 100;
-        document.getElementById("volumevalue").style.left = 100 * 2.425 + 'px';
         volume = 100;
     } else if (volume_var < 0) {
         document.getElementById("slider").value = 0;
         openaudio.setGlobalVolume(0);
         volume = 0;
         document.getElementById("volumevalue").innerHTML = 0;
-        document.getElementById("volumevalue").style.left = 0 * 2.425 + 'px';
     } else {
         document.getElementById("slider").value = volume_var;
         document.getElementById("volumevalue").innerHTML = volume_var;
-        document.getElementById("volumevalue").style.left = volume_var * 2.425 + 'px';
         volume = volume_var;
         openaudio.setGlobalVolume(volume_var);
     }
@@ -798,14 +793,6 @@ openaudio.createBuffer = function(file_to_load) {
     loadedsound.load();
 };
 
-function dismiss_notification() {
-    $('#header').slideUp(800);
-}
-
-function notification_open() {
-    $('#header').slideDown(800);
-}
-
 openaudio.message = function(text) {
     if (window.location.protocol == "https:") {
         if (Notification.permission !== "granted") {
@@ -817,14 +804,12 @@ openaudio.message = function(text) {
             });
         }
     } else {
-        $('#notifications').text('To ' + mcname + ': ' +text);
-        soundManager.createSound({
-            id: 'mySound2',
-            url: '',
-            volume: volume
-        });
-        soundManager.play('mySound2');
-        notification_open();
+        var notification = document.querySelector('.mdl-js-snackbar');
+        notification.MaterialSnackbar.showSnackbar(
+            {
+                message: 'To ' + mcname + ': ' + text
+            }
+        );
     }
 };
 
@@ -847,7 +832,7 @@ openaudio.loop = function(url, defaultTime) {
             onerror: function(code, description) {
                 soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
-                    fadeIdOut("loop_" + randomID);
+                    openaudio.stopLoop();
                 } else {
                     soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
                 }
@@ -859,6 +844,7 @@ openaudio.loop = function(url, defaultTime) {
 
 openaudio.stopLoop = function() {
     fadeIdOut("loop_" + randomID);
+    soundManager.destroySound("loop_" + randomID);
 };
 
 //all the fading c
@@ -1155,13 +1141,14 @@ $(document).ready(function() {
     }
 });
 
+
 /*
 AUTO DJ SCRIPT FROM
 https://github.com/Mindgamesnl/SM2_Playlist_Thingy
 */
 var AutoDj = {};
 AutoDj.AddedCount = 1;
-AutoDj.IdOfNowPlaying = 1;
+AutoDj.IdOfNowPlaying = 0;
 AutoDj.AddSong = function(File) {
     PlayList_songs["_" + AutoDj.AddedCount] = {
         "File": File
@@ -1200,21 +1187,34 @@ AutoDj.Check = function(song_id) {
 AutoDj.Play = function(FNC_ID) {
     if (this.Check(FNC_ID) === true) {
         var thisdata = AutoDj["SongData_" + FNC_ID];
-        AutoDj.SoundManager_Play(thisdata.File)
+        AutoDj.SoundManager_Play(thisdata.File, FNC_ID)
     } else {
-        console.log("AutoDj: " + FNC_ID + "not playing");
+        console.warn("AutoDj: " + FNC_ID + " not playing due to an error. Try rerunning the command again in game");
+        AutoDj.PlayNext();
     }
 };
-AutoDj.SoundManager_Play = function(fnc_file) {
-    var VolumeNow = this.Volume;
-    soundManager.destroySound('AutoDj');
+AutoDj.SoundManager_Play = function(fnc_file, id) {
     var mySoundObject = soundManager.createSound({
-        id: "AutoDj",
+        id: "AutoDj_" + id,
         url: fnc_file,
         volume: volume,
-        stream: true,
-        onfinish: AutoDj.PlayNext
+        autoplay: true
     });
+
+    function playSound(sound) {
+        sound.play({
+            onfinish: function() {
+                AutoDj.PlayNext();
+            },
+            onerror: function() {
+                console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
+                soundManager.destroySound("AutoDj_" + id);
+                AutoDj.PlayNext();
+            }
+        });
+    }
+
+    playSound(mySoundObject);
 };
 AutoDj.PlayNext = function() {
     var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;
@@ -1280,14 +1280,22 @@ function openTwitter() {
 }
 
 function dev() {
-    if (!(development !== true)) {
-        $('#notifications').text(langpack.message.devbuild);
-        notification_open();
+    if (!(development != true)) {
+        var notification = document.querySelector('.mdl-js-snackbar');
+        notification.MaterialSnackbar.showSnackbar(
+            {
+                message: langpack.message.devbuild
+            }
+        );
     }
 }
 
 function soundmanager2_debugger() {
-    $("#debugger").modal();
+    var dialog = document.querySelector('#dialog-soundmanager2');
+    dialog.showModal();
+    dialog.querySelector('#dialog-close-sm').addEventListener('click', function () {
+        dialog.close();
+    });
 }
 
 function SetDesignColor(code) {
@@ -1309,9 +1317,9 @@ function keyfix() {
                 openhue();
             }
             else {
-                swal({
-                    title: langpack.hue.disabled,
-                    type: 'error'
+                OpenAudioAPI.generateDialog({
+                    textTitle: 'MiniMe',
+                    htmlContent: langpack.hue.disabled
                 });
             }
         }
@@ -1320,9 +1328,9 @@ function keyfix() {
             if (!(minimeon) !== true) {
                 openSmallWindow();
             } else {
-                swal({
-                    html: langpack.message.minime_disabled,
-                    type: 'error'
+                OpenAudioAPI.generateDialog({
+                    textTitle: 'MiniMe',
+                    htmlContent: langpack.message.minime_disabled
                 });
             }
         }
@@ -1331,20 +1339,31 @@ function keyfix() {
             if (!(development !== true)) {
                 soundmanager2_debugger();
             } else {
-                swal({
-                    html: langpack.message.debugger_off,
-                    type: 'error'
+                OpenAudioAPI.generateDialog({
+                    textTitle: 'Soundmanager2 Debugger',
+                    htmlContent: langpack.message.debugger_off
                 });
             }
         }
 
         if (data.key == "l") {
-            swal(langpack.message.easter_egg);
+            OpenAudioAPI.generateDialog({
+                textTitle: 'Easter Egg',
+                htmlContent: langpack.message.easter_egg
+            });
             soundManager.createSound({
                 id: "oa_easteregg",
                 volume: volume,
                 url: "https://oayt-delivery.snowdns.de/?v=m7SNzJx05IE",
                 autoPlay: true
+            });
+        }
+
+        if (data.key == "i") {
+            var dialog = document.querySelector('#dialog-mods');
+            dialog.showModal();
+            dialog.querySelector('#dialog-close-mods').addEventListener('click', function () {
+                dialog.close();
             });
         }
 
@@ -1411,10 +1430,11 @@ function openhue() {
     if (hue_enabled != false) {
         hue_menu();
     } else {
-        swal({
-            title: langpack.hue.disabled,
-            type: 'error'
-        })
+        OpenAudioAPI.generateDialog({
+            dialogWidth: '70%',
+            textTitle: 'Philips HUE',
+            htmlContent: 'langpack.hue.disabled'
+        });
     }
 }
 
@@ -1508,32 +1528,38 @@ function sliderValue(vol) {
     //Joww, it's ja boy liturkey doing all the math boi
     var output = document.querySelector("#volumevalue");
     output.value = vol;
-    output.style.left = vol * 2.4 + 'px';
-}
-
-function open_soundcloud() {
-    swal({
-        title: soundcloud_title,
-        imageUrl: soundcloud_icon,
-        showCancelButton: true,
-        confirmButtonColor: "#3fa5ff",
-        confirmButtonText: langpack.message.listen_on_soundcloud,
-    }).then(function() {
-        window.open(soundcloud_url);
-    });
 }
 
 function addJs(url) {
     console.info("[ModManager] Attempting to add js file from " + url + ".");
-    $.getScript(url, function() {
-        console.info("[ModManager] Added js file from " + url + " successfully.");
-    });
+    var extension = url.substr((url.lastIndexOf('.') +1));
+    if (!/(js)$/ig.test(extension)) {
+        console.error("[ModManager] [Idiot Proof Detection] File is not a JavaScript (.js) file. Not appending to the client.");
+        OpenAudioAPI.loadMod(url, "Disabled", "JSMod");
+    } else {
+        $.getScript(url, function() {
+            $('head').append('<script src="' + url + '" type="text/javascript"></script>');
+            console.info("[ModManager] Added js file from " + url + " successfully.");
+            OpenAudioAPI.loadMod(url, "Enabled", "JSMod");
+        });
+    }
 }
 
+/**
+ * @deprecated Since build 1.8 for 3.0. Recommend loading as a JavaScript Web Mod
+ */
 function addCss(url) {
+    console.warn("[ModManager] addCss has been deprecated as of Development Build 1.8. Use OpenAudioAPI.getCSS instead.");
     console.info("[ModManager] Attempting to add css file from " + url + ".");
-    $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
-    console.info("[ModManager] Added css file from location " + url + " successfully");
+    var extension = url.substr((url.lastIndexOf('.') +1));
+    if (!/(css)$/ig.test(extension)) {
+        console.error("[ModManager] [Idiot Proof Detection] File is not a Cascade Style Sheet (.css) file. Not appending to the client.");
+        OpenAudioAPI.loadMod(url, "Disabled", "CSSMod");
+    } else {
+        $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
+        console.info("[ModManager] Added css file from location " + url + " successfully");
+        OpenAudioAPI.loadMod(url, "Enabled", "CSSMod");
+    }
 }
 
 Element.prototype.remove = function() {
@@ -1546,23 +1572,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
         }
     }
 };
-
-
-function trayItem(icon, callback) {
-    this.ul = document.getElementById("icons");
-    this.li = document.createElement("li");
-    $('.icons').each(function () {
-            $('.icons li').addClass('fa-mobile-hide');
-    });
-    this.ul.appendChild(document.createTextNode(''));
-    this.ul.appendChild(this.li);
-    this.li.innerHTML = '<i class="fa ' + icon + ' fa-2x footer-icon" aria-hidden="true" onclick="' + callback + '();"></i>';
-    this.li.style.color = "#" + iconcolor;
-    this.destroy = function() {
-        this.li.remove();
-    }
-}
-
 
 function enable() {
     //setup vars

@@ -67,8 +67,8 @@
             url: (smURL || null),             // path (directory) where SoundManager 2 SWFs exist, eg., /path/to/swfs/
             flashVersion: 8,                  // flash build to use (8 or 9.) Some API features require 9.
             debugMode: true,                  // enable debugging output (console.log() with HTML fallback)
-            debugFlash: true,                // enable debugging output inside SWF, troubleshoot Flash/browser issues
-            useConsole: false,                 // use console.log() if available (otherwise, writes to #soundmanager-debug element)
+            debugFlash: true,                 // enable debugging output inside SWF, troubleshoot Flash/browser issues
+            useConsole: false,                // use console.log() if available (otherwise, writes to #soundmanager-debug element)
             consoleOnly: true,                // if console is being used, do not create/write to #soundmanager-debug
             waitForWindowLoad: false,         // force SM2 to wait for window.onload() before trying to call soundManager.onload()
             bgColor: '#ffffff',               // SWF background color. N/A when wmode = 'transparent'

@@ -23,6 +23,8 @@
 
   <!-- CSS -->
   <link href="../../files/css/error.css" rel="stylesheet" />
+  <link href="../../files/css/material.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- META -->
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -34,23 +36,35 @@
   <link rel="image" href="../../files/images/small_logo.png" />
 
   <!-- JS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="../../files/js/material.js"></script>
+  <script src="../../files/js/jquery.js?v=1.5"></script>
   <script src="https://craftmend.com/api_SSL/openaudio/randomtext.js"></script>
+  <script src="../../files/js/version.js"></script>
 </head>
-
-<body onload="changeTitle()">
-  <img class="logo" src="../../files/images/logo.png">
-  <div class="container-parent">
-    <div class="container">
-      <div class="text">
-        <div id="title"><h1>Oh snap! You're not supposed to be here!</h1></div>
-        <span>This is invalid URL. Please do not access this website by yourself. Generate your link in game using one of OpenAudio commands (/audio etc.). If you'll see this error even if you generated the link, contact us on our Discord! You can find link to it at our Spigot page! Thank you! :)</span>
-      </div>
-      <div class="footer">
-        <span>OpenAudio 2.7 (Build 1.7) Error Page - <a href="http://openaudiomc.net/">OpenAudioMC</a></span>
+<body onload="loadVersion(); randomText();">
+<!-- Uses a header that scrolls with the text, rather than staying locked at the top -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <div class="mdl-layout-title"><span id="client-title">OpenAudioMc</span> <img style="  position: relative; top: -3px; width: auto !important; height: 30px !important;" src="../../files/images/logo.png"></div>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </header>
+  <main class="mdl-layout__content">
+    <div class="container-parent">
+      <div class="container">
+        <div class="text">
+          <div id="title"><h1>Oh snap! You're not supposed to be here!</h1></div>
+          <span>This is invalid URL. Please do not access this website by yourself. Generate your link in game using one of OpenAudio commands (/audio etc.). If you'll see this error even if you generated the link, contact us on our Discord! You can find link to it at our Spigot page! Thank you! :)</span>
+        </div>
+        <div class="footer">
+          <span>OpenAudio <span id="version">...</span> (Build <span id="build">...</span>) Error Page - <a href="http://openaudiomc.net/">OpenAudioMC</a></span>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+</div>
 </body>
-
 </html>

@@ -21,17 +21,16 @@ socketIo.connect = function() {
     socket = io.connect(socket_io, {
         secure: true
     });
+
     closedwreason = false;
     socket.on('command', function(msg) {
         socketIo.log("Reiceived command.");
         if (msg == "connectionSuccess") {
-            status_span.innerHTML = langpack.message.welcome.replace("%name%", mcname);
-            status_span.className = "status-span status-success";
+            $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else if (msg == "not_in_server") {
-            status_span.innerHTML = langpack.message.notconnected;
-            status_span.className = "status-span status-error"
+            $('.name').html(langpack.message.notconnected);
         } else if (msg == "connected") {
-
+            $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else {
             openaudio.decode(msg);
         }
@@ -58,9 +57,28 @@ socketIo.connect = function() {
     });
 
     socket.on('oaSettings', function(msg) {
-        $( ".fa-mobile-hide" ).remove();
+        $( ".mdl-navigation__link" ).remove();
+        $( ".mdl-menu__item" ).remove();
+
+        OpenAudioAPI.rightTrayItem({
+            onClick: "about();",
+            itemName: 'About'
+        });
+
+        OpenAudioAPI.rightTrayItem({
+            onClick: "openInNewTab('https://github.com/OpenAudioMc/Web-UI-Dev-Builds');",
+            itemName: 'Source Code'
+        });
+
+        OpenAudioAPI.rightTrayItem({
+            onClick: "openInNewTab('https://discord.gg/b44BPv7');",
+            itemName: 'Discord'
+        });
+
         if (msg != null) {
             var settings = JSON.parse(msg);
+            $("#client-title").text(settings.Title);
+            document.title = settings.Title;
             addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
             if (settings.asound != null) {
                 ambiance = settings.asound;
@@ -73,53 +91,49 @@ socketIo.connect = function() {
             }
 
             if (development == true) {
-                sm_debugger = new trayItem("fa-terminal", "soundmanager2_debugger");
+                sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "SoundManager Debugger");
             }
 
             if (settings.twitter != "" && settings.twitter != null) {
-                twitterIcon = new trayItem("fa-twitter", "openTwitter");
+                twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "Twitter");
                 twitter = settings.twitter;
             }
 
             if (settings.minime == "on" && settings.minime != null) {
                 if (tinyWindow == "(none)") {
                     minimeon = true;
-                    minimeicon = new trayItem("fa-window-maximize", "openSmallWindow");
+                    minimeicon = new trayItem("fa fa-window-maximize", "openSmallWindow", "Mini Mode");
                 }
             }
 
             if (settings.qrcode != null && settings.qrcode != "off") {
-                $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa-qrcode", "showqr");});
+                $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "QR Code");});
             }
 
             if (settings.youtube != "" && settings.youtube != null) {
-                youtubeIcon = new trayItem("fa-youtube-play", "openYt");
+                youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "YouTube");
                 youtube = settings.youtube;
             }
             if (settings.website != "" && settings.website != null) {
-                websiteIcon = new trayItem("fa-globe", "openSite");
+                websiteIcon = new trayItem("fa fa-globe", "openSite", "Our Website");
                 website = settings.website;
             }
             if (settings.uicolor != null && settings.uicolor != "") {
-                document.getElementById("sc-title").style.background = "#" + settings.uicolor;
-                document.getElementById("sc-cover").style.border = "6px solid " + "#" + settings.uicolor;
                 openaudio.color("#" + settings.uicolor);
                 iconcolor = settings.uicolor;
                 document.getElementById("icons").color = "'#" + settings.uicolor + "'";
-                $('#icons').find('li').each(function() {
+                $('#icons').find('i').each(function() {
                     this.style.color = "#" + settings.uicolor
                 });
             }
             setTimeout(function() {
-                if (settings.hue != "off") {
+                if (settings.hue != null && settings.hue != "off") {
                     $.getScript("files/core/OAM-Hue.js", function() {
-                        hueicon = new trayItem("fa-lightbulb-o", "openhue");
+                        hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
                         hue_enabled = true;
+                        loop_hue_connection_on_load();
                     });
                 } else {}
-                status_span.innerHTML = langpack.message.welcome.replace("%name%", mcname);
-                document.getElementById("client-title").innerHTML = settings.Title;
-                document.title = settings.Title;
                 if (settings.bg == "") {} else {
                     document.body.background = settings.bg;
                 }
@@ -139,8 +153,8 @@ socketIo.connect = function() {
 
             }, 1000);
         } else {
-            ba = new trayItem("fa-warning", "showPlus");
-            swal('Account info!','This web site has not been claimed yet!<br /><a style="color:red" href="https://plus.openaudiomc.net/">click here to claim this account</a>!<br /> It only takes 1 minute of your time.','error');
+            ba = new trayItem("fa fa-warning", "showPlus", "Claim This Account");
+            swal('Account info!','This web site has not been claimed yet!<br /><a style="color:red" href="https://plus.openaudiomc.net/">click here to claim this account</a>!<br /> It only takes 1 minute of your time.','warning');
         }
     });
 
@@ -150,8 +164,7 @@ socketIo.connect = function() {
         socketIo.log("Received error.");
         if (msg == "server-offline") {
             closedwreason = true;
-            status_span.innerHTML = langpack.message.server_is_offline;
-            status_span.className = "label label-danger";
+            $('.name').html(langpack.message.server_is_offline);
             socketIo.log("Received offline server data");
         } else if (msg == "kicked") {
             closedwreason = true;
@@ -193,8 +206,7 @@ socketIo.connect = function() {
     socket.on('disconnect', function() {
         socketIo.log("Disconnected!");
         soundManager._writeDebug("Disconnected!", 3);
-        status_span.innerHTML = langpack.message.socket_closed;
-        status_span.className = "status-span status-danger";
+        $('.name').html(langpack.message.socket_closed);
     });
 
 

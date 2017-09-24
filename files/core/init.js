@@ -25,6 +25,11 @@ function loadBg() {
     setTimeout(loadBg, 5000);
 }
 
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+}
+
 ui = {};
 var issmall = getUrlVar("small") == null;
 var debug = getUrlVar("debug") == null;
@@ -41,6 +46,23 @@ tinyWindow = getUrlVar("tinyWindow");
 
 console.info("You like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/");
 
+// Make sure that OpenAudioMc is mentioned in the function somewhere or your server will be banned until it's fixed as it was stated in the license. To appeal, email us at contact@openaudiomc.net. Thanks, ~OpenAudioMc developers
+function about() {
+    OpenAudioAPI.generateDialog({
+        textTitle: 'About',
+        htmlContent: '<h6>OpenAudioMc Version: <b id="version">Unable to fetch Version</b></h6>\n' +
+        '<h6>Dev Build #:<b id="build">Unable to fetch Build</b></h6>\n' +
+        '<h6>Release Status: <b id="release-status">Unable to fetch Release Status</b></h6>\n' +
+        '<h6><b>&#9400;OpenAudioMc 2016-2017</b></h6>'
+    });
+    if (!(development != true)) {
+        $('#release-status').text("Unstable");
+    } else {
+        $('#release-status').text("Stable");
+    }
+    loadVersion();
+}
+
 function getUrlVar(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -54,33 +76,26 @@ function getUrlVar(variable) {
     return "(none)";
 }
 
-onload = initialize;
-
 function initialize() {
     if (getUrlVar("session").includes(":")) {
         var username = getUrlVar("name");
         if (username.length >= 3) {
             if (/^\w+$/i.test(username)) {
                 //save to load, i guess?
-                if (apijson != null) {
-                    logInit("Trying login.");
-                    //try {
-                    var api = apijson;
-                    session = getUrlVar("session");
-                    socket_io = api.socket;
-                    mcname = getUrlVar("name");
-                    socketio_client_js = api.clientJS;
-                    enableMain(api.clientJS);
-                    /*} catch (e) {
-                      console.error(e);
-                      alert(e)
-                      //location.href = "files/pages/serverError.html";
-                      logInit("Login fail!");
-                    }*/
-                } else {
-                    location.href = "files/pages/serverError.html";
-                    logInit("Failed to get api data.");
-                }
+                logInit("Trying login.");
+                //try {
+                var api = apijson;
+                session = getUrlVar("session");
+                socket_io = api.socket;
+                mcname = getUrlVar("name");
+                socketio_client_js = api.clientJS;
+                enableMain(api.clientJS);
+                /*} catch (e) {
+                        console.error(e);
+                        alert(e)
+                        //location.href = "files/pages/serverError.html";
+                        logInit("Login fail!");
+                  }*/
             } else {
                 //invalid url
                 location.href = "files/pages/urlError.html";
@@ -108,3 +123,5 @@ function enableMain(clientJs) {
 function logInit(msg) {
     console.info("[Init] " + msg);
 }
+
+initialize();

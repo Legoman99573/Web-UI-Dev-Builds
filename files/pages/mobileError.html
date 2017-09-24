@@ -1,0 +1,70 @@
+<!--/*
+ * Copyright (C) 2017 Mindgamesnl
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- OpenAudioMC by Mindgamesnl -->
+
+    <!-- Title -->
+    <title>OpenAudioMC</title>
+
+    <!-- CSS -->
+    <link href="../../files/css/error.css" rel="stylesheet" />
+    <link href="../../files/css/material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- META -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- ICON -->
+    <link rel="icon" href="../../files/images/small_logo.png" />
+    <link rel="image" href="../../files/images/small_logo.png" />
+
+    <!-- JS -->
+    <script src="../../files/js/material.js"></script>
+    <script src="../../files/js/jquery.js?v=1.5"></script>
+    <script src="https://craftmend.com/api_SSL/openaudio/randomtext.js"></script>
+    <script src="../../files/js/version.js"></script>
+</head>
+<body onload="loadVersion(); randomText();">
+<!-- Uses a header that scrolls with the text, rather than staying locked at the top -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <div class="mdl-layout-title"><span id="client-title">OpenAudioMc</span> <img style="  position: relative; top: -3px; width: auto !important; height: 30px !important;" src="../../files/images/logo.png"></div>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="container-parent">
+            <div class="container">
+                <div class="text">
+                    <div id="title"><h1>Oh snap! You're not supposed to be here!</h1></div>
+                    <span>It seems like you are using a mobile browser!<br>Please download the mobile app in order to listen on your mobile device</span>
+                </div>
+                <div class="footer">
+                    <span>OpenAudio <span id="version">...</span> (Build <span id="build">...</span>) Error Page - <a href="http://openaudiomc.net/">OpenAudioMC</a></span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -55,7 +55,6 @@ socketIo.connect = function() {
             }
         }
     });
-
     socket.on('oaSettings', function(msg) {
         $( ".mdl-navigation__link" ).remove();
         $( ".mdl-menu__item" ).remove();
@@ -73,6 +72,11 @@ socketIo.connect = function() {
         OpenAudioAPI.rightTrayItem({
             onClick: "openInNewTab('https://discord.gg/b44BPv7');",
             itemName: 'Discord'
+        });
+
+        OpenAudioAPI.rightTrayItem({
+            onClick: "openInNewTab('https://chrome.google.com/webstore/detail/huegasm-for-philips-hue-l/mbjanbdhcpohhfecjgbdpcfhnnbofooj');",
+            itemName: 'Huegasm'
         });
 
         if (msg != null) {
@@ -127,6 +131,7 @@ socketIo.connect = function() {
                 });
             }
             setTimeout(function() {
+                addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
                 if (settings.hue != null && settings.hue != "off") {
                     $.getScript("files/core/OAM-Hue.js", function() {
                         hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");

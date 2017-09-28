@@ -254,18 +254,16 @@ openaudio.decode = function(msg) {
     } else if (request.command == "stop") {
         openaudio.playAction("stop");
         try {
-            loadedsound.stop();
-        } catch (e) {}
-        try {
             openaudio.stopPlay();
         } catch (e) {}
         try {
             openaudio.stopLoop('loop');
         } catch (e) {}
         try {
-            soundManager.stop('AutoDj');
-            soundManager.destroySound('AutoDj');
-            soundManager.destroy('AutoDj');
+            AutoDj.stopPlaylist('AutoDj');
+        } catch (e) {}
+        try {
+            loadedsound.stop();
         } catch (e) {}
     } else if (request.command == "custom") {
         var str = request.string;
@@ -277,6 +275,9 @@ openaudio.decode = function(msg) {
             addJs(request.src);
         }
     } else if (request.command == "playlist") {
+        try {
+            AutoDj.stopPlaylist();
+        } catch (e) {}
         var myStringArray = request.array;
         var arrayLength = myStringArray.length;
         PlayList_songs = {};
@@ -1215,6 +1216,11 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
     }
 
     playSound(mySoundObject);
+
+    AutoDj.stopPlaylist = function() {
+        fadeIdOut("AutoDj_" + id);
+        soundManager.destroySound("AutoDj_" + id);
+    }
 };
 AutoDj.PlayNext = function() {
     var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;

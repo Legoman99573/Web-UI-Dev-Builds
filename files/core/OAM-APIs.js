@@ -187,3 +187,50 @@ OpenAudioAPI.loadMod = function(url, status, type) {
         console.error("[OpenAudioAPI] [errorException] URL must be defined.");
     }
 };
+
+/*
+ Version Checking API
+ Good for people who can install mods on their own servers.
+ This can be called using JQuery AJAX $.getScript("URL")
+*/
+OpenAudioAPI.versionCheckup = function(options) {
+    var defaults = {
+        modName: null,
+        currentVersion: null,
+        latestVersion: null,
+        urlLink: null
+    };
+    var actual = $.extend({}, defaults, options || {});
+    if (actual.modName != null) {
+        if (actual.currentVersion != null) {
+            if (actual.latestVersion != null) {
+                if (actual.urlLink != null) {
+                    if (actual.currentVersion == actual.latestVersion) {
+                        var notification = document.querySelector('.mdl-js-snackbar');
+                        var data = {
+                            message: actual.modName + ' is up to date.',
+                            timeout: 10000
+                        };
+                        notification.MaterialSnackbar.showSnackbar(data);
+                    } else {
+                        var notification = document.querySelector('.mdl-js-snackbar');
+                        $('.mdl-js-snackbar').click(function () {
+                            openInNewTab(actual.urlLink);
+                        });
+                        var data = {
+                            message: 'Update available for ' + actual.modName + '. Latest version: ' + actual.latestVersion,
+                            timeout: 10000
+                        };
+                        notification.MaterialSnackbar.showSnackbar(data);
+                    }
+                } else {
+                    console.error("[OpenAudioAPI] [errorException] urlLink cannot be null.");
+                }
+            } else {
+                console.error("[OpenAudioAPI] [errorException] latestVersion cannot be null.");
+            }
+        } else {
+            console.error("[OpenAudioAPI] [errorException] currentVersion cannot be null.");
+        }
+    }
+};

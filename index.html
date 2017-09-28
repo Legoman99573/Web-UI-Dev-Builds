@@ -31,24 +31,25 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="cache-control" content="no-cache">
     <!-- ICON -->
     <link rel="icon" href="files/images/small_logo.png?v=1.5" />
     <link rel="image" href="files/images/small_logo.png?v=1.5" />
     <!-- JS -->
+    <script src="files/js/version.js?v=1.8_for_3.0"></script>
+    <script src="files/js/material.js"></script>
     <script src="files/js/jquery.js?v=1.5"></script>
     <script src="files/js/jqueryui.js?v=1.5"></script>
-    <script src="files/js/material.js"></script>
     <script src="https://craftmendserver.eu:3000/socket.io/socket.io.js"></script>
     <script src="files/js/swall.js?v=1.7"></script>
     <script src="files/js/soundmanager2.js?v=1.31"></script>
     <script src="files/js/hueapi.js?v=1.5"></script>
-    <script src="files/core/OAM-APIs.js?v=1.25"></script>
-    <script src="files/core/OAM-Core.js?v=3.45"></script>
+    <script src="files/core/OAM-APIs.js?v=1.28"></script>
+    <script src="files/core/OAM-Core.js?v=3.56"></script>
     <script src="files/core/OAM-Hue.js?v=1.31"></script>
-    <script src="files/core/OAM-ApiConnector.js?v=1.20"></script>
+    <script src="files/core/OAM-ApiConnector.js?v=1.25"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
     <script src="files/js/soundcloud.js"></script>
-    <script src="files/js/version.js"></script>
 </head>
 
 <body id="body">
@@ -106,6 +107,12 @@
 </body>
 <!-- Notification API -->
 <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button type="button" class="mdl-snackbar__action"></button>
+</div>
+
+<!-- ModUpdateCheck API -->
+<div aria-live="assertive" aria-atomic="true" aria-relevant="text" id="client-update-api" class="mdl-snackbar mdl-js-snackbar">
     <div class="mdl-snackbar__text"></div>
     <button type="button" class="mdl-snackbar__action"></button>
 </div>
@@ -172,7 +179,6 @@
         <button type="button" class="mdl-button" id="dialog-close-mods">Close</button>
     </div>
 </dialog>
-
 
 <script src="files/core/init.js?v=1.17"></script>
 </html>

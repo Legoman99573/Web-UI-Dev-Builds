@@ -141,6 +141,8 @@ socketIo.connect = function() {
                 } else {}
                 if (settings.bg == "") {} else {
                     document.body.background = settings.bg;
+                    // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                    document.body.style = "background-size: 100% 100%; background-repeat: no-repeat;";
                 }
                 if (settings.logo == "") {
                     document.getElementById("logo").src = "files/images/footer_logo.png";

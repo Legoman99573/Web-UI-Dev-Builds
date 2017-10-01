@@ -4,7 +4,6 @@
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/main.css" afterPath="$PROJECT_DIR$/files/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,13 +18,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="143" column="128" lean-forward="true" selection-start-line="143" selection-start-column="128" selection-end-line="143" selection-end-column="128" />
+            <state relative-caret-position="229">
+              <caret line="144" column="90" lean-forward="false" selection-start-line="144" selection-start-column="90" selection-end-line="144" selection-end-column="90" />
               <folding>
-                <marker date="1506881742483" expanded="true" signature="6664:6673" ph="..." />
+                <marker date="1506882394578" expanded="true" signature="6689:6698" ph="..." />
               </folding>
             </state>
           </provider>
@@ -55,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -226,8 +225,8 @@
         <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
         <option value="$PROJECT_DIR$/files/js/version.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -417,7 +416,7 @@
       <workItem from="1505439529553" duration="57545000" />
       <workItem from="1506163651339" duration="26388000" />
       <workItem from="1506618567396" duration="8796000" />
-      <workItem from="1506880614813" duration="1179000" />
+      <workItem from="1506880614813" duration="1830000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -629,11 +628,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506742962160</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)">
+      <created>1506881878450</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1506881878450</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="458315000" />
+    <option name="totallyTimeSpent" value="458966000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -696,7 +702,8 @@
     <MESSAGE value="New theme, APIs, and Awesome additions&#10;&#10;Following API is deprecated. addCss(). Use OpenAudioAPI.getCSS() instead." />
     <MESSAGE value="Web Client Outdated Notification, New APIs, and BugFixes&#10;&#10;This will fix some things up and sorry for not getting this straight away due to being sick :(" />
     <MESSAGE value="Dupe Code&#10;&#10;Removed it :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dupe Code&#10;&#10;Removed it :)" />
+    <MESSAGE value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -710,7 +717,7 @@
         <state relative-caret-position="1785">
           <caret line="117" column="24" lean-forward="false" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
           <folding>
-            <marker date="1506881742483" expanded="true" signature="6664:6673" ph="..." />
+            <marker date="1506882394578" expanded="true" signature="6689:6698" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1075,14 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="49" column="54" lean-forward="false" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1095,11 +1094,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="143" column="128" lean-forward="true" selection-start-line="143" selection-start-column="128" selection-end-line="143" selection-end-column="128" />
+        <state relative-caret-position="229">
+          <caret line="144" column="90" lean-forward="false" selection-start-line="144" selection-start-column="90" selection-end-line="144" selection-end-column="90" />
           <folding>
-            <marker date="1506881742483" expanded="true" signature="6664:6673" ph="..." />
+            <marker date="1506882394578" expanded="true" signature="6689:6698" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="49" column="54" lean-forward="false" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

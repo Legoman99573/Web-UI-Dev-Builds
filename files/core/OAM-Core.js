@@ -207,7 +207,6 @@ var hue_set = false;
 var direct = true;
 var connecting = true;
 var loop = false;
-setTimeout(dev, 1000);
 setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
@@ -806,11 +805,11 @@ openaudio.message = function(text) {
         }
     } else {
         var notification = document.querySelector('.mdl-js-snackbar');
-        notification.MaterialSnackbar.showSnackbar(
-            {
-                message: 'To ' + mcname + ': ' + text
-            }
-        );
+        var data = {
+            message: 'To ' + mcname + ': ' + text,
+            timeout: 10000
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
     }
 };
 
@@ -1254,11 +1253,7 @@ function openSmallWindow() {
 }
 
 function showPlus() {
-    swal(
-        'Do you want to customize?',
-        '<a style="color:black" href="https://plus.openaudiomc.net/">Then click here.</a>',
-        'question'
-    );
+    console.error("[OpenAudio] [removedMethodError] showPlus() is no longer supported. You will get redirected instead due to an annoying bug in OpenAudio 2.x.");
 }
 
 window.onresize = function() {
@@ -1288,11 +1283,11 @@ function openTwitter() {
 function dev() {
     if (!(development != true)) {
         var notification = document.querySelector('.mdl-js-snackbar');
-        notification.MaterialSnackbar.showSnackbar(
-            {
-                message: langpack.message.devbuild
-            }
-        );
+        var data = {
+            message: langpack.message.devbuild,
+            timeout: 10000
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
     }
 }
 
@@ -1595,8 +1590,15 @@ function enable() {
 
     document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
 
-    if (Notification.permission !== "granted") {
-        Notification.requestPermission();
+    // Since its deprecated to use on an insecure connection, we will use Material's version as a workaround fix for it ;)
+    if (window.location.protocol == "https:") {
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+    } else if (window.location.protocol == "http:") {
+        console.warn("[OpenAudioMC] [illegalException] Notifications only works on secure connection. Using Material's Own Notifications instead.");
+    } else {
+        console.warn("[OpenAudioMC] [illegalException] Notifications only works on secure connection. Using Material's Own Notifications instead.");
     }
 
     //connect to the craftmend server

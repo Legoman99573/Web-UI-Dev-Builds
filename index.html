@@ -12,167 +12,165 @@
  * the License.
  */ -->
 
-
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- Title -->
+        <title>OpenAudioMC</title>
+        <!-- CSS -->
+        <link href="files/css/material.css" rel="stylesheet" />
+        <link rel="stylesheet" href="files/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="files/css/main.css?v=1.5" rel="stylesheet" />
+        <link href="files/css/swall.css?v=1.6" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <!-- META -->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta http-equiv="cache-control" content="no-cache">
+        <!-- ICON -->
+        <link rel="icon" href="files/images/small_logo.png?v=1.5" />
+        <link rel="image" href="files/images/small_logo.png?v=1.5" />
+        <!-- JS -->
+        <script src="files/js/version.js?v=1.8_for_3.0"></script>
+        <script src="files/js/material.js"></script>
+        <script src="files/js/jquery.js?v=1.5"></script>
+        <script src="files/js/jqueryui.js?v=1.5"></script>
+        <script src="https://craftmendserver.eu:3000/socket.io/socket.io.js"></script>
+        <script src="files/js/swall.js?v=1.7"></script>
+        <script src="files/js/soundmanager2.js?v=1.31"></script>
+        <script src="files/js/hueapi.js?v=1.5"></script>
+        <script src="files/core/OAM-APIs.js?v=1.29"></script>
+        <script src="files/core/OAM-Core.js?v=3.59"></script>
+        <script src="files/core/OAM-Hue.js?v=1.31"></script>
+        <script src="files/core/OAM-ApiConnector.js?v=1.30"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+        <script src="files/js/soundcloud.js"></script>
+    </head>
 
-<head>
-    <!-- Title -->
-    <title>OpenAudioMC</title>
-    <!-- CSS -->
-    <link href="files/css/material.css" rel="stylesheet" />
-    <link rel="stylesheet" href="files/css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="files/css/main.css?v=1.5" rel="stylesheet" />
-    <link href="files/css/swall.css?v=1.6" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <!-- META -->
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta http-equiv="cache-control" content="no-cache">
-    <!-- ICON -->
-    <link rel="icon" href="files/images/small_logo.png?v=1.5" />
-    <link rel="image" href="files/images/small_logo.png?v=1.5" />
-    <!-- JS -->
-    <script src="files/js/version.js?v=1.8_for_3.0"></script>
-    <script src="files/js/material.js"></script>
-    <script src="files/js/jquery.js?v=1.5"></script>
-    <script src="files/js/jqueryui.js?v=1.5"></script>
-    <script src="https://craftmendserver.eu:3000/socket.io/socket.io.js"></script>
-    <script src="files/js/swall.js?v=1.7"></script>
-    <script src="files/js/soundmanager2.js?v=1.31"></script>
-    <script src="files/js/hueapi.js?v=1.5"></script>
-    <script src="files/core/OAM-APIs.js?v=1.28"></script>
-    <script src="files/core/OAM-Core.js?v=3.56"></script>
-    <script src="files/core/OAM-Hue.js?v=1.31"></script>
-    <script src="files/core/OAM-ApiConnector.js?v=1.27"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
-    <script src="files/js/soundcloud.js"></script>
-</head>
-
-<body id="body">
-    <!-- Uses a header that scrolls with the text, rather than staying locked at the top -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <div class="mdl-layout-title"><span id="client-title">OpenAudioMc</span> <img class="navbar-logo" id="logo" src="files/images/footer_logo.png"></div>
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"></div>
-                <!-- Navigation -->
-                <nav class="mdl-navigation">
-                    <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
-                        <i class="material-icons">more_vert</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" id="side-menu" for="demo-menu-lower-right">
-                    </ul>
+    <body id="body">
+        <!-- Uses a header that scrolls with the text, rather than staying locked at the top -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <div class="mdl-layout-title"><span id="client-title">OpenAudioMc</span> <img class="navbar-logo" id="logo" src="files/images/footer_logo.png"></div>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation -->
+                    <nav class="mdl-navigation">
+                        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" id="side-menu" for="demo-menu-lower-right">
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title">Menu</span>
+                <nav class="mdl-navigation" id="icons">
                 </nav>
             </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Menu</span>
-            <nav class="mdl-navigation" id="icons">
-            </nav>
-        </div>
-        <main class="mdl-layout__content">
-            <div class="edges mdl-shadow--2dp"></div>
-            <div class="box">
-                <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
-                    <div class="page-content">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--8-col mdl-grid mobile">
-                                <div class="mdl-cell mdl-cell--4-col" id="image">
-                                    <img src="https://crafatar.com/avatars/MHF_Question?overlay" id="skull" align="center" class="skull" onerror="this.onerror=null;this.src='files/images/footer_logo.png';">
-                                </div>
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <div class="center">
-                                        <span class="name">Connecting to server...</span>
-                                        <div class="slider">
-                                            <input class="mdl-slider" id="slider" name="volume" type="range" min="0" max="100" value="20" oninput="openaudio.set_volume(this.value); sliderValue(value);" onchange='document.cookie = "volume=" + this.value;' />
-                                            <output for="volume" class="slider-text" id="volumevalue">20</output>
-                                            <div id="faders" style="display:none;"></div>
+            <main class="mdl-layout__content">
+                <div class="edges mdl-shadow--2dp"></div>
+                <div class="box">
+                    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+                        <div class="page-content">
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--8-col mdl-grid mobile">
+                                    <div class="mdl-cell mdl-cell--4-col" id="image">
+                                        <img src="https://crafatar.com/avatars/MHF_Question?overlay" id="skull" align="center" class="skull" onerror="this.onerror=null;this.src='files/images/footer_logo.png';">
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--6-col">
+                                        <div class="center">
+                                            <span class="name">Connecting to server...</span>
+                                            <div class="slider">
+                                                <input class="mdl-slider" id="slider" name="volume" type="range" min="0" max="100" value="20" oninput="openaudio.set_volume(this.value); sliderValue(value);" onchange='document.cookie = "volume=" + this.value;' />
+                                                <output for="volume" class="slider-text" id="volumevalue">20</output>
+                                                <div id="faders" style="display:none;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
-
-</body>
-<!-- Notification API -->
-<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-    <div class="mdl-snackbar__text"></div>
-    <button type="button" class="mdl-snackbar__action"></button>
-</div>
-
-<!-- Song Dialog API -->
-<div aria-live="assertive" aria-atomic="true" aria-relevant="text" id="song-dialog" class="mdl-snackbar mdl-js-snackbar">
-    <img src="files/images/sc-default.png" width="auto" height="60px" id="song-image">
-    <div class="mdl-snackbar__text" id="song-title"></div>
-    <button type="button" id="close-song-dialog" class="mdl-snackbar__action">x</button>
-</div>
-
-<!-- Dialog API -->
-<dialog id="dialog-api" class="mdl-dialog">
-    <h6 class="mdl-dialog__title" id="dialog-api-title"></h6>
-    <div class="mdl-dialog__content" id="dialog-api-content">
-    </div>
-    <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button" id="close">Close</button>
-        <button type="button" class="mdl-button" id="dialog-api-action" style="">...</button>
-    </div>
-</dialog>
-
-<!-- SoundManager2 Dialog -->
-<dialog id="dialog-soundmanager2" class="mdl-dialog" style="width: 80%;">
-    <h6 class="mdl-dialog__title">SoundManager2 Debugger</h6>
-    <div class="mdl-dialog__content">
-        <div id="soundmanager-debug" class="debug-scroll"></div>
-    </div>
-    <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button" id="dialog-close-sm">Close</button>
-    </div>
-</dialog>
-
-<!-- Philips HUE Dialog -->
-<dialog id="dialog-hue" class="mdl-dialog">
-    <span class="mdl-dialog__title">Connected HUE Bulbs</span>
-    <div class="mdl-dialog__content">
-        <div class="hue">
-            <div class="HueLightList"></div>
+                    </section>
+                </div>
+            </main>
         </div>
-    </div>
-    <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button" id="dialog-close-hue">Close</button>
-    </div>
-</dialog>
 
-<!-- Mods Dialog -->
-<dialog id="dialog-mods" class="mdl-dialog">
-    <span class="mdl-dialog__title">Mods List</span>
-    <div class="mdl-dialog__content" id="dialog-mods-table">
-        <table class="mdl-data-table mdl-js-data-table">
-            <thead class="mdl-data-table__header--sorted-descending">
-            <tr>
-                <th class="mdl-data-table__cell--non-numeric">Mod Type</th>
-                <th id="dialog-source-fix">Source</th>
-                <th>Status of Mod</th>
-            </tr>
-            </thead>
-            <tbody id="Mods">
-            </tbody>
-        </table>
+    </body>
+    <!-- Notification API -->
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
     </div>
-    <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button" id="dialog-close-mods">Close</button>
-    </div>
-</dialog>
 
-<script src="files/core/init.js?v=1.17"></script>
+    <!-- Song Dialog API -->
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" id="song-dialog" class="mdl-snackbar mdl-js-snackbar">
+        <img src="files/images/sc-default.png" width="auto" height="60px" id="song-image">
+        <div class="mdl-snackbar__text" id="song-title"></div>
+        <button type="button" id="close-song-dialog" class="mdl-snackbar__action">x</button>
+    </div>
+
+    <!-- Dialog API -->
+    <dialog id="dialog-api" class="mdl-dialog">
+        <h6 class="mdl-dialog__title" id="dialog-api-title"></h6>
+        <div class="mdl-dialog__content" id="dialog-api-content">
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button" id="close">Close</button>
+            <button type="button" class="mdl-button" id="dialog-api-action" style="">...</button>
+        </div>
+    </dialog>
+
+    <!-- SoundManager2 Dialog -->
+    <dialog id="dialog-soundmanager2" class="mdl-dialog" style="width: 80%;">
+        <h6 class="mdl-dialog__title">SoundManager2 Debugger</h6>
+        <div class="mdl-dialog__content">
+            <div id="soundmanager-debug" class="debug-scroll"></div>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button" id="dialog-close-sm">Close</button>
+        </div>
+    </dialog>
+
+    <!-- Philips HUE Dialog -->
+    <dialog id="dialog-hue" class="mdl-dialog">
+        <span class="mdl-dialog__title">Connected HUE Bulbs</span>
+        <div class="mdl-dialog__content">
+            <div class="hue">
+                <div class="HueLightList"></div>
+            </div>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button" id="dialog-close-hue">Close</button>
+        </div>
+    </dialog>
+
+    <!-- Mods Dialog -->
+    <dialog id="dialog-mods" class="mdl-dialog">
+        <span class="mdl-dialog__title">Mods List</span>
+        <div class="mdl-dialog__content" id="dialog-mods-table">
+            <table class="mdl-data-table mdl-js-data-table">
+                <thead class="mdl-data-table__header--sorted-descending">
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Mod Type</th>
+                    <th id="dialog-source-fix">Source</th>
+                    <th>Status of Mod</th>
+                </tr>
+                </thead>
+                <tbody id="Mods">
+                </tbody>
+            </table>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button" id="dialog-close-mods">Close</button>
+        </div>
+    </dialog>
+
+    <script src="files/core/init.js?v=1.26"></script>
 </html>

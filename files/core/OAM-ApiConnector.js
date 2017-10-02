@@ -160,8 +160,8 @@ socketIo.connect = function() {
 
             }, 1000);
         } else {
-            ba = new trayItem("fa fa-warning", "showPlus", "Claim This Account");
-            swal('Account info!','This web site has not been claimed yet!<br /><a style="color:red" href="https://plus.openaudiomc.net/">click here to claim this account</a>!<br /> It only takes 1 minute of your time.','warning');
+            console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
+            $.getScript("files/pages/unclaimedError.js");
         }
     });
 
@@ -175,9 +175,7 @@ socketIo.connect = function() {
             socketIo.log("Received offline server data");
         } else if (msg == "kicked") {
             closedwreason = true;
-            status_span.innerHTML = langpack.message.inavlid_url;
-            status_span.className = "label label-danger";
-            document.getElementById("box").className = document.getElementById("box").className + " animated bounceOutUp";
+            $('.name').html(langpack.message.inavlid_url)
             swal({
                 title: langpack.message.invalid_connection,
                 text: langpack.message.reconnect_prompt,

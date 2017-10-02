@@ -83,41 +83,44 @@ function initialize() {
             if (/^\w+$/i.test(username)) {
                 //save to load, i guess?
                 logInit("Trying login.");
-                //try {
-                var api = apijson;
-                session = getUrlVar("session");
-                socket_io = api.socket;
-                mcname = getUrlVar("name");
-                socketio_client_js = api.clientJS;
-                enableMain(api.clientJS);
-                /*} catch (e) {
-                        console.error(e);
-                        alert(e)
-                        //location.href = "files/pages/serverError.html";
-                        logInit("Login fail!");
-                  }*/
+                try {
+                    var api = apijson;
+                    session = getUrlVar("session");
+                    socket_io = api.socket;
+                    mcname = getUrlVar("name");
+                    socketio_client_js = api.clientJS;
+                    enableMain(api.clientJS);
+                } catch (e) {
+                    console.error(e);
+                    console.error("[OpenAudioMc][clientException] Exit Code status: 4. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+                    logInit("clientError 4: Cannot connect to OpenAudio Socket Server.");
+                    $.getScript("files/pages/urlError.js");
+                }
             } else {
-                //invalid url
-                location.href = "files/pages/urlError.html";
-                logInit("Invalid url.");
+                // Invalid Username
+                console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+                logInit("clientError 3: Invalid Username used. use /audio or /connect to get a new url link");
+                $.getScript("files/pages/urlError.js");
             }
         } else {
-            //invalid url
-            location.href = "files/pages/urlError.html";
-            logInit("Invalid url.");
+            // Username length is under 3
+            console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+            logInit("clientError 2: Username Length is under 3 characters. use /audio or /connect to get a new url link");
+            $.getScript("files/pages/urlError.js");
         }
     } else {
-        //invalid url
-        location.href = "files/pages/urlError.html";
-        logInit("Invalid url.");
+        //Cannot get right session key
+        console.error("[OpenAudioMc][clientException] Exit Code status: 1. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+        logInit("clientError 1: Invalid Session used. use /audio or /connect to get a new url link");
+        $.getScript("files/pages/urlError.js");
     }
 }
 
 function enableMain(clientJs) {
-
     logInit("Login-sucess");
-    enable();
+    enable(clientJs);
     loadBg();
+    setTimeout(dev, 1000);
 }
 
 function logInit(msg) {

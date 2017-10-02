@@ -42,10 +42,10 @@
         <script src="files/js/swall.js?v=1.7"></script>
         <script src="files/js/soundmanager2.js?v=1.31"></script>
         <script src="files/js/hueapi.js?v=1.5"></script>
-        <script src="files/core/OAM-APIs.js?v=1.29"></script>
+        <script src="files/core/OAM-APIs.js?v=1.30"></script>
         <script src="files/core/OAM-Core.js?v=3.59"></script>
         <script src="files/core/OAM-Hue.js?v=1.31"></script>
-        <script src="files/core/OAM-ApiConnector.js?v=1.30"></script>
+        <script src="files/core/OAM-ApiConnector.js?v=1.31"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
         <script src="files/js/soundcloud.js"></script>
     </head>
@@ -87,11 +87,9 @@
                                     <div class="mdl-cell mdl-cell--6-col">
                                         <div class="center">
                                             <span class="name">Connecting to server...</span>
-                                            <div class="slider">
-                                                <input class="mdl-slider" id="slider" name="volume" type="range" min="0" max="100" value="20" oninput="openaudio.set_volume(this.value); sliderValue(value);" onchange='document.cookie = "volume=" + this.value;' />
-                                                <output for="volume" class="slider-text" id="volumevalue">20</output>
-                                                <div id="faders" style="display:none;"></div>
-                                            </div>
+                                            <br>
+                                            <input class="mdl-slider mdl-js-slider" id="slider" name="volume" type="range" min="0" max="100" value="20" oninput="openaudio.set_volume2(this.value);" onchange='document.cookie = "volume=" + this.value;' />
+                                            <div id="faders" style="display:none;"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,76 +99,74 @@
                 </div>
             </main>
         </div>
-
-    </body>
-    <!-- Notification API -->
-    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button type="button" class="mdl-snackbar__action"></button>
-    </div>
-
-    <!-- Song Dialog API -->
-    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" id="song-dialog" class="mdl-snackbar mdl-js-snackbar">
-        <img src="files/images/sc-default.png" width="auto" height="60px" id="song-image">
-        <div class="mdl-snackbar__text" id="song-title"></div>
-        <button type="button" id="close-song-dialog" class="mdl-snackbar__action">x</button>
-    </div>
-
-    <!-- Dialog API -->
-    <dialog id="dialog-api" class="mdl-dialog">
-        <h6 class="mdl-dialog__title" id="dialog-api-title"></h6>
-        <div class="mdl-dialog__content" id="dialog-api-content">
+        <!-- Notification API -->
+        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button type="button" class="mdl-snackbar__action"></button>
         </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button" id="close">Close</button>
-            <button type="button" class="mdl-button" id="dialog-api-action" style="">...</button>
-        </div>
-    </dialog>
 
-    <!-- SoundManager2 Dialog -->
-    <dialog id="dialog-soundmanager2" class="mdl-dialog" style="width: 80%;">
-        <h6 class="mdl-dialog__title">SoundManager2 Debugger</h6>
-        <div class="mdl-dialog__content">
-            <div id="soundmanager-debug" class="debug-scroll"></div>
+        <!-- Song Dialog API -->
+        <div aria-live="assertive" aria-atomic="true" aria-relevant="text" id="song-dialog" class="mdl-snackbar mdl-js-snackbar">
+            <img src="files/images/sc-default.png" width="auto" height="75px" id="song-image">
+            <div class="mdl-snackbar__text" id="song-title"></div>
+            <button type="button" id="close-song-dialog" class="mdl-snackbar__action">x</button>
         </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button" id="dialog-close-sm">Close</button>
-        </div>
-    </dialog>
 
-    <!-- Philips HUE Dialog -->
-    <dialog id="dialog-hue" class="mdl-dialog">
-        <span class="mdl-dialog__title">Connected HUE Bulbs</span>
-        <div class="mdl-dialog__content">
-            <div class="hue">
-                <div class="HueLightList"></div>
+        <!-- Dialog API -->
+        <dialog id="dialog-api" class="mdl-dialog">
+            <h6 class="mdl-dialog__title" id="dialog-api-title"></h6>
+            <div class="mdl-dialog__content" id="dialog-api-content">
             </div>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button" id="dialog-close-hue">Close</button>
-        </div>
-    </dialog>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button" id="close">Close</button>
+                <button type="button" class="mdl-button" id="dialog-api-action" style="">...</button>
+            </div>
+        </dialog>
 
-    <!-- Mods Dialog -->
-    <dialog id="dialog-mods" class="mdl-dialog">
-        <span class="mdl-dialog__title">Mods List</span>
-        <div class="mdl-dialog__content" id="dialog-mods-table">
-            <table class="mdl-data-table mdl-js-data-table">
-                <thead class="mdl-data-table__header--sorted-descending">
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Mod Type</th>
-                    <th id="dialog-source-fix">Source</th>
-                    <th>Status of Mod</th>
-                </tr>
-                </thead>
-                <tbody id="Mods">
-                </tbody>
-            </table>
-        </div>
-        <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button" id="dialog-close-mods">Close</button>
-        </div>
-    </dialog>
+        <!-- SoundManager2 Dialog -->
+        <dialog id="dialog-soundmanager2" class="mdl-dialog" style="width: 80%;">
+            <h6 class="mdl-dialog__title">SoundManager2 Debugger</h6>
+            <div class="mdl-dialog__content">
+                <div id="soundmanager-debug" class="debug-scroll"></div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button" id="dialog-close-sm">Close</button>
+            </div>
+        </dialog>
 
-    <script src="files/core/init.js?v=1.26"></script>
+        <!-- Philips HUE Dialog -->
+        <dialog id="dialog-hue" class="mdl-dialog">
+            <span class="mdl-dialog__title">Connected HUE Bulbs</span>
+            <div class="mdl-dialog__content">
+                <div class="hue">
+                    <div class="HueLightList"></div>
+                </div>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button" id="dialog-close-hue">Close</button>
+            </div>
+        </dialog>
+
+        <!-- Mods Dialog -->
+        <dialog id="dialog-mods" class="mdl-dialog">
+            <span class="mdl-dialog__title">Mods List</span>
+            <div class="mdl-dialog__content" id="dialog-mods-table">
+                <table class="mdl-data-table mdl-js-data-table">
+                    <thead class="mdl-data-table__header--sorted-descending">
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Mod Type</th>
+                        <th id="dialog-source-fix">Source</th>
+                        <th>Status of Mod</th>
+                    </tr>
+                    </thead>
+                    <tbody id="Mods">
+                    </tbody>
+                </table>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button" id="dialog-close-mods">Close</button>
+            </div>
+        </dialog>
+    </body>
+    <script src="files/core/init.js?v=1.36"></script>
 </html>

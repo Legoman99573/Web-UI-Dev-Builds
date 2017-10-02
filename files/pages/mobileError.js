@@ -15,7 +15,7 @@
 $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "\n" +
     "  <!-- Title -->\n" +
-    "  <title>OpenAudioMC | Setup</title>\n" +
+    "  <title>OpenAudioMC | mobileError</title>\n" +
     "\n" +
     "  <!-- CSS -->\n" +
     "  <link href=\"files/css/error.css\" rel=\"stylesheet\" />\n" +
@@ -67,25 +67,29 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "           <h2 class=\"mdl-card__title-text\"></h2>\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__supporting-text\">\n" +
-    "           <b>To claim client ID:" + clientID + ", Follow these steps:</b>\n" +
-    "           <ol>\n" +
-    "             <li>Click Get Started and use <b>/oa oauth</b> in game</li>\n" +
-    "             <li>Configure settings to fit your needs</li>\n" +
-    "             <li>Press Continue and enjoy :)</li>\n" +
-    "             <li>Check out our Discord (Optional)</li>\n" +
-    "           </ol>\n" +
+    "           <b>Mobile browser must be served over a secure connection.</b> \n" +
+    "           <br>\n" +
+    "           <br>\n" +
+    "           Due to a bug with socket.io on mobile browsers, this must be served over a secure connection. \n" +
+    "           <br>\n" +
+    "           <br>\n" +
+    "           If your host doesnt support SSL <b>(We recommend LetsEncrypt)</b>, we recommend using your computer.\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__actions mdl-card--border\">\n" +
-    "           <a href=\"https://plus.openaudiomc.net/login\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" target=\"_blank\">\n" +
-    "             Get Started \n" +
-    "           </a>\n" +
-    "           <a href=\"" + window.location.href + "\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\">\n" +
-    "             Continue \n" +
-    "           </a>\n" +
     "           <a href=\"https://discord.gg/b44BPv7\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" target=\"_blank\">\n" +
     "             Discord Invite \n" +
     "           </a>\n" +
+    "           <button onclick=\"reconnect()\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" target=\"_blank\">\n" +
+    "             Secure Connction \n" +
+    "           </button>\n" +
     "        </div>\n" +
     "      </div>" +
     "    </div>");
 loadVersion();
+
+function reconnect() {
+    if (window.location.protocol != "https") {
+        window.location = "https://" + window.location.href.substring(window.location.protocol.length, window.location.href.length);
+        window.location.reload();
+    }
+}

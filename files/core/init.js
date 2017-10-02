@@ -77,42 +77,35 @@ function getUrlVar(variable) {
 }
 
 function initialize() {
-    if (getUrlVar("session").includes(":")) {
-        var username = getUrlVar("name");
-        if (username.length >= 3) {
-            if (/^\w+$/i.test(username)) {
-                //save to load, i guess?
-                logInit("Trying login.");
-                try {
-                    var api = apijson;
-                    session = getUrlVar("session");
-                    socket_io = api.socket;
-                    mcname = getUrlVar("name");
-                    socketio_client_js = api.clientJS;
-                    enableMain(api.clientJS);
-                } catch (e) {
-                    console.error(e);
-                    console.error("[OpenAudioMc][clientException] Exit Code status: 4. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-                    logInit("clientError 4: Cannot connect to OpenAudio Socket Server.");
-                    $.getScript("files/pages/urlError.js");
-                }
-            } else {
-                // Invalid Username
-                console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-                logInit("clientError 3: Invalid Username used. use /audio or /connect to get a new url link");
-                $.getScript("files/pages/urlError.js");
-            }
-        } else {
-            // Username length is under 3
+    var username = getUrlVar("name");
+    if (/^\w+$/i.test(username)) {
+        //save to load, i guess?
+        logInit("Trying login.");
+        try {
+            var api = apijson;
+            session = getUrlVar("session");
+            socket_io = api.socket;
+            mcname = getUrlVar("name");
+            socketio_client_js = api.clientJS;
+            enableMain(api.clientJS);
+        } catch (e) {
+            console.error(e);
             console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-            logInit("clientError 2: Username Length is under 3 characters. use /audio or /connect to get a new url link");
-            $.getScript("files/pages/urlError.js");
+            logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
+            $.getScript("files/pages/serverError.js");
         }
     } else {
-        //Cannot get right session key
+        // Invalid Username
         console.error("[OpenAudioMc][clientException] Exit Code status: 1. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-        logInit("clientError 1: Invalid Session used. use /audio or /connect to get a new url link");
+        logInit("clientError 1: No Username filled in. use /audio or /connect to get a new url link");
         $.getScript("files/pages/urlError.js");
+    }
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        swal(
+            'Mobile Browser Detected',
+            'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
+            'warning'
+        )
     }
 }
 

@@ -136,7 +136,9 @@ socketIo.connect = function() {
                     $.getScript("files/core/OAM-Hue.js", function() {
                         hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
                         hue_enabled = true;
-                        loop_hue_connection_on_load();
+                        if (closedwreason != true) {
+                            loop_hue_connection_on_load();
+                        }
                     });
                 } else {}
                 if (settings.bg == "") {} else {
@@ -171,20 +173,14 @@ socketIo.connect = function() {
         socketIo.log("Received error.");
         if (msg == "server-offline") {
             closedwreason = true;
-            $('.name').html(langpack.message.server_is_offline);
-            socketIo.log("Received offline server data");
+            console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+            logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
+            $.getScript("files/pages/serverError.js");
         } else if (msg == "kicked") {
             closedwreason = true;
-            $('.name').html(langpack.message.inavlid_url)
-            swal({
-                title: langpack.message.invalid_connection,
-                text: langpack.message.reconnect_prompt,
-                showCancelButton: false,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                showConfirmButton: false,
-                html: langpack.message.reconnect_prompt
-            }, function() {});
+            console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+            logInit("clientError 3: Invalid Session. use /audio or /connect to get a new url link");
+            $.getScript("files/pages/urlError.js");
         } else {
             var message = JSON.parse(msg);
 

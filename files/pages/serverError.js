@@ -38,13 +38,16 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "\n" +
     "  <!-- Wide card with share menu button -->\n" +
     "  <style>\n" +
-    "    .demo-card-wide.mdl-card {\n" +
-    "      width: 512px;\n" +
+    "    .demo-card-wide .mdl-card {\n" +
+    "      max-width: 512px;\n" +
+    "      min-width: 260px;\n" +
+    "      width: 100%;\n" +
+    "      overflow: auto;\n" +
     "    }\n" +
     "    .demo-card-wide > .mdl-card__title {\n" +
     "      height: 250px;\n" +
     "      width: auto;\n" +
-    "      background: url('files/images/logo.png') center / cover;\n" +
+    "      background: url('https://plus.openaudiomc.net/img/plus.png') center / cover;\n" +
     "      background-color: #303030;\n" +
     "    }\n" +
     "   .materialcontainer {\n" +

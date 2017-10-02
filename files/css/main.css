@@ -99,14 +99,6 @@ p {
 }
 
 @media screen and (min-height: 480px) {
-  .profile-card .profile-volume {
-    width: auto;
-    height: auto;
-    padding: 15px 20px 30px 20px;
-    display: block;
-    float: none;
-  }
-
   .profile-social-links {
     width: 100%;
     display: block;
@@ -121,80 +113,6 @@ p {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-}
-
-input[type=range] {
-  -webkit-appearance: none;
-  margin: 18px 0;
-  width: 100%;
-}
-
-input[type=range]:focus {
-  outline: none;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 3px;
-  cursor: pointer;
-  background-color: rgb(103,58,183);
-  border-radius: 3px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  height: 16px;
-  width: 16px;
-  border-radius: 100%;
-  background-color: #5f5cea;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -7px;
-}
-
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 3px;
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 3px;
-}
-
-input[type=range]::-moz-range-thumb {
-  height: 16px;
-  width: 16px;
-  border-radius: 100%;
-  background-color: #5f5cea;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -7px;
-}
-
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 1px;
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 3px;
-}
-
-input[type=range]::-ms-thumb {
-  height: 13px;
-  width: 13px;
-  border-radius: 100%;
-  background-color: #5f5cea;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: 0px;
-}
-
-.slider {
-  position: relative;
-}
-
-.slider-text {
-  text-align: center;
-  position: absolute;
-  top: 25px;
 }
 
 output {
@@ -501,10 +419,6 @@ footer {
   padding-right: 25px;
 }
 
-#volumevalue {
-  color: black;
-}
-
 .box {
   height: auto;
   position: absolute;
@@ -614,6 +528,12 @@ footer {
   background-color: lightgrey;
 }
 
+.mdl-slider__container {
+  margin-left: -25px;
+  margin-right: -20px;
+  margin-top: 10px;
+}
+
 @media (max-width: 840px) {
   .edges {
     width: 220px;
@@ -625,7 +545,6 @@ footer {
     left: 285px;
     top: 120px;
   }
-
   .skull {
     position: absolute;
     top: -110px;
@@ -651,4 +570,14 @@ footer {
 #dialog-mods-table {
   width: 90% !important;
   overflow: auto;
+}
+
+/* Thanks to Firefox, We have to make a border transparent to hide it */
+input[type=range]{
+  border: 0px solid transparent;
+}
+
+input[type=range]:-moz-focusring{
+  outline: 0px solid transparent;
+  outline-offset: -1px;
 }

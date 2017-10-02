@@ -737,16 +737,13 @@ openaudio.set_volume = function(volume_var) {
     if (volume_var > 100) {
         document.getElementById("slider").value = 100;
         openaudio.setGlobalVolume(100);
-        document.getElementById("volumevalue").innerHTML = 100;
         volume = 100;
     } else if (volume_var < 0) {
         document.getElementById("slider").value = 0;
         openaudio.setGlobalVolume(0);
         volume = 0;
-        document.getElementById("volumevalue").innerHTML = 0;
     } else {
         document.getElementById("slider").value = volume_var;
-        document.getElementById("volumevalue").innerHTML = volume_var;
         volume = volume_var;
         openaudio.setGlobalVolume(volume_var);
     }
@@ -1523,12 +1520,6 @@ function getCookie(name) {
     if (parts.length == 2) {
         return parts.pop().split(";").shift();
     }
-}
-
-function sliderValue(vol) {
-    //Joww, it's ja boy liturkey doing all the math boi
-    var output = document.querySelector("#volumevalue");
-    output.value = vol;
 }
 
 function addJs(url) {

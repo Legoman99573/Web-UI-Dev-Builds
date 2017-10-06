@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
@@ -31,7 +37,7 @@
       <file leaf-file-name="OAM-Hue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6902">
+            <state relative-caret-position="328">
               <caret line="418" column="16" lean-forward="false" selection-start-line="418" selection-start-column="16" selection-end-line="418" selection-end-column="55" />
               <folding>
                 <marker date="1506168887767" expanded="true" signature="10728:10741" ph="..." />
@@ -43,29 +49,83 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="87" column="144" lean-forward="false" selection-start-line="87" selection-start-column="144" selection-end-line="87" selection-end-column="144" />
-              <folding />
+            <state relative-caret-position="238">
+              <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unclaimedError.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/pages/unclaimedError.js">
+      <file leaf-file-name="OAM-Audio.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="69" />
-              <folding />
+            <state relative-caret-position="204">
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urlError.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
+      <file leaf-file-name="OAM-Loop.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-Playlist.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-Region.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-Speaker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-3rd-Party-Audio.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,55 +136,6 @@
             <state relative-caret-position="362">
               <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/init.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1377">
-              <caret line="93" column="21" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="78" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1506981505122" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9707">
-              <caret line="571" column="17" lean-forward="false" selection-start-line="571" selection-start-column="17" selection-end-line="571" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mobileError.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/pages/mobileError.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1506973020430" expanded="true" signature="5749:5766" ph="..." />
-                <marker date="1506973020430" expanded="true" signature="6122:6139" ph="..." />
-                <marker date="1506973020430" expanded="true" signature="6667:6684" ph="..." />
-                <marker date="1506973020430" expanded="true" signature="7033:7050" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -224,6 +235,13 @@
         <option value="$PROJECT_DIR$/files/css/main.css" />
         <option value="$PROJECT_DIR$/files/core/init.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Audio.js.html" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Audio.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Loop.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Playlist.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Regions.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-Speakers.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanagers/OAM-3rd-Party-Audio.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
@@ -282,6 +300,13 @@
               <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
               <item name="files" type="462c0819:PsiDirectoryNode" />
               <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
+              <item name="files" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
@@ -449,7 +474,7 @@
       <workItem from="1506163651339" duration="26388000" />
       <workItem from="1506618567396" duration="8796000" />
       <workItem from="1506880614813" duration="35195000" />
-      <workItem from="1507324371898" duration="910000" />
+      <workItem from="1507324371898" duration="2694000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -689,11 +714,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506982212564</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Song IDs don't change, so back to the old way of random IDs&#10;&#10;Since chrome keeps it at 1 ID, we decided to place it back in the function to work properly.">
+      <created>1507325355725</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1507325355725</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493241000" />
+    <option name="totallyTimeSpent" value="495025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -735,7 +767,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="YouTube Support and Hue Fixes" />
     <MESSAGE value="Hue fixes and Fixes" />
     <MESSAGE value="Regions Fix" />
     <MESSAGE value="Broke speakers (OOPSIE)" />
@@ -760,7 +791,8 @@
     <MESSAGE value="Background image looks better&#10;&#10;Now it doesnt look like it was hit by a bus. Beep Beep D:" />
     <MESSAGE value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
     <MESSAGE value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
+    <MESSAGE value="Song IDs don't change, so back to the old way of random IDs&#10;&#10;Since chrome keeps it at 1 ID, we decided to place it back in the function to work properly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Song IDs don't change, so back to the old way of random IDs&#10;&#10;Since chrome keeps it at 1 ID, we decided to place it back in the function to work properly." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -769,55 +801,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/files/js/soundmanager2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="113" column="28" lean-forward="false" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16456">
-          <caret line="968" column="10" lean-forward="true" selection-start-line="968" selection-start-column="10" selection-end-line="968" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/error.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="38" lean-forward="false" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="109" column="1" lean-forward="false" selection-start-line="109" selection-start-column="1" selection-end-line="109" selection-end-column="1" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1506981505122" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5304">
@@ -832,7 +815,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="132" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -850,7 +835,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22525">
           <caret line="1325" column="12" lean-forward="false" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -890,7 +877,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22525">
           <caret line="1325" column="12" lean-forward="true" selection-start-line="1325" selection-start-column="12" selection-end-line="1325" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -930,7 +919,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8908">
           <caret line="524" column="49" lean-forward="false" selection-start-line="524" selection-start-column="49" selection-end-line="524" selection-end-column="49" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -938,7 +929,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -946,7 +939,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14220">
           <caret line="790" column="111" lean-forward="false" selection-start-line="790" selection-start-column="111" selection-end-line="790" selection-end-column="111" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -954,7 +949,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1121,16 +1118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6902">
-          <caret line="418" column="16" lean-forward="false" selection-start-line="418" selection-start-column="16" selection-end-line="418" selection-end-column="55" />
-          <folding>
-            <marker date="1506168887767" expanded="true" signature="10728:10741" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2159">
@@ -1139,11 +1126,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="418" column="16" lean-forward="false" selection-start-line="418" selection-start-column="16" selection-end-line="418" selection-end-column="55" />
+          <folding>
+            <marker date="1506168887767" expanded="true" signature="10728:10741" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="87" column="144" lean-forward="false" selection-start-line="87" selection-start-column="144" selection-end-line="87" selection-end-column="144" />
-          <folding />
+        <state relative-caret-position="238">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

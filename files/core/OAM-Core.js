@@ -62,11 +62,10 @@ function getYouTubePlaylist(playlistID) {
     });
 }
 
-var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-
 soundManager.setup({
     defaultOptions: {
         onfinish: function() {
+            var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
             handleSoundEnd(this.id);
             soundManager.destroySound(this.id);
             if (this.id != "oa_back_" + randomID) {
@@ -74,16 +73,19 @@ soundManager.setup({
             }
         },
         onplay: function() {
+            var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
             if (this.id != "oa_back_" + randomID) {
                 onSoundPlay();
             }
         },
         onstop: function() {
+            var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
             if (this.id != "oa_back_" + randomID) {
                 onSoundEnd();
             }
         },
         onerror: function(code, description) {
+            var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
             if (this.id != "oa_back_" + randomID) {
                 soundManager._writeDebug("[SoundManager2] oa_back_" + randomID + " failed?", 3, code, description);
                 if (this.loaded) {
@@ -98,6 +100,7 @@ soundManager.setup({
 });
 
 function onSoundPlay() {
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
     if (listSounds().includes("oa_back_" + randomID) && ambiance != "") {
         openaudio.stopBackground();
     }
@@ -492,6 +495,8 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         defaultTime = 0;
     }
 
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+
     var soundId = "play";
     if (isFading[soundId] === true) {
         stopFading[soundId] = true;
@@ -503,14 +508,16 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         from: defaultTime,
         autoPlay: true
     });
+
+    openaudio.stopPlay = function(soundID) {
+
+        fadeIdOut("play_" + randomID + soundID);
+        soundManager.destroySound("play_" + randomID + soundID);
+    }
 };
 
-openaudio.stopPlay = function(soundID) {
-    fadeIdOut("play_" + randomID + soundID);
-    soundManager.destroySound("play_" + randomID + soundID);
-}
-
 openaudio.sartBackground = function(url) {
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
     soundManager.stop("oa_region_" + randomID);
     soundManager.destroySound("oa_back_" + randomID);
     var regionsound = soundManager.createSound({
@@ -536,11 +543,11 @@ openaudio.sartBackground = function(url) {
     }
     fadeIdTarget("oa_back_" + randomID);
     loopSound(regionsound);
-};
 
-openaudio.stopBackground = function() {
-    fadeIdOut("oa_back_" + randomID);
-    soundManager.destroySound("oa_back_" + randomID);
+    openaudio.stopBackground = function() {
+        fadeIdOut("oa_back_" + randomID);
+        soundManager.destroySound("oa_back_" + randomID);
+    };
 };
 
 openaudio.whisper = function(message) {
@@ -561,6 +568,7 @@ openaudio.skipTo = function(id, timeInS) {
 };
 
 openaudio.playRegion = function(url, defaultTime) {
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
     soundManager.stop("oa_region_" + randomID);
     soundManager.destroySound("oa_region_" + randomID);
     var regionsounds = soundManager.createSound({
@@ -589,20 +597,21 @@ openaudio.playRegion = function(url, defaultTime) {
         });
     }
     loopSound(regionsounds);
-};
 
-openaudio.stopRegion = function() {
-    fadeIdOut("oa_region_" + randomID );
-    soundManager.destroySound("oa_region_" + randomID );
-};
+    openaudio.stopRegion = function() {
+        fadeIdOut("oa_region_" + randomID );
+        soundManager.destroySound("oa_region_" + randomID );
+    };
 
-openaudio.regionsStop = function() {
-    for (var i = 0; i < listSounds().split(',').length; i++) {
-        listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
-        if (listSounds().split(',')[i].indexOf("oa_region_" + randomID) !== -1) {
-            fadeIdOut(listSounds().split(',')[i]);
+
+    openaudio.regionsStop = function() {
+        for (var i = 0; i < listSounds().split(',').length; i++) {
+            listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+            if (listSounds().split(',')[i].indexOf("oa_region_" + randomID) !== -1) {
+                fadeIdOut(listSounds().split(',')[i]);
+            }
         }
-    }
+    };
 };
 
 openaudio.playAction = function(action_is_fnc) {
@@ -638,6 +647,7 @@ openaudio.setGlobalVolume = function(volumeNew) {
 };
 
 openaudio.newspeaker = function(url, defaultTime, requestvol) {
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
     soundManager.stop("speaker_ding_" + randomID);
     soundManager.destroySound("speaker_ding_" + randomID);
     var speakersound = soundManager.createSound({
@@ -662,11 +672,11 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
             }
         }
     });
-};
 
-openaudio.removeSpeaker = function(id) {
-    fadeSpeakerOut("speaker_ding_" + randomID);
-    soundManager.destroySound("speaker_ding_" + randomID);
+    openaudio.removeSpeaker = function(id) {
+        fadeSpeakerOut("speaker_ding_" + randomID);
+        soundManager.destroySound("speaker_ding_" + randomID);
+    };
 };
 
 openaudio.setIdAtribute = function(ID, callback) {
@@ -949,6 +959,7 @@ $(document).ready(function() {
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
         x.value = soundManager.getSoundById("speaker_ding_" + randomID).volume;
         x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");

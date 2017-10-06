@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/files/pages/mobileError.html" afterPath="$PROJECT_DIR$/files/pages/mobileError.js" />
+    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/init.js" afterPath="$PROJECT_DIR$/files/core/init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/main.css" afterPath="$PROJECT_DIR$/files/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/serverError.js" afterPath="$PROJECT_DIR$/files/pages/serverError.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/unclaimedError.js" afterPath="$PROJECT_DIR$/files/pages/unclaimedError.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/urlError.js" afterPath="$PROJECT_DIR$/files/pages/urlError.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -25,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="140" column="25" lean-forward="true" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
+            <state relative-caret-position="2159">
+              <caret line="139" column="51" lean-forward="false" selection-start-line="139" selection-start-column="51" selection-end-line="139" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -38,7 +31,7 @@
       <file leaf-file-name="OAM-Hue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
+            <state relative-caret-position="6902">
               <caret line="418" column="16" lean-forward="false" selection-start-line="418" selection-start-column="16" selection-end-line="418" selection-end-column="55" />
               <folding>
                 <marker date="1506168887767" expanded="true" signature="10728:10741" ph="..." />
@@ -50,8 +43,8 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6159">
-              <caret line="1522" column="1" lean-forward="false" selection-start-line="1522" selection-start-column="1" selection-end-line="1522" selection-end-column="1" />
+            <state relative-caret-position="153">
+              <caret line="87" column="144" lean-forward="false" selection-start-line="87" selection-start-column="144" selection-end-line="87" selection-end-column="144" />
               <folding />
             </state>
           </provider>
@@ -60,8 +53,8 @@
       <file leaf-file-name="unclaimedError.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/pages/unclaimedError.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="69" />
+            <state relative-caret-position="629">
+              <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -71,17 +64,17 @@
         <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2890">
-              <caret line="170" column="42" lean-forward="false" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+            <state relative-caret-position="362">
+              <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -90,8 +83,8 @@
       <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="78" />
+            <state relative-caret-position="1377">
+              <caret line="93" column="21" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="78" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <marker date="1506981505122" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
@@ -103,8 +96,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="571" column="17" lean-forward="true" selection-start-line="571" selection-start-column="17" selection-end-line="571" selection-end-column="17" />
+            <state relative-caret-position="9707">
+              <caret line="571" column="17" lean-forward="false" selection-start-line="571" selection-start-column="17" selection-end-line="571" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -113,8 +106,8 @@
       <file leaf-file-name="mobileError.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/pages/mobileError.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state relative-caret-position="1292">
+              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -123,8 +116,8 @@
       <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="58" column="31" lean-forward="true" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+            <state relative-caret-position="782">
+              <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <marker date="1506973020430" expanded="true" signature="5749:5766" ph="..." />
@@ -228,11 +221,11 @@
         <option value="$PROJECT_DIR$/files/pages/urlError.js" />
         <option value="$PROJECT_DIR$/files/pages/mobileError.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
         <option value="$PROJECT_DIR$/files/core/init.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -271,9 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -303,6 +294,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -455,7 +448,8 @@
       <workItem from="1505439529553" duration="57545000" />
       <workItem from="1506163651339" duration="26388000" />
       <workItem from="1506618567396" duration="8796000" />
-      <workItem from="1506880614813" duration="33171000" />
+      <workItem from="1506880614813" duration="35195000" />
+      <workItem from="1507324371898" duration="910000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -688,11 +682,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506922812011</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D">
+      <created>1506982212563</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1506982212564</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490307000" />
+    <option name="totallyTimeSpent" value="493241000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -758,7 +759,8 @@
     <MESSAGE value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
     <MESSAGE value="Background image looks better&#10;&#10;Now it doesnt look like it was hit by a bus. Beep Beep D:" />
     <MESSAGE value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
-    <option name="LAST_COMMIT_MESSAGE" value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
+    <MESSAGE value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1059,16 +1061,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="73">
           <caret line="37" column="10" lean-forward="true" selection-start-line="37" selection-start-column="10" selection-end-line="38" selection-end-column="53" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="58" column="31" lean-forward="true" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
+        <state relative-caret-position="782">
+          <caret line="58" column="31" lean-forward="false" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <marker date="1506973020430" expanded="true" signature="5749:5766" ph="..." />
@@ -1081,8 +1080,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/pages/unclaimedError.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="49" column="28" lean-forward="true" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="69" />
+        <state relative-caret-position="629">
+          <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="69" />
           <folding />
         </state>
       </provider>
@@ -1090,31 +1089,31 @@
     <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="571" column="17" lean-forward="true" selection-start-line="571" selection-start-column="17" selection-end-line="571" selection-end-column="17" />
+        <state relative-caret-position="9707">
+          <caret line="571" column="17" lean-forward="false" selection-start-line="571" selection-start-column="17" selection-end-line="571" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/pages/mobileError.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        <state relative-caret-position="1292">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/init.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="93" column="21" lean-forward="true" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="78" />
+        <state relative-caret-position="1377">
+          <caret line="93" column="21" lean-forward="false" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="78" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <marker date="1506981505122" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
@@ -1122,17 +1121,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6159">
-          <caret line="1522" column="1" lean-forward="false" selection-start-line="1522" selection-start-column="1" selection-end-line="1522" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
+        <state relative-caret-position="6902">
           <caret line="418" column="16" lean-forward="false" selection-start-line="418" selection-start-column="16" selection-end-line="418" selection-end-column="55" />
           <folding>
             <marker date="1506168887767" expanded="true" signature="10728:10741" ph="..." />
@@ -1140,18 +1131,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="170" column="42" lean-forward="false" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+        <state relative-caret-position="2159">
+          <caret line="139" column="51" lean-forward="false" selection-start-line="139" selection-start-column="51" selection-end-line="139" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="87" column="144" lean-forward="false" selection-start-line="87" selection-start-column="144" selection-end-line="87" selection-end-column="144" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
-          <caret line="140" column="25" lean-forward="true" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
+          <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
           <folding />
         </state>
       </provider>

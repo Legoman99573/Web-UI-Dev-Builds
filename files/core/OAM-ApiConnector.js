@@ -140,7 +140,6 @@ socketIo.connect = function() {
                 });
             }
             setTimeout(function() {
-                addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
                 if (settings.hue != null && settings.hue != "off") {
                     $.getScript("files/core/OAM-Hue.js", function() {
                         hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
@@ -172,6 +171,7 @@ socketIo.connect = function() {
                 }
 
             }, 1000);
+            addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
         } else {
             console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
             $.getScript("files/pages/unclaimedError.js");

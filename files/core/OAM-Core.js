@@ -399,14 +399,21 @@ openaudio.message = function(text) {
                 body: text,
             });
         }
-    } else {
+    }
+    if (window.location.protocol == "http:"){
         var notification = document.querySelector('.mdl-js-snackbar');
         var data = {
-            message: 'To ' + mcname + ': ' + text,
+            message: 'New Message: ' + text,
             timeout: 10000
         };
         notification.MaterialSnackbar.showSnackbar(data);
     }
+    var notificationsound = soundManager.createSound({
+        id: "oa_notification",
+        volume: volume / 10,
+        url: "files/core/soundmanager/notification.wav"
+    });
+    notificationsound.play();
 };
 
 //goto
@@ -639,7 +646,6 @@ function addJs(url) {
         OpenAudioAPI.loadMod(url, "Disabled", "JSMod");
     } else {
         $.getScript(url, function() {
-            $('head').append('<script src="' + url + '" type="text/javascript"></script>');
             console.info("[ModManager] Added js file from " + url + " successfully.");
             OpenAudioAPI.loadMod(url, "Enabled", "JSMod");
         });

@@ -581,3 +581,19 @@ input[type=range]:-moz-focusring{
   outline: 0px solid transparent;
   outline-offset: -1px;
 }
+
+.swal2-modal {
+  border-radius: 0px !important;
+}
+
+.swal2-modal .swal2-styled {
+  border-radius: 0px !important;
+}
+
+.song__text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

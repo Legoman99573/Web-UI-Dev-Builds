@@ -29,6 +29,15 @@ socketIo.connect = function() {
             $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else if (msg == "not_in_server") {
             $('.name').html(langpack.message.notconnected);
+            swal({
+                title: 'Looks like you disconnected',
+                text: "Run /audio in game, then press reconnect.",
+                type: 'error',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Reconnect'
+            }).then(function () {
+                initialize();
+            })
         } else if (msg == "connected") {
             $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else {
@@ -136,8 +145,10 @@ socketIo.connect = function() {
                     $.getScript("files/core/OAM-Hue.js", function() {
                         hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
                         hue_enabled = true;
-                        if (closedwreason != true) {
+                        if (hue_connected != true) {
                             loop_hue_connection_on_load();
+                        } else {
+                            openaudio.whisper("hueConnected");
                         }
                     });
                 } else {}

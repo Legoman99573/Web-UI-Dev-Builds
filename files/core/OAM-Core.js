@@ -93,6 +93,8 @@ var development = true;
 var hue_set = false;
 var direct = true;
 var connecting = true;
+var queueplaying = false;
+var Queue_List = {};
 var loop = false;
 setTimeout(keyfix, 1000);
 
@@ -180,7 +182,7 @@ openaudio.decode = function(msg) {
                     getYouTubePlaylist(curl);
                 } else {
                     curl = song.toString().split('?v=')[1];
-                    AutoDj.AddSong(AutoDj.AddSong(curl));
+                    AutoDj.AddSong(getYoutbe(curl));
                 }
             } else {
                 AutoDj.AddSong(song);

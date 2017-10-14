@@ -67,10 +67,10 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "           <h2 class=\"mdl-card__title-text\"></h2>\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__supporting-text\">\n" +
-    "           <b>It seems like you are using an unsupported browser</b> \n" +
+    "           <b>It seems like you are using a browser that has known issues and developers gave up on life trying to get support for it</b> \n" +
     "           <br>\n" +
     "           <br>\n" +
-    "           IE/Edge doesn't seem to like most of the js code as Microsoft has its own crappy version of JavaScript and we as developers of OA have lost faith in these browsers.\n" +
+    "           IE/Edge doesn't seem to like most of the js code as Microsoft has its own crappy version of JavaScript and we as developers of OA have dropped support. Edge has a possibility to be supported again in the future when they can get a better handler.\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__actions mdl-card--border\">\n" +
     "           <a href=\"https://discord.gg/b44BPv7\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" target=\"_blank\">\n" +

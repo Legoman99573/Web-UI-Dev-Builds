@@ -120,4 +120,12 @@ function logInit(msg) {
     console.info("[Init] " + msg);
 }
 
-initialize();
+if (navigator.appVersion.indexOf("Edge") != -1) {
+    $.getScript("files/pages/unsupportedError.js");
+} else if (navigator.appVersion.indexOf("Trident") != -1) {
+    $.getScript("files/pages/unsupportedError.js");
+} else if (navigator.appVersion.indexOf("MSIE") != -1) {
+    $.getScript("files/pages/unsupportedError.js");
+} else {
+    initialize();
+}

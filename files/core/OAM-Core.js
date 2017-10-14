@@ -96,7 +96,6 @@ var connecting = true;
 var queueplaying = false;
 var Queue_List = {};
 var loop = false;
-setTimeout(keyfix, 1000);
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -276,7 +275,6 @@ openaudio.decode = function(msg) {
         //TODO: REGION HANDLER
 
         if (request.command == "startRegion") {
-
             if (request.src.includes("soundcloud.com")) {
                 var scurl = request.src;
                 getSoundcloud(scurl, function(newurl) {
@@ -294,10 +292,52 @@ openaudio.decode = function(msg) {
 			else {
                 openaudio.playRegion(request.src, request.time, request.id);
             }
+        }
+        //Regions Playlist Integration
+        else if (request.command == "startPlaylist") {
+            try {
+                AutoDj.stopPlaylist();
+            } catch (e) {}
+            var myStringArray = request.array;
+            var arrayLength = myStringArray.length;
+            PlayList_songs = {};
+            for (var i = 0; i < arrayLength; i++) {
+                var song = myStringArray[i];
+                if (song.includes("soundcloud.com")) {
+                    var scurl2 = request.src;
+                    AutoDj.AddSong(getSoundcloud(scurl2, song));
+                }
+                // YouTube Integration
+                if (song.includes("youtube.com")) {
+                    if (song.includes("?list=")) {
+                        curl = song.toString().split('list=')[1];
+                        getYouTubePlaylist(curl);
+                    } else {
+                        curl = song.toString().split('?v=')[1];
+                        AutoDj.AddSong(getYoutbe(curl));
+                    }
+                } else {
+                    AutoDj.AddSong(song);
+                }
+                AutoDj.AddedCount = 1;
+                AutoDj.IdOfNowPlaying = 0;
+                AutoDj.LoadAll();
+                AutoDj.PlayNext();
+            }
         } else if (request.command == "stopOldRegion") {
-            openaudio.stopRegion(request.id);
+            try {
+                AutoDj.stopPlaylist();
+            } catch (e) {}
+            try {
+                openaudio.stopRegion(request.id);
+            } catch (e) {}
         } else {
-            openaudio.regionsStop();
+            try {
+                AutoDj.stopPlaylist();
+            } catch (e) {}
+            try {
+                openaudio.regionsStop();
+            } catch (e) {}
         }
     } else if (request.command == "volume") {
         fadeAllTarget(request.volume);
@@ -486,80 +526,96 @@ function SetDesignColor(code) {
     document.getElementById("box").style = "background-color: " + code + ";";
 }
 
-function keyfix() {
-    document.body.onkeydown = function(data) {
 
-        if (data.key == "ArrowDown" || data.key == "ArrowLeft") {
-            var slider = document.getElementById("slider");
-            slider.value = slider.value - 1;
-            openaudio.set_volume(slider.value);
-            sliderValue(slider.value);
+/* Format
+    keycode = decodedKey
+ */
+function keyEvent(key) {
+
+    /* 40 = ArrowDown
+       37 = ArrowLeft
+    */
+    if ((key.keyCode) === 40 || (key.keyCode) === 37) {
+        var slider = document.getElementById("slider");
+        slider.value = slider.value - 1;
+        openaudio.set_volume(slider.value);
+        sliderValue(slider.value);
+    }
+
+    // 72 = h
+    if ((key.keyCode) === 72) {
+        if (!(hue_enabled) !== true) {
+            openhue();
         }
-
-        if (data.key == "h") {
-            if (!(hue_enabled) !== true) {
-                openhue();
-            }
-            else {
-                OpenAudioAPI.generateDialog({
-                    textTitle: 'MiniMe',
-                    htmlContent: langpack.hue.disabled
-                });
-            }
-        }
-
-        if (data.key == "m") {
-            if (!(minimeon) !== true) {
-                openSmallWindow();
-            } else {
-                OpenAudioAPI.generateDialog({
-                    textTitle: 'MiniMe',
-                    htmlContent: langpack.message.minime_disabled
-                });
-            }
-        }
-
-        if (data.key == "d") {
-            if (!(development !== true)) {
-                soundmanager2_debugger();
-            } else {
-                OpenAudioAPI.generateDialog({
-                    textTitle: 'Soundmanager2 Debugger',
-                    htmlContent: langpack.message.debugger_off
-                });
-            }
-        }
-
-        if (data.key == "l") {
+        else {
             OpenAudioAPI.generateDialog({
-                textTitle: 'Easter Egg',
-                htmlContent: langpack.message.easter_egg
+                textTitle: 'Philips HUE',
+                htmlContent: langpack.hue.disabled
             });
-            soundManager.createSound({
-                id: "oa_easteregg",
-                volume: volume,
-                url: "https://oayt-delivery.snowdns.de/?v=m7SNzJx05IE",
-                autoPlay: true
-            });
-        }
-
-        if (data.key == "i") {
-            var dialog = document.querySelector('#dialog-mods');
-            dialog.showModal();
-            dialog.querySelector('#dialog-close-mods').addEventListener('click', function () {
-                dialog.close();
-            });
-        }
-
-        if (data.key == "ArrowUp" || data.key == "ArrowRight") {
-            var slider = document.getElementById("slider");
-            var val = ++slider.value;
-            slider.value = val;
-            openaudio.set_volume(slider.value);
-            sliderValue(slider.value);
         }
     }
+
+    // 77 = m
+    if ((key.keyCode) === 77) {
+        if (!(minimeon) !== true) {
+            openSmallWindow();
+        } else {
+            OpenAudioAPI.generateDialog({
+                textTitle: 'MiniMe',
+                htmlContent: langpack.message.minime_disabled
+            });
+        }
+    }
+
+    // 68 = d
+    if ((key.keyCode) === 68) {
+        if (!(development !== true)) {
+            soundmanager2_debugger();
+        } else {
+            OpenAudioAPI.generateDialog({
+                textTitle: 'Soundmanager2 Debugger',
+                htmlContent: langpack.message.debugger_off
+            });
+        }
+    }
+
+    // 76 = l
+    if ((key.keyCode) === 76) {
+        OpenAudioAPI.generateDialog({
+            textTitle: 'Easter Egg',
+            htmlContent: langpack.message.easter_egg
+        });
+        soundManager.createSound({
+            id: "oa_easteregg",
+            volume: volume,
+            url: "https://oayt-delivery.snowdns.de/?v=m7SNzJx05IE",
+            autoPlay: true
+        });
+    }
+
+    // 73 = i
+    if ((key.keyCode) === 73) {
+        var dialog = document.querySelector('#dialog-mods');
+        dialog.showModal();
+        dialog.querySelector('#dialog-close-mods').addEventListener('click', function () {
+            dialog.close();
+        });
+    }
+
+    /*
+       38 = ArrowUp
+       39 = ArrowRight
+    */
+    if ((key.keyCode) === 38 || (key.keyCode) === 39) {
+        var slider = document.getElementById("slider");
+        var val = ++slider.value;
+        slider.value = val;
+        openaudio.set_volume(slider.value);
+        sliderValue(slider.value);
+    }
 }
+
+document.onkeydown = keyEvent;
 
 function loadAllFromJson(pack) {
     var json = JSON.parse(pack);

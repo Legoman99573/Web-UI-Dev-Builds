@@ -89,7 +89,6 @@ function initialize() {
             socketio_client_js = api.clientJS;
             enableMain(api.clientJS);
         } catch (e) {
-            console.error(e);
             console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
             $.getScript("files/pages/serverError.js");
@@ -120,11 +119,7 @@ function logInit(msg) {
     console.info("[Init] " + msg);
 }
 
-if (navigator.appVersion.indexOf("Edge") != -1) {
-    $.getScript("files/pages/unsupportedError.js");
-} else if (navigator.appVersion.indexOf("Trident") != -1) {
-    $.getScript("files/pages/unsupportedError.js");
-} else if (navigator.appVersion.indexOf("MSIE") != -1) {
+if (navigator.appVersion.indexOf("Edge") != -1 && navigator.appVersion.indexOf("Trident") != -1 && navigator.appVersion.indexOf("MSIE") != -1) {
     $.getScript("files/pages/unsupportedError.js");
 } else {
     initialize();

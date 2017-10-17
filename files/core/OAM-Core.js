@@ -12,14 +12,6 @@
  * the License.
  */
 
-// Load SoundManagers first :D
-$.getScript('files/core/soundmanager/OAM-3rd-Party-Audio.js');
-$.getScript('files/core/soundmanager/OAM-Audio.js');
-$.getScript('files/core/soundmanager/OAM-Loop.js');
-$.getScript('files/core/soundmanager/OAM-Playlist.js');
-$.getScript('files/core/soundmanager/OAM-Region.js');
-$.getScript('files/core/soundmanager/OAM-Speaker.js');
-
 langpack = {};
 langpack.hue = {};
 langpack.message = {};
@@ -165,32 +157,34 @@ openaudio.decode = function(msg) {
         try {
             AutoDj.stopPlaylist();
         } catch (e) {}
-        var myStringArray = request.array;
-        var arrayLength = myStringArray.length;
-        PlayList_songs = {};
-        for (var i = 0; i < arrayLength; i++) {
-            var song = myStringArray[i];
-            if (song.includes("soundcloud.com")) {
-                var scurl2 = request.src;
-                AutoDj.AddSong(getSoundcloud(scurl2, song));
-            }
-            // YouTube Integration
-            if (song.includes("youtube.com")) {
-                if (song.includes("?list=")) {
-                    curl = song.toString().split('list=')[1];
-                    getYouTubePlaylist(curl);
-                } else {
-                    curl = song.toString().split('?v=')[1];
-                    AutoDj.AddSong(getYoutbe(curl));
+        setTimeout(function() {
+            var myStringArray = request.array;
+            var arrayLength = myStringArray.length;
+            PlayList_songs = {};
+            for (var i = 0; i < arrayLength; i++) {
+                var song = myStringArray[i];
+                if (song.includes("soundcloud.com")) {
+                    var scurl2 = request.src;
+                    AutoDj.AddSong(getSoundcloud(scurl2, song));
                 }
-            } else {
-                AutoDj.AddSong(song);
+                // YouTube Integration
+                if (song.includes("youtube.com")) {
+                    if (song.includes("list=")) {
+                        curl = song.toString().split('list=')[1];
+                        getYouTubePlaylist(curl);
+                    } else if (song.includes("v=")) {
+                        curl = song.toString().split('?v=')[1];
+                        AutoDj.AddSong(getYoutbe(curl));
+                    }
+                } else {
+                    AutoDj.AddSong(song);
+                }
             }
             AutoDj.AddedCount = 1;
             AutoDj.IdOfNowPlaying = 0;
             AutoDj.LoadAll();
             AutoDj.PlayNext();
-        }
+        }, 1000)
     } else if (request.command == "message") {
         //Browser messages
         openaudio.message(request.string);
@@ -413,7 +407,7 @@ openaudio.decode = function(msg) {
 };
 
 openaudio.whisper = function(message) {
-    socket.emit("whisperToServer", message);
+    socket.emit("whisperToServer" , message);
     console.info("[Socket.io] Whisper send.");
 };
 

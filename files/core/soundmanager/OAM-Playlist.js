@@ -64,8 +64,9 @@ AutoDj.Play = function(FNC_ID) {
     }
 };
 AutoDj.SoundManager_Play = function(fnc_file, id) {
+    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
     var mySoundObject = soundManager.createSound({
-        id: "AutoDj_" + id,
+        id: "AutoDj_" + id + "_" + randomID,
         url: fnc_file,
         volume: volume,
         autoplay: true
@@ -78,7 +79,7 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
             },
             onerror: function() {
                 console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
-                soundManager.destroySound("AutoDj_" + id);
+                soundManager.destroySound("AutoDj_" + id + "_" + randomID);
                 AutoDj.PlayNext();
             }
         });
@@ -87,8 +88,8 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
     playSound(mySoundObject);
 
     AutoDj.stopPlaylist = function() {
-        fadeIdOut("AutoDj_" + id);
-        soundManager.destroySound("AutoDj_" + id);
+        fadeIdOut("AutoDj_" + id + "_" + randomID);
+        soundManager.destroySound("AutoDj_" + id + "_" + randomID);
     }
 };
 AutoDj.PlayNext = function() {

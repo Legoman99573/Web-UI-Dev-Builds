@@ -43,14 +43,14 @@ function getYoutbe(youtubeId) {
             songImage: json["thumbnail"]
         });
     });
-    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId
+    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId;
 }
 
 // YouTube Playlist Integration
 // Warning: This will only work with /oa playlist
 function getYouTubePlaylist(playlistID) {
     $.ajax({
-        url: 'https://apocalypsje.ga/YouTubePlayList.php?playlistId=' + playlistID,
+        url: 'https://api.apocalypsje.ga/yt/YouTubePlayList.php?playlistId=' + playlistID,
         type: 'get',
         async: false,
         success: function (data) {

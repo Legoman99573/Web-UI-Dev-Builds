@@ -157,34 +157,32 @@ openaudio.decode = function(msg) {
         try {
             AutoDj.stopPlaylist();
         } catch (e) {}
-        setTimeout(function() {
-            var myStringArray = request.array;
-            var arrayLength = myStringArray.length;
-            PlayList_songs = {};
-            for (var i = 0; i < arrayLength; i++) {
-                var song = myStringArray[i];
-                if (song.includes("soundcloud.com")) {
-                    var scurl2 = request.src;
-                    AutoDj.AddSong(getSoundcloud(scurl2, song));
-                }
-                // YouTube Integration
-                if (song.includes("youtube.com")) {
-                    if (song.includes("list=")) {
-                        curl = song.toString().split('list=')[1];
-                        getYouTubePlaylist(curl);
-                    } else if (song.includes("v=")) {
-                        curl = song.toString().split('?v=')[1];
-                        AutoDj.AddSong(getYoutbe(curl));
-                    }
-                } else {
-                    AutoDj.AddSong(song);
-                }
+        var myStringArray = request.array;
+        var arrayLength = myStringArray.length;
+        PlayList_songs = {};
+        for (var i = 0; i < arrayLength; i++) {
+            var song = myStringArray[i];
+            if (song.includes("soundcloud.com")) {
+                var scurl2 = request.src;
+                AutoDj.AddSong(getSoundcloud(scurl2, song));
             }
-            AutoDj.AddedCount = 1;
-            AutoDj.IdOfNowPlaying = 0;
-            AutoDj.LoadAll();
-            AutoDj.PlayNext();
-        }, 1000)
+            // YouTube Integration
+            if (song.includes("youtube.com")) {
+                if (song.includes("list=")) {
+                    curl = song.toString().split('list=')[1];
+                    getYouTubePlaylist(curl);
+                } else if (song.includes("v=")) {
+                    curl = song.toString().split('?v=')[1];
+                    AutoDj.AddSong("https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + curl);
+                }
+            } else {
+                AutoDj.AddSong(song);
+            }
+        }
+        AutoDj.AddedCount = 1;
+        AutoDj.IdOfNowPlaying = 0;
+        AutoDj.LoadAll();
+        AutoDj.PlayNext();
     } else if (request.command == "message") {
         //Browser messages
         openaudio.message(request.string);

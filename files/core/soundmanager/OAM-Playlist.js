@@ -40,6 +40,13 @@ AutoDj.LoadAll = function() {
     if (PlayList_songs["_" + thiscount] == "end") {
         var loadedcount = thiscount - 1;
         console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
+
+        var notification = document.querySelector('.mdl-js-snackbar');
+        var data = {
+            message: "[PlaylistManager] Loaded " + loadedcount + " songs.",
+            timeout: 10000
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
     }
 };
 AutoDj.Check = function(song_id) {
@@ -61,6 +68,13 @@ AutoDj.Play = function(FNC_ID) {
     } else {
         console.warn("AutoDj: " + FNC_ID + " not playing due to an error. Try rerunning the command again in game");
         AutoDj.PlayNext();
+
+        var notification = document.querySelector('.mdl-js-snackbar');
+        var data = {
+            message: "[PlaylistManager] Failed to play song #" + FNC_ID + ". Skipping to next song.",
+            timeout: 100
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
     }
 };
 AutoDj.SoundManager_Play = function(fnc_file, id) {
@@ -81,11 +95,30 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
                 console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
                 soundManager.destroySound("AutoDj_" + id + "_" + randomID);
                 AutoDj.PlayNext();
+
+                var notification = document.querySelector('.mdl-js-snackbar');
+                var data = {
+                    message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
+                    timeout: 100
+                };
+                notification.MaterialSnackbar.showSnackbar(data);
             }
         });
     }
 
     playSound(mySoundObject);
+
+    if (fnc_file.includes("oayt-delivery.snowdns.de")) {
+        curl = fnc_file.toString().split('&v=')[1];
+        $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + curl, function(data) {
+            let json = JSON.parse(data);
+            OpenAudioAPI.songNotification({
+                songTitle: json["title"],
+                songURL: 'https://www.youtube.com/watch?v=' + curl,
+                songImage: json["thumbnail"]
+            });
+        });
+    }
 
     AutoDj.stopPlaylist = function() {
         fadeIdOut("AutoDj_" + id + "_" + randomID);

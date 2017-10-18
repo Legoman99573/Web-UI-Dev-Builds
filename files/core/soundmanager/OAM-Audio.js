@@ -45,7 +45,7 @@ soundManager.setup({
                     soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
                 }
             }
-        }
+        },
     }
 });
 

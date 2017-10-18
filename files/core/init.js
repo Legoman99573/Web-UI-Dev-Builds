@@ -99,13 +99,6 @@ function initialize() {
         logInit("clientError 1: No Username filled in. use /audio or /connect to get a new url link");
         $.getScript("files/pages/urlError.js");
     }
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        swal(
-            'Mobile Browser Detected',
-            'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
-            'warning'
-        )
-    }
 }
 
 function enableMain(clientJs) {

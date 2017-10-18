@@ -67,12 +67,20 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "           <h2 class=\"mdl-card__title-text\"></h2>\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__supporting-text\">\n" +
-    "           <b>It seems like our API server is offline</b>, but don't worry! We have a team of <b>highly trained Assassin Monkeys</b> who will be investigating this problem! \n" +
+    "           <b>It seems like something happened to the webclient</b>\n" +
     "           <br>\n" +
     "           <br>\n" +
-    "           Please try loading this page again later and if the Monkeys didn't manage to fix it, let us know on Discord\n" +
+    "           Either issue is: \n" +
+    "           <ol>\n" +
+    "               <li>API Server is offline</li>\n" +
+    "               <li>The Web Client has failed to initialize due to an error in the code</li>\n" +
+    "           </ol>\n"+
+    "           Please try reloading this page and if your problem isnt solved, let us know on Discord.\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__actions mdl-card--border\">\n" +
+    "           <a href=\""+ window.location.href +"\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\">\n" +
+    "             Retry \n" +
+    "           </a>\n" +
     "           <a href=\"https://discord.gg/b44BPv7\" class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" target=\"_blank\">\n" +
     "             Discord Invite \n" +
     "           </a>\n" +

@@ -172,6 +172,25 @@ socketIo.connect = function() {
 
             }, 1000);
             addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                swal(
+                    'Mobile Browser Detected',
+                    'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
+                    'warning'
+                )
+            } else if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) {
+                swal({
+                    title: 'Are you sure?',
+                    text: "Do you want to use the Windows App made by sneeuw?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Open Windows APP'
+                }).then(function () {
+                    openInNewTab("oamc:"+ clientID +"/"+ clientTOKEN +"/"+ mcname);
+                });
+            }
         } else {
             console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
             $.getScript("files/pages/unclaimedError.js");

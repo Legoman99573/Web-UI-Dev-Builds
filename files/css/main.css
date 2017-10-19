@@ -564,6 +564,43 @@ footer {
   overflow: auto;
 }
 
+/* Thanks to IE/Edge, we got to make our own slider */
+input[type=range]::-ms-track {
+  height: 50px; !important;
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent !important;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent !important;
+  border-width: 6px 0 !important;
+
+  overflow: visible !important;
+
+  /*remove default tick marks*/
+  color: transparent !important;
+}
+input[type=range]::-ms-fill-lower {
+  background: transparent !important;
+  border-radius: 100px !important;
+}
+input[type=range]::-ms-fill-upper {
+  background: transparent !important;
+  border-radius: 10px !important;
+}
+input[type=range]::-ms-thumb {
+  border: none !important;
+  height: 30px !important;
+  width: 30px !important;
+  border-radius: 50% !important;
+  background: rgb(33,150,243) !important;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: transparent !important;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: transparent !important;
+}
+
 /* Thanks to Firefox, We have to make a border transparent to hide it */
 input[type=range]{
   border: 0px solid transparent;

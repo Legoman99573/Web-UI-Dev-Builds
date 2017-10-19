@@ -140,57 +140,58 @@ socketIo.connect = function() {
                 });
             }
             setTimeout(function() {
-                if (settings.hue !== null && settings.hue !== "off") {
-                    $.getScript("files/core/OAM-Hue.js", function() {
-                        hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
-                        hue_enabled = true;
-                        if (hue_connected != true) {
-                            loop_hue_connection_on_load();
-                        } else {
-                            openaudio.whisper("hueConnected");
-                        }
-                    });
-                } else {}
-                if (settings.bg === "") {} else {
-                    document.body.background = settings.bg;
-                    // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-                    document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
-                }
-                if (settings.logo === "") {
-                    document.getElementById("logo").src = "files/images/footer_logo.png";
-                } else {
+                if (closedwreason !== true) {
+                    if (settings.hue !== null && settings.hue !== "off") {
+                        $.getScript("files/core/OAM-Hue.js", function() {
+                            hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
+                            hue_enabled = true;
+                            if (hue_connected != true) {
+                                loop_hue_connection_on_load();
+                            } else {
+                                openaudio.whisper("hueConnected");
+                            }
+                        });
+                    } else {}
+                    if (settings.bg === "") {} else {
+                        document.body.background = settings.bg;
+                        // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                        document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                    }
+                    if (settings.logo === "") {
+                        document.getElementById("logo").src = "files/images/footer_logo.png";
+                    } else {
 
-                    (function() {
-                        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-                        link.type = 'image/x-icon';
-                        link.rel = 'shortcut icon';
-                        link.href = settings.logo;
-                        document.getElementsByTagName('head')[0].appendChild(link);
-                    }());
-                    document.getElementById("logo").src = settings.logo;
+                        (function() {
+                            var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+                            link.type = 'image/x-icon';
+                            link.rel = 'shortcut icon';
+                            link.href = settings.logo;
+                            document.getElementsByTagName('head')[0].appendChild(link);
+                        }());
+                        document.getElementById("logo").src = settings.logo;
+                    }
+                    addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                        swal(
+                            'Mobile Browser Detected',
+                            'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
+                            'warning'
+                        )
+                    } else if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
+                        swal({
+                            title: 'Are you sure?',
+                            text: "Do you want to use the Windows App made by sneeuw?",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Open Windows APP'
+                        }).then(function () {
+                            openInNewTab("oamc:"+ clientID +"/"+ clientTOKEN +"/"+ mcname);
+                        });
+                    }
                 }
-
             }, 1000);
-            addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
-            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                swal(
-                    'Mobile Browser Detected',
-                    'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
-                    'warning'
-                )
-            } else if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
-                swal({
-                    title: 'Are you sure?',
-                    text: "Do you want to use the Windows App made by sneeuw?",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Open Windows APP'
-                }).then(function () {
-                    openInNewTab("oamc:"+ clientID +"/"+ clientTOKEN +"/"+ mcname);
-                });
-            }
         } else {
             console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
             $.getScript("files/pages/unclaimedError.js");

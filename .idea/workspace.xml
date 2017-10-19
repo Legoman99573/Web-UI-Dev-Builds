@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/main.css" afterPath="$PROJECT_DIR$/files/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -95,21 +95,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
+            <state relative-caret-position="17">
               <caret line="576" column="30" lean-forward="false" selection-start-line="576" selection-start-column="30" selection-end-line="576" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="114" column="40" lean-forward="true" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
+            <state relative-caret-position="204">
+              <caret line="147" column="56" lean-forward="true" selection-start-line="147" selection-start-column="56" selection-end-line="147" selection-end-column="56" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -145,7 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>audio.playlist</find>
       <find>IdOfNowPlaying</find>
       <find>speaker</find>
       <find>region</find>
@@ -175,6 +174,7 @@
       <find>border-radius</find>
       <find>about()</find>
       <find>mdl</find>
+      <find>mdl-snackbar</find>
     </findStrings>
     <replaceStrings>
       <replace>Queue</replace>
@@ -247,8 +247,8 @@
         <option value="$PROJECT_DIR$/files/core/init.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
+        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
       </list>
     </option>
   </component>
@@ -268,8 +268,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="777" />
+    <option name="height" value="705" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -494,7 +494,7 @@
       <workItem from="1507324371898" duration="22337000" />
       <workItem from="1507542020557" duration="3678000" />
       <workItem from="1507974786776" duration="8455000" />
-      <workItem from="1508065877924" duration="49319000" />
+      <workItem from="1508065877924" duration="50894000" />
     </task>
     <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
       <created>1502366453004</created>
@@ -804,11 +804,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508375378587</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Volume slider fixed as best as possible for Edge&#10;&#10;Cannot get the circle part fixed, but i guess we tried our best =/">
+      <created>1508377665002</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1508377665002</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="576120000" />
+    <option name="totallyTimeSpent" value="577695000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -878,7 +885,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="BgColor Changes and Bugfixes" />
     <MESSAGE value="Bugfixes" />
     <MESSAGE value="SoundManager2 Debugger changes" />
     <MESSAGE value="HUE tests before release" />
@@ -903,7 +909,8 @@
     <MESSAGE value="More improvements to Playlist Manager" />
     <MESSAGE value="OpenAudio App for Windows UWP&#10;&#10;Fuck Windows 8, they dont needs it ;P" />
     <MESSAGE value="Bootstrap Modals are back&#10;&#10;Due to an issue with Material's Dialog system, we decided to bring only Bootstrap Modal's back.&#10;&#10;Plus this allows us to remove unsupportedError.js as it works with Edge and IE, but philips hue wont work again sadly :(" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bootstrap Modals are back&#10;&#10;Due to an issue with Material's Dialog system, we decided to bring only Bootstrap Modal's back.&#10;&#10;Plus this allows us to remove unsupportedError.js as it works with Edge and IE, but philips hue wont work again sadly :(" />
+    <MESSAGE value="Volume slider fixed as best as possible for Edge&#10;&#10;Cannot get the circle part fixed, but i guess we tried our best =/" />
+    <option name="LAST_COMMIT_MESSAGE" value="Volume slider fixed as best as possible for Edge&#10;&#10;Cannot get the circle part fixed, but i guess we tried our best =/" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -947,7 +954,7 @@
         <state relative-caret-position="1360">
           <caret line="80" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="81" selection-end-column="14" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1046,7 +1053,7 @@
         <state relative-caret-position="314">
           <caret line="76" column="25" lean-forward="true" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1056,7 +1063,7 @@
         <state relative-caret-position="153">
           <caret line="66" column="55" lean-forward="false" selection-start-line="66" selection-start-column="55" selection-end-line="66" selection-end-column="55" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1066,7 +1073,7 @@
         <state relative-caret-position="365">
           <caret line="81" column="23" lean-forward="false" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1086,7 +1093,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1200,21 +1207,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
+    <entry file="file://$PROJECT_DIR$/files/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="114" column="40" lean-forward="true" selection-start-line="114" selection-start-column="40" selection-end-line="114" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="576" column="30" lean-forward="false" selection-start-line="576" selection-start-column="30" selection-end-line="576" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/main.css">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="576" column="30" lean-forward="false" selection-start-line="576" selection-start-column="30" selection-end-line="576" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="204">
+          <caret line="147" column="56" lean-forward="true" selection-start-line="147" selection-start-column="56" selection-end-line="147" selection-end-column="56" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

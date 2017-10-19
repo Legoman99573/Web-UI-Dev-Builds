@@ -263,7 +263,6 @@ openaudio.decode = function(msg) {
             openaudio.loop(request.src);
         }
     } else if (request.type == "region") {
-
         //TODO: REGION HANDLER
 
         if (request.command == "startRegion") {
@@ -283,38 +282,6 @@ openaudio.decode = function(msg) {
 			} // YouTube Integration End
 			else {
                 openaudio.playRegion(request.src, request.time, request.id);
-            }
-        }
-        //Regions Playlist Integration
-        else if (request.command == "startPlaylist") {
-            try {
-                AutoDj.stopPlaylist();
-            } catch (e) {}
-            var myStringArray = request.array;
-            var arrayLength = myStringArray.length;
-            PlayList_songs = {};
-            for (var i = 0; i < arrayLength; i++) {
-                var song = myStringArray[i];
-                if (song.includes("soundcloud.com")) {
-                    var scurl2 = request.src;
-                    AutoDj.AddSong(getSoundcloud(scurl2, song));
-                }
-                // YouTube Integration
-                if (song.includes("youtube.com")) {
-                    if (song.includes("?list=")) {
-                        curl = song.toString().split('list=')[1];
-                        getYouTubePlaylist(curl);
-                    } else {
-                        curl = song.toString().split('?v=')[1];
-                        AutoDj.AddSong(getYoutbe(curl));
-                    }
-                } else {
-                    AutoDj.AddSong(song);
-                }
-                AutoDj.AddedCount = 1;
-                AutoDj.IdOfNowPlaying = 0;
-                AutoDj.LoadAll();
-                AutoDj.PlayNext();
             }
         } else if (request.command == "stopOldRegion") {
             try {
@@ -507,11 +474,7 @@ function dev() {
 }
 
 function soundmanager2_debugger() {
-    var dialog = document.querySelector('#dialog-soundmanager2');
-    dialog.showModal();
-    dialog.querySelector('#dialog-close-sm').addEventListener('click', function () {
-        dialog.close();
-    });
+    $('#dialog-soundmanager2').modal('show');
 }
 
 function SetDesignColor(code) {
@@ -541,20 +504,20 @@ function keyEvent(key) {
         }
         else {
             OpenAudioAPI.generateDialog({
-                textTitle: 'Philips HUE',
-                htmlContent: langpack.hue.disabled
+                title: 'Philips HUE',
+                text: langpack.hue.disabled
             });
         }
     }
 
     // 77 = m
     if ((key.keyCode) === 77) {
-        if (!(minimeon) !== true) {
+        if (!(minimeon) === true) {
             openSmallWindow();
         } else {
-            OpenAudioAPI.generateDialog({
-                textTitle: 'MiniMe',
-                htmlContent: langpack.message.minime_disabled
+            swal({
+                title: 'MiniMe',
+                text: langpack.message.minime_disabled
             });
         }
     }
@@ -564,18 +527,18 @@ function keyEvent(key) {
         if (!(development !== true)) {
             soundmanager2_debugger();
         } else {
-            OpenAudioAPI.generateDialog({
-                textTitle: 'Soundmanager2 Debugger',
-                htmlContent: langpack.message.debugger_off
+            swal({
+                title: 'Soundmanager2 Debugger',
+                text: langpack.message.debugger_off
             });
         }
     }
 
     // 76 = l
     if ((key.keyCode) === 76) {
-        OpenAudioAPI.generateDialog({
-            textTitle: 'Easter Egg',
-            htmlContent: langpack.message.easter_egg
+        swal({
+            title: 'Easter Egg',
+            text: langpack.message.easter_egg
         });
         soundManager.createSound({
             id: "oa_easteregg",
@@ -587,11 +550,7 @@ function keyEvent(key) {
 
     // 73 = i
     if ((key.keyCode) === 73) {
-        var dialog = document.querySelector('#dialog-mods');
-        dialog.showModal();
-        dialog.querySelector('#dialog-close-mods').addEventListener('click', function () {
-            dialog.close();
-        });
+        $('#dialog-mods').modal('show');
     }
 
     /*

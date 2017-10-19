@@ -17,7 +17,7 @@ var OpenAudioAPI = {};
 // Dialog API
 OpenAudioAPI.generateDialog = function(options) {
     var defaults = {
-        dialogWidth: null,
+        dialogLarge: null,
         textTitle: null,
         htmlContent: null,
         optionButtonHide: "true",
@@ -33,7 +33,11 @@ OpenAudioAPI.generateDialog = function(options) {
             console.error("[OpenAudio API] [errorException] htmlContent is required");
         } else {
             if (actual.dialogWidth != null) {
-                $('#dialog-api').css('width', actual.dialogWidth);
+                $('#dialog-api-width').addClass('modal-lg');
+            } else {
+                try {
+                    $('#dialog-api-width').removeClass('modal-lg');
+                } catch (e) {}
             }
             $('#dialog-api-title').text(actual.textTitle);
             $('#dialog-api-content').html(actual.htmlContent);
@@ -55,12 +59,7 @@ OpenAudioAPI.generateDialog = function(options) {
             } else {
                 $('#dialog-api-action').hide();
             }
-            var dialog = document.querySelector('#dialog-api');
-            dialog.showModal();
-            dialog.querySelector('#close').addEventListener('click', function () {
-                $('#dialog-api').css('width', "");
-                dialog.close();
-            });
+            $('#dialog-api').modal('show');
         }
     }
 };

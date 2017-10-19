@@ -494,14 +494,6 @@ footer {
   transform: translate(-50%, -50%);
 }
 
-.dialog-center {
-  position: fixed;
-  top: 50%;
-  bottom: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
 .edges {
   position: absolute;
   margin-top: 10px;

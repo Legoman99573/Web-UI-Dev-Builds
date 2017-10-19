@@ -25,9 +25,9 @@ socketIo.connect = function() {
     closedwreason = false;
     socket.on('command', function(msg) {
         socketIo.log("Reiceived command.");
-        if (msg == "connectionSuccess") {
+        if (msg === "connectionSuccess") {
             $('.name').html(langpack.message.welcome.replace("%name%", mcname));
-        } else if (msg == "not_in_server") {
+        } else if (msg === "not_in_server") {
             $('.name').html(langpack.message.notconnected);
             swal({
                 title: 'Looks like you disconnected',
@@ -38,7 +38,7 @@ socketIo.connect = function() {
             }).then(function () {
                 initialize();
             })
-        } else if (msg == "connected") {
+        } else if (msg === "connected") {
             $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else {
             openaudio.decode(msg);
@@ -46,7 +46,7 @@ socketIo.connect = function() {
     });
 
     socket.on('oaCss', function(msg) {
-        if (msg != null) {
+        if (msg !== null) {
             var msg = JSON.parse(msg);
             var arrayLength = msg.length;
             for (var i = 0; i < arrayLength; i++) {
@@ -56,7 +56,7 @@ socketIo.connect = function() {
     });
 
     socket.on('oaJs', function(msg) {
-        if (msg != null) {
+        if (msg !== null) {
             var msg = JSON.parse(msg);
             var arrayLength = msg.length;
             for (var i = 0; i < arrayLength; i++) {
@@ -88,50 +88,50 @@ socketIo.connect = function() {
             itemName: 'Huegasm'
         });
 
-        if (msg != null) {
+        if (msg !== null) {
             var settings = JSON.parse(msg);
             $("#client-title").text(settings.Title);
             document.title = settings.Title;
             addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
-            if (settings.asound != null) {
+            if (settings.asound !== null) {
                 ambiance = settings.asound;
             } else {
                 ambiance = "";
             }
 
-            if (settings.ambdelay != null) {
+            if (settings.ambdelay !== null) {
                 ambdelay = settings.ambdelay;
             }
 
-            if (development == true) {
+            if (development === true) {
                 sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "SoundManager Debugger");
             }
 
-            if (settings.twitter != "" && settings.twitter != null) {
+            if (settings.twitter !== "" && settings.twitter !== null) {
                 twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "Twitter");
                 twitter = settings.twitter;
             }
 
-            if (settings.minime == "on" && settings.minime != null) {
-                if (tinyWindow == "(none)") {
+            if (settings.minime === "on" || settings.minime !== null) {
+                if (tinyWindow === "(none)") {
                     minimeon = true;
                     minimeicon = new trayItem("fa fa-window-maximize", "openSmallWindow", "Mini Mode");
                 }
             }
 
-            if (settings.qrcode != null && settings.qrcode != "off") {
+            if (settings.qrcode !== null && settings.qrcode !== "off") {
                 $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "QR Code");});
             }
 
-            if (settings.youtube != "" && settings.youtube != null) {
+            if (settings.youtube !== "" && settings.youtube !== null) {
                 youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "YouTube");
                 youtube = settings.youtube;
             }
-            if (settings.website != "" && settings.website != null) {
+            if (settings.website !== "" && settings.website !== null) {
                 websiteIcon = new trayItem("fa fa-globe", "openSite", "Our Website");
                 website = settings.website;
             }
-            if (settings.uicolor != null && settings.uicolor != "") {
+            if (settings.uicolor !== null && settings.uicolor !== "") {
                 openaudio.color("#" + settings.uicolor);
                 iconcolor = settings.uicolor;
                 document.getElementById("icons").color = "'#" + settings.uicolor + "'";
@@ -140,7 +140,7 @@ socketIo.connect = function() {
                 });
             }
             setTimeout(function() {
-                if (settings.hue != null && settings.hue != "off") {
+                if (settings.hue !== null && settings.hue !== "off") {
                     $.getScript("files/core/OAM-Hue.js", function() {
                         hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
                         hue_enabled = true;
@@ -151,12 +151,12 @@ socketIo.connect = function() {
                         }
                     });
                 } else {}
-                if (settings.bg == "") {} else {
+                if (settings.bg === "") {} else {
                     document.body.background = settings.bg;
                     // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                     document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
                 }
-                if (settings.logo == "") {
+                if (settings.logo === "") {
                     document.getElementById("logo").src = "files/images/footer_logo.png";
                 } else {
 
@@ -178,7 +178,7 @@ socketIo.connect = function() {
                     'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
                     'warning'
                 )
-            } else if (window.navigator.userAgent.indexOf("Windows NT 10.0")!= -1) {
+            } else if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
                 swal({
                     title: 'Are you sure?',
                     text: "Do you want to use the Windows App made by sneeuw?",
@@ -201,12 +201,12 @@ socketIo.connect = function() {
 
     socket.on('oaError', function(msg) {
         socketIo.log("Received error.");
-        if (msg == "server-offline") {
+        if (msg === "server-offline") {
             closedwreason = true;
             console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
             $.getScript("files/pages/serverError.js");
-        } else if (msg == "kicked") {
+        } else if (msg === "kicked") {
             closedwreason = true;
             console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 3: Invalid Session. use /audio or /connect to get a new url link");
@@ -218,7 +218,7 @@ socketIo.connect = function() {
             //So we can ban servers/users who use openaudio for bad things
             //You can remove it if you wanna :3
 
-            if (message.command == "banned") {
+            if (message.command === "banned") {
                 swal({
                     title: "Oh no, it looks like this server is banned :(",
                     text: "Ban info: " + message.message,

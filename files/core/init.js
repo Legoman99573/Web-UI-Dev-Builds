@@ -112,8 +112,8 @@ function logInit(msg) {
     console.info("[Init] " + msg);
 }
 
+initialize();
+
 if (navigator.appVersion.indexOf("Edge") != -1 && navigator.appVersion.indexOf("Trident") != -1 && navigator.appVersion.indexOf("MSIE") != -1) {
-    $.getScript("files/pages/unsupportedError.js");
-} else {
-    initialize();
+        console.warn("You are using IE/Edge. Some features may not work.");
 }

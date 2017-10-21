@@ -57,7 +57,10 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "      z-index: 0;\n" +
     "      -webkit-transform: translate(-50%, -50%);\n" +
     "      transform: translate(-50%, -50%);\n" +
-    "    }" +
+    "    }\n" +
+    "    .swal2-container {\n" +
+    "       display: none !important;\n" +
+    "    }\n" +
     "  </style>");
 
 $('body').html("<!-- Uses a header that scrolls with the text, rather than staying locked at the top -->\n" +

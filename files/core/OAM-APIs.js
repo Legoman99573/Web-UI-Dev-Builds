@@ -222,8 +222,11 @@ OpenAudioAPI.versionCheckup = function(options) {
                     } else {
                         var notification = document.querySelector('.mdl-js-snackbar');
                         var data = {
-                            message: 'Update available for ' + actual.modName + '. Latest version: ' + actual.latestVersion +
-                            '/n <span onclick="openInNewTab(\'actual.urlLink\')">Click Here</span>',
+                            message: 'Update available for ' + actual.modName,
+                            actionHandler: function() {
+                                openInNewTab(actual.urlLink)
+                            },
+                            actionText: 'Click Here',
                             timeout: 10000
                         };
                         notification.MaterialSnackbar.showSnackbar(data);

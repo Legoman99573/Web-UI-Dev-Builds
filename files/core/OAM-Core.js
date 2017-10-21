@@ -432,20 +432,23 @@ openaudio.message = function(text) {
 //goto
 
 function openSmallWindow() {
-    swal({
-        title: 'Are you sure?',
-        text: "Current sounds may stop!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Open mini-audio'
-    }).then(function () {
-        minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
-        minime.onload = function() {
-            window.location.href = "http://closeme.openaudiomc.net/";
-        }
-    })
+    if (!(document.URL.includes("&tinyWindow=true"))) {
+        swal({
+            title: 'Are you sure?',
+            text: "Current sounds may stop!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Open mini-audio'
+        }).then(function () {
+            minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
+            closedwreason = true;
+            minime.onload = function() {
+                $.getScript("files/pages/closeme.js")
+            }
+        })
+    }
 }
 
 function showPlus() {
@@ -527,12 +530,12 @@ function keyEvent(key) {
 
         // 77 = m
         if ((key.keyCode) === 77) {
-            if (!(minimeon) === true) {
+            if ((minimeon) === true) {
                 openSmallWindow();
             } else {
                 swal({
                     title: 'MiniMe',
-                    text: langpack.message.minime_disabled
+                    html: langpack.message.minime_disabled
                 });
             }
         }

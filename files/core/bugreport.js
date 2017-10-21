@@ -6,12 +6,18 @@ function bugreport() {
         betacheck = "Stable"
     }
 
+    if (development === true) {
+        developmentcheck = "Unstable"
+    } else {
+        developmentcheck = "Stable"
+    }
+
     OpenAudioAPI.generateDialog({
         dialogWidth: "435px",
         textTitle: 'Bug Report Information',
         htmlContent: "<b>Send this in a snapshot to Spigot Page or in our discord.</b>\n" +
         "<br>\n" +
-        "<table class=\"mdl-data-table mdl-js-data-table\">\n" +
+        "<table class=\"mdl-data-table mdl-js-data-table\" style=\"overflow-y: auto; max-height: 250px;\">\n" +
         "  <tbody>\n" +
         "    <tr>\n" +
         "      <td class=\"mdl-data-table__cell--non-numeric\">Browser</td>\n" +
@@ -38,12 +44,24 @@ function bugreport() {
         "      <td>"+ platform.os.architecture +"-bit</td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "      <td class=\"mdl-data-table__cell--non-numeric\">Release Status</td>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">OS Release Status</td>\n" +
         "      <td>"+ betacheck +"</td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
         "      <td class=\"mdl-data-table__cell--non-numeric\">Browser Info (Just Incase it nulls)</td>\n" +
         "      <td>"+ platform.description +"</td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\"></td>\n" +
+        "      <td></td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Web Client Dev Build Version</td>\n" +
+        "      <td>"+ devBuild +" for "+ devVersion +"</td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Web Client Release Status</td>\n" +
+        "      <td>"+ developmentcheck +"</td>\n" +
         "    </tr>\n" +
         "  </tbody>\n" +
         "</table>",

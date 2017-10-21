@@ -20,6 +20,7 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "  <!-- CSS -->\n" +
     "  <link href=\"files/css/error.css\" rel=\"stylesheet\" />\n" +
     "  <link href=\"files/css/material.css\" rel=\"stylesheet\" />\n" +
+    "  <link href=\"files/css/swall.css\" rel=\"stylesheet\" />\n" +
     "  <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
     "\n" +
     "  <!-- META -->\n" +
@@ -31,11 +32,11 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "  <link rel=\"icon\" href=\"files/images/small_logo.png\" />\n" +
     "  <link rel=\"image\" href=\"files/images/small_logo.png\" />\n" +
     "\n" +
-    "  <!-- JS -->\n" +
-    "  <script src=\"files/js/material.js\"></script>\n" +
-    "  <script src=\"files/js/jquery.js?v=1.5\"></script>\n" +
-    "  <script src=\"files/js/version.js\"></script>\n" +
-    "\n" +
+    $.getScript("files/js/material.js") +
+    $.getScript("files/js/jquery.js?v=1.5") +
+    $.getScript("files/js/version.js") +
+    +
+        "\n" +
     "  <!-- Wide card with share menu button -->\n" +
     "  <style>\n" +
     "    .demo-card-wide .mdl-card {\n" +
@@ -82,4 +83,34 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "        </div>\n" +
     "      </div>" +
     "    </div>");
+
+if (clientTOKEN !== null && clientID !== null && mcname !== null) {
+    setTimeout(function () {
+        swal({
+            title: 'Your token is invalid',
+            text: 'Input new token down below',
+            input: 'text',
+            showCancelButton: false,
+            allowEscapeKey: false,
+            confirmButtonText: 'Reconnect',
+            showLoaderOnConfirm: true,
+            inputValidator: function (value) {
+                return new Promise(function (resolve, reject) {
+                    if (value) {
+                        resolve();
+                    } else {
+                        reject("Enter a token");
+                    }
+                })
+            },
+            allowOutsideClick: false
+        }).then(function (result) {
+            window.location = "?name=" + mcname + "&session=" + clientID + ":" + result;
+        });
+    })
+}
 loadVersion();
+
+function connect_new_token(token) {
+    window.location.href = "?name=" + mcname + "&session=" + clientID + ":" + token;
+}

@@ -128,7 +128,7 @@ function invalid_hue_link() {
 }
 
 function loop_hue_connection() {
-    if (window.location.protocol == "http:") {
+    if (window.location.protocol === "http:") {
         HueTestTry = 0;
         hue_connect_loop = window.setInterval(function() {
             HueTestTry++;
@@ -156,7 +156,7 @@ function loop_hue_connection() {
             }
         }, 5000);
     }
-    else if (window.location.protocol == "https:") {
+    else if (window.location.protocol === "https:") {
         console.info("[Philips-Hue] There is no support over a secure connection :(");
         swal({
             html: langpack.hue.ssl_error,
@@ -388,11 +388,7 @@ function hue_set_color(args, id) {
 
 function hue_menu() {
     if (!(hue_set) !== true) {
-        var dialog = document.querySelector('#dialog-hue');
-        dialog.showModal();
-        dialog.querySelector('#dialog-close-hue').addEventListener('click', function () {
-            dialog.close();
-        });
+        $('#dialog-hue').modal('show');
     } else {
         if (!(connecting) !== true) {
             connecting = false;
@@ -408,7 +404,7 @@ function hue_menu() {
 }
 
 function loop_hue_connection_on_load() {
-    if (window.location.protocol == "http:") {
+    if (window.location.protocol === "http:") {
         HueTestTry = 0;
         hue_connect_loop = window.setInterval(function() {
             HueTestTry++;

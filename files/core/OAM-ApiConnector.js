@@ -33,6 +33,8 @@ socketIo.connect = function() {
                 title: 'Looks like you disconnected',
                 text: "Run /audio in game, then press reconnect.",
                 type: 'error',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Reconnect'
             }).then(function () {
@@ -74,6 +76,11 @@ socketIo.connect = function() {
         });
 
         OpenAudioAPI.rightTrayItem({
+            onClick: "bugreport();",
+            itemName: "Bug Report"
+        });
+
+        OpenAudioAPI.rightTrayItem({
             onClick: "openInNewTab('https://github.com/OpenAudioMc/Web-UI-Dev-Builds');",
             itemName: 'Source Code'
         });
@@ -89,58 +96,58 @@ socketIo.connect = function() {
         });
 
         if (msg !== null) {
-            var settings = JSON.parse(msg);
-            $("#client-title").text(settings.Title);
-            document.title = settings.Title;
-            addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
-            if (settings.asound !== null) {
-                ambiance = settings.asound;
-            } else {
-                ambiance = "";
-            }
-
-            if (settings.ambdelay !== null) {
-                ambdelay = settings.ambdelay;
-            }
-
-            if (development === true) {
-                sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "SoundManager Debugger");
-            }
-
-            if (settings.twitter !== "" && settings.twitter !== null) {
-                twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "Twitter");
-                twitter = settings.twitter;
-            }
-
-            if (settings.minime === "on" || settings.minime !== null) {
-                if (tinyWindow === "(none)") {
-                    minimeon = true;
-                    minimeicon = new trayItem("fa fa-window-maximize", "openSmallWindow", "Mini Mode");
-                }
-            }
-
-            if (settings.qrcode !== null && settings.qrcode !== "off") {
-                $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "QR Code");});
-            }
-
-            if (settings.youtube !== "" && settings.youtube !== null) {
-                youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "YouTube");
-                youtube = settings.youtube;
-            }
-            if (settings.website !== "" && settings.website !== null) {
-                websiteIcon = new trayItem("fa fa-globe", "openSite", "Our Website");
-                website = settings.website;
-            }
-            if (settings.uicolor !== null && settings.uicolor !== "") {
-                openaudio.color("#" + settings.uicolor);
-                iconcolor = settings.uicolor;
-                document.getElementById("icons").color = "'#" + settings.uicolor + "'";
-                $('#icons').find('i').each(function() {
-                    this.style.color = "#" + settings.uicolor
-                });
-            }
             setTimeout(function() {
                 if (closedwreason !== true) {
+                    var settings = JSON.parse(msg);
+                    $("#client-title").text(settings.Title);
+                    document.title = settings.Title;
+                    addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
+                    if (settings.asound !== null) {
+                        ambiance = settings.asound;
+                    } else {
+                        ambiance = "";
+                    }
+
+                    if (settings.ambdelay !== null) {
+                        ambdelay = settings.ambdelay;
+                    }
+
+                    if (development === true) {
+                        sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "SoundManager Debugger");
+                    }
+
+                    if (settings.twitter !== "" && settings.twitter !== null) {
+                        twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "Twitter");
+                        twitter = settings.twitter;
+                    }
+
+                    if (settings.minime === "on" || settings.minime !== null) {
+                        if (tinyWindow === "(none)") {
+                            minimeon = true;
+                            minimeicon = new trayItem("fa fa-window-maximize fa-mobile-hide", "openSmallWindow", "Mini Mode");
+                        }
+                    }
+
+                    if (settings.qrcode !== null && settings.qrcode !== "off") {
+                        $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "QR Code");});
+                    }
+
+                    if (settings.youtube !== "" && settings.youtube !== null) {
+                        youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "YouTube");
+                        youtube = settings.youtube;
+                    }
+                    if (settings.website !== "" && settings.website !== null) {
+                        websiteIcon = new trayItem("fa fa-globe", "openSite", "Our Website");
+                        website = settings.website;
+                    }
+                    if (settings.uicolor !== null && settings.uicolor !== "") {
+                        openaudio.color("#" + settings.uicolor);
+                        iconcolor = settings.uicolor;
+                        document.getElementById("icons").color = "'#" + settings.uicolor + "'";
+                        $('#icons').find('i').each(function() {
+                            this.style.color = "#" + settings.uicolor
+                        });
+                    }
                     if (settings.hue !== null && settings.hue !== "off") {
                         $.getScript("files/core/OAM-Hue.js", function() {
                             hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
@@ -193,6 +200,7 @@ socketIo.connect = function() {
                 }
             }, 1000);
         } else {
+            closedwreason = true;
             console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
             $.getScript("files/pages/unclaimedError.js");
         }
@@ -220,6 +228,7 @@ socketIo.connect = function() {
             //You can remove it if you wanna :3
 
             if (message.command === "banned") {
+                closedwreason = true;
                 swal({
                     title: "Oh no, it looks like this server is banned :(",
                     text: "Ban info: " + message.message,

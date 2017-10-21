@@ -47,7 +47,7 @@ function getYoutbe(youtubeId) {
 }
 
 // YouTube Playlist Integration
-// Warning: This will only work with /oa playlist
+// Warning: This will only work with /oa playlist and playlist regions
 function getYouTubePlaylist(playlistID) {
     $.ajax({
         url: 'https://api.apocalypsje.ga/yt/YouTubePlayList.php?playlistId=' + playlistID,
@@ -60,4 +60,8 @@ function getYouTubePlaylist(playlistID) {
             });
         }
     });
+}
+
+function getStackStorage(url) {
+    return "https://api.apocalypsje.ga/stack.php?url=" + url;
 }

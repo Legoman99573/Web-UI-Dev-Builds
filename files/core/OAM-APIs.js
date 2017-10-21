@@ -18,6 +18,7 @@ var OpenAudioAPI = {};
 OpenAudioAPI.generateDialog = function(options) {
     var defaults = {
         dialogLarge: null,
+        dialogWidth: null,
         textTitle: null,
         htmlContent: null,
         optionButtonHide: "true",
@@ -33,6 +34,13 @@ OpenAudioAPI.generateDialog = function(options) {
             console.error("[OpenAudio API] [errorException] htmlContent is required");
         } else {
             if (actual.dialogWidth != null) {
+                $('#dialog-api-width').width(actual.dialogWidth);
+            } else {
+                try {
+                    $('#dialog-api-width').style('');
+                } catch (e) {}
+            }
+            if (actual.dialogLarge != null) {
                 $('#dialog-api-width').addClass('modal-lg');
             } else {
                 try {

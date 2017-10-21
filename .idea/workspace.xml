@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Error pages showing SweetAlert2 Errors">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files/pages/closeme.js" />
+    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-APIs.js" afterPath="$PROJECT_DIR$/files/core/OAM-APIs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/bugreport.js" afterPath="$PROJECT_DIR$/files/core/bugreport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/bootstrap.modal.css" afterPath="$PROJECT_DIR$/files/css/bootstrap.modal.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/swall.css" afterPath="$PROJECT_DIR$/files/css/swall.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/js/swall.js" afterPath="$PROJECT_DIR$/files/js/swall.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/js/version.js" afterPath="$PROJECT_DIR$/files/js/version.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/serverError.js" afterPath="$PROJECT_DIR$/files/pages/serverError.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/unclaimedError.js" afterPath="$PROJECT_DIR$/files/pages/unclaimedError.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/unsupportedError.js" afterPath="$PROJECT_DIR$/files/pages/unsupportedError.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -503,14 +491,7 @@
       <workItem from="1507542020557" duration="3678000" />
       <workItem from="1507974786776" duration="8455000" />
       <workItem from="1508065877924" duration="64698000" />
-      <workItem from="1508613149943" duration="11386000" />
-    </task>
-    <task id="LOCAL-00001" summary="YouTube Support and Hue Fixes">
-      <created>1502366453004</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1502366453004</updated>
+      <workItem from="1508613149943" duration="11428000" />
     </task>
     <task id="LOCAL-00002" summary="YouTube Support and Hue Fixes">
       <created>1502366871362</created>
@@ -848,11 +829,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508618034548</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be">
+      <created>1508625311760</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1508625311761</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="602885000" />
+    <option name="totallyTimeSpent" value="602927000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -922,7 +910,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Youtube integration complete + Icon Changes" />
     <MESSAGE value="Youtube integration ready for public testing" />
     <MESSAGE value="Messages to language packs ready&#10;&#10;Needs contributors to help translate what is not translated as I dont want to screw them up." />
     <MESSAGE value="New theme, APIs, and Awesome additions&#10;&#10;Following API is deprecated. addCss(). Use OpenAudioAPI.getCSS() instead." />
@@ -947,7 +934,8 @@
     <MESSAGE value="Stack Storage Support + Dev Build 1.8 Release" />
     <MESSAGE value="Dev Build 1.8 Release for 3.0&#10;&#10;Playlist Fixes&#10;&#10;StackStorage.com support&#10;&#10;Bug Report Information&#10;&#10;New Theme (Material Design)&#10;&#10;Fixes for youtu.be links&#10;&#10;Dropped support for IE/Edge browsers (sorry, but they are broken)" />
     <MESSAGE value="Oops, forgot to patch a bug =/" />
-    <option name="LAST_COMMIT_MESSAGE" value="Oops, forgot to patch a bug =/" />
+    <MESSAGE value="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be" />
+    <option name="LAST_COMMIT_MESSAGE" value="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

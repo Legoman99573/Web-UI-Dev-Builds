@@ -84,8 +84,6 @@ var lastSpeakerVolume = 0;
 var hue_set = false;
 var direct = true;
 var connecting = true;
-var queueplaying = false;
-var Queue_List = {};
 var loop = false;
 
 // Determines if stabe or unstable

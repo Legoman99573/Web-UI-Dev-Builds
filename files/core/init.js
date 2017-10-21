@@ -112,8 +112,9 @@ function logInit(msg) {
     console.info("[Init] " + msg);
 }
 
-initialize();
-
-if (navigator.appVersion.indexOf("Edge") != -1 && navigator.appVersion.indexOf("Trident") != -1 && navigator.appVersion.indexOf("MSIE") != -1) {
-        console.warn("You are using IE/Edge. Some features may not work.");
+if (platform.name === "Microsoft Edge" || platform.name === "IE") {
+    logInit("clientError 6: Using an Unsupported Browser");
+    $.getScript("files/pages/unsupportedError.js");
+} else {
+    initialize();
 }

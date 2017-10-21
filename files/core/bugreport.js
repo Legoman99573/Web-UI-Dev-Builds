@@ -8,7 +8,7 @@ function bugreport() {
 
     OpenAudioAPI.generateDialog({
         dialogWidth: "435px",
-        textTitle: 'Bug Report Format',
+        textTitle: 'Bug Report Information',
         htmlContent: "<b>Send this in a snapshot to Spigot Page or in our discord.</b>\n" +
         "<br>\n" +
         "<table class=\"mdl-data-table mdl-js-data-table\">\n" +

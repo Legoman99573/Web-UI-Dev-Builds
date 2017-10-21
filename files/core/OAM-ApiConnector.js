@@ -42,24 +42,7 @@ socketIo.connect = function() {
                 initialize();
             })
         } else if (msg === "connected") {
-            if (development === true) {
-                $('.name').html(langpack.message.welcome.replace("%name%", mcname));
-            } else {
-                closedwreason = true;
-                $('.name').html(langpack.message.notconnected);
-                swal({
-                    title: 'Looks like you are not in the server or the server is offline',
-                    text: "Run /audio in game, then press reconnect.",
-                    type: 'error',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Reconnect'
-                }).then(function () {
-                    initialize();
-                })
-            }
-
+            $('.name').html(langpack.message.welcome.replace("%name%", mcname));
         } else {
             openaudio.decode(msg);
         }

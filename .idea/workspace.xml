@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -496,14 +493,7 @@
       <workItem from="1507974786776" duration="8455000" />
       <workItem from="1508065877924" duration="64698000" />
       <workItem from="1508613149943" duration="21396000" />
-      <workItem from="1508695129755" duration="29000" />
-    </task>
-    <task id="LOCAL-00004" summary="YouTube Support and Hue Fixes">
-      <created>1502367021914</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1502367021914</updated>
+      <workItem from="1508695129755" duration="73000" />
     </task>
     <task id="LOCAL-00005" summary="YouTube Support and Hue Fixes">
       <created>1502367043057</created>
@@ -841,11 +831,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508685376544</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Fixed issue with eventMinni causing errors java side from the webclient.">
+      <created>1508695198335</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1508695198335</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="612924000" />
+    <option name="totallyTimeSpent" value="612968000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -915,7 +912,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Messages to language packs ready&#10;&#10;Needs contributors to help translate what is not translated as I dont want to screw them up." />
     <MESSAGE value="New theme, APIs, and Awesome additions&#10;&#10;Following API is deprecated. addCss(). Use OpenAudioAPI.getCSS() instead." />
     <MESSAGE value="Web Client Outdated Notification, New APIs, and BugFixes&#10;&#10;This will fix some things up and sorry for not getting this straight away due to being sick :(" />
     <MESSAGE value="Dupe Code&#10;&#10;Removed it :)" />
@@ -940,7 +936,8 @@
     <MESSAGE value="Oops, forgot to patch a bug =/" />
     <MESSAGE value="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be" />
     <MESSAGE value="Hopefully fixed SweetAlert2 bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hopefully fixed SweetAlert2 bug" />
+    <MESSAGE value="Fixed issue with eventMinni causing errors java side from the webclient." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with eventMinni causing errors java side from the webclient." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

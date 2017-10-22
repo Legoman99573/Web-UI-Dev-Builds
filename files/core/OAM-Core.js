@@ -86,8 +86,8 @@ var direct = true;
 var connecting = true;
 var loop = false;
 
-// Determines if stabe or unstable
-var development = true;
+// Determines if stable or unstable
+var development = false;
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -387,6 +387,9 @@ openaudio.decode = function(msg) {
 
 openaudio.whisper = function(message) {
     socket.emit("whisperToServer" , message);
+    if (development === true) {
+        console.warn("[Socket.io] Sending to socket server [\"whisperToServer\",\"" + message + "\"]");
+    }
     console.info("[Socket.io] Whisper send.");
 };
 
@@ -444,6 +447,7 @@ function openSmallWindow() {
         }).then(function () {
             minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
             closedwreason = true;
+            openaudio.whisper("eventMinni");
             minime.onload = function() {
                 $.getScript("files/pages/closeme.js")
             }

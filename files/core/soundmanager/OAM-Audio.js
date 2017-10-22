@@ -327,13 +327,11 @@ var vis = (function() {
 })();
 
 vis(function() {
-    if (vis()) {
+    if (!vis()) {
         setTimeout(function() {
             FadeEnabled = true;
         }, 300);
     } else {
-        openaudio.whisper("eventMinni");
-        openaudio.whisper(JSON.stringify("eventMinni"));
         FadeEnabled = false;
     }
 });

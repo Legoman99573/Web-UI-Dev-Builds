@@ -87,7 +87,7 @@ var connecting = true;
 var loop = false;
 
 // Determines if stabe or unstable
-var development = false;
+var development = true;
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -523,7 +523,7 @@ function keyEvent(key) {
             else {
                 OpenAudioAPI.generateDialog({
                     title: 'Philips HUE',
-                    text: langpack.hue.disabled
+                    html: langpack.hue.disabled
                 });
             }
         }
@@ -547,7 +547,7 @@ function keyEvent(key) {
             } else {
                 swal({
                     title: 'Soundmanager2 Debugger',
-                    text: langpack.message.debugger_off
+                    html: langpack.message.debugger_off
                 });
             }
         }
@@ -556,7 +556,7 @@ function keyEvent(key) {
         if ((key.keyCode) === 76) {
             swal({
                 title: 'Easter Egg',
-                text: langpack.message.easter_egg
+                html: langpack.message.easter_egg
             });
             soundManager.createSound({
                 id: "oa_easteregg",

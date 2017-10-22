@@ -20,7 +20,7 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "  <!-- CSS -->\n" +
     "  <link href=\"files/css/error.css\" rel=\"stylesheet\" />\n" +
     "  <link href=\"files/css/material.css\" rel=\"stylesheet\" />\n" +
-    "  <link href=\"files/css/swall.css\" rel=\"stylesheet\" />\n" +
+    "  <link href=\"https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css\" rel=\"stylesheet\" />\n" +
     "  <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
     "\n" +
     "  <!-- META -->\n" +

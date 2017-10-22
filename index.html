@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="files/css/animate.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="files/css/main.css?v=1.5" rel="stylesheet" />
-        <link href="files/css/swall.css?v=1.6" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" rel="stylesheet" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
@@ -44,10 +44,10 @@
         <script src="files/js/jquery.js?v=1.5"></script>
         <script src="files/js/bootstrap.modal.js"></script>
         <script src="https://craftmendserver.eu:3000/socket.io/socket.io.js"></script>
-        <script src="files/js/swall.js?v=1.8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.all.min.js"></script>
         <script src="files/js/soundmanager2.js?v=1.32"></script>
         <script src="files/js/hueapi.js?v=1.5"></script>
-        <script src="files/core/OAM-APIs.js?v=1.36"></script>
+        <script src="files/core/OAM-APIs.js?v=1.38"></script>
         <script src="files/core/OAM-Core.js?v=3.85"></script>
         <script src="files/core/OAM-Hue.js?v=1.31"></script>
         <script src="files/core/OAM-ApiConnector.js?v=1.36"></script>
@@ -115,88 +115,94 @@
                     </section>
                 </div>
             </main>
-        </div>
-    </body>
-    <!-- Dialog API -->
-    <div class="modal fade" id="dialog-api" tabindex="-1" role="dialog" aria-labelledby="dialog-api-title">
-        <div class="modal-dialog" id="dialog-api-width" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="dialog-api-title">...</h4>
-                </div>
-                <div class="modal-body" id="dialog-api-content">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
-                    <button type="button" class="btn btn-primary" id="dialog-api-action" style="">...</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SoundManager2 Modal -->
-    <div class="modal fade" id="dialog-soundmanager2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">SoundManager2 Debugger</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="soundmanager-debug" class="debug-scroll"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Philips HUE Dialog -->
-    <div class="modal fade" id="dialog-hue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-        <div class="modal-dialog" style="width: 169px !important;" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel2">Philips HUE</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="hue">
-                        <div class="HueLightList"></div>
+            <!-- Dialog API -->
+            <div class="modal fade" id="dialog-api" tabindex="-1" role="dialog" aria-labelledby="dialog-api-title">
+                <div class="modal-dialog" id="dialog-api-width" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="dialog-api-title">...</h4>
+                        </div>
+                        <div class="modal-body" id="dialog-api-content">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                            <button type="button" class="btn btn-primary" id="dialog-api-action" style="">...</button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Mods Modal -->
-    <div class="modal fade" id="dialog-mods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel3">Mods List</h4>
+            <!-- SoundManager2 Modal -->
+            <div class="modal fade" id="dialog-soundmanager2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">SoundManager2 Debugger</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="soundmanager-debug" class="debug-scroll"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <table class="mdl-data-table mdl-js-data-table">
-                        <thead class="mdl-data-table__header--sorted-descending">
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Mod Type</th>
-                            <th>Source</th>
-                            <th>Status of Mod</th>
-                        </tr>
-                        </thead>
-                        <tbody id="Mods">
-                        </tbody>
-                    </table>
+            </div>
+
+            <!-- Philips HUE Dialog -->
+            <div class="modal fade" id="dialog-hue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                <div class="modal-dialog" style="width: 169px !important;" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel2">Philips HUE</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="hue">
+                                <div class="HueLightList"></div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+            <!-- Mods Modal -->
+            <div class="modal fade" id="dialog-mods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel3">Mods List</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                                <div class="mdl-tabs__tab-bar">
+                                    <a href="#js-enabled" class="mdl-tabs__tab is-active">JavaScript</a>
+                                    <a href="#js-disabled" class="mdl-tabs__tab">CSS</a>
+                                </div>
+
+                                <div class="mdl-tabs__panel is-active" id="js-enabled">
+                                    <div id="js-mods">
+                                        <div id="js-none">It seems there are no loaded JS Mods</div>
+                                    </div>
+                                </div>
+                                <div class="mdl-tabs__panel" id="js-disabled">
+                                    <div id="css-mods">
+                                        <div id="css-none">It seems there are no loaded CSS Mods</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </body>
     <!-- Notification API -->
     <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
         <div class="mdl-snackbar__text"></div>

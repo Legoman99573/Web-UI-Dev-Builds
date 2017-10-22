@@ -149,41 +149,23 @@ OpenAudioAPI.getCSS = function(options) {
 OpenAudioAPI.loadMod = function(url, status, type) {
     if (url != "undefined") {
         if (type == "JSMod") {
+            $('#js-none').hide();
             if (status == "Enabled") {
-                $('#Mods').append('<tr>' +
-                    '<td class="mdl-data-table__cell--non-numeric" style="overflow: hidden;">JavaScript</td>' +
-                    '<td class="dialog-source-fix">' + url + '</td>' +
-                    '<td>Enabled</td>' +
-                    '</tr>'
-                );
+                $('#js-mods').append('<div class="mods" style="color: green">' + url + ' Loaded Successfully</div>');
             }
             else if (status == "Disabled") {
-                $('#Mods').append('<tr>' +
-                    '<td class="mdl-data-table__cell--non-numeric" style="overflow: hidden;">JavaScript</td>' +
-                    '<td class="dialog-source-fix">' + url + '</td>' +
-                    '<td>Disabled by Error</td>' +
-                    '</tr>'
-                );
+                $('#js-mods').append('<div class="mods" style="color: red">' + url + ' Failed to load. Reason: Not a JavaScript Extension</div>');
             } else {
                 console.warn("[OpenAudioAPI] [illegalException] Status cannot be " + status + ".");
             }
         }
         else if (type == "CSSMod") {
+            $('#css-none').hide();
             if (status == "Enabled") {
-                $('#Mods').append('<tr>' +
-                    '<td class="mdl-data-table__cell--non-numeric" style="overflow: hidden;">CSS</td>' +
-                    '<td class="dialog-source-fix">' + url + '</td>' +
-                    '<td>Enabled</td>' +
-                    '</tr>'
-                );
+                $('#css-mods').append('<div class="mods" style="color: green">' + url + ' Loaded Successfully</div>');
             }
             else if (status == "Disabled") {
-                $('#Mods').append('<tr>' +
-                    '<td class="mdl-data-table__cell--non-numeric" style="overflow: hidden;">CSS</td>' +
-                    '<td class="dialog-source-fix">' + url + '</td>' +
-                    '<td>Disabled by Error</td>' +
-                    '</tr>'
-                );
+                $('#css-mods').append('<div class="mods" style="color: red">' + url + ' Failed to load. Reason: Not a CSS Extension</div>');
             } else {
                 console.warn("[OpenAudioAPI] [illegalException] Status cannot be " + status + ".");
             }

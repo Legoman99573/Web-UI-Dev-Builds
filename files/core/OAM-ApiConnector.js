@@ -70,7 +70,9 @@ socketIo.connect = function() {
     socket.on('oaSettings', function(msg) {
         $( ".mdl-navigation__link" ).remove();
         $( ".mdl-menu__item" ).remove();
-        $( "#Mods" ).remove();
+        $( ".mods" ).remove();
+        $('#js-none').show();
+        $('#css-none').show();
 
         OpenAudioAPI.rightTrayItem({
             onClick: "about();",

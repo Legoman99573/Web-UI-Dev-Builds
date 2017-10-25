@@ -13,7 +13,7 @@ function bugreport() {
     }
 
     OpenAudioAPI.generateDialog({
-        dialogWidth: "435px",
+        dialogWidth: "571px",
         textTitle: 'Bug Report Information',
         htmlContent: "<b>Send this in a snapshot to Spigot Page or in our discord.</b>\n" +
         "<br>\n" +

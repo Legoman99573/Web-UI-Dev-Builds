@@ -53,9 +53,10 @@ function about() {
         htmlContent: '<h6>OpenAudioMc Version: <b id="version">Unable to fetch Version</b></h6>\n' +
         '<h6>Dev Build #:<b id="build">Unable to fetch Build</b></h6>\n' +
         '<h6>Release Status: <b id="release-status">Unable to fetch Release Status</b></h6>\n' +
-        '<h6><b>&#9400;OpenAudioMc 2016-2017</b></h6>'
+        '<h6><b>&#9400;OpenAudioMc 2016-2017</b></h6>',
+        dialogWidth: '300px'
     });
-    if (!(development != true)) {
+    if (!(development !== true)) {
         $('#release-status').text("Unstable");
     } else {
         $('#release-status').text("Stable");

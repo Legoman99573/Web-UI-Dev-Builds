@@ -58,9 +58,6 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "      z-index: 0;\n" +
     "      -webkit-transform: translate(-50%, -50%);\n" +
     "      transform: translate(-50%, -50%);\n" +
-    "    }" +
-    "    .swal2-container {\n" +
-    "       display: none !important;\n" +
     "    }\n" +
     "    #soundmanager-debug {\n" +
     "       display: none !important;\n" +

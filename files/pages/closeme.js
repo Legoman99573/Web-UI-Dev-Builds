@@ -60,7 +60,7 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "    }\n" +
     "    .swal2-container {\n" +
     "       display: none !important;\n" +
-    "    }" +
+    "    }\n" +
     "    #soundmanager-debug {\n" +
     "       display: none !important;\n" +
     "    }\n" +

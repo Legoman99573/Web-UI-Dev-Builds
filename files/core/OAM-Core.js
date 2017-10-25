@@ -86,7 +86,7 @@ var connecting = true;
 var loop = false;
 
 // Determines if stable or unstable
-var development = true;
+var development = false;
 
 openaudio.color = function(code) {
     $("#footer").animate({

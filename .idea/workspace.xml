@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="Development popup shows too early. Lets fix that">
+    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-APIs.js" afterPath="$PROJECT_DIR$/files/core/OAM-APIs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/init.js" afterPath="$PROJECT_DIR$/files/core/init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/closeme.js" afterPath="$PROJECT_DIR$/files/pages/closeme.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/serverError.js" afterPath="$PROJECT_DIR$/files/pages/serverError.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/unclaimedError.js" afterPath="$PROJECT_DIR$/files/pages/unclaimedError.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/unsupportedError.js" afterPath="$PROJECT_DIR$/files/pages/unsupportedError.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/urlError.js" afterPath="$PROJECT_DIR$/files/pages/urlError.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,19 +34,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/init.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="78" column="23" lean-forward="false" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <marker date="1508900746085" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -53,28 +42,6 @@
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OAM-Speaker.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="625" column="16" lean-forward="true" selection-start-line="625" selection-start-column="16" selection-end-line="625" selection-end-column="16" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -92,24 +59,84 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="53" column="58" lean-forward="false" selection-start-line="53" selection-start-column="58" selection-end-line="53" selection-end-column="58" />
+            <state relative-caret-position="459">
+              <caret line="144" column="37" lean-forward="false" selection-start-line="144" selection-start-column="37" selection-end-line="144" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="76" column="125" lean-forward="true" selection-start-line="76" selection-start-column="125" selection-end-line="76" selection-end-column="125" />
+            <state relative-caret-position="238">
+              <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1508902722858" expanded="true" signature="6302:6314" ph="..." />
-                <marker date="1508902722858" expanded="true" signature="6480:6490" ph="..." />
-                <marker date="1508902722858" expanded="true" signature="6886:6898" ph="..." />
-                <marker date="1508902722858" expanded="true" signature="7065:7075" ph="..." />
+                <marker date="1508902913229" expanded="true" signature="6303:6315" ph="..." />
+                <marker date="1508902913229" expanded="true" signature="6481:6491" ph="..." />
+                <marker date="1508902913229" expanded="true" signature="6887:6899" ph="..." />
+                <marker date="1508902913229" expanded="true" signature="7066:7076" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="closeme.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/files/pages/closeme.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serverError.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/pages/serverError.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="unclaimedError.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/pages/unclaimedError.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="unsupportedError.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/pages/unsupportedError.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urlError.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,11 +250,6 @@
         <option value="$PROJECT_DIR$/files/css/bootstrap.modal.css" />
         <option value="$PROJECT_DIR$/files/css/swall.css" />
         <option value="$PROJECT_DIR$/files/js/swall.js" />
-        <option value="$PROJECT_DIR$/files/pages/closeme.js" />
-        <option value="$PROJECT_DIR$/files/pages/serverError.js" />
-        <option value="$PROJECT_DIR$/files/pages/unclaimedError.js" />
-        <option value="$PROJECT_DIR$/files/pages/unsupportedError.js" />
-        <option value="$PROJECT_DIR$/files/pages/urlError.js" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
         <option value="$PROJECT_DIR$/files/js/version.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
@@ -237,6 +259,11 @@
         <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
+        <option value="$PROJECT_DIR$/files/pages/urlError.js" />
+        <option value="$PROJECT_DIR$/files/pages/unsupportedError.js" />
+        <option value="$PROJECT_DIR$/files/pages/unclaimedError.js" />
+        <option value="$PROJECT_DIR$/files/pages/serverError.js" />
+        <option value="$PROJECT_DIR$/files/pages/closeme.js" />
       </list>
     </option>
   </component>
@@ -295,26 +322,7 @@
               <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
               <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
               <item name="files" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="soundmanager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
-              <item name="files" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -479,14 +487,7 @@
       <workItem from="1508065877924" duration="64698000" />
       <workItem from="1508613149943" duration="21396000" />
       <workItem from="1508695129755" duration="1339000" />
-      <workItem from="1508869049144" duration="11222000" />
-    </task>
-    <task id="LOCAL-00010" summary="Broke speakers (OOPSIE)">
-      <created>1502509925488</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1502509925488</updated>
+      <workItem from="1508869049144" duration="11532000" />
     </task>
     <task id="LOCAL-00011" summary="Speakers now have IDS (Wasn't that ez)">
       <created>1502510710886</created>
@@ -824,11 +825,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508900531137</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Open in Windows 10 will now show in left menu now">
+      <created>1508902861034</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1508902861034</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="625456000" />
+    <option name="totallyTimeSpent" value="625766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -846,7 +854,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21815519" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21815519" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15457413" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -898,7 +906,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
     <MESSAGE value="Background image looks better&#10;&#10;Now it doesnt look like it was hit by a bus. Beep Beep D:" />
     <MESSAGE value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
     <MESSAGE value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
@@ -923,7 +930,8 @@
     <MESSAGE value="Release 1.10 for OpenAudioMc 3.0" />
     <MESSAGE value="Bugfixes with Speakers" />
     <MESSAGE value="Fix Socket.io not connecting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Socket.io not connecting" />
+    <MESSAGE value="Open in Windows 10 will now show in left menu now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Open in Windows 10 will now show in left menu now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -991,22 +999,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="53" column="58" lean-forward="false" selection-start-line="53" selection-start-column="58" selection-end-line="53" selection-end-column="58" />
+        <state relative-caret-position="459">
+          <caret line="144" column="37" lean-forward="false" selection-start-line="144" selection-start-column="37" selection-end-line="144" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="76" column="125" lean-forward="true" selection-start-line="76" selection-start-column="125" selection-end-line="76" selection-end-column="125" />
+        <state relative-caret-position="238">
+          <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1508902722858" expanded="true" signature="6302:6314" ph="..." />
-            <marker date="1508902722858" expanded="true" signature="6480:6490" ph="..." />
-            <marker date="1508902722858" expanded="true" signature="6886:6898" ph="..." />
-            <marker date="1508902722858" expanded="true" signature="7065:7075" ph="..." />
+            <marker date="1508902913229" expanded="true" signature="6303:6315" ph="..." />
+            <marker date="1508902913229" expanded="true" signature="6481:6491" ph="..." />
+            <marker date="1508902913229" expanded="true" signature="6887:6899" ph="..." />
+            <marker date="1508902913229" expanded="true" signature="7066:7076" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/pages/unsupportedError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="66" column="12" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/pages/unclaimedError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/pages/serverError.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/pages/closeme.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -30,7 +30,7 @@ OpenAudioAPI.generateDialog = function(options) {
     if (actual.textTitle === null) {
         console.error("[OpenAudio API] [errorException] textTitle is required");
     } else {
-        if (actual.htmlContent == null) {
+        if (actual.htmlContent === null) {
             console.error("[OpenAudio API] [errorException] htmlContent is required");
         } else {
             if (actual.dialogWidth !== null) {

@@ -621,3 +621,7 @@ input[type=range]:-moz-focusring{
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+#speaker-vars {
+  display: none;
+}

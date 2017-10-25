@@ -55,7 +55,6 @@ langpack.hue.light_data_fail = "<h2>Unable to retrieve Light Data.</h2><h3>Press
 
 var openaudio = {};
 var socketIo = {};
-var apijson = {"ver":"1.0","clientJS":"https://craftmendserver.eu:3000/socket.io/socket.io.js","socket":"https://craftmendserver.eu:3000/","secureSocket":"https://craftmendserver.eu:3000/"};
 var ui = {};
 var fadingData = {};
 var stopFading = {};
@@ -87,7 +86,7 @@ var connecting = true;
 var loop = false;
 
 // Determines if stable or unstable
-var development = false;
+var development = true;
 
 openaudio.color = function(code) {
     $("#footer").animate({

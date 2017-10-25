@@ -49,13 +49,13 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
 $(document).ready(function() {
     window.fadeIdOut = function(soundId) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId + "_Slider";
         x.min = 0;
         x.max = 100;
         x.value = volume;
-        x.style = "display:none;";
         var backAudio = $('#' + soundId + "_Slider");
         document.getElementById('faders').appendChild(x);
 
@@ -96,13 +96,13 @@ $(document).ready(function() {
 
     window.fadeSpeakerOut = function(soundId) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId + "_Slider";
         x.min = 0;
         x.max = 100;
         x.value = soundManager.getSoundById(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/')).volume;
-        x.style = "display:none;";
         var backAudio = $('#' + soundId + "_Slider");
         document.getElementById('faders').appendChild(x);
 
@@ -142,17 +142,16 @@ $(document).ready(function() {
     };
 
     window.fadeSpeaker2 = function(soundId, vt) {
-
         var volumeTarget = (vt / 100) * volume;
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
         var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-        x.value = soundManager.getSoundById("speaker_ding_" + randomID).volume;
-        x.style = "display:none;";
+        x.value = soundManager.getSoundById("speaker_ding_" + randomID, volumeTarget);
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);
 
@@ -183,13 +182,13 @@ $(document).ready(function() {
 
     window.fadeIdTarget = function(soundId, volumeTarget) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
         x.value = volume;
-        x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);
 
@@ -219,13 +218,13 @@ $(document).ready(function() {
 
     window.fadeIdOutWithSpeaker = function(soundId) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
         x.value = volume;
-        x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);
 
@@ -267,13 +266,13 @@ $(document).ready(function() {
 
     window.fadeIdTargetSpeaker = function(soundId, volumeTarget) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
         x.min = 0;
         x.max = 100;
         x.value = soundManager.getSoundById(soundId).volume;
-        x.style = "display:none;";
         var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
         document.getElementById('faders').appendChild(x);
 
@@ -305,13 +304,13 @@ $(document).ready(function() {
 
     window.fadeAllTarget = function(volumeTarget) {
         var x = document.createElement("INPUT");
+        x.style = "display:none;";
         x.setAttribute("type", "range");
         document.body.appendChild(x);
         x.id = "global_Slider_type_2";
         x.min = 0;
         x.max = 100;
         x.value = volume;
-        x.style = "display:none;";
         var backAudio = $('#' + "global_Slider_type_2");
         document.getElementById('faders').appendChild(x);
 

@@ -103,6 +103,10 @@ openaudio.color = function(code) {
 
 openaudio.decode = function(msg) {
 
+    if (development === true) {
+        console.log("%c[Socket.io] " + msg, 'background: #2B547E; color: white');
+    }
+
     if (msg.includes("clyp.it")) {
         soundManager._writeDebug("Clyp.it is no longer supported! Do not ask for support.", 2);
         swal(langpack.message.clypit_url, "error");
@@ -386,10 +390,10 @@ openaudio.decode = function(msg) {
 
 openaudio.whisper = function(message) {
     socket.emit("whisperToServer" , message);
-    if (development === true) {
-        console.warn("[Socket.io] Sending to socket server [\"whisperToServer\",\"" + message + "\"]");
-    }
     console.info("[Socket.io] Whisper send.");
+    if (development === true) {
+        console.log("%c[Socket.io] {\"whisperToServer\",\"" + message + "\"}", 'background: #2B547E; color: white');
+    }
 };
 
 socketIo.log = function(data) {

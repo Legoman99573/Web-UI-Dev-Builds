@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/closeme.js" afterPath="$PROJECT_DIR$/files/pages/closeme.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/urlError.js" afterPath="$PROJECT_DIR$/files/pages/urlError.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -482,14 +480,7 @@
       <workItem from="1508613149943" duration="21396000" />
       <workItem from="1508695129755" duration="1339000" />
       <workItem from="1508869049144" duration="12323000" />
-      <workItem from="1508942608680" duration="32000" />
-    </task>
-    <task id="LOCAL-00012" summary="Loops now stop correctly :)">
-      <created>1502513237618</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1502513237618</updated>
+      <workItem from="1508942608680" duration="107000" />
     </task>
     <task id="LOCAL-00013" summary="IDs added to BG, Region Sounds, and Loops">
       <created>1502516527633</created>
@@ -827,11 +818,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508903101171</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Fix up some error pages">
+      <created>1508942661743</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1508942661744</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="626589000" />
+    <option name="totallyTimeSpent" value="626664000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -901,7 +899,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
     <MESSAGE value="Error Pages fix for mobile + Mobile warning added + Session is properly checked now :)&#10;&#10;Close to 3.0 being finished :D" />
     <MESSAGE value="Song IDs don't change, so back to the old way of random IDs&#10;&#10;Since chrome keeps it at 1 ID, we decided to place it back in the function to work properly." />
     <MESSAGE value="SoundManagers are now in own folder :D&#10;&#10;Bye Bye being thrown in OAM-Core.js where its hard to locate." />
@@ -926,7 +923,8 @@
     <MESSAGE value="Fix Socket.io not connecting" />
     <MESSAGE value="Open in Windows 10 will now show in left menu now" />
     <MESSAGE value="Error pages will now hide SoundManager2 Debug Properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error pages will now hide SoundManager2 Debug Properly" />
+    <MESSAGE value="Fix up some error pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix up some error pages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

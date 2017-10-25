@@ -91,7 +91,8 @@ socketIo.connect = function() {
 
         OpenAudioAPI.rightTrayItem({
             onClick: "openInNewTab('https://discord.gg/b44BPv7');",
-            itemName: 'Discord'
+            itemName: 'Discord',
+            underlineBelow: "true"
         });
 
         OpenAudioAPI.rightTrayItem({
@@ -106,6 +107,9 @@ socketIo.connect = function() {
                     $("#client-title").text(settings.Title);
                     document.title = settings.Title;
                     addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
+                    if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
+                        windows_10 = new trayItem("fa fa-windows", 'openInNewTab', 'oamc:' + clientID + '/' + clientTOKEN + '/' + mcname, "Play in APP");
+                    }
                     if (settings.asound !== null) {
                         ambiance = settings.asound;
                     } else {
@@ -117,31 +121,31 @@ socketIo.connect = function() {
                     }
 
                     if (development === true) {
-                        sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "SoundManager Debugger");
+                        sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "", "SoundManager Debugger");
                     }
 
                     if (settings.twitter !== "" && settings.twitter !== null) {
-                        twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "Twitter");
+                        twitterIcon = new trayItem("fa fa-twitter", "openTwitter", "", "Twitter");
                         twitter = settings.twitter;
                     }
 
                     if (settings.minime === "on" || settings.minime !== null) {
                         if (tinyWindow === "(none)") {
                             minimeon = true;
-                            minimeicon = new trayItem("fa fa-window-maximize fa-mobile-hide", "openSmallWindow", "Mini Mode");
+                            minimeicon = new trayItem("fa fa-window-maximize fa-mobile-hide", "openSmallWindow", "", "Mini Mode");
                         }
                     }
 
                     if (settings.qrcode !== null && settings.qrcode !== "off") {
-                        $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "QR Code");});
+                        $.getScript("files/js/qrcode.js", function() {qrbutton = new trayItem("fa fa-qrcode fa-mobile-hide", "showqr", "", "QR Code");});
                     }
 
                     if (settings.youtube !== "" && settings.youtube !== null) {
-                        youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "YouTube");
+                        youtubeIcon = new trayItem("fa fa-youtube-play", "openYt", "", "YouTube");
                         youtube = settings.youtube;
                     }
                     if (settings.website !== "" && settings.website !== null) {
-                        websiteIcon = new trayItem("fa fa-globe", "openSite", "Our Website");
+                        websiteIcon = new trayItem("fa fa-globe", "openSite", "", "Our Website");
                         website = settings.website;
                     }
                     if (settings.uicolor !== null && settings.uicolor !== "") {
@@ -154,7 +158,7 @@ socketIo.connect = function() {
                     }
                     if (settings.hue !== null && settings.hue !== "off") {
                         $.getScript("files/core/OAM-Hue.js", function() {
-                            hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "Philips HUE");
+                            hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "", "Philips HUE");
                             hue_enabled = true;
                             if (hue_connected != true) {
                                 loop_hue_connection_on_load();
@@ -181,26 +185,17 @@ socketIo.connect = function() {
                         }());
                         document.getElementById("logo").src = settings.logo;
                     }
-                    addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
-                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                        swal(
-                            'Mobile Browser Detected',
-                            'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
-                            'warning'
-                        )
-                    } else if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
-                        swal({
-                            title: 'Are you sure?',
-                            text: "Do you want to use the Windows App made by sneeuw?",
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Open Windows APP'
-                        }).then(function () {
-                            openInNewTab("oamc:"+ clientID +"/"+ clientTOKEN +"/"+ mcname);
-                        });
-                    }
+                    setTimeout(function() {
+                        dev();
+                        addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
+                        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                            swal(
+                                'Mobile Browser Detected',
+                                'AutoPlay may not work at all. Use a mobile browser, like FireFox App, to hear music. If music plays for this browser. Ignore this message.',
+                                'warning'
+                            )
+                        }
+                    }, 2000);
                 }
             }, 1000);
         } else {

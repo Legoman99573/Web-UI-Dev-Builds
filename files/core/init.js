@@ -105,7 +105,6 @@ function enableMain(clientJs) {
     logInit("Login-sucess");
     enable(clientJs);
     loadBg();
-    setTimeout(dev, 1000);
 }
 
 function logInit(msg) {

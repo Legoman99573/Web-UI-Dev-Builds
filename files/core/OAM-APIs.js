@@ -27,20 +27,20 @@ OpenAudioAPI.generateDialog = function(options) {
         hideCloseButton: "false"
     };
     var actual = $.extend({}, defaults, options || {});
-    if (actual.textTitle == null) {
+    if (actual.textTitle === null) {
         console.error("[OpenAudio API] [errorException] textTitle is required");
     } else {
         if (actual.htmlContent == null) {
             console.error("[OpenAudio API] [errorException] htmlContent is required");
         } else {
-            if (actual.dialogWidth != null) {
+            if (actual.dialogWidth !== null) {
                 $('#dialog-api-width').width(actual.dialogWidth);
             } else {
                 try {
                     $('#dialog-api-width').style('');
                 } catch (e) {}
             }
-            if (actual.dialogLarge != null) {
+            if (actual.dialogLarge !== null) {
                 $('#dialog-api-width').addClass('modal-lg');
             } else {
                 try {
@@ -49,19 +49,19 @@ OpenAudioAPI.generateDialog = function(options) {
             }
             $('#dialog-api-title').text(actual.textTitle);
             $('#dialog-api-content').html(actual.htmlContent);
-            if (actual.optionButtonHide == 'false') {
-                if (actual.optionButtonText == null) {
+            if (actual.optionButtonHide === 'false') {
+                if (actual.optionButtonText === null) {
                     $('#dialog-api-action').hide();
                     console.error("[OpenAudio API] [errorException] optionButtonText is required when optionButtonHide is set to false");
                 } else {
-                    if (actual.optionAction == null) {
+                    if (actual.optionAction === null) {
                         $('#dialog-api-action').hide();
                         console.error("[OpenAudio API] [errorException] optionAction is required when optionButtonHide is set to false");
                     } else {
                         $('#dialog-api-action').show().text(actual.optionButtonText).click(actual.optionAction);
                     }
                 }
-                if (actual.hideCloseButton == 'true') {
+                if (actual.hideCloseButton === 'true') {
                     $('.mdl-dialog__actions').hide();
                 }
             } else {
@@ -73,24 +73,29 @@ OpenAudioAPI.generateDialog = function(options) {
 };
 
 // Left Menu API
-function trayItem(icon, callback, iconname) {
-    $('#icons').append('<div class="mdl-navigation__link ' + icon + '" onclick="' + callback + '(); $(\'div\').removeClass(\'is-visible\');"> ' + iconname + '</div>');
+function trayItem(icon, callback, whattocallback, iconname) {
+    $('#icons').append('<div class="mdl-navigation__link ' + icon + '" onclick="' + callback + '(\'' + whattocallback + '\'); $(\'div\').removeClass(\'is-visible\');"> ' + iconname + '</div>');
 }
 
 // Right Tray Item API
 OpenAudioAPI.rightTrayItem = function(options) {
     var defaults = {
         onClick: null,
-        itemName: null
+        itemName: null,
+        underlineBelow: "false"
     };
     var actual = $.extend({}, defaults, options || {});
-    if (actual.onClick == null) {
+    if (actual.onClick === null) {
         console.error('[OpenAudioAPI] [errorException] onClick cannot be empty.');
     } else {
-        if (actual.itemName == null) {
+        if (actual.itemName === null) {
             console.error('[OpenAudioAPI] [errorException] itemName cannot be empty.');
         } else {
-            $('#side-menu').append('<li class="mdl-menu__item" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+            if (actual.underlineBelow === "true") {
+                $('#side-menu').append('<li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+            } else {
+                $('#side-menu').append('<li class="mdl-menu__item" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+            }
         }
     }
 };
@@ -103,17 +108,17 @@ OpenAudioAPI.songNotification = function(options) {
         songURL: null
     };
     var actual = $.extend({}, defaults, options || {});
-    if (actual.songTitle == null) {
+    if (actual.songTitle === null) {
         console.error('[OpenAudioAPI] [errorException] songTitle cannot be empty.');
     } else {
-        if (actual.songURL == null) {
+        if (actual.songURL === null) {
             console.error('[OpenAudioAPI] [errorException] songURL cannot be empty.');
         } else {
             $('#song-dialog').click(function () {
                 openInNewTab(actual.songURL);
             });
             var notification = document.querySelector('#song-dialog');
-            if (actual.songImage == null) {
+            if (actual.songImage === null) {
                 $('#song-image').attr('src', 'files/images/sc-default.png');
             } else {
                 $('#song-image').attr('src', actual.songImage);
@@ -133,7 +138,7 @@ OpenAudioAPI.getCSS = function(options) {
         url: null
     };
     var actual = $.extend({}, defaults, options || {});
-    if (actual.url != null) {
+    if (actual.url !== null) {
         var extension = actual.url.substr((actual.url.lastIndexOf('.') + 1));
         if (!/(css)$/ig.test(extension)) {
             console.error("[OpenAudioAPI] [errorException] File is not a Cascade Style Sheet (.css) file. Not appending to the client.");
@@ -147,24 +152,24 @@ OpenAudioAPI.getCSS = function(options) {
 
 // ModLoader API
 OpenAudioAPI.loadMod = function(url, status, type) {
-    if (url != "undefined") {
-        if (type == "JSMod") {
+    if (url !== "undefined") {
+        if (type === "JSMod") {
             $('#js-none').hide();
-            if (status == "Enabled") {
+            if (status === "Enabled") {
                 $('#js-mods').append('<div class="mods" style="color: green">' + url + ' Loaded Successfully</div>');
             }
-            else if (status == "Disabled") {
+            else if (status === "Disabled") {
                 $('#js-mods').append('<div class="mods" style="color: red">' + url + ' Failed to load. Reason: Not a JavaScript Extension</div>');
             } else {
                 console.warn("[OpenAudioAPI] [illegalException] Status cannot be " + status + ".");
             }
         }
-        else if (type == "CSSMod") {
+        else if (type === "CSSMod") {
             $('#css-none').hide();
-            if (status == "Enabled") {
+            if (status === "Enabled") {
                 $('#css-mods').append('<div class="mods" style="color: green">' + url + ' Loaded Successfully</div>');
             }
-            else if (status == "Disabled") {
+            else if (status === "Disabled") {
                 $('#css-mods').append('<div class="mods" style="color: red">' + url + ' Failed to load. Reason: Not a CSS Extension</div>');
             } else {
                 console.warn("[OpenAudioAPI] [illegalException] Status cannot be " + status + ".");
@@ -190,11 +195,11 @@ OpenAudioAPI.versionCheckup = function(options) {
         urlLink: null
     };
     var actual = $.extend({}, defaults, options || {});
-    if (actual.modName != null) {
-        if (actual.currentVersion != null) {
-            if (actual.latestVersion != null) {
-                if (actual.urlLink != null) {
-                    if (actual.currentVersion == actual.latestVersion) {
+    if (actual.modName !== null) {
+        if (actual.currentVersion !== null) {
+            if (actual.latestVersion !== null) {
+                if (actual.urlLink !== null) {
+                    if (actual.currentVersion === actual.latestVersion) {
                         var notification = document.querySelector('.mdl-js-snackbar');
                         var data = {
                             message: actual.modName + ' is up to date.',

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
+    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="Development popup shows too early. Lets fix that">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-APIs.js" afterPath="$PROJECT_DIR$/files/core/OAM-APIs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/init.js" afterPath="$PROJECT_DIR$/files/core/init.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +23,8 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-493">
-              <caret line="88" column="22" lean-forward="false" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
+            <state relative-caret-position="228">
+              <caret line="486" column="0" lean-forward="false" selection-start-line="486" selection-start-column="0" selection-end-line="491" selection-end-column="57" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -32,11 +35,23 @@
       <file leaf-file-name="init.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="51">
               <caret line="78" column="23" lean-forward="false" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1508900439430" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
+                <marker date="1508900746085" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="110" column="153" lean-forward="true" selection-start-line="110" selection-start-column="153" selection-end-line="110" selection-end-column="153" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,12 +89,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="220" column="42" lean-forward="false" selection-start-line="220" selection-start-column="42" selection-end-line="220" selection-end-column="42" />
+            <state relative-caret-position="391">
+              <caret line="53" column="58" lean-forward="false" selection-start-line="53" selection-start-column="58" selection-end-line="53" selection-end-column="58" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="76" column="125" lean-forward="true" selection-start-line="76" selection-start-column="125" selection-end-line="76" selection-end-column="125" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1508902722858" expanded="true" signature="6302:6314" ph="..." />
+                <marker date="1508902722858" expanded="true" signature="6480:6490" ph="..." />
+                <marker date="1508902722858" expanded="true" signature="6886:6898" ph="..." />
+                <marker date="1508902722858" expanded="true" signature="7065:7075" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,8 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addjs</find>
-      <find>you</find>
       <find>autodj</find>
       <find>dialog-sou</find>
       <find>soundmana</find>
@@ -127,6 +156,8 @@
       <find>eventminn</find>
       <find>vis(</find>
       <find>openSmallWindow</find>
+      <find>dev()</find>
+      <find>dev</find>
     </findStrings>
     <replaceStrings>
       <replace>Queue</replace>
@@ -197,15 +228,15 @@
         <option value="$PROJECT_DIR$/files/pages/unclaimedError.js" />
         <option value="$PROJECT_DIR$/files/pages/unsupportedError.js" />
         <option value="$PROJECT_DIR$/files/pages/urlError.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
         <option value="$PROJECT_DIR$/files/js/version.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/files/core/init.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
       </list>
     </option>
   </component>
@@ -448,14 +479,7 @@
       <workItem from="1508065877924" duration="64698000" />
       <workItem from="1508613149943" duration="21396000" />
       <workItem from="1508695129755" duration="1339000" />
-      <workItem from="1508869049144" duration="8991000" />
-    </task>
-    <task id="LOCAL-00009" summary="Regions Fix">
-      <created>1502509233895</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1502509233895</updated>
+      <workItem from="1508869049144" duration="11222000" />
     </task>
     <task id="LOCAL-00010" summary="Broke speakers (OOPSIE)">
       <created>1502509925488</created>
@@ -793,11 +817,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508899415279</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Fix Socket.io not connecting">
+      <created>1508900531137</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1508900531137</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="623225000" />
+    <option name="totallyTimeSpent" value="625456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -817,6 +848,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21815519" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15457413" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -828,7 +860,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15457413" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -867,7 +898,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Dupe Code&#10;&#10;Removed it :)" />
     <MESSAGE value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
     <MESSAGE value="Background image looks better&#10;&#10;Now it doesnt look like it was hit by a bus. Beep Beep D:" />
     <MESSAGE value="New Error Pages + OAMPlus Requirement&#10;&#10;Error Pages are converted to .js so we dont have to redirect. Saves some time and makes it friendly to reload if Socket server is ever to have temporary downtime.&#10;&#10;Plus those who dont claim a client ID will be stuck on install proccess until done. This is to combat a bug back in 2.x spamming the alert." />
@@ -892,7 +922,8 @@
     <MESSAGE value="Fixed issue with eventMinni causing errors java side from the webclient." />
     <MESSAGE value="Release 1.10 for OpenAudioMc 3.0" />
     <MESSAGE value="Bugfixes with Speakers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes with Speakers" />
+    <MESSAGE value="Fix Socket.io not connecting" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Socket.io not connecting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -901,10 +932,39 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/files/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="625" column="16" lean-forward="true" selection-start-line="625" selection-start-column="16" selection-end-line="625" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="78" column="23" lean-forward="false" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1508900746085" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="486" column="0" lean-forward="false" selection-start-line="486" selection-start-column="0" selection-end-line="491" selection-end-column="57" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -919,40 +979,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/css/main.css">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="625" column="16" lean-forward="true" selection-start-line="625" selection-start-column="16" selection-end-line="625" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-493">
-          <caret line="88" column="22" lean-forward="false" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="22" />
+        <state relative-caret-position="141">
+          <caret line="110" column="153" lean-forward="true" selection-start-line="110" selection-start-column="153" selection-end-line="110" selection-end-column="153" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="78" column="23" lean-forward="false" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <marker date="1508900439430" expanded="true" signature="2800:2807" ph="&amp;##9400;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="220" column="42" lean-forward="false" selection-start-line="220" selection-start-column="42" selection-end-line="220" selection-end-column="42" />
+        <state relative-caret-position="391">
+          <caret line="53" column="58" lean-forward="false" selection-start-line="53" selection-start-column="58" selection-end-line="53" selection-end-column="58" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="76" column="125" lean-forward="true" selection-start-line="76" selection-start-column="125" selection-end-line="76" selection-end-column="125" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1508902722858" expanded="true" signature="6302:6314" ph="..." />
+            <marker date="1508902722858" expanded="true" signature="6480:6490" ph="..." />
+            <marker date="1508902722858" expanded="true" signature="6886:6898" ph="..." />
+            <marker date="1508902722858" expanded="true" signature="7065:7075" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

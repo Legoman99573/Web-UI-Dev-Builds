@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/css/main.css" afterPath="$PROJECT_DIR$/files/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/js/version.js" afterPath="$PROJECT_DIR$/files/js/version.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -439,14 +434,7 @@
       <workItem from="1508065877924" duration="64698000" />
       <workItem from="1508613149943" duration="21396000" />
       <workItem from="1508695129755" duration="1339000" />
-      <workItem from="1508869049144" duration="7852000" />
-    </task>
-    <task id="LOCAL-00007" summary="Regions Fix">
-      <created>1502509105438</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1502509105438</updated>
+      <workItem from="1508869049144" duration="7885000" />
     </task>
     <task id="LOCAL-00008" summary="Regions Fix">
       <created>1502509219197</created>
@@ -784,11 +772,18 @@
       <option name="project" value="LOCAL" />
       <updated>1508695291304</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Bugfixes with Speakers">
+      <created>1508899405477</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1508899405478</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622086000" />
+    <option name="totallyTimeSpent" value="622119000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -858,7 +853,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Web Client Outdated Notification, New APIs, and BugFixes&#10;&#10;This will fix some things up and sorry for not getting this straight away due to being sick :(" />
     <MESSAGE value="Dupe Code&#10;&#10;Removed it :)" />
     <MESSAGE value="Background Image Resize Ignored Fix&#10;&#10;Width and height is set at 100% and will work on any device now :)" />
     <MESSAGE value="Background image looks better&#10;&#10;Now it doesnt look like it was hit by a bus. Beep Beep D:" />
@@ -883,7 +877,8 @@
     <MESSAGE value="Hopefully fixed SweetAlert2 bug" />
     <MESSAGE value="Fixed issue with eventMinni causing errors java side from the webclient." />
     <MESSAGE value="Release 1.10 for OpenAudioMc 3.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Release 1.10 for OpenAudioMc 3.0" />
+    <MESSAGE value="Bugfixes with Speakers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfixes with Speakers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

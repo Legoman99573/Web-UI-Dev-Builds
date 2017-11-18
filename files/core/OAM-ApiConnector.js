@@ -69,7 +69,7 @@ socketIo.connect = function() {
     });
     socket.on('oaSettings', function(msg) {
         $( ".mdl-navigation__link" ).remove();
-        $( ".mdl-menu__item" ).remove();
+        $( ".right-menu" ).remove();
         $( ".mods" ).remove();
         $('#js-none').show();
         $('#css-none').show();
@@ -106,7 +106,27 @@ socketIo.connect = function() {
                     var settings = JSON.parse(msg);
                     $("#client-title").text(settings.Title);
                     document.title = settings.Title;
-                    addJs("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js");
+                    localStorage.DefaultLanguage = settings.language;
+                    if (localStorage.PrimaryColor && localStorage.SecondaryColor) {
+                        $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + localStorage.PrimaryColor + '-' + localStorage.SecondaryColor + '.min.css');
+                    }
+                    if (localStorage.SetLanguage) {
+                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.SetLanguage + ".js", function() {
+                            if (!closedwreason) {
+                                $('.name').html(langpack.message.welcome.replace("%name%", mcname));
+                            } else {
+                                $('.name').html(langpack.message.notconnected);
+                            }
+                        });
+                    } else {
+                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js", function() {
+                            if (!closedwreason) {
+                                $('.name').html(langpack.message.welcome.replace("%name%", mcname));
+                            } else {
+                                $('.name').html(langpack.message.notconnected);
+                            }
+                        });
+                    }
                     if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
                         windows_10 = new trayItem("fa fa-windows", 'openInNewTab', 'oamc:' + clientID + '/' + clientTOKEN + '/' + mcname, "Play in APP");
                     }
@@ -167,8 +187,21 @@ socketIo.connect = function() {
                             }
                         });
                     } else {}
-                    if (settings.bg === "") {} else {
-                        document.body.background = settings.bg;
+                    if (settings.bg === "") {
+                        if (localStorage.ThemeURL) {
+                            console.log('[OpenAudioMc] Loading cached theme from settings');
+                            document.body.background = localStorage.ThemeURL;
+                            // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                            document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                        }
+                    } else {
+                        if (!localStorage.ThemeURL) {
+                            document.body.background = settings.bg;
+                            localStorage.defaultTheme = settings.bg;
+                        } else {
+                            console.log('[OpenAudioMc] Loading cached theme from settings');
+                            document.body.background = localStorage.ThemeURL;
+                        }
                         // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                         document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
                     }
@@ -244,6 +277,7 @@ socketIo.connect = function() {
 
 
     socket.on('disconnect', function() {
+        socketclosed = true;
         socketIo.log("Disconnected!");
         soundManager._writeDebug("Disconnected!", 3);
         $('.name').html(langpack.message.socket_closed);
@@ -255,6 +289,7 @@ socketIo.connect = function() {
         console.info("[Socket.io] Connected!");
         socketIo.log("Connecting as: User: " + mcname + " Id: " + clientID + " Token: " + clientTOKEN);
         closedwreason = false;
+        socketclosed = false;
         socket.emit("message", '{"type":"client","clientid":"' + clientID + '","user":"' + mcname + '","key":"' + clientTOKEN + '"}');
         socketIo.log("Message send.");
     });

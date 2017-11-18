@@ -12,45 +12,61 @@
  * the License.
  */
 
-langpack = {};
-langpack.hue = {};
-langpack.message = {};
-langpack.notification = {};
+// This is just incase Language Packs don't load, we will have a set loaded. Even good for packs that are not up-to-date
+    langpack = {};
+    langpack.hue = {};
+    langpack.message = {};
+    langpack.notification = {};
+    langpack.settings = {};
 
+    langpack.message.devbuild = "This server is using a Development Build! Some functions may or may not work.";
+    langpack.message.welcome = "Connected as %name%! Welcome!";
+    langpack.message.notconnected = "You're not connected to the server...";
+    langpack.message.server_is_offline = "Server is offline.";
+    langpack.message.inavlid_url = "Invalid url.";
+    langpack.message.invalid_connection = "Invalid connection!";
+    langpack.message.reconnect_prompt = "Sorry but your url is not valid  Please request a new url via <b>/audio</b> or <b>/connect</b>.";
+    langpack.message.socket_closed = "Disconnected from the server, please wait";
+    langpack.message.mobile_qr = "Qr code for mobile client";
+    langpack.message.listen_on_soundcloud = "Listen on soundcloud!";
+    langpack.message.clypit_url = "<h2>Uh oh</h2> <h3>Clyp.it is no longer supported! <b>Do not ask for support.</b></h3>";
+    langpack.message.spotify_url = "<h2>Uh oh</h2> <h3>Spotify links do not currently work. <b>Support is coming soon™</b></h3>";
+    langpack.message.minime_disabled = "<h2>Minimi is disabled by the server admin.</h2>";
+    langpack.message.debugger_off = "<h2>Debugger is only available on development builds.</h2>";
+    langpack.message.easter_egg = "<h2>You found an EasterEgg.</h2><h3>Now listen to the torture >:)</h3>";
 
-langpack.message.devbuild = "This server is using a Development Build! Some functions may or may not work.";
-langpack.message.welcome = "Connected as %name%! Welcome!";
-langpack.message.notconnected = "You're not connected to the server...";
-langpack.message.server_is_offline = "Server is offline.";
-langpack.message.inavlid_url = "Invalid url.";
-langpack.message.invalid_connection = "Invalid connection!";
-langpack.message.reconnect_prompt = "Sorry but your url is not valid  Please request a new url via <b>/audio</b> or <b>/connect</b>.";
-langpack.message.socket_closed = "Disconnected from the server, please wait";
-langpack.message.mobile_qr = "Qr code for mobile client";
-langpack.message.listen_on_soundcloud = "Listen on soundcloud!";
-langpack.message.clypit_url = "<h2>Uh oh</h2> <h3>Clyp.it is no longer supported! <b>Do not ask for support.</b></h3>";
-langpack.message.spotify_url = "<h2>Uh oh</h2> <h3>Spotify links do not currently work. <b>Support is coming soon™</b></h3>";
-langpack.message.minime_disabled = "<h2>Minimi is disabled by the server admin.</h2>";
-langpack.message.debugger_off = "<h2>Debugger is only available on development builds.</h2>";
-langpack.message.easter_egg = "<h2>You found an EasterEgg.</h2><h3>Now listen to the torture >:)</h3>";
+    langpack.notification.header = "OpenAudioMc | %username%";
+    langpack.notification.img = 'files/images/footer_logo.png';
 
-langpack.notification.header = "OpenAudioMc | %username%";
-langpack.notification.img = 'files/images/footer_logo.png';
+    langpack.hue.disabled = "philips hue lights are disabled by the server admin!";
+    langpack.hue.please_link = "<h2>Philips HUE bridge detected!</h2><h3>Please press the link button!</h3>";
+    langpack.hue.connecting = "<h2>Connecting to hue bridge...</h2>";
+    langpack.hue.re_search_bridge = "<h2>No philips hue bridge found</h2><h4>Searching for a hue bridge in your network...</h4>";
+    langpack.hue.cant_connect = "<h2>Could not connect to hue bridge</h2>";
+    langpack.hue.not_found = "<h2>No philips hue bridge found</h2>";
+    langpack.hue.connected_with_bridge = "<h3>You are now connected with your %bridgename% bridge. Have fun!</h3>";
+    langpack.hue.ssl_error = "<h2>There is no support over a secure connection :(</h2><h4>Phillips HUE support is automatically disabled.</h4>";
+    langpack.hue.direct_ip_prompt = "<h2>Please input your bridge IP</h2>";
+    langpack.hue.direct_ip_prompt_empty = "<h2>Please enter a Bridge IP</h2>";
+    langpack.hue.direct_ip_lookup = "<h2>Attempting to connect to bridge IP %ip%...</h2>";
+    langpack.hue.direct_ip_lookup_success = "<h2>Found bridge IP %ip%</h2><h3>Connecting...</h3>";
+    langpack.hue.direct_ip_lookup_failed = "<h2>Failed to connect to bridge IP %ip%...</h2>";
+    langpack.hue.light_data_fail = "<h2>Unable to retrieve Light Data.</h2><h3>Press <b>F5</b> to refresh</h3>";
 
-langpack.hue.disabled = "philips hue lights are disabled by the server admin!";
-langpack.hue.please_link = "<h2>Philips HUE bridge detected!</h2><h3>Please press the link button!</h3>";
-langpack.hue.connecting = "<h2>Connecting to hue bridge...</h2>";
-langpack.hue.re_search_bridge = "<h2>No philips hue bridge found</h2><h4>Searching for a hue bridge in your network...</h4>";
-langpack.hue.cant_connect = "<h2>Could not connect to hue bridge</h2>";
-langpack.hue.not_found = "<h2>No philips hue bridge found</h2>";
-langpack.hue.connected_with_bridge = "<h3>You are now connected with your %bridgename% bridge. Have fun!</h3>";
-langpack.hue.ssl_error = "<h2>There is no support over a secure connection :(</h2><h4>Phillips HUE support is automatically disabled.</h4>";
-langpack.hue.direct_ip_prompt = "<h2>Please input your bridge IP</h2>";
-langpack.hue.direct_ip_prompt_empty = "<h2>Please enter a Bridge IP</h2>";
-langpack.hue.direct_ip_lookup = "<h2>Attempting to connect to bridge IP %ip%...</h2>";
-langpack.hue.direct_ip_lookup_success = "<h2>Found bridge IP %ip%</h2><h3>Connecting...</h3>";
-langpack.hue.direct_ip_lookup_failed = "<h2>Failed to connect to bridge IP %ip%...</h2>";
-langpack.hue.light_data_fail = "<h2>Unable to retrieve Light Data.</h2><h3>Press <b>F5</b> to refresh</h3>";
+    langpack.settings.bgimage = 'Type "Default" to use the default background image (if set)';
+    langpack.settings.bgimage_rejected = 'URL field cannot be empty';
+    langpack.settings.bgimage_default = 'Background image has been reset to default.';
+    langpack.settings.bgimage_success = 'Background image has been set.';
+    langpack.settings.language = 'Note that JS addons may not support language changes.';
+    langpack.settings.language_rejected = 'Language must be selected.';
+    langpack.settings.language_default = 'Language reset to default language, %lang%.';
+    langpack.settings.language_success = 'Language set to %lang%.';
+    langpack.settings.color_default = 'Default Primary and Secondary colors set.';
+    langpack.settings.color_success = 'Primary and Secondary colors are set.';
+    langpack.settings.primarycolor_rejected = 'Primary Color must be selected.';
+    langpack.settings.secondarycolor_rejected = 'Secondary Color must be selected.';
+    langpack.settings.secondarycolor_rejected_match_primary = "Primary and Secondary colors can't be the same.";
+// Default Language Packs End
 
 
 var openaudio = {};
@@ -84,9 +100,11 @@ var hue_set = false;
 var direct = true;
 var connecting = true;
 var loop = false;
+var closedwreason = false;
+var settings = false;
 
 // Determines if stable or unstable
-var development = false;
+var development = true;
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -506,93 +524,82 @@ function SetDesignColor(code) {
 }
 
 
-/* Format
-    keycode = decodedKey
- */
-function keyEvent(key) {
-    if (closedwreason != true) {
+// Key bindings
+$(document).keydown(function(e) {
+    if (e.which === 40 && e.altKey || e.which === 37 && e.altKey ) {
+        // CTRL+ArrowDown or CTRL+ArrowLeft pressed
+        var slider = document.getElementById("slider");
+        slider.value = slider.value - 1;
+        openaudio.set_volume(slider.value);
+        sliderValue(slider.value);
+    }
 
-        /* 40 = ArrowDown
-           37 = ArrowLeft
-        */
-        if ((key.keyCode) === 40 || (key.keyCode) === 37) {
-            var slider = document.getElementById("slider");
-            slider.value = slider.value - 1;
-            openaudio.set_volume(slider.value);
-            sliderValue(slider.value);
+    if (e.which === 72 && e.altKey) {
+        // CTRL+H pressed
+        if (!(hue_enabled) !== true) {
+            openhue();
         }
-
-        // 72 = h
-        if ((key.keyCode) === 72) {
-            if (!(hue_enabled) !== true) {
-                openhue();
-            }
-            else {
-                OpenAudioAPI.generateDialog({
-                    title: 'Philips HUE',
-                    html: langpack.hue.disabled
-                });
-            }
-        }
-
-        // 77 = m
-        if ((key.keyCode) === 77) {
-            if ((minimeon) === true) {
-                openSmallWindow();
-            } else {
-                swal({
-                    title: 'MiniMe',
-                    html: langpack.message.minime_disabled
-                });
-            }
-        }
-
-        // 68 = d
-        if ((key.keyCode) === 68) {
-            if (!(development !== true)) {
-                soundmanager2_debugger();
-            } else {
-                swal({
-                    title: 'Soundmanager2 Debugger',
-                    html: langpack.message.debugger_off
-                });
-            }
-        }
-
-        // 76 = l
-        if ((key.keyCode) === 76) {
+        else {
             swal({
-                title: 'Easter Egg',
-                html: langpack.message.easter_egg
+                title: 'Philips HUE',
+                html:  langpack.hue.disabled
             });
-            soundManager.createSound({
-                id: "oa_easteregg",
-                volume: volume,
-                url: "https://oayt-delivery.snowdns.de/?v=m7SNzJx05IE",
-                autoPlay: true
-            });
-        }
-
-        // 73 = i
-        if ((key.keyCode) === 73) {
-            $('#dialog-mods').modal('show');
-        }
-
-        /*
-           38 = ArrowUp
-           39 = ArrowRight
-        */
-        if ((key.keyCode) === 38 || (key.keyCode) === 39) {
-            var slider = document.getElementById("slider");
-            var val = ++slider.value;
-            slider.value = val;
-            openaudio.set_volume(slider.value);
-            sliderValue(slider.value);
         }
     }
-}
 
-document.onkeydown = keyEvent;
+    if (e.which === 77 && e.altKey) {
+        // CTRL+M pressed
+        if ((minimeon) === true) {
+            openSmallWindow();
+        } else {
+            swal({
+                title: 'MiniMe',
+                html: langpack.message.minime_disabled
+            });
+        }
+    }
+
+    if (e.which === 68 && e.altKey) {
+        // CTRL+D pressed
+        if (!(development !== true)) {
+            soundmanager2_debugger();
+        } else {
+            swal({
+                title: 'Soundmanager2 Debugger',
+                html: langpack.message.debugger_off
+            });
+        }
+    }
+
+    if (e.which === 76 && e.altKey) {
+        // CTRL+L pressed
+        swal({
+            title: 'Easter Egg',
+            html: langpack.message.easter_egg
+        });
+        soundManager.createSound({
+            id: "oa_easteregg",
+            volume: volume,
+            url: "https://oayt-delivery.snowdns.de/?v=m7SNzJx05IE",
+            autoPlay: true
+        });
+    }
+
+    if (e.which === 73 && e.altKey) {
+        // CTRL+I pressed
+        $('#dialog-mods').modal('show');
+    }
+
+    if (e.which === 38 && e.altKey || e.which === 39 && e.altKey ) {
+        // CTRL+ArrowUp or CTRL+ArrowRight pressed
+        var slider = document.getElementById("slider");
+        slider.value = slider.value - 1;
+        openaudio.set_volume(slider.value);
+        sliderValue(slider.value);
+    }
+
+
+});
 
 function loadAllFromJson(pack) {
     var json = JSON.parse(pack);
@@ -718,7 +725,7 @@ function enable() {
     status_span = document.getElementById("status-span");
     volume_text = document.getElementById("volume");
 
-    if (getCookie("volume") != null) {
+    if (getCookie("volume") !== null) {
         openaudio.set_volume(getCookie("volume"));
     }
 
@@ -730,11 +737,11 @@ function enable() {
     document.getElementById("skull").src = "https://crafatar.com/avatars/" + mcname + "?overlay";
 
     // Since its deprecated to use on an insecure connection, we will use Material's version as a workaround fix for it ;)
-    if (window.location.protocol == "https:") {
+    if (window.location.protocol === "https:") {
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
         }
-    } else if (window.location.protocol == "http:") {
+    } else if (window.location.protocol === "http:") {
         console.warn("[OpenAudioMC] [illegalException] Notifications only works on secure connection. Using Material's Own Notifications instead.");
     } else {
         console.warn("[OpenAudioMC] [illegalException] Notifications only works on secure connection. Using Material's Own Notifications instead.");

@@ -20,7 +20,7 @@
         <!-- CSS -->
         <link href="files/css/material.css" rel="stylesheet" />
         <link href="files/css/bootstrap.modal.css" rel="stylesheet" />
-        <link rel="stylesheet" href="files/css/style.css">
+        <link rel="stylesheet" href="files/css/style.css" title="main">
         <link rel="stylesheet" href="files/css/animate.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="files/css/main.css?v=1.5" rel="stylesheet" />
@@ -39,19 +39,20 @@
         <link rel="image" href="files/images/small_logo.png?v=1.5" />
 
         <!-- JS -->
-        <script src="files/js/version.js?v=1.11_for_3.0"></script>
+        <script src="files/js/version.js?v=1.12_for_3.0"></script>
         <script defer src="files/js/material.js"></script>
-        <script src="files/js/jquery.js?v=1.5"></script>
+        <script src="files/js/jquery.js?v=1.6"></script>
         <script src="files/js/bootstrap.modal.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <script src="https://craftmend.com/nophp-openaudiomc.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.all.min.js"></script>
         <script src="files/js/soundmanager2.js?v=1.32"></script>
         <script src="files/js/hueapi.js?v=1.5"></script>
-        <script src="files/core/OAM-APIs.js?v=1.40"></script>
-        <script src="files/core/OAM-Core.js?v=3.90"></script>
+        <script src="files/core/OAM-APIs.js?v=1.41"></script>
+        <script src="files/core/OAM-Core.js?v=3.99"></script>
+        <script src="files/core/OAM-SettingsHandler.js?v=1.13"></script>
         <script src="files/core/OAM-Hue.js?v=1.31"></script>
-        <script src="files/core/OAM-ApiConnector.js?v=1.40"></script>
+        <script src="files/core/OAM-ApiConnector.js?v=1.45"></script>
         <script src="files/core/bugreport.js?v=1.0"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
         <script src="files/js/soundcloud.js"></script>
@@ -94,6 +95,16 @@
             </div>
             <main class="mdl-layout__content">
                 <div class="edges mdl-shadow--2dp"></div>
+                <!-- Settings Button -->
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent" id="settings">
+                    <i class="material-icons">settings</i>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="settings">
+                    <li class="mdl-menu__item" onclick="editBgImage()">Edit Background Image</li>
+                    <li class="mdl-menu__item" onclick="editLanguage()">Edit Language</li>
+                    <li class="mdl-menu__item" onclick="editColorTemplate()">Edit Material Colors</li>
+                </ul>
                 <div class="box">
                     <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
                         <div class="page-content">
@@ -218,5 +229,5 @@
     </div>
 
     <div id="speaker-vars"></div>
-    <script src="files/core/init.js?v=1.51"></script>
+    <script src="files/core/init.js?v=1.52"></script>
 </html>

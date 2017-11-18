@@ -92,9 +92,9 @@ OpenAudioAPI.rightTrayItem = function(options) {
             console.error('[OpenAudioAPI] [errorException] itemName cannot be empty.');
         } else {
             if (actual.underlineBelow === "true") {
-                $('#side-menu').append('<li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+                $('#side-menu').append('<li class="mdl-menu__item mdl-menu__item--full-bleed-divider right-menu" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
             } else {
-                $('#side-menu').append('<li class="mdl-menu__item" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+                $('#side-menu').append('<li class="mdl-menu__item right-menu" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
             }
         }
     }

@@ -20,9 +20,12 @@ logInit("You may see a message like '[Violation] Forced reflow while executing J
 function loadBg() {
     var LiturkeyColorsInc = ["#f5d65a","#39e2b0","#3fbe98","#a743c4","#5f5cea","#ea5c5c","#242424","#c5b358","#c0c0c0","#cd7f32","#b9f2ff","#7d1242","#800000"];
     var item = LiturkeyColorsInc[Math.floor(Math.random()*LiturkeyColorsInc.length)];
-    $('body').animate({backgroundColor: item}, {duration:1000});
+    $(body).animate({backgroundColor: item}, {duration:1000});
     // Keep in mind that putting this under 5 seconds (5000 milliseconds) can cause epilepsy and is not recommended.
-    setTimeout(loadBg, 5000);
+    if (!localStorage.disableRainbow) {
+        setTimeout(loadBg, 5000);
+    }
+    epilepsyfix = true;
 }
 
 function openInNewTab(url) {
@@ -105,7 +108,9 @@ function initialize() {
 function enableMain(clientJs) {
     logInit("Login-sucess");
     enable(clientJs);
-    loadBg();
+    if (!epilepsyfix) {
+        loadBg();
+    }
 }
 
 function logInit(msg) {

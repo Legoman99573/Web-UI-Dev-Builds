@@ -236,3 +236,46 @@ function editColorTemplate() {
         }
     });
 }
+
+function editBackgroundColor() {
+    swal({
+        title: 'Update Background Settings',
+        text: langpack.settings.backgroundColor,
+        input: 'select',
+        inputOptions: {
+            'true': 'Rainbow',
+            'false': 'Random Color'
+        },
+        inputPlaceholder: 'Select Setting',
+        showCancelButton: true,
+        confirmButtonText: 'Update',
+        inputValidator: function (value) {
+            return new Promise(function (resolve, reject) {
+                if (value) {
+                    resolve();
+                } else {
+                    reject(langpack.settings.backgroundColor_rejected);
+                }
+            })
+        },
+        allowOutsideClick: false
+    }).then(function (result) {
+        if (result === 'true') {
+            if (localStorage.disableRainbow) {
+                delete localStorage.disableRainbow;
+            }
+            setTimeout(loadBg, 5000);
+            swal({
+                type: 'success',
+                title: langpack.settings.backgroundColor_Rainbow,
+            });
+        } else {
+            localStorage.disableRainbow = 'true';
+            setTimeout(loadBg, 5000);
+            swal({
+                type: 'success',
+                title: langpack.settings.backgroundColor_Random_Color,
+            });
+        }
+    });
+}

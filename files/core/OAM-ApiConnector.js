@@ -278,6 +278,7 @@ socketIo.connect = function() {
 
     socket.on('disconnect', function() {
         socketclosed = true;
+        closedwreason = true;
         socketIo.log("Disconnected!");
         soundManager._writeDebug("Disconnected!", 3);
         $('.name').html(langpack.message.socket_closed);

@@ -182,7 +182,7 @@ function direct_hue_connection() {
             })
         },
         allowOutsideClick: false
-    }).then(function (result) {
+    }).then(result => {
         localStorage.MyHueBridgeIP = result;
         direct = false;
         swal({

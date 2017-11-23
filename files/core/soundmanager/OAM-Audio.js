@@ -88,67 +88,76 @@ function handleSoundEnd(fullId) {
 
 
 openaudio.play = function(src_fo_file, soundID, defaultTime) {
-    if (soundID === null) {
-        soundID = 'default';
-    }
+    if (!closedwreason) {
+        if (soundID === null) {
+            soundID = 'default';
+        }
 
-    if (defaultTime === null) {
-        defaultTime = 0;
-    }
+        if (defaultTime === null) {
+            defaultTime = 0;
+        }
 
-    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
 
-    var soundId = "play";
-    if (isFading[soundId] === true) {
-        stopFading[soundId] = true;
-    }
-    var mySoundObject = soundManager.createSound({
-        id: "play_" + randomID + soundID,
-        url: src_fo_file,
-        volume: volume,
-        from: defaultTime,
-        autoPlay: true
-    });
+        var soundId = "play";
+        if (isFading[soundId] === true) {
+            stopFading[soundId] = true;
+        }
+        var mySoundObject = soundManager.createSound({
+            id: "play_" + randomID + soundID,
+            url: src_fo_file,
+            volume: volume,
+            from: defaultTime,
+            autoPlay: true
+        });
 
-    openaudio.stopPlay = function(soundID) {
+        openaudio.stopPlay = function (soundID) {
 
-        fadeIdOut("play_" + randomID + soundID);
-        soundManager.destroySound("play_" + randomID + soundID);
+            fadeIdOut("play_" + randomID + soundID);
+            soundManager.destroySound("play_" + randomID + soundID);
+        }
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
     }
 };
 
 openaudio.sartBackground = function(url) {
-    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-    soundManager.stop("oa_region_" + randomID);
-    soundManager.destroySound("oa_back_" + randomID);
-    var regionsound = soundManager.createSound({
-        id: "oa_back_" + randomID,
-        volume: volume,
-        url: url
-    });
-
-    function loopSound(sound) {
-        sound.play({
-            onfinish: function() {
-                loopSound(sound);
-            },
-            onerror: function(code, description) {
-                soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
-                if (this.loaded) {
-                    openaudio.stopBackground();
-                } else {
-                    soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
-                }
-            }
-        });
-    }
-    fadeIdTarget("oa_back_" + randomID);
-    loopSound(regionsound);
-
-    openaudio.stopBackground = function() {
-        fadeIdOut("oa_back_" + randomID);
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        soundManager.stop("oa_region_" + randomID);
         soundManager.destroySound("oa_back_" + randomID);
-    };
+        var regionsound = soundManager.createSound({
+            id: "oa_back_" + randomID,
+            volume: volume,
+            url: url
+        });
+
+        function loopSound(sound) {
+            sound.play({
+                onfinish: function () {
+                    loopSound(sound);
+                },
+                onerror: function (code, description) {
+                    soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
+                    if (this.loaded) {
+                        openaudio.stopBackground();
+                    } else {
+                        soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
+                    }
+                }
+            });
+        }
+
+        fadeIdTarget("oa_back_" + randomID);
+        loopSound(regionsound);
+
+        openaudio.stopBackground = function () {
+            fadeIdOut("oa_back_" + randomID);
+            soundManager.destroySound("oa_back_" + randomID);
+        };
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
+    }
 };
 
 openaudio.playAction = function(action_is_fnc) {

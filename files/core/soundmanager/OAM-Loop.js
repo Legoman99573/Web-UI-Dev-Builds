@@ -13,32 +13,41 @@
  */
 
 openaudio.loop = function(url, defaultTime) {
-    soundManager.stop("loop_" + randomID);
-    soundManager.destroySound("loop_" + randomID);
-    var loopnu = soundManager.createSound({
-        id: "loop_" + randomID,
-        volume: volume,
-        url: url,
-        from: defaultTime * 1000,
-        stream: true
-    });
-
-    function loopSound(sound) {
-        sound.play({
-            onfinish: function() {
-                loopSound(sound);
-            },
-            onerror: function(code, description) {
-                soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
-                if (this.loaded) {
-                    openaudio.stopLoop();
-                } else {
-                    soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
-                }
-            }
+    if (!closedwreason) {
+        soundManager.stop("loop_" + randomID);
+        soundManager.destroySound("loop_" + randomID);
+        var loopnu = soundManager.createSound({
+            id: "loop_" + randomID,
+            volume: volume,
+            url: url,
+            from: defaultTime * 1000,
+            stream: true
         });
+
+        function loopSound(sound) {
+            sound.play({
+                onfinish: function () {
+                    loopSound(sound);
+                },
+                onerror: function (code, description) {
+                    soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
+                    if (this.loaded) {
+                        openaudio.stopLoop();
+                    } else {
+                        soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
+                    }
+                }
+            });
+        }
+
+        if (!closedwreason) {
+            loopSound(loopnu);
+        } else {
+            console.error("[OpenAudio] An error has occured while loading this function.");
+        }
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
     }
-    loopSound(loopnu);
 };
 
 openaudio.stopLoop = function() {

@@ -78,46 +78,50 @@ AutoDj.Play = function(FNC_ID) {
     }
 };
 AutoDj.SoundManager_Play = function(fnc_file, id) {
-    var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-    var mySoundObject = soundManager.createSound({
-        id: "AutoDj_" + id + "_" + randomID,
-        url: fnc_file,
-        volume: volume,
-        autoplay: true
-    });
-
-    function playSound(sound) {
-        sound.play({
-            onfinish: function() {
-                AutoDj.PlayNext();
-            },
-            onerror: function() {
-                console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
-                soundManager.destroySound("AutoDj_" + id + "_" + randomID);
-                AutoDj.PlayNext();
-
-                var notification = document.querySelector('.mdl-js-snackbar');
-                var data = {
-                    message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
-                    timeout: 100
-                };
-                notification.MaterialSnackbar.showSnackbar(data);
-            }
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        var mySoundObject = soundManager.createSound({
+            id: "AutoDj_" + id + "_" + randomID,
+            url: fnc_file,
+            volume: volume,
+            autoplay: true
         });
-    }
 
-    playSound(mySoundObject);
+        function playSound(sound) {
+            sound.play({
+                onfinish: function () {
+                    AutoDj.PlayNext();
+                },
+                onerror: function () {
+                    console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
+                    soundManager.destroySound("AutoDj_" + id + "_" + randomID);
+                    AutoDj.PlayNext();
 
-    if (fnc_file.includes("oayt-delivery.snowdns.de")) {
-        curl = fnc_file.toString().split('&v=')[1];
-        $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + curl, function(data) {
-            let json = JSON.parse(data);
-            OpenAudioAPI.songNotification({
-                songTitle: json["title"],
-                songURL: 'https://www.youtube.com/watch?v=' + curl,
-                songImage: json["thumbnail"]
+                    var notification = document.querySelector('.mdl-js-snackbar');
+                    var data = {
+                        message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
+                        timeout: 100
+                    };
+                    notification.MaterialSnackbar.showSnackbar(data);
+                }
             });
-        });
+        }
+
+        playSound(mySoundObject);
+
+        if (fnc_file.includes("oayt-delivery.snowdns.de")) {
+            curl = fnc_file.toString().split('&v=')[1];
+            $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + curl, function (data) {
+                let json = JSON.parse(data);
+                OpenAudioAPI.songNotification({
+                    songTitle: json["title"],
+                    songURL: 'https://www.youtube.com/watch?v=' + curl,
+                    songImage: json["thumbnail"]
+                });
+            });
+        }
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
     }
 
     AutoDj.stopPlaylist = function() {

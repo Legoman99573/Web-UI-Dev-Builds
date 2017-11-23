@@ -240,7 +240,7 @@ socketIo.connect = function() {
         } else {
             closedwreason = true;
             console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
-            $.getScript("files/pages/unclaimedError.js");
+            $.getScript("files/pages/unclaimedError.js?v=1.1");
         }
     });
 
@@ -252,12 +252,12 @@ socketIo.connect = function() {
             closedwreason = true;
             console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
-            $.getScript("files/pages/serverError.js");
+            $.getScript("files/pages/serverError.js?v=1.1");
         } else if (msg === "kicked") {
             closedwreason = true;
             console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 3: Invalid Session. use /audio or /connect to get a new url link");
-            $.getScript("files/pages/urlError.js");
+            $.getScript("files/pages/urlError.js?v=1.1");
         } else {
             var message = JSON.parse(msg);
 

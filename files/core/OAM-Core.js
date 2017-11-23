@@ -711,7 +711,7 @@ function mobile(type) {
             if (!result.dismiss) {
                 openInNewTab('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname)
                 closedwreason = true;
-                $.getScript('files/pages/closeme.js');
+                $.getScript('files/pages/closeapp.js');
             }
         });
     } else if (type === "Android") {
@@ -727,7 +727,7 @@ function mobile(type) {
             if (!result.dismiss) {
                 openInNewTab('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname)
                 closedwreason = true;
-                $.getScript('files/pages/closeme.js');
+                $.getScript('files/pages/closeapp.js');
             }
         });
     } else {

@@ -12,6 +12,8 @@
  * the License.
  */
 
+document.body.background = "";
+
 $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "\n" +
     "  <!-- Title -->\n" +

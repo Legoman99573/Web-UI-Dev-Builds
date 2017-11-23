@@ -17,7 +17,7 @@ document.body.background = "";
 $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "\n" +
     "  <!-- Title -->\n" +
-    "  <title>OpenAudioMC | CloseMe</title>\n" +
+    "  <title>OpenAudioMC | CloseApp</title>\n" +
     "\n" +
     "  <!-- CSS -->\n" +
     "  <link href=\"files/css/error.css\" rel=\"stylesheet\" />\n" +
@@ -75,7 +75,7 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "           <h2 class=\"mdl-card__title-text\"></h2>\n" +
     "         </div>\n" +
     "         <div class=\"mdl-card__supporting-text\">\n" +
-    "           <b>You have opened minime.</b>\n" +
+    "           <b>You have opened an app.</b>\n" +
     "           <br>\n" +
     "           <br>\n" +
     "           You may now close this tab or press Refresh.\n" +
@@ -91,3 +91,7 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "      </div>" +
     "    </div>");
 loadVersion();
+
+function connect_new_token(token) {
+    window.location.href = "?name=" + mcname + "&session=" + clientID + ":" + token;
+}

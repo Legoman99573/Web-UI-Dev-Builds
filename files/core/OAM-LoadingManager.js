@@ -95,13 +95,13 @@ function initialize() {
         } catch (e) {
             console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
             logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
-            $.getScript("files/pages/serverError.js");
+            $.getScript("files/pages/serverError.js?v=1.1");
         }
     } else {
         // Invalid Username
         console.error("[OpenAudioMc][clientException] Exit Code status: 1. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
         logInit("clientError 1: No Username filled in. use /audio or /connect to get a new url link");
-        $.getScript("files/pages/urlError.js");
+        $.getScript("files/pages/urlError.js?v=1.1");
     }
 }
 
@@ -119,7 +119,7 @@ function logInit(msg) {
 
 if (platform.name === "Microsoft Edge" || platform.name === "IE") {
     logInit("clientError 6: Using an Unsupported Browser");
-    $.getScript("files/pages/unsupportedError.js");
+    $.getScript("files/pages/unsupportedError.js?v=1.1");
 } else {
     initialize();
 }

@@ -107,7 +107,7 @@ if (clientTOKEN !== null && clientID !== null && mcname !== null) {
                 })
             },
             allowOutsideClick: false
-        }).then(result => {
+        }).then(function (result) {
             window.location = "?name=" + mcname + "&session=" + clientID + ":" + result;
         });
     })

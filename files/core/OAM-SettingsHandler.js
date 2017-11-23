@@ -29,7 +29,7 @@ function editBgImage() {
             })
         },
         allowOutsideClick: false
-    }).then(result => {
+    }).then(function (result) {
         if (result === 'default' || result === 'Default') {
             delete localStorage.ThemeURL;
             document.body.background = '';
@@ -80,7 +80,7 @@ function editLanguage() {
             })
         },
         allowOutsideClick: false
-    }).then(result => {
+    }).then(function (result) {
         if (result === 'Default') {
             delete localStorage.SetLanguage;
             $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.DefaultLanguage + ".js", function() {
@@ -158,7 +158,7 @@ function editColorTemplate() {
             })
         },
         allowOutsideClick: false
-    }).then(result => {
+    }).then(function (result) {
         if (result === 'Default') {
             if (localStorage.PrimaryColor) {
                 delete localStorage.PrimaryColor;
@@ -209,7 +209,7 @@ function editColorTemplate() {
                     })
                 },
                 allowOutsideClick: false
-            }).then(result2 => {
+            }).then(function (result2) {
                 if (result2 === 'Default') {
                     if (localStorage.PrimaryColor) {
                         delete localStorage.PrimaryColor;
@@ -259,7 +259,7 @@ function editBackgroundColor() {
             })
         },
         allowOutsideClick: false
-    }).then(result => {
+    }).then(function (result) {
         if (result === 'true') {
             if (localStorage.disableRainbow) {
                 delete localStorage.disableRainbow;

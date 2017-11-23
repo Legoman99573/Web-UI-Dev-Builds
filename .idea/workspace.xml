@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Hue.js" afterPath="$PROJECT_DIR$/files/core/OAM-Hue.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-SettingsHandler.js" afterPath="$PROJECT_DIR$/files/core/OAM-SettingsHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/urlError.js" afterPath="$PROJECT_DIR$/files/pages/urlError.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,8 +21,8 @@
       <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="71" column="89" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="71" selection-end-column="89" />
+            <state relative-caret-position="183">
+              <caret line="714" column="13" lean-forward="false" selection-start-line="714" selection-start-column="13" selection-end-line="714" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -50,7 +48,7 @@
       <file leaf-file-name="OAM-SettingsHandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-SettingsHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
+            <state relative-caret-position="187">
               <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -62,8 +60,8 @@
       <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4658">
-              <caret line="286" column="0" lean-forward="false" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
+            <state relative-caret-position="178">
+              <caret line="135" column="82" lean-forward="false" selection-start-line="135" selection-start-column="82" selection-end-line="135" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -82,7 +80,7 @@
       <file leaf-file-name="OAM-Hue.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="-1258">
               <caret line="188" column="25" lean-forward="false" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -95,8 +93,8 @@
       <file leaf-file-name="OAM-APIs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="112" column="12" lean-forward="false" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+            <state relative-caret-position="467">
+              <caret line="230" column="2" lean-forward="true" selection-start-line="230" selection-start-column="2" selection-end-line="230" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <marker date="1510959533962" expanded="true" signature="6325:6337" ph="..." />
@@ -123,8 +121,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="26" column="101" lean-forward="false" selection-start-line="26" selection-start-column="101" selection-end-line="26" selection-end-column="101" />
+            <state relative-caret-position="408">
+              <caret line="58" column="49" lean-forward="false" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -159,7 +157,6 @@
       <find>dialog-mods</find>
       <find>eventminn</find>
       <find>vis(</find>
-      <find>openSmallWindow</find>
       <find>dev()</find>
       <find>dev</find>
       <find>font-</find>
@@ -173,6 +170,7 @@
       <find>ctrlKey</find>
       <find>mdl-menu__item</find>
       <find>function (result)</find>
+      <find>openSmallWindow</find>
     </findStrings>
     <replaceStrings>
       <replace>Queue</replace>
@@ -247,13 +245,13 @@
         <option value="$PROJECT_DIR$/files/core/OAM-APIs.js" />
         <option value="$PROJECT_DIR$/files/css/main.css" />
         <option value="$PROJECT_DIR$/files/js/jqueryui.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/files/core/init.js" />
-        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/PRIVACY_POLICY.md" />
         <option value="$PROJECT_DIR$/files/pages/urlError.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-Hue.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-SettingsHandler.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -326,6 +324,12 @@
               <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
               <item name="files" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Web-UI-Dev-Builds" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Web-UI-Dev-Builds" type="462c0819:PsiDirectoryNode" />
+              <item name="files" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -498,21 +502,7 @@
       <workItem from="1510885020287" duration="40292000" />
       <workItem from="1511395194911" duration="20000" />
       <workItem from="1511405128610" duration="5471000" />
-      <workItem from="1511467612201" duration="872000" />
-    </task>
-    <task id="LOCAL-00023" summary="Direct HUE Link Stable.">
-      <created>1504194942678</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1504194942678</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Youtube integration complete + Icon Changes">
-      <created>1504296336182</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1504296336182</updated>
+      <workItem from="1511467612201" duration="3784000" />
     </task>
     <task id="LOCAL-00025" summary="Youtube integration ready for public testing">
       <created>1504537239010</created>
@@ -843,11 +833,25 @@
       <option name="project" value="LOCAL" />
       <updated>1511463177457</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Reverting SweetAlert2 due to major bugs in latest version">
+      <created>1511468520121</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1511468520121</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Android App Placeholder">
+      <created>1511473069504</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1511473069504</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="683171000" />
+    <option name="totallyTimeSpent" value="686083000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -926,8 +930,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Bootstrap Modals are back&#10;&#10;Due to an issue with Material's Dialog system, we decided to bring only Bootstrap Modal's back.&#10;&#10;Plus this allows us to remove unsupportedError.js as it works with Edge and IE, but philips hue wont work again sadly :(" />
-    <MESSAGE value="Volume slider fixed as best as possible for Edge&#10;&#10;Cannot get the circle part fixed, but i guess we tried our best =/" />
     <MESSAGE value="Fixed HUE not stopping on URL Error" />
     <MESSAGE value="Stack Storage Support + Dev Build 1.8 Release" />
     <MESSAGE value="Dev Build 1.8 Release for 3.0&#10;&#10;Playlist Fixes&#10;&#10;StackStorage.com support&#10;&#10;Bug Report Information&#10;&#10;New Theme (Material Design)&#10;&#10;Fixes for youtu.be links&#10;&#10;Dropped support for IE/Edge browsers (sorry, but they are broken)" />
@@ -951,7 +953,9 @@
     <MESSAGE value="Implement Privacy Policy for App Developers" />
     <MESSAGE value="Forgot Microsoft Policy&#10;&#10;Required for Windows 10 App in Privacy Policy. OOPSIES" />
     <MESSAGE value="SA2 Pushed to 7.0.3 + OA Manager Changes&#10;&#10;* init.js is now called OAM-LoadingManager.js&#10;&#10;* bugreport.js is now called OAM-BugReport.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="SA2 Pushed to 7.0.3 + OA Manager Changes&#10;&#10;* init.js is now called OAM-LoadingManager.js&#10;&#10;* bugreport.js is now called OAM-BugReport.js" />
+    <MESSAGE value="Reverting SweetAlert2 due to major bugs in latest version" />
+    <MESSAGE value="Android App Placeholder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Android App Placeholder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1047,6 +1051,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7123">
           <caret line="419" column="0" lean-forward="true" selection-start-line="419" selection-start-column="0" selection-end-line="419" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1264,6 +1269,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10642">
           <caret line="626" column="0" lean-forward="false" selection-start-line="626" selection-start-column="0" selection-end-line="626" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1304,6 +1310,7 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="323">
             <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1319,18 +1326,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
+    <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="71" column="89" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="71" selection-end-column="89" />
+        <state relative-caret-position="314">
+          <caret line="109" column="35" lean-forward="false" selection-start-line="109" selection-start-column="35" selection-end-line="109" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="112" column="12" lean-forward="false" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+        <state relative-caret-position="467">
+          <caret line="230" column="2" lean-forward="true" selection-start-line="230" selection-start-column="2" selection-end-line="230" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <marker date="1510959533962" expanded="true" signature="6325:6337" ph="..." />
@@ -1341,25 +1348,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-SettingsHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4658">
-          <caret line="286" column="0" lean-forward="false" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="187">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/pages/urlError.js">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="109" column="35" lean-forward="false" selection-start-line="109" selection-start-column="35" selection-end-line="109" selection-end-column="35" />
+        <state relative-caret-position="178">
+          <caret line="135" column="82" lean-forward="false" selection-start-line="135" selection-start-column="82" selection-end-line="135" selection-end-column="82" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="-1258">
           <caret line="188" column="25" lean-forward="false" selection-start-line="188" selection-start-column="25" selection-end-line="188" selection-end-column="25" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -1368,20 +1377,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-SettingsHandler.js">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="183">
+          <caret line="714" column="13" lean-forward="false" selection-start-line="714" selection-start-column="13" selection-end-line="714" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="26" column="101" lean-forward="false" selection-start-line="26" selection-start-column="101" selection-end-line="26" selection-end-column="101" />
+        <state relative-caret-position="408">
+          <caret line="58" column="49" lean-forward="false" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
           <folding />
         </state>
       </provider>

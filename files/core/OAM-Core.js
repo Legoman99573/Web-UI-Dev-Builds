@@ -706,10 +706,10 @@ function mobile(type) {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes',
-            confirmButtonCancel: 'No'
+            cancelButtonText: 'No'
         }).then(function (result) {
-            if (result.value) {
-                minime = window.open('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname, "OpenAudioMc Windows 10 App", "width=561,height=566");
+            if (!result.dismiss) {
+                openInNewTab('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname)
                 closedwreason = true;
                 $.getScript('files/pages/closeme.js');
             }
@@ -722,10 +722,10 @@ function mobile(type) {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes',
-            confirmButtonCancel: 'No'
+            cancelButtonText: 'No'
         }).then(function (result) {
-            if (result.value) {
-                minime = window.open('oamc://' + clientID + '/' + clientTOKEN + '/' + mcname, "OpenAudioMc Android App", "width=561,height=566");
+            if (!result.dismiss) {
+                openInNewTab('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname)
                 closedwreason = true;
                 $.getScript('files/pages/closeme.js');
             }

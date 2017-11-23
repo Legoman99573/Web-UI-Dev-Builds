@@ -127,9 +127,15 @@ socketIo.connect = function() {
                             }
                         });
                     }
+                    // Windows 10 Users
                     if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
-                        windows_10 = new trayItem("fa fa-windows", 'openInNewTab', 'oamc:' + clientID + '/' + clientTOKEN + '/' + mcname, "Play in APP");
+                        windows_10 = new trayItem("fa fa-windows", 'mobile', 'Windows 10', "Windows 10 App");
                     }
+
+                    if (window.navigator.userAgent.indexOf("android") !== -1) {
+                        android = new trayItem("fa fa-android", 'mobile', 'Android', "Android APP");
+                    }
+
                     if (settings.asound !== null) {
                         ambiance = settings.asound;
                     } else {

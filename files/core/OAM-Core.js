@@ -697,6 +697,44 @@ function addJs(url) {
     }
 }
 
+function mobile(type) {
+    if (type === "Windows 10") {
+        swal({
+            title: "Are you sure?",
+            text: "Sounds may stop once you go to the app",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            confirmButtonCancel: 'No'
+        }).then(function (result) {
+            if (result.value) {
+                minime = window.open('oamc:' + clientID + '/' + clientTOKEN + '/' + mcname, "OpenAudioMc Windows 10 App", "width=561,height=566");
+                closedwreason = true;
+                $.getScript('files/pages/closeme.js');
+            }
+        });
+    } else if (type === "Android") {
+        swal({
+            title: "Are you sure?",
+            text: "Sounds may stop once you go to the app",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            confirmButtonCancel: 'No'
+        }).then(function (result) {
+            if (result.value) {
+                minime = window.open('oamc://' + clientID + '/' + clientTOKEN + '/' + mcname, "OpenAudioMc Android App", "width=561,height=566");
+                closedwreason = true;
+                $.getScript('files/pages/closeme.js');
+            }
+        });
+    } else {
+        console.error("[OpenAudio] [appNotFoundException] OpenAudioMc does not currently support " + type + " devices. To request an app, post in our discord guild.")
+    }
+}
+
 /**
  * @deprecated Since build 1.8 for 3.0. Recommend loading as a JavaScript Web Mod
  */

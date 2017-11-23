@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PRIVACY_POLICY.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PRIVACY_POLICY.md" afterPath="$PROJECT_DIR$/PRIVACY_POLICY.md" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -134,8 +134,8 @@
         <entry file="file://$PROJECT_DIR$/PRIVACY_POLICY.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="501">
-                <caret line="60" column="48" lean-forward="true" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+              <first_editor relative-caret-position="323">
+                <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -509,14 +509,7 @@
       <workItem from="1509825501269" duration="1320000" />
       <workItem from="1510885020287" duration="40292000" />
       <workItem from="1511395194911" duration="20000" />
-      <workItem from="1511405128610" duration="2119000" />
-    </task>
-    <task id="LOCAL-00020" summary="Bugfixes">
-      <created>1502702744642</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1502702744642</updated>
+      <workItem from="1511405128610" duration="2587000" />
     </task>
     <task id="LOCAL-00021" summary="SoundManager2 Debugger changes">
       <created>1502893116128</created>
@@ -854,11 +847,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511412014310</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Implement Privacy Policy for App Developers">
+      <created>1511460896151</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1511460896152</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="678947000" />
+    <option name="totallyTimeSpent" value="679415000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -937,7 +937,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="playlist fix + improvements" />
     <MESSAGE value="More improvements to Playlist Manager" />
     <MESSAGE value="OpenAudio App for Windows UWP&#10;&#10;Fuck Windows 8, they dont needs it ;P" />
     <MESSAGE value="Bootstrap Modals are back&#10;&#10;Due to an issue with Material's Dialog system, we decided to bring only Bootstrap Modal's back.&#10;&#10;Plus this allows us to remove unsupportedError.js as it works with Edge and IE, but philips hue wont work again sadly :(" />
@@ -962,7 +961,8 @@
     <MESSAGE value="Settings Support + LanguagePack Changes&#10;&#10;This means you can modify background image, language, and Modify the Primary and Secondary colors of Material Theme.&#10;Note that JS mods wont support switching over to another language." />
     <MESSAGE value="Background Color Support&#10;&#10;This means you can enable/disable rainbow background ;)" />
     <MESSAGE value="Fixed Typo + Cache Control not working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Typo + Cache Control not working" />
+    <MESSAGE value="Implement Privacy Policy for App Developers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement Privacy Policy for App Developers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1392,8 +1392,8 @@
     <entry file="file://$PROJECT_DIR$/PRIVACY_POLICY.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="501">
-            <caret line="60" column="48" lean-forward="true" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+          <first_editor relative-caret-position="323">
+            <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
             <folding />
           </first_editor>
           <second_editor />

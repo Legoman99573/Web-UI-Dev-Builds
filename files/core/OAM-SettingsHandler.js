@@ -279,3 +279,48 @@ function editBackgroundColor() {
         }
     });
 }
+
+function editBackgroundSnow() {
+    swal({
+        title: 'Update Background Snow',
+        text: langpack.settings.backgroundSnow,
+        input: 'select',
+        inputOptions: {
+            'true': 'Enable',
+            'false': 'Disable'
+        },
+        inputPlaceholder: 'Select Setting...',
+        showCancelButton: true,
+        confirmButtonText: 'Update',
+        inputValidator: function (value) {
+            return new Promise(function (resolve, reject) {
+                if (value) {
+                    resolve();
+                } else {
+                    reject(langpack.settings.backgroundSnow_rejected);
+                }
+            })
+        },
+        allowOutsideClick: false
+    }).then(function (result) {
+        if (result === 'true') {
+            if (localStorage.disableSnow) {
+                delete localStorage.disableSnow;
+                loadSnow();
+                snowStorm.toggleSnow();
+            }
+            swal({
+                type: 'success',
+                title: langpack.settings.backgroundSnow_Enable,
+            });
+        } else {
+            localStorage.disableSnow = 'true';
+            snowStorm.toggleSnow();
+            snowStorm.stop();
+            swal({
+                type: 'success',
+                title: langpack.settings.backgroundSnow_Disable,
+            });
+        }
+    });
+}

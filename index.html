@@ -53,11 +53,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
         <script src="files/js/soundcloud.js"></script>
         <script src="files/js/platform.js"></script>
+        <script src="files/js/snowstorm.js"></script>
 
         <!-- OpenAudio Cores -->
         <script src="files/core/OAM-APIs.js?v=1.41"></script>
-        <script src="files/core/OAM-Core.js?v=4.5"></script>
-        <script src="files/core/OAM-SettingsHandler.js?v=1.20"></script>
+        <script src="files/core/OAM-Core.js?v=4.7"></script>
+        <script src="files/core/OAM-SettingsHandler.js?v=1.23"></script>
         <script src="files/core/OAM-Hue.js?v=1.33"></script>
         <script src="files/core/OAM-ApiConnector.js?v=1.46"></script>
         <script src="files/core/OAM-BugReport.js"></script>
@@ -106,6 +107,7 @@
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                     for="settings">
                     <li class="mdl-menu__item" onclick="editBgImage()">Edit Background Image</li>
+                    <li class="mdl-menu__item" onclick="editBackgroundSnow()" id="snow-settings">Edit Background Snow</li>
                     <li class="mdl-menu__item" onclick="editBackgroundColor()">Edit Background Color</li>
                     <li class="mdl-menu__item" onclick="editLanguage()">Edit Language</li>
                     <li class="mdl-menu__item" onclick="editColorTemplate()">Edit Material Colors</li>
@@ -234,5 +236,5 @@
     </div>
 
     <div id="speaker-vars"></div>
-    <script src="files/core/OAM-LoadingManager.js"></script>
+    <script src="files/core/OAM-LoadingManager.js?v1.4"></script>
 </html>

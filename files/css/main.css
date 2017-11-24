@@ -628,5 +628,13 @@ input[type=range]:-moz-focusring{
 #settings {
   position: fixed;
   top: 70px;
-  right: 13px;
+  right: 36px;
+}
+
+@media (max-width: 1024px) {
+  #settings {
+    position: fixed;
+    top: 70px;
+    right: 13px;
+  }
 }

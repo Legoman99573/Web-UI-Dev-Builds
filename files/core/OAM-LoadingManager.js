@@ -67,6 +67,38 @@ function about() {
     loadVersion();
 }
 
+if (!month === 10 || !month === 11 || !month === 0 || !month === 1) {
+    $('#snow-settings').hide();
+}
+
+function loadSnow() {
+    if (month === 10 || month === 11 || month === 0) {
+        snowStorm.snowColor = '#fff';       // white snow
+        snowStorm.flakesMaxActive = 96;     // show less to prevent high CPU
+        snowStorm.useTwinkleEffect = false; // prevents epilepsy
+        snowStorm.snowStick = false;        // snow will never sit at the bottom
+        snowStorm.snowCharacter = '•';      // How snow will look
+        snowStorm.followMouse = false;      // why should I enable this?
+        snowStorm.animationInterval = 33;   // uses less cpu
+        snowStorm.freezeOnBlur = true;      // this makes it more friendly when you are not on the tab or window
+        snowStorm.excludeMobile = false;    // Snow on mobile :D
+        snowStorm.className = 'mdl-layout__content';
+        snowStorm.autoStart = true;         // starts the snow :)
+    } else if (month === 1) {
+        snowStorm.flakesMaxActive = 96;
+        snowStorm.useTwinkleEffect = false;
+        snowStorm.snowStick = false;
+        snowStorm.snowCharacter = '❤';
+        snowStorm.snowColor = '#E74C3C';
+        snowStorm.followMouse = false;
+        snowStorm.animationInterval = 33;
+        snowStorm.freezeOnBlur = true;
+        snowStorm.excludeMobile = false;
+        snowStorm.className = 'mdl-layout__content';
+        snowStorm.autoStart = true;
+    }
+}
+
 function getUrlVar(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -107,10 +139,13 @@ function initialize() {
 
 function enableMain(clientJs) {
     logInit("Login-sucess");
-    enable(clientJs);
     if (!epilepsyfix) {
         loadBg();
+        if (!localStorage.disableSnow) {
+            loadSnow();
+        }
     }
+    enable(clientJs);
 }
 
 function logInit(msg) {

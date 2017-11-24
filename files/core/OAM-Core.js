@@ -70,6 +70,10 @@ langpack.settings.backgroundColor = 'Note that if you are prone to getting seizu
 langpack.settings.backgroundColor_rejected = 'Rainbow or Random Color must be selected.';
 langpack.settings.backgroundColor_Rainbow = 'Background Color set to Rainbow.';
 langpack.settings.backgroundColor_Random_Color = 'Background Color set to Random Color.';
+langpack.settings.backgroundSnow = 'If you have a bad computer, we recommend disabling snow particles.';
+langpack.settings.backgroundSnow_rejected = 'Please select an option.';
+langpack.settings.backgroundSnow_Enable = 'Snow particles has been enabled.';
+langpack.settings.backgroundSnow_Disable = 'Snow particles has been disabled.';
 // Default Language Packs End
 
 
@@ -107,6 +111,8 @@ var loop = false;
 var closedwreason = false;
 var settings = false;
 var epilepsyfix = false;
+var date = new Date();
+var month = date.getMonth();
 
 // Determines if stable or unstable
 var development = true;

@@ -307,8 +307,7 @@ function editBackgroundSnow() {
         if (result === 'true') {
             if (localStorage.disableSnow) {
                 delete localStorage.disableSnow;
-                loadSnow();
-                snowStorm.toggleSnow();
+                $('body').snowfall('clear').snowfall({maxSize : 10, image: "files/images/Snowflake.png"});
             }
             swal({
                 type: 'success',
@@ -316,8 +315,7 @@ function editBackgroundSnow() {
             });
         } else {
             localStorage.disableSnow = 'true';
-            snowStorm.toggleSnow();
-            snowStorm.stop();
+            $('body').snowfall('clear');
             swal({
                 type: 'success',
                 title: langpack.settings.backgroundSnow_Disable,

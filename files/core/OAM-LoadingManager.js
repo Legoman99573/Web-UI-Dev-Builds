@@ -68,35 +68,13 @@ function about() {
     loadVersion();
 }
 
-if (!month === 10 || !month === 11 || !month === 0 || !month === 1) {
+if (!month === 10 || !month === 11 || !month === 0) {
     $('#snow-settings').hide();
 }
 
 function loadSnow() {
     if (month === 10 || month === 11 || month === 0) {
-        snowStorm.snowColor = '#fff';
-        snowStorm.flakesMaxActive = 96;
-        snowStorm.useTwinkleEffect = true;
-        snowStorm.snowStick = false;
-        snowStorm.snowCharacter = '•';
-        snowStorm.followMouse = false;
-        snowStorm.animationInterval = 33;
-        snowStorm.freezeOnBlur = false;
-        snowStorm.excludeMobile = false;
-        snowStorm.className = 'mdl-layout__content';
-        snowStorm.autoStart = true;
-    } else if (month === 1) {
-        snowStorm.flakesMaxActive = 96;
-        snowStorm.useTwinkleEffect = true;
-        snowStorm.snowStick = false;
-        snowStorm.snowCharacter = '❤';
-        snowStorm.snowColor = '#E74C3C';
-        snowStorm.followMouse = false;
-        snowStorm.animationInterval = 33;
-        snowStorm.freezeOnBlur = false;
-        snowStorm.excludeMobile = false;
-        snowStorm.className = 'mdl-layout__content';
-        snowStorm.autoStart = true;
+        $('body').snowfall({maxSize : 10, image: "files/images/Snowflake.png"});
     }
 }
 
@@ -140,10 +118,18 @@ function initialize() {
 
 function enableMain(clientJs) {
     logInit("Login-sucess");
-    if (!epilepsyfix) {
+    if (!epilepsyfix === true) {
+        if (!localStorage.disableRainbow) {
+            console.log("[OpenAudio] Enabled rainbow background colors based on client settings.");
+        } else {
+            console.log("[OpenAudio] Disabled rainbow background colors based on client settings.");
+        }
         loadBg();
         if (!localStorage.disableSnow) {
+            console.log("[OpenAudio] Enabled snow based on client settings.");
             loadSnow();
+        } else {
+            console.log("[OpenAudio] Disabled snow based on client settings.");
         }
     }
     enable(clientJs);

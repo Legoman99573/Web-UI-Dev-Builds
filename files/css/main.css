@@ -36,6 +36,7 @@ body {
   margin: 0px;
   font: normal 14px/1.618em 'Yanone Kaffeesatz', sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden !important;
 }
 
 body:before {

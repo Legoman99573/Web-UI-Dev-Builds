@@ -15,6 +15,22 @@
 
 document.body.background = "";
 
+closedwreason = true;
+
+openaudio.playAction("stop");
+try {
+    openaudio.stopPlay();
+} catch (e) {}
+try {
+    openaudio.stopLoop('loop');
+} catch (e) {}
+try {
+    AutoDj.stopPlaylist('AutoDj');
+} catch (e) {}
+try {
+    loadedsound.stop();
+} catch (e) {}
+
 $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "\n" +
     "  <!-- Title -->\n" +

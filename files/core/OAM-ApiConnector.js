@@ -112,10 +112,22 @@ socketIo.connect = function() {
                     $("#client-title").text(settings.Title);
                     document.title = settings.Title;
                     localStorage.DefaultLanguage = settings.language;
+
                     if (localStorage.PrimaryColor && localStorage.SecondaryColor) {
                         $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + localStorage.PrimaryColor + '-' + localStorage.SecondaryColor + '.min.css');
+                        console.log("[OpenAudio] Loading Primary and secondary colors based on client settings.");
+                    } else if (!localStorage.PrimaryColor && localStorage.SecondaryColor) {
+                        console.warn("[OpenAudio] [settingsException] Primary color has not been set. Primary and Secondary colors will be reset.");
+                        delete localStorage.SecondaryColor;
+                    } else if (localStorage.PrimaryColor && !localStorage.SecondaryColor) {
+                        console.warn("[OpenAudio] [settingsException] Secondary color has not been set. Primary and Secondary colors will be reset.");
+                        delete localStorage.PrimaryColor;
+                    } else {
+                        console.log("[OpenAudio] Loading default colors based on client settings.");
                     }
+
                     if (localStorage.SetLanguage) {
+                        console.log("[OpenAudio] Loading language " + localStorage.SetLanguage + " based on client settings");
                         $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.SetLanguage + ".js", function() {
                             if (!closedwreason) {
                                 $('.name').html(langpack.message.welcome.replace("%name%", mcname));
@@ -124,6 +136,7 @@ socketIo.connect = function() {
                             }
                         });
                     } else {
+                        console.log("[OpenAudio] Loading Server default language based on client settings");
                         $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js", function() {
                             if (!closedwreason) {
                                 $('.name').html(langpack.message.welcome.replace("%name%", mcname));
@@ -132,6 +145,7 @@ socketIo.connect = function() {
                             }
                         });
                     }
+
                     // Windows 10 Users
                     if (window.navigator.userAgent.indexOf("Windows NT 10.0") !== -1) {
                         windows_10 = new trayItem("fa fa-windows", 'mobile', 'Windows 10', "Windows 10 App");
@@ -200,17 +214,20 @@ socketIo.connect = function() {
                     } else {}
                     if (settings.bg === "") {
                         if (localStorage.ThemeURL) {
-                            console.log('[OpenAudioMc] Loading cached theme from settings');
+                            console.log('[OpenAudioMc] Loaded theme from settings.');
                             document.body.background = localStorage.ThemeURL;
                             // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                             document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                        } else {
+                            console.log('[OpenAudioMc] Detected no default background. Theme wont be set since background image was not configured.');
                         }
                     } else {
                         if (!localStorage.ThemeURL) {
+                            console.log('[OpenAudioMc] Detected default background. Using that theme instead.');
                             document.body.background = settings.bg;
                             localStorage.defaultTheme = settings.bg;
                         } else {
-                            console.log('[OpenAudioMc] Loading cached theme from settings');
+                            console.log('[OpenAudioMc] Loaded theme from settings.');
                             document.body.background = localStorage.ThemeURL;
                         }
                         // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D

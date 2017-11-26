@@ -1,6 +1,7 @@
-/*
- * Copyright (C) 2017 Mindgamesnl
+/**
+ * @copyright 2017 Mindgamesnl
  *
+ * @license
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  *
@@ -80,7 +81,6 @@ langpack.settings.backgroundSnow_Disable = 'Snow particles has been disabled.';
 var openaudio = {};
 var socketIo = {};
 var ui = {};
-var fadingData = {};
 var stopFading = {};
 var isFading = {};
 var volume = 20;
@@ -88,7 +88,6 @@ var FadeEnabled = true;
 var hue_connected = {};
 var MyHue = new huepi();
 var HueDefaultColor = "rgba(255	,255,255,150)";
-var isHueOn = true;
 var HueTestTry = 0;
 var hue_lights = {};
 var hue_enabled = false;
@@ -143,25 +142,25 @@ openaudio.decode = function(msg) {
     }
 
     request = JSON.parse(msg);
-    if (request.command == "play_normal") {
+    if (request.command === "play_normal") {
         if (request.src.includes("soundcloud.com")) {
-            var scurl = request.src;
+            scurl = request.src;
             getSoundcloud(scurl, function(newurl) {
                 request.src = newurl;
                 openaudio.play(request.src);
             });
         } else if (request.src.includes("youtube.com")) {
-            var youtubeId = request.src.split("?v=");
+            youtubeId = request.src.split("?v=");
             openaudio.play(getYoutbe(youtubeId[1]));
         } else if (request.src.includes("youtu.be")) {
-            var youtubeId = request.src.split('youtu.be/');
+            youtubeId = request.src.split('youtu.be/');
             openaudio.play(getYoutbe(youtubeId[1]));
         } else if (request.src.includes("stackstorage.com/s/")) {
             openaudio.play(getStackStorage(request.src));
         } else {
             openaudio.play(request.src);
         }
-    } else if (request.command == "stop") {
+    } else if (request.command === "stop") {
         openaudio.playAction("stop");
         try {
             openaudio.stopPlay();
@@ -175,21 +174,27 @@ openaudio.decode = function(msg) {
         try {
             loadedsound.stop();
         } catch (e) {}
-    } else if (request.command == "custom") {
-        var str = request.string;
+    } else if (request.command === "custom") {
+        str = request.string;
         console.log("Custom json for developers: " + str);
-    } else if (request.command == "loadmod") {
-        if (request.type == "css") {
-            addCss(request.src);
-        } else if (request.type == "js") {
-            addJs(request.src);
+    } else if (request.command === "loadmod") {
+        if (request.type === "css") {
+            OpenAudioAPI.getCSS({
+                url: request.src
+            });
+        } else if (request.type === "js") {
+            OpenAudioAPI.getJS({
+                url: request.src
+            })
+        } else {
+            console.error("[OpenAudio] [socketException] " + request.type + " is not a valid mod command.");
         }
-    } else if (request.command == "playlist") {
+    } else if (request.command === "playlist") {
         try {
             AutoDj.stopPlaylist();
         } catch (e) {}
-        var myStringArray = request.array;
-        var arrayLength = myStringArray.length;
+        myStringArray = request.array;
+        arrayLength = myStringArray.length;
         PlayList_songs = {};
         for (var i = 0; i < arrayLength; i++) {
             var song = myStringArray[i];
@@ -219,11 +224,11 @@ openaudio.decode = function(msg) {
         AutoDj.IdOfNowPlaying = 0;
         AutoDj.LoadAll();
         AutoDj.PlayNext();
-    } else if (request.command == "message") {
+    } else if (request.command === "message") {
         //Browser messages
         openaudio.message(request.string);
-    } else if (request.command == "speaker") {
-        if (request.type == "add") {
+    } else if (request.command === "speaker") {
+        if (request.type === "add") {
             if (request.src.includes("soundcloud.com")) {
                 var scurl = request.src;
                 getSoundcloud(scurl, function (newurl) {
@@ -240,7 +245,7 @@ openaudio.decode = function(msg) {
 			} else {
                 openaudio.newspeaker(request.src, request.time, request.volume);
             }
-        } else if (request.type == "volume") {
+        } else if (request.type === "volume") {
             for (var i = 0; i < listSpeakerSounds().split(',').length; i++) {
                 listSpeakerSounds().split(',')[i] = listSpeakerSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
                 if ((listSpeakerSounds().split(',')[i].indexOf("speaker_") !== -1)) {
@@ -248,19 +253,19 @@ openaudio.decode = function(msg) {
                     lastSpeakerVolume = request.volume;
                 }
             }
-        } else if (request.type == "stop") {
+        } else if (request.type === "stop") {
             openaudio.removeSpeaker("speaker");
-        } else if (request.type == "stopall") {
+        } else if (request.type === "stopall") {
             openaudio.removeSpeaker("speaker");
         }
-    } else if (request.command == "skipto") {
+    } else if (request.command === "skipto") {
         //skip to
         openaudio.skipTo(request.id, request.timeStamp);
-    } else if (request.command == "setvolumeid") {
+    } else if (request.command === "setvolumeid") {
         openaudio.set_directed_volume(request.id, request.volume);
-    } else if (request.command == "forcevolume") {
+    } else if (request.command === "forcevolume") {
         openaudio.set_volume(request.volume);
-    } else if (request.command == "play_normal_id") {
+    } else if (request.command === "play_normal_id") {
         if (request.src.includes("soundcloud.com")) {
             var scurl = request.src;
             getSoundcloud(scurl, function(newurl) {
@@ -279,12 +284,12 @@ openaudio.decode = function(msg) {
         } else {
             openaudio.play(request.src, request.id, request.time);
         }
-    } else if (request.command == "stop_id") {
+    } else if (request.command === "stop_id") {
         openaudio.stop_id(request.id);
-    } else if (request.command == "toggle") {
+    } else if (request.command === "toggle") {
         //I KNOW TOOGLE IS A TYPO
         openaudio.toogle_id(request.id);
-    } else if (request.command == "loop") {
+    } else if (request.command === "loop") {
         if (request.src.includes("soundcloud.com")) {
             var scurl = request.src;
             getSoundcloud(scurl, function(newurl) {
@@ -304,10 +309,10 @@ openaudio.decode = function(msg) {
 		else {
             openaudio.loop(request.src);
         }
-    } else if (request.type == "region") {
+    } else if (request.type === "region") {
         //TODO: REGION HANDLER
 
-        if (request.command == "startRegion") {
+        if (request.command === "startRegion") {
             if (request.src.includes("soundcloud.com")) {
                 var scurl = request.src;
                 getSoundcloud(scurl, function(newurl) {
@@ -327,7 +332,7 @@ openaudio.decode = function(msg) {
 			} else {
                 openaudio.playRegion(request.src, request.time, request.id);
             }
-        } else if (request.command == "stopOldRegion") {
+        } else if (request.command === "stopOldRegion") {
             try {
                 AutoDj.stopPlaylist();
             } catch (e) {}
@@ -342,12 +347,12 @@ openaudio.decode = function(msg) {
                 openaudio.regionsStop();
             } catch (e) {}
         }
-    } else if (request.command == "volume") {
+    } else if (request.command === "volume") {
         fadeAllTarget(request.volume);
-    } else if (request.type == "buffer") {
-        if (request.command == "play") {
+    } else if (request.type === "buffer") {
+        if (request.command === "play") {
             openaudio.playbuffer();
-        } else if (request.command == "create") {
+        } else if (request.command === "create") {
 
             if (request.src.includes("soundcloud.com")) {
                 var scurl = request.src;
@@ -368,8 +373,8 @@ openaudio.decode = function(msg) {
                 openaudio.createBuffer(request.src);
             }
         }
-    } else if (request.command == "hue") {
-        if (request.type == "set") {
+    } else if (request.command === "hue") {
+        if (request.type === "set") {
             var values = request.target.split(':');
             var colorcode = values[0];
             try {
@@ -380,9 +385,9 @@ openaudio.decode = function(msg) {
                 //no light code
                 hue_set_color(colorcode);
             }
-        } else if (request.type == "reset") {
+        } else if (request.type === "reset") {
             hue_set_color(HueDefaultColor);
-        } else if (request.type == "blink") {
+        } else if (request.type === "blink") {
             for (var key in MyHue.Lights) {
                 if (MyHue.Lights.hasOwnProperty(key)) {
                     if (hue_lights[key].enabled) {
@@ -390,7 +395,7 @@ openaudio.decode = function(msg) {
                     }
                 }
             }
-        } else if (request.type == "cyclecolors") {
+        } else if (request.type === "cyclecolors") {
             for (var key in MyHue.Lights) {
                 if (MyHue.Lights.hasOwnProperty(key)) {
                     if (hue_lights[key].enabled) {
@@ -398,7 +403,7 @@ openaudio.decode = function(msg) {
                     }
                 }
             }
-        } else if (request.type == "stop") {
+        } else if (request.type === "stop") {
             for (var key in MyHue.Lights) {
                 if (MyHue.Lights.hasOwnProperty(key)) {
                     if (hue_lights[key].enabled) {
@@ -408,10 +413,10 @@ openaudio.decode = function(msg) {
                 }
             }
         }
-    } else if (request.command == "setbg") {
-        if (request.type == "set") {
+    } else if (request.command === "setbg") {
+        if (request.type === "set") {
             document.body.background = request.target;
-        } else if (request.type == "reset") {
+        } else if (request.type === "reset") {
             document.body.background = "";
         }
     }
@@ -438,7 +443,7 @@ openaudio.skipTo = function(id, timeInS) {
 };
 
 openaudio.message = function(text) {
-    if (window.location.protocol == "https:") {
+    if (window.location.protocol === "https:") {
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
         } else {
@@ -464,8 +469,6 @@ openaudio.message = function(text) {
     notificationsound.play();
 };
 
-//goto
-
 function openSmallWindow() {
     if (!(document.URL.includes("&tinyWindow=true"))) {
         swal({
@@ -487,12 +490,8 @@ function openSmallWindow() {
     }
 }
 
-function showPlus() {
-    console.error("[OpenAudio] [removedMethodError] showPlus() is no longer supported. You will get redirected instead due to an annoying bug in OpenAudio 2.x.");
-}
-
 window.onresize = function() {
-    if (tinyWindow != "(none)") {
+    if (tinyWindow !== "(none)") {
         window.resizeTo(566, 681);
     }
 
@@ -617,10 +616,14 @@ function loadAllFromJson(pack) {
     var jsfiles = json.js;
     var cssfiles = json.css;
     for (var i = 0; i < jsfiles.length; i++) {
-        addJs(jsfiles[i]);
+        OpenAudioAPI.getJS({
+            url: jsfiles[i]
+        })
     }
     for (var i2 = 0; i2 < cssfiles.length; i2++) {
-        addCss(cssfiles[i2]);
+        OpenAudioAPI.getCSS({
+            url: cssfiles[i2]
+        });
     }
 }
 
@@ -689,20 +692,6 @@ function getCookie(name) {
     }
 }
 
-function addJs(url) {
-    console.info("[ModManager] Attempting to add js file from " + url + ".");
-    var extension = url.substr((url.lastIndexOf('.') +1));
-    if (!/(js)$/ig.test(extension)) {
-        console.error("[ModManager] [Idiot Proof Detection] File is not a JavaScript (.js) file. Not appending to the client.");
-        OpenAudioAPI.loadMod(url, "Disabled", "JSMod");
-    } else {
-        $.getScript(url, function() {
-            console.info("[ModManager] Added js file from " + url + " successfully.");
-            OpenAudioAPI.loadMod(url, "Enabled", "JSMod");
-        });
-    }
-}
-
 function mobile(type) {
     if (type === "Windows 10") {
         swal({
@@ -738,23 +727,6 @@ function mobile(type) {
         });
     } else {
         console.error("[OpenAudio] [appNotFoundException] OpenAudioMc does not currently support " + type + " devices. To request an app, post in our discord guild.")
-    }
-}
-
-/**
- * @deprecated Since build 1.8 for 3.0. Recommend loading as a JavaScript Web Mod
- */
-function addCss(url) {
-    console.warn("[ModManager] addCss has been deprecated as of Development Build 1.8. Use OpenAudioAPI.getCSS instead.");
-    console.info("[ModManager] Attempting to add css file from " + url + ".");
-    var extension = url.substr((url.lastIndexOf('.') +1));
-    if (!/(css)$/ig.test(extension)) {
-        console.error("[ModManager] [Idiot Proof Detection] File is not a Cascade Style Sheet (.css) file. Not appending to the client.");
-        OpenAudioAPI.loadMod(url, "Disabled", "CSSMod");
-    } else {
-        $('head').append('<link rel="stylesheet" href="' + url + '" type="text/css" />');
-        console.info("[ModManager] Added css file from location " + url + " successfully");
-        OpenAudioAPI.loadMod(url, "Enabled", "CSSMod");
     }
 }
 

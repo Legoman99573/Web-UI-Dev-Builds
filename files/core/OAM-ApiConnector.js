@@ -1,6 +1,7 @@
-/*
- * Copyright (C) 2017 Mindgamesnl
+/**
+ * @copyright 2017 Mindgamesnl
  *
+ * @license
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  *
@@ -53,7 +54,9 @@ socketIo.connect = function() {
             var msg = JSON.parse(msg);
             var arrayLength = msg.length;
             for (var i = 0; i < arrayLength; i++) {
-                addCss(msg[i]);
+                OpenAudioAPI.getCSS({
+                    url: msg[1]
+                });
             }
         }
     });
@@ -63,7 +66,9 @@ socketIo.connect = function() {
             var msg = JSON.parse(msg);
             var arrayLength = msg.length;
             for (var i = 0; i < arrayLength; i++) {
-                addJs(msg[i]);
+                OpenAudioAPI.getJS({
+                    url: msg[i]
+                })
             }
         }
     });
@@ -186,7 +191,7 @@ socketIo.connect = function() {
                         $.getScript("files/core/OAM-Hue.js", function() {
                             hueicon = new trayItem("fa fa-lightbulb-o", "openhue", "", "Philips HUE");
                             hue_enabled = true;
-                            if (hue_connected != true) {
+                            if (hue_connected !== true) {
                                 loop_hue_connection_on_load();
                             } else {
                                 openaudio.whisper("hueConnected");
@@ -226,7 +231,9 @@ socketIo.connect = function() {
                     }
                     setTimeout(function() {
                         dev();
-                        addJs("https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js");
+                        OpenAudioAPI.getJS({
+                            url: "https://rawgit.com/OpenAudioMc/WebClient-Updater/master/version.js"
+                        });
                         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                             swal(
                                 'Mobile Browser Detected',

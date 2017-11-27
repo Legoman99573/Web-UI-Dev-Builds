@@ -64,9 +64,11 @@ function editLanguage() {
             'Dutch': 'Dutch',
             'French': 'French',
             'German': 'German',
+            'Hawaiian': 'Hawaiian',
             'Japanese': 'Japanese',
+            'PirateSpeak': 'PirateSpeak',
             'Portugues': 'Portugues',
-            'PirateSpeak': 'PirateSpeak'
+            'Spanish': 'Spanish'
         },
         inputPlaceholder: 'Select language',
         showCancelButton: true,

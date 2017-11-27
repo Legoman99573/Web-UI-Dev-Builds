@@ -113,6 +113,12 @@ var epilepsyfix = false;
 var date = new Date();
 var month = date.getMonth();
 
+// Date Check
+var start = new Date(date.getFullYear(), 0, 0);
+var diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+var oneDay = 1000 * 60 * 60 * 24;
+var day = Math.floor(diff / oneDay);
+
 // Determines if stable or unstable
 var development = true;
 

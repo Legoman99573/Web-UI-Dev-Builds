@@ -309,7 +309,7 @@ function editBackgroundSnow() {
         if (result === 'true') {
             if (localStorage.disableSnow) {
                 delete localStorage.disableSnow;
-                $('body').snowfall('clear').snowfall({maxSize : 10, image: "files/images/Snowflake.png"});
+                $('body').snowfall('clear').snowfall({minSize: 10, maxSize : 20, image: "files/images/Snowflake.png"});
             }
             swal({
                 type: 'success',

@@ -93,6 +93,11 @@
                             <i class="material-icons">more_vert</i>
                         </button>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" id="side-menu" for="demo-menu-lower-right">
+                            <li class="mdl-menu__item" onclick="about(); $('div').removeClass('is-visible');">About</li>
+                            <li class="mdl-menu__item" onclick="bugreport(); $('div').removeClass('is-visible');">Bug Report</li>
+                            <li class="mdl-menu__item" onclick="openInNewTab('https://github.com/OpenAudioMc/Web-UI-Dev-Builds'); $('div').removeClass('is-visible');">Source Code</li>
+                            <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" onclick="openInNewTab('https://discord.gg/b44BPv7'); $('div').removeClass('is-visible');">Discord Server</li>
+                            <li class="mdl-menu__item" onclick="openInNewTab('https://chrome.google.com/webstore/detail/huegasm-for-philips-hue-l/mbjanbdhcpohhfecjgbdpcfhnnbofooj'); $('div').removeClass('is-visible');">Huegasm</li>
                         </ul>
                     </nav>
                 </div>
@@ -109,7 +114,7 @@
                     <i class="material-icons">settings</i>
                 </button>
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                    for="settings">
+                    for="settings" id="settings-api">
                     <li class="mdl-menu__item" onclick="editBgImage()">Edit Background Image</li>
                     <li class="mdl-menu__item" onclick="editBackgroundSnow()" id="snow-settings">Edit Background Snow</li>
                     <li class="mdl-menu__item" onclick="editBackgroundColor()">Edit Background Color</li>

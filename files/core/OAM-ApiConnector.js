@@ -75,35 +75,10 @@ socketIo.connect = function() {
     socket.on('oaSettings', function(msg) {
         $( ".mdl-navigation__link" ).remove();
         $( ".right-menu" ).remove();
+        $( ".settings-menu" ).remove();
         $( ".mods" ).remove();
         $('#js-none').show();
         $('#css-none').show();
-
-        OpenAudioAPI.rightTrayItem({
-            onClick: "about();",
-            itemName: 'About'
-        });
-
-        OpenAudioAPI.rightTrayItem({
-            onClick: "bugreport();",
-            itemName: "Bug Report"
-        });
-
-        OpenAudioAPI.rightTrayItem({
-            onClick: "openInNewTab('https://github.com/OpenAudioMc/Web-UI-Dev-Builds');",
-            itemName: 'Source Code'
-        });
-
-        OpenAudioAPI.rightTrayItem({
-            onClick: "openInNewTab('https://discord.gg/b44BPv7');",
-            itemName: 'Discord',
-            underlineBelow: "true"
-        });
-
-        OpenAudioAPI.rightTrayItem({
-            onClick: "openInNewTab('https://chrome.google.com/webstore/detail/huegasm-for-philips-hue-l/mbjanbdhcpohhfecjgbdpcfhnnbofooj');",
-            itemName: 'Huegasm'
-        });
 
         if (msg !== null) {
             setTimeout(function() {

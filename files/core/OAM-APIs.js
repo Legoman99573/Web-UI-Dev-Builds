@@ -300,3 +300,32 @@ OpenAudioAPI.versionCheckup = function(options) {
         }
     }
 };
+
+/**
+ * @param {onClick} options
+ * @param {itemName} options
+ * @param {underlineBelow} options
+ * @returns {onClick} {itemName} {underlineBelow}
+ * @description Adds an option in Settings Menu
+ */
+OpenAudioAPI.settingsItem = function(options) {
+    var defaults = {
+        onClick: null,
+        itemName: null,
+        underlineBelow: "false"
+    };
+    var actual = $.extend({}, defaults, options || {});
+    if (actual.onClick === null) {
+        console.error('[OpenAudioAPI] [errorException] onClick cannot be empty.');
+    } else {
+        if (actual.itemName === null) {
+            console.error('[OpenAudioAPI] [errorException] itemName cannot be empty.');
+        } else {
+            if (actual.underlineBelow === "true") {
+                $('#settings-api').append('<li class="mdl-menu__item mdl-menu__item--full-bleed-divider settings-menu" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+            } else {
+                $('#settings-api').append('<li class="mdl-menu__item right-menu settings-menu" onclick="' + actual.onClick + '; $(\'div\').removeClass(\'is-visible\');">' + actual.itemName + '</li>');
+            }
+        }
+    }
+}

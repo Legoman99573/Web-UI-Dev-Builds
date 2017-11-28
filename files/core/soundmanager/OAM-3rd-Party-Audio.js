@@ -36,15 +36,41 @@ function getSoundcloud(Url, callback) {
 
 // YouTube Integration
 function getYoutbe(youtubeId) {
-    $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId, function(data) {
-        let json = JSON.parse(data);
-        OpenAudioAPI.songNotification({
-            songTitle: json["title"],
-            songURL: 'https://www.youtube.com/watch?v=' + youtubeId,
-            songImage: json["thumbnail"]
+    if (youtubeId.includes('youtube.com')) {
+        console.warn('[OpenAudio] [snowDNSException] Please use ID only. Correcting for you.');
+        var getid = youtubeId.split("?v=");
+        $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + getid[1], function(data) {
+            let json = JSON.parse(data);
+            OpenAudioAPI.songNotification({
+                songTitle: json["title"],
+                songURL: 'https://www.youtube.com/watch?v=' + getid,
+                songImage: json["thumbnail"]
+            });
         });
-    });
-    return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId;
+        return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + getid[1];
+    } else if (youtubeId.includes('yout.ub/')) {
+        console.warn('[OpenAudio] [snowDNSException] Please use ID only. Correcting for you.');
+        var getid = youtubeId.split('youtu.be/');
+        $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + getid[1], function(data) {
+            let json = JSON.parse(data);
+            OpenAudioAPI.songNotification({
+                songTitle: json["title"],
+                songURL: 'https://www.youtube.com/watch?v=' + getid[1],
+                songImage: json["thumbnail"]
+            });
+        });
+        return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + getid[1];
+    } else {
+        $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId, function(data) {
+            let json = JSON.parse(data);
+            OpenAudioAPI.songNotification({
+                songTitle: json["title"],
+                songURL: 'https://www.youtube.com/watch?v=' + youtubeId,
+                songImage: json["thumbnail"]
+            });
+        });
+        return "https://oayt-delivery.snowdns.de/?name=" + mcname + "&server=" + clientID + "&v=" + youtubeId;
+    }
 }
 
 // YouTube Playlist Integration

@@ -285,13 +285,19 @@ socketIo.connect = function() {
         socketclosed = true;
         closedwreason = true;
         socketIo.log("Disconnected!");
-        soundManager._writeDebug("Disconnected!", 3);
         $('.name').html(langpack.message.socket_closed);
+        swal({
+            text: "Lost Connection to Socket.io Server. Reconnecting...",
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
     });
 
 
 
     socket.on('connect', function() {
+        swal.close();
         console.info("[Socket.io] Connected!");
         socketIo.log("Connecting as: User: " + mcname + " Id: " + clientID + " Token: " + clientTOKEN);
         closedwreason = false;

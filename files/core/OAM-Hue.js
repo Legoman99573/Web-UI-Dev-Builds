@@ -166,47 +166,43 @@ function loop_hue_connection() {
     }
 }
 
-function direct_hue_connection() {
-    swal({
+async function direct_hue_connection() {
+    const {value: BridgeIP} = await swal({
         html: langpack.hue.direct_ip_prompt,
         input: 'text',
         showCancelButton: true,
         confirmButtonText: 'Connect',
         showLoaderOnConfirm: true,
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.hue.direct_ip_prompt_empty);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.hue.direct_ip_prompt_empty;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        localStorage.MyHueBridgeIP = result;
+    });
+
+    if (BridgeIP) {
+        localStorage.MyHueBridgeIP = BridgeIP;
         direct = false;
         swal({
             type: 'info',
-            html: langpack.hue.direct_ip_lookup.replace("%ip%", result),
+            html: langpack.hue.direct_ip_lookup.replace("%ip%", BridgeIP),
             showConfirmButton: false,
             allowOutsideClick: false
         });
         $.ajax({
-            url: 'http://' + result + '/api/',
+            url: 'http://' + BridgeIP + '/api/',
             success: function() {
                 swal({
                     type: 'info',
-                    html: langpack.hue.direct_ip_lookup_success.replace("%ip%", result),
+                    html: langpack.hue.direct_ip_lookup_success.replace("%ip%", BridgeIP),
                     showConfirmButton: false,
                     allowOutsideClick: false
                 });
                 loop_hue_connection();
                 return true;
             },
-            error:function() {
+            error: function() {
                 swal({
-                    title: langpack.hue.direct_ip_lookup_failed.replace("%ip%", result),
+                    title: langpack.hue.direct_ip_lookup_failed.replace("%ip%", BridgeIP),
                     html: '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="hue_menu();">Retry Auto Detect</div> ' +
                     '<div type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="direct_hue_connection();">Direct Connect</div>',
                     type: 'error',
@@ -215,7 +211,7 @@ function direct_hue_connection() {
                 return false;
             }
         });
-    });
+    }
 }
 
 function on_hue_link(name) {

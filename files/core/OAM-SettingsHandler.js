@@ -13,25 +13,22 @@
  * the License.
  */
 
-function editBgImage() {
-    swal({
+async function editBgImage() {
+    const {value: BgImage} = await swal({
         title: 'Update Background Image',
         text: langpack.settings.bgimage,
         input: 'text',
         showCancelButton: true,
         confirmButtonText: 'Update',
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.settings.bgimage_rejected);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.settings.bgimage_rejected;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        if (result === 'default' || result === 'Default') {
+    });
+
+    // Runs after SweetAlert is done
+    if (BgImage) {
+        if (BgImage === 'default' || BgImage === 'Default') {
             delete localStorage.ThemeURL;
             document.body.background = '';
             swal({
@@ -40,8 +37,8 @@ function editBgImage() {
                 showCancelButton: false
             });
         } else {
-            localStorage.ThemeURL = result;
-            document.body.background = result;
+            localStorage.ThemeURL = BgImage;
+            document.body.background = BgImage;
             // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
             document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
             swal({
@@ -50,11 +47,11 @@ function editBgImage() {
                 showCancelButton: false
             });
         }
-    });
+    }
 }
 
-function editLanguage() {
-    swal({
+async function editLanguage() {
+    const {value: Language} = await swal({
         title: 'Update Language',
         text: langpack.settings.language,
         input: 'select',
@@ -73,20 +70,17 @@ function editLanguage() {
         inputPlaceholder: 'Select language',
         showCancelButton: true,
         confirmButtonText: 'Update',
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.settings.language_rejected);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.settings.language_rejected;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        if (result === 'Default') {
+    });
+
+    // Runs after SweetAlert is done
+    if (Language) {
+        if (Language === 'Default') {
             delete localStorage.SetLanguage;
-            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.DefaultLanguage + ".js", function() {
+            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.DefaultLanguage + ".js", function () {
                 if (!closedwreason) {
                     $('.name').html(langpack.message.welcome.replace("%name%", mcname));
                 } else {
@@ -103,7 +97,7 @@ function editLanguage() {
             });
         } else {
             localStorage.SetLanguage = result;
-            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + result + ".js", function() {
+            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + Language + ".js", function () {
                 if (!closedwreason) {
                     $('.name').html(langpack.message.welcome.replace("%name%", mcname));
                 } else {
@@ -115,15 +109,15 @@ function editLanguage() {
             });
             swal({
                 type: 'success',
-                title: langpack.settings.language_success.replace('%lang%', result),
+                title: langpack.settings.language_success.replace('%lang%', Language),
                 showCancelButton: false
             });
         }
-    });
+    }
 }
 
-function editColorTemplate() {
-    swal({
+async function editColorTemplate() {
+    const {value: PrimaryColor} = await swal({
         title: 'Update Primary Color',
         input: 'select',
         inputOptions: {
@@ -151,18 +145,15 @@ function editColorTemplate() {
         inputPlaceholder: 'Select Primary Color',
         showCancelButton: true,
         confirmButtonText: 'Update',
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.settings.primarycolor_rejected);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.settings.primarycolor_rejected;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        if (result === 'Default') {
+    });
+
+    // Runs after SweetAlert is done
+    if (PrimaryColor) {
+        if (PrimaryColor === 'Default') {
             if (localStorage.PrimaryColor) {
                 delete localStorage.PrimaryColor;
             }
@@ -175,8 +166,9 @@ function editColorTemplate() {
                 title: langpack.settings.color_default,
             });
         } else {
-            localStorage.PrimaryColor = result;
-            swal({
+            localStorage.PrimaryColor = PrimaryColor;
+
+            const {value: SecondaryColor} = await swal({
                 title: 'Update Secondary Color',
                 input: 'select',
                 inputOptions: {
@@ -200,20 +192,24 @@ function editColorTemplate() {
                 },
                 inputPlaceholder: 'Select Secondary Color',
                 confirmButtonText: 'Update',
-                inputValidator: function (value2) {
-                    return new Promise(function (resolve, reject) {
-                        if (value2 !== result) {
-                            resolve();
-                        } else if (value2 === result) {
-                            reject(langpack.settings.secondarycolor_rejected_match_primary);
-                        } else {
-                            reject(langpack.settings.secondarycolor_rejected);
-                        }
-                    })
+                inputValidator: (result) => {
+                    return !result && langpack.settings.secondarycolor_rejected;
                 },
                 allowOutsideClick: false
-            }).then(function (result2) {
-                if (result2 === 'Default') {
+            });
+
+            // Runs after SweetAlert is done
+            if (SecondaryColor) {
+                if (PrimaryColor === SecondaryColor) {
+                    if (!localStorage.SecondaryColor) {
+                        delete localStorage.PrimaryColor;
+                    }
+                    swal({
+                        type: 'error',
+                        text: langpack.settings.secondarycolor_rejected_match_primary,
+                        showCancelButton: false
+                    })
+                } else if (SecondaryColor === 'Default') {
                     if (localStorage.PrimaryColor) {
                         delete localStorage.PrimaryColor;
                     }
@@ -227,21 +223,21 @@ function editColorTemplate() {
                         showCancelButton: false
                     });
                 } else {
-                    localStorage.SecondaryColor = result2;
+                    localStorage.SecondaryColor = SecondaryColor;
                     swal({
                         type: 'success',
                         title: langpack.settings.color_success,
                         showCancelButton: false
                     });
-                    $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + result + '-' + result2 + '.min.css');
+                    $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css');
                 }
-            });
+            }
         }
-    });
+    }
 }
 
-function editBackgroundColor() {
-    swal({
+async function editBackgroundColor() {
+    const {value: BackgroundColor} = await swal({
         title: 'Update Background Settings',
         text: langpack.settings.backgroundColor,
         input: 'select',
@@ -252,18 +248,15 @@ function editBackgroundColor() {
         inputPlaceholder: 'Select Setting',
         showCancelButton: true,
         confirmButtonText: 'Update',
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.settings.backgroundColor_rejected);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.settings.backgroundColor_rejected;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        if (result === 'true') {
+    });
+
+    // Runs after SweetAlert is done
+    if (BackgroundColor) {
+        if (BackgroundColor === 'true') {
             if (localStorage.disableRainbow) {
                 delete localStorage.disableRainbow;
             }
@@ -280,11 +273,11 @@ function editBackgroundColor() {
                 title: langpack.settings.backgroundColor_Random_Color,
             });
         }
-    });
+    }
 }
 
-function editBackgroundSnow() {
-    swal({
+async function editBackgroundSnow() {
+    const {value: BackgroundSnow} = await swal({
         title: 'Update Background Snow',
         text: langpack.settings.backgroundSnow,
         input: 'select',
@@ -295,18 +288,15 @@ function editBackgroundSnow() {
         inputPlaceholder: 'Select Setting...',
         showCancelButton: true,
         confirmButtonText: 'Update',
-        inputValidator: function (value) {
-            return new Promise(function (resolve, reject) {
-                if (value) {
-                    resolve();
-                } else {
-                    reject(langpack.settings.backgroundSnow_rejected);
-                }
-            })
+        inputValidator: (result) => {
+            return !result && langpack.settings.backgroundSnow_rejected;
         },
         allowOutsideClick: false
-    }).then(function (result) {
-        if (result === 'true') {
+    });
+
+    // Runs after SweetAlert is done
+    if (BackgroundSnow) {
+        if (BackgroundSnow === 'true') {
             if (localStorage.disableSnow) {
                 delete localStorage.disableSnow;
                 $('body').snowfall('clear').snowfall({minSize: 10, maxSize : 20, flakeIndex: 0, image: "files/images/Snowflake.png"});
@@ -323,5 +313,5 @@ function editBackgroundSnow() {
                 title: langpack.settings.backgroundSnow_Disable,
             });
         }
-    });
+    }
 }

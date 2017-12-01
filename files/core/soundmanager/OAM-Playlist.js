@@ -85,30 +85,23 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
             id: "AutoDj_" + id + "_" + randomID,
             url: fnc_file,
             volume: volume,
-            autoplay: true
+            autoPlay: true,
+            onfinish: function () {
+                AutoDj.PlayNext();
+            },
+            onerror: function () {
+                console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
+                soundManager.destroySound("AutoDj_" + id + "_" + randomID);
+                AutoDj.PlayNext();
+
+                var notification = document.querySelector('.mdl-js-snackbar');
+                var data = {
+                    message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
+                    timeout: 100
+                };
+                notification.MaterialSnackbar.showSnackbar(data);
+            }
         });
-
-        function playSound(sound) {
-            sound.play({
-                onfinish: function () {
-                    AutoDj.PlayNext();
-                },
-                onerror: function () {
-                    console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
-                    soundManager.destroySound("AutoDj_" + id + "_" + randomID);
-                    AutoDj.PlayNext();
-
-                    var notification = document.querySelector('.mdl-js-snackbar');
-                    var data = {
-                        message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
-                        timeout: 100
-                    };
-                    notification.MaterialSnackbar.showSnackbar(data);
-                }
-            });
-        }
-
-        playSound(mySoundObject);
 
         if (fnc_file.includes("oayt-delivery.snowdns.de")) {
             curl = fnc_file.toString().split('&v=')[1];

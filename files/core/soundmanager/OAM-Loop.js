@@ -15,42 +15,39 @@
 
 openaudio.loop = function(url, defaultTime) {
     if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+
         soundManager.stop("loop_" + randomID);
         soundManager.destroySound("loop_" + randomID);
         var loopnu = soundManager.createSound({
             id: "loop_" + randomID,
-            volume: volume,
             url: url,
+            volume: volume,
+            autoPlay: true,
             from: defaultTime * 1000,
-            stream: true
+            onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
+                }
+            },
+            onerror: function (code, description) {
+                soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.stopLoop();
+                } else {
+                    soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
+                }
+            }
         });
 
-        function loopSound(sound) {
-            sound.play({
-                onfinish: function () {
-                    loopSound(sound);
-                },
-                onerror: function (code, description) {
-                    soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
-                    if (this.loaded) {
-                        openaudio.stopLoop();
-                    } else {
-                        soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
-                    }
-                }
-            });
-        }
-
-        if (!closedwreason) {
-            loopSound(loopnu);
-        } else {
-            console.error("[OpenAudio] An error has occured while loading this function.");
-        }
+        openaudio.stopLoop = function() {
+            fadeIdOut("loop_" + randomID);
+        };
     } else {
         console.error("[OpenAudio] An error has occured while loading this function.");
     }
-};
-
-openaudio.stopLoop = function() {
-    fadeIdOut("loop_" + randomID);
 };

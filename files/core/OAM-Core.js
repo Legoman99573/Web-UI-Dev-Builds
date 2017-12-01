@@ -547,7 +547,6 @@ $(document).keydown(function(e) {
         var slider = document.getElementById("slider");
         slider.value = slider.value - 1;
         openaudio.set_volume(slider.value);
-        sliderValue(slider.value);
     }
 
     if (e.which === 72 && e.altKey) {
@@ -609,9 +608,8 @@ $(document).keydown(function(e) {
     if (e.which === 38 && e.altKey || e.which === 39 && e.altKey ) {
         // CTRL+ArrowUp or CTRL+ArrowRight pressed
         var slider = document.getElementById("slider");
-        slider.value = slider.value - 1;
+        slider.value = slider.value + 1;
         openaudio.set_volume(slider.value);
-        sliderValue(slider.value);
     }
 
 

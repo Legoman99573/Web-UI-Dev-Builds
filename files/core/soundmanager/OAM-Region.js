@@ -24,33 +24,28 @@ openaudio.playRegion = function(url, defaultTime) {
             url: url,
             volume: volume,
             from: defaultTime * 1000,
-            stream: true,
+            autoPlay: true,
             onplay: function () {
                 soundManager.getSoundById("oa_region_" + randomID).metadata.region = true;
+            },
+            onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
+                }
+            },
+            onerror: function (code, description) {
+                soundManager._writeDebug("oa_region_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.stopRegion();
+                } else {
+                    soundManager._writeDebug("Unable to decode oa_region_" + randomID + ". Well shit.", 3);
+                }
             }
         });
-
-        function loopSound(sound) {
-            sound.play({
-                onfinish: function () {
-                    loopSound(sound);
-                },
-                onerror: function (code, description) {
-                    soundManager._writeDebug("oa_region_" + randomID + " failed?", 3, code, description);
-                    if (this.loaded) {
-                        openaudio.stopRegion();
-                    } else {
-                        soundManager._writeDebug("Unable to decode oa_region_" + randomID + ". Well shit.", 3);
-                    }
-                }
-            });
-        }
-
-        if (!closedwreason) {
-            loopSound(regionsounds);
-        } else {
-            console.error("[OpenAudio] An error has occured while loading this function.");
-        }
     } else {
         console.error("[OpenAudio] An error has occured while loading this function.");
     }

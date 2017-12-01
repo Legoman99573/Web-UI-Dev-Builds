@@ -133,30 +133,30 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
 openaudio.sartBackground = function(url) {
     if (!closedwreason) {
         var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-        var regionsound = soundManager.createSound({
+        var backgroundSound = soundManager.createSound({
             id: "oa_back_" + randomID,
             volume: volume,
-            url: url
-        });
-
-        function loopSound(sound) {
-            sound.play({
-                onfinish: function () {
-                    loopSound(sound);
-                },
-                onerror: function (code, description) {
-                    soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
-                    if (this.loaded) {
-                        openaudio.stopBackground();
-                    } else {
-                        soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
-                    }
+            url: url,
+            autoPlay: true,
+            onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
                 }
-            });
-        }
-
+            },
+            onerror: function (code, description) {
+                soundManager._writeDebug("oa_back_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.stopLoop();
+                } else {
+                    soundManager._writeDebug("Unable to decode oa_back_" + randomID + ". Well shit.", 3);
+                }
+            }
+        });
         fadeIdTarget("oa_back_" + randomID);
-        loopSound(regionsound);
 
         openaudio.stopBackground = function () {
             fadeIdOut("oa_back_" + randomID);

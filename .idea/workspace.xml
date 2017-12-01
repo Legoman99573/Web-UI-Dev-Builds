@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-LoadingManager.js" afterPath="$PROJECT_DIR$/files/core/OAM-LoadingManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-FadingHandler.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-FadingHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js" afterPath="$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
@@ -21,11 +22,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OAM-Core.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-VolumeHandlers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="71" column="71" lean-forward="false" selection-start-line="71" selection-start-column="71" selection-end-line="71" selection-end-column="71" />
+            <state relative-caret-position="362">
+              <caret line="73" column="64" lean-forward="false" selection-start-line="73" selection-start-column="64" selection-end-line="73" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OAM-3rd-Party-Audio.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="51" column="95" lean-forward="false" selection-start-line="51" selection-start-column="95" selection-end-line="51" selection-end-column="95" />
               <folding />
             </state>
           </provider>
@@ -34,30 +65,8 @@
       <file leaf-file-name="OAM-FadingHandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-FadingHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OAM-LoadingManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/OAM-LoadingManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1887">
-              <caret line="111" column="27" lean-forward="true" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
-              <folding>
-                <marker date="1512157482240" expanded="true" signature="3986:3993" ph="&amp;##9400;" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OAM-Audio.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="153" column="22" lean-forward="true" selection-start-line="153" selection-start-column="22" selection-end-line="153" selection-end-column="32" />
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -66,18 +75,18 @@
       <file leaf-file-name="OAM-Loop.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="54" column="34" lean-forward="false" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
+            <state relative-caret-position="144">
+              <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OAM-Playlist.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OAM-Playlist.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="128" column="51" lean-forward="false" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
+            <state relative-caret-position="-85">
+              <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -88,8 +97,8 @@
       <file leaf-file-name="OAM-Region.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="20" column="59" lean-forward="true" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+            <state relative-caret-position="680">
+              <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -98,30 +107,18 @@
       <file leaf-file-name="OAM-Speaker.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="53" column="2" lean-forward="true" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+            <state relative-caret-position="192">
+              <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OAM-Hue.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/OAM-Hue.js">
+      <file leaf-file-name="OAM-Audio.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="3" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="3" />
-              <folding>
-                <marker date="1511902807016" expanded="true" signature="10603:10616" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OAM-VolumeHandlers.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="3" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+            <state relative-caret-position="2380">
+              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="156" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -140,12 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dev()</find>
-      <find>dev</find>
-      <find>font-</find>
-      <find>about()</find>
-      <find>font</find>
-      <find>sound</find>
       <find>10</find>
       <find>json</find>
       <find>loadBG</find>
@@ -170,6 +161,12 @@
       <find>onPosition</find>
       <find>getUrlVar</find>
       <find>.box</find>
+      <find>snow</find>
+      <find>openaudio.set_volume</find>
+      <find>getGlobalVolume</find>
+      <find>setGlobalVolume</find>
+      <find>volume</find>
+      <find>sliderValue</find>
     </findStrings>
     <replaceStrings>
       <replace>Queue</replace>
@@ -242,16 +239,16 @@
         <option value="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js" />
         <option value="$PROJECT_DIR$/metadata.json" />
-        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
-        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js" />
-        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js" />
-        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js" />
-        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
-        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js" />
         <option value="$PROJECT_DIR$/files/core/OAM-LoadingManager.js" />
         <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-FadingHandler.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js" />
+        <option value="$PROJECT_DIR$/files/core/OAM-Core.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js" />
+        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js" />
       </list>
     </option>
   </component>
@@ -520,21 +517,7 @@
       <workItem from="1511395194911" duration="20000" />
       <workItem from="1511405128610" duration="5471000" />
       <workItem from="1511467612201" duration="41610000" />
-      <workItem from="1511894415749" duration="31267000" />
-    </task>
-    <task id="LOCAL-00040" summary="Better unsupportedError.js file&#10;&#10;Better said than looking vague.">
-      <created>1508006734760</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1508006734760</updated>
-    </task>
-    <task id="LOCAL-00041" summary="playlist fix + improvements">
-      <created>1508240782937</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1508240782937</updated>
+      <workItem from="1511894415749" duration="37052000" />
     </task>
     <task id="LOCAL-00042" summary="More improvements to Playlist Manager">
       <created>1508326898435</created>
@@ -865,11 +848,25 @@
       <option name="project" value="LOCAL" />
       <updated>1512156674067</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Fixed Ambiance sound not stopping on region call&#10;&#10;This should fix that, plus went back to old fade handler since the issue was destroying sound too early.">
+      <created>1512158265867</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1512158265870</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Fixed ambiance never calling YouTube or StackStorage URLs.">
+      <created>1512158791706</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1512158791706</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="755176000" />
+    <option name="totallyTimeSpent" value="760961000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -934,7 +931,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21911764" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25441176" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4384858" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -948,8 +945,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Bootstrap Modal Changes" />
-    <MESSAGE value="Socket.io debug commands looks better (mostly if we need to see if something is messed up." />
     <MESSAGE value="Release DevBuild 1.11 for 3.0" />
     <MESSAGE value="Settings Support + LanguagePack Changes&#10;&#10;This means you can modify background image, language, and Modify the Primary and Secondary colors of Material Theme.&#10;Note that JS mods wont support switching over to another language." />
     <MESSAGE value="Background Color Support&#10;&#10;This means you can enable/disable rainbow background ;)" />
@@ -973,7 +968,9 @@
     <MESSAGE value="YouTube Function will warn when you use full URL&#10;&#10;This is a good testing tool, but a warning will be there as idiot proof. Hope this clears half the confusion." />
     <MESSAGE value="Added metadata.json to work with OA+&#10;&#10;Sorta useless, but ok :/" />
     <MESSAGE value="Fixed fading audio not working + own system (WIP)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed fading audio not working + own system (WIP)" />
+    <MESSAGE value="Fixed Ambiance sound not stopping on region call&#10;&#10;This should fix that, plus went back to old fade handler since the issue was destroying sound too early." />
+    <MESSAGE value="Fixed ambiance never calling YouTube or StackStorage URLs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed ambiance never calling YouTube or StackStorage URLs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,13 +979,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-BugReport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/css/material.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1259,14 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="51" column="95" lean-forward="false" selection-start-line="51" selection-start-column="95" selection-end-line="51" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-APIs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="490">
@@ -1297,22 +1279,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3958">
-          <caret line="289" column="68" lean-forward="false" selection-start-line="289" selection-start-column="68" selection-end-line="289" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2847">
-          <caret line="744" column="55" lean-forward="true" selection-start-line="744" selection-start-column="55" selection-end-line="744" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/js/soundmanager2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -1333,79 +1299,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="3" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="54" column="34" lean-forward="false" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="128" column="51" lean-forward="false" selection-start-line="128" selection-start-column="51" selection-end-line="128" selection-end-column="51" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="53" column="2" lean-forward="true" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="153" column="22" lean-forward="true" selection-start-line="153" selection-start-column="22" selection-end-line="153" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-LoadingManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="111" column="27" lean-forward="true" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
+        <state relative-caret-position="442">
+          <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="35" />
           <folding>
             <marker date="1512157482240" expanded="true" signature="3986:3993" ph="&amp;##9400;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js">
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="20" column="59" lean-forward="true" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+        <state relative-caret-position="572">
+          <caret line="289" column="68" lean-forward="false" selection-start-line="289" selection-start-column="68" selection-end-line="289" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/js/soundcloud.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="1056" column="47" lean-forward="false" selection-start-line="1056" selection-start-column="45" selection-end-line="1056" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-3rd-Party-Audio.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="51" column="95" lean-forward="false" selection-start-line="51" selection-start-column="95" selection-end-line="51" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-FadingHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-VolumeHandlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/OAM-Core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Audio.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="156" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Loop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Speaker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="24" column="27" lean-forward="true" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Region.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="71" column="71" lean-forward="false" selection-start-line="71" selection-start-column="71" selection-end-line="71" selection-end-column="71" />
+        <state relative-caret-position="362">
+          <caret line="73" column="64" lean-forward="false" selection-start-line="73" selection-start-column="64" selection-end-line="73" selection-end-column="64" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/core/soundmanager/OAM-Playlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

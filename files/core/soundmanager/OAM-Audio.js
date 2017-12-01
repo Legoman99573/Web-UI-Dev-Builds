@@ -113,7 +113,6 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
         });
 
         openaudio.stopPlay = function (soundID) {
-
             fadeIdOut("play_" + randomID + soundID);
             soundManager.destroySound("play_" + randomID + soundID);
         }

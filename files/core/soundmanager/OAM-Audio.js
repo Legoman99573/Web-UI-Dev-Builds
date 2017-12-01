@@ -66,9 +66,17 @@ function onSoundEnd() {
         if (listSounds().length === 0 && ambiance !== "") {
             if (ambiance.includes("soundcloud.com")) {
                 var scurl = ambiance;
-                getSoundcloud(scurl, function(newurl) {
+                getSoundcloud(scurl, function (newurl) {
                     openaudio.sartBackground(newurl);
                 });
+            } else if (ambiance.includes("youtube.com")) {
+                var youtubeId = request.src.split("?v=");
+                openaudio.sartBackground(getYoutbe(youtubeId));
+            } else if (ambiance.includes("youtu.be")) {
+                var youtubeId = ambiance.split('youtu.be/');
+                openaudio.sartBackground(getYoutbe(youtubeId));
+            } else if (ambiance.includes("stackstorage.com/s/")) {
+                openaudio.sartBackground(getStackStorage(ambiance));
             } else {
                 openaudio.sartBackground(ambiance);
             }

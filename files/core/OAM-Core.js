@@ -658,7 +658,7 @@ function listSounds() {
 
 
 function openhue() {
-    if (hue_enabled != false) {
+    if (hue_enabled !== false) {
         hue_menu();
     } else {
         OpenAudioAPI.generateDialog({

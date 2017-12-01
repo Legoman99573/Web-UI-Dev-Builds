@@ -50,6 +50,5 @@ openaudio.newspeaker = function(url, defaultTime, requestvol) {
 
     openaudio.removeSpeaker = function(id) {
         fadeSpeakerOut("speaker_ding_" + randomID);
-        soundManager.destroySound("speaker_ding_" + randomID);
     };
 };

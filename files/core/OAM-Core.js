@@ -459,7 +459,7 @@ openaudio.message = function(text) {
             });
         }
     }
-    if (window.location.protocol == "http:"){
+    if (window.location.protocol === "http:"){
         var notification = document.querySelector('.mdl-js-snackbar');
         var data = {
             message: 'New Message: ' + text,

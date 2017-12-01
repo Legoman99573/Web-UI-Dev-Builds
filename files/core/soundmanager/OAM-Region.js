@@ -56,7 +56,6 @@ openaudio.playRegion = function(url, defaultTime) {
 
     openaudio.stopRegion = function() {
         fadeIdOut("oa_region_" + randomID );
-        soundManager.destroySound("oa_region_" + randomID );
     };
 
 

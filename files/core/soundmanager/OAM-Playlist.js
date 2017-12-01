@@ -127,7 +127,6 @@ AutoDj.SoundManager_Play = function(fnc_file, id) {
 
     AutoDj.stopPlaylist = function() {
         fadeIdOut("AutoDj_" + id + "_" + randomID);
-        soundManager.destroySound("AutoDj_" + id + "_" + randomID);
     }
 };
 AutoDj.PlayNext = function() {

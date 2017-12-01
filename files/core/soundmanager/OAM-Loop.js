@@ -53,5 +53,4 @@ openaudio.loop = function(url, defaultTime) {
 
 openaudio.stopLoop = function() {
     fadeIdOut("loop_" + randomID);
-    soundManager.destroySound("loop_" + randomID);
 };

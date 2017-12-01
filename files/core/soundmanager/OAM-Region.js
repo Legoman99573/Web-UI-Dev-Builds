@@ -16,6 +16,7 @@
 openaudio.playRegion = function(url, defaultTime) {
     if (!closedwreason) {
         var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        openaudio.stopBackground();
         soundManager.stop("oa_region_" + randomID);
         soundManager.destroySound("oa_region_" + randomID);
         var regionsounds = soundManager.createSound({

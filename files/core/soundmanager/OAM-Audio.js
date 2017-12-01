@@ -57,6 +57,7 @@ function onSoundPlay() {
     }
     try {
         clearTimeout(ambtimer);
+        openaudio.stopBackground();
     } catch(e) {}
 }
 
@@ -124,8 +125,6 @@ openaudio.play = function(src_fo_file, soundID, defaultTime) {
 openaudio.sartBackground = function(url) {
     if (!closedwreason) {
         var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
-        soundManager.stop("oa_region_" + randomID);
-        soundManager.destroySound("oa_back_" + randomID);
         var regionsound = soundManager.createSound({
             id: "oa_back_" + randomID,
             volume: volume,

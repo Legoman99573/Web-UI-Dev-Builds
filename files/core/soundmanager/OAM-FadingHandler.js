@@ -16,31 +16,97 @@
 //all the fading c
 $(document).ready(function() {
     window.fadeIdOut = function(soundId) {
-        let fadeout = setInterval(function() {
-            let x = soundManager.getSoundById(soundId);
-            if (x.volume > 1) {
-                let y = (x.volume / 101) * volume;
-                soundManager.setVolume(y);
-            } else {
-                clearInterval(fadeout);
+        var x = document.createElement("INPUT");
+        x.style = "display:none;";
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId + "_Slider";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        var backAudio = $('#' + soundId + "_Slider");
+        document.getElementById('faders').appendChild(x);
+
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId, currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId);
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
                 soundManager.stop(soundId);
                 soundManager.destroySound(soundId);
-            }
-        }, 20);
+            } catch (e) {}
+            x.remove();
+        }
     };
 
     window.fadeSpeakerOut = function(soundId) {
-        let fadeout = setInterval(function() {
-            let x = soundManager.getSoundById(soundId);
-            if (x.volume > 1) {
-                let y = (x.volume / 101) * volume;
-                soundManager.setVolume(y);
-            } else {
-                clearInterval(fadeout);
+        var x = document.createElement("INPUT");
+        x.style = "display:none;";
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId + "_Slider";
+        x.min = 0;
+        x.max = 100;
+        x.value = soundManager.getSoundById(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/')).volume;
+        var backAudio = $('#' + soundId + "_Slider");
+        document.getElementById('faders').appendChild(x);
+
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 1000,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId, currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId);
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
                 soundManager.stop(soundId);
                 soundManager.destroySound(soundId);
-            }
-        }, 20);
+            } catch (e) {}
+            x.remove();
+        }
     };
 
     window.fadeSpeaker2 = function(soundId, vt) {
@@ -62,7 +128,7 @@ $(document).ready(function() {
             backAudio.animate({
                 value: volumeTarget
             }, {
-                duration: 1000,
+                duration: 400,
                 step: function(currentLeft, animProperties) {
                     if (stopFading[soundId + "_Slider_type_2"] !== true) {
                         soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
@@ -119,17 +185,50 @@ $(document).ready(function() {
     };
 
     window.fadeIdOutWithSpeaker = function(soundId) {
-        let fadeout = setInterval(function() {
-            let x = soundManager.getSoundById(soundId);
-            if (x.volume > 1) {
-                let y = (x.volume / 101) * volume;
-                soundManager.setVolume(y);
-            } else {
-                clearInterval(fadeout);
-                soundManager.stop(soundId);
-                soundManager.destroySound(soundId);
-            }
-        }, 20);
+        var x = document.createElement("INPUT");
+        x.style = "display:none;";
+        x.setAttribute("type", "range");
+        document.body.appendChild(x);
+        x.id = soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2";
+        x.min = 0;
+        x.max = 100;
+        x.value = volume;
+        var backAudio = $('#' + soundId.replace(/\./g, 'oapoint').replace(/\:/g, 'oadubblepoint').replace(/\//g, 'oaslash') + "_Slider_type_2");
+        document.getElementById('faders').appendChild(x);
+
+        if (FadeEnabled) {
+            isFading[soundId] = true;
+            backAudio.animate({
+                value: 0
+            }, {
+                duration: 100,
+                step: function(currentLeft, animProperties) {
+                    //call event when a sound started
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
+                        } catch (e) {}
+                    }
+                },
+                done: function() {
+                    if (stopFading[soundId] !== true) {
+                        try {
+                            soundManager.stop(soundId);
+                            soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+                        } catch (e) {}
+                    }
+                    isFading[soundId] = false;
+                    stopFading[soundId] = false;
+                    x.remove();
+                }
+            });
+        } else {
+            try {
+                soundManager.stop(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+                soundManager.destroySound(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'));
+            } catch (e) {}
+            x.remove();
+        }
     };
 
 
@@ -150,7 +249,7 @@ $(document).ready(function() {
             backAudio.animate({
                 value: volumeTarget
             }, {
-                duration: 1000,
+                duration: 500,
                 step: function(currentLeft, animProperties) {
                     if (stopFading[soundId + "_Slider_type_2"] !== true) {
                         soundManager.setVolume(soundId.replace(/\oapoint/g, '.').replace(/\oadubblepoint/g, ':').replace(/\oaslas/g, '/'), currentLeft);
@@ -188,7 +287,7 @@ $(document).ready(function() {
             backAudio.animate({
                 value: volumeTarget
             }, {
-                duration: 2000,
+                duration: 1000,
                 step: function(currentLeft, animProperties) {
                     if (stopFading["global_Slider_type_2"] !== true) {
                         openaudio.set_volume2(currentLeft);

@@ -69,6 +69,7 @@ async function editLanguage() {
         },
         inputPlaceholder: 'Select language',
         showCancelButton: true,
+        showLoaderOnConfirm: true,
         confirmButtonText: 'Update',
         inputValidator: (result) => {
             return !result && langpack.settings.language_rejected;
@@ -96,7 +97,7 @@ async function editLanguage() {
                 showCancelButton: false
             });
         } else {
-            localStorage.SetLanguage = result;
+            localStorage.SetLanguage = Language;
             $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + Language + ".js", function () {
                 if (!closedwreason) {
                     $('.name').html(langpack.message.welcome.replace("%name%", mcname));
@@ -106,11 +107,11 @@ async function editLanguage() {
                 if (socketclosed) {
                     $('.name').html(langpack.message.socket_closed);
                 }
-            });
-            swal({
-                type: 'success',
-                title: langpack.settings.language_success.replace('%lang%', Language),
-                showCancelButton: false
+                swal({
+                    type: 'success',
+                    title: langpack.settings.language_success.replace('%lang%', Language),
+                    showCancelButton: false
+                });
             });
         }
     }

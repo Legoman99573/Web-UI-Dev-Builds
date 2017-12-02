@@ -135,9 +135,9 @@ openaudio.sartBackground = function(url) {
         var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
         var backgroundSound = soundManager.createSound({
             id: "oa_back_" + randomID,
-            volume: volume,
             url: url,
             autoPlay: true,
+            volume: volume,
             onfinish: function () {
                 if (!closedwreason) {
                     this.stream = true;
@@ -183,4 +183,266 @@ openaudio.createBuffer = function(file_to_load) {
     });
     soundManager.load('loader');
     loadedsound.load();
+};
+
+
+/*
+* Looping handler
+*/
+openaudio.loop = function(url, defaultTime) {
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+
+        soundManager.stop("loop_" + randomID);
+        soundManager.destroySound("loop_" + randomID);
+        var loopnu = soundManager.createSound({
+            id: "loop_" + randomID,
+            url: url,
+            volume: volume,
+            autoPlay: true,
+            from: defaultTime * 1000,
+            onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
+                }
+            },
+            onerror: function (code, description) {
+                soundManager._writeDebug("loop_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.stopLoop();
+                } else {
+                    soundManager._writeDebug("Unable to decode loop_" + randomID + ". Well shit.", 3);
+                }
+            }
+        });
+
+        openaudio.stopLoop = function() {
+            fadeIdOut("loop_" + randomID);
+        };
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
+    }
+};
+
+/*
+AUTO DJ SCRIPT FROM
+https://github.com/Mindgamesnl/SM2_Playlist_Thingy
+*/
+var AutoDj = {};
+AutoDj.AddedCount = 1;
+AutoDj.IdOfNowPlaying = 0;
+AutoDj.AddSong = function(File) {
+    PlayList_songs["_" + AutoDj.AddedCount] = {
+        "File": File
+    };
+    this.AddedCount++;
+    PlayList_songs["_" + AutoDj.AddedCount] = "end";
+};
+AutoDj.LoadAll = function() {
+    var thiscount = 1;
+    while (PlayList_songs["_" + thiscount] != "end") {
+        var this_item = PlayList_songs["_" + thiscount];
+        AutoDj["SongData_" + thiscount] = {
+            "File": this_item.File,
+            "CanBePlayed": true
+        };
+        console.log("AutoDj: Song loaded with ID:" + thiscount);
+        thiscount++
+    }
+    if (PlayList_songs["_" + thiscount] == "end") {
+        var loadedcount = thiscount - 1;
+        console.log("AutoDj: Loading done (loaded a total of " + loadedcount + " songs.)");
+
+        var notification = document.querySelector('.mdl-js-snackbar');
+        var data = {
+            message: "[PlaylistManager] Loaded " + loadedcount + " songs.",
+            timeout: 10000
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
+    }
+};
+AutoDj.Check = function(song_id) {
+    if (AutoDj["SongData_" + song_id] != null) {
+        var thisdata = AutoDj["SongData_" + song_id];
+        if (thisdata.CanBePlayed === true) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+};
+AutoDj.Play = function(FNC_ID) {
+    if (this.Check(FNC_ID) === true) {
+        var thisdata = AutoDj["SongData_" + FNC_ID];
+        AutoDj.SoundManager_Play(thisdata.File, FNC_ID)
+    } else {
+        console.warn("AutoDj: " + FNC_ID + " not playing due to an error. Try rerunning the command again in game");
+        AutoDj.PlayNext();
+
+        var notification = document.querySelector('.mdl-js-snackbar');
+        var data = {
+            message: "[PlaylistManager] Failed to play song #" + FNC_ID + ". Skipping to next song.",
+            timeout: 100
+        };
+        notification.MaterialSnackbar.showSnackbar(data);
+    }
+};
+AutoDj.SoundManager_Play = function(fnc_file, id) {
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        var mySoundObject = soundManager.createSound({
+            id: "AutoDj_" + id + "_" + randomID,
+            url: fnc_file,
+            volume: volume,
+            autoPlay: true,
+            onfinish: function () {
+                AutoDj.PlayNext();
+            },
+            onerror: function () {
+                console.error("AutoDj: An error occured while playing ID: " + id + ". Check the URL in playlist.yml. Playing next song in playlist");
+                soundManager.destroySound("AutoDj_" + id + "_" + randomID);
+                AutoDj.PlayNext();
+
+                var notification = document.querySelector('.mdl-js-snackbar');
+                var data = {
+                    message: "[PlaylistManager] Failed to play song #" + id + ". Skipping to next song.",
+                    timeout: 100
+                };
+                notification.MaterialSnackbar.showSnackbar(data);
+            }
+        });
+
+        if (fnc_file.includes("oayt-delivery.snowdns.de")) {
+            curl = fnc_file.toString().split('&v=')[1];
+            $.get("https://oayt-delivery.snowdns.de/ytdata.php?name=" + mcname + "&server=" + clientID + "&v=" + curl, function (data) {
+                let json = JSON.parse(data);
+                OpenAudioAPI.songNotification({
+                    songTitle: json["title"],
+                    songURL: 'https://www.youtube.com/watch?v=' + curl,
+                    songImage: json["thumbnail"]
+                });
+            });
+        }
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
+    }
+
+    AutoDj.stopPlaylist = function() {
+        fadeIdOut("AutoDj_" + id + "_" + randomID);
+    }
+};
+AutoDj.PlayNext = function() {
+    var VolgendeLiedje = AutoDj.IdOfNowPlaying + 1;
+    if (AutoDj.Check(VolgendeLiedje) === true) {
+        AutoDj.Play(VolgendeLiedje);
+        AutoDj.IdOfNowPlaying++
+    } else {
+        AutoDj.IdOfNowPlaying = 1;
+        AutoDj.Play(AutoDj.IdOfNowPlaying);
+
+    }
+};
+
+/*
+*  Region Handler
+*/
+openaudio.playRegion = function(url, defaultTime) {
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        openaudio.stopBackground();
+        soundManager.stop("oa_region_" + randomID);
+        soundManager.destroySound("oa_region_" + randomID);
+        var regionsounds = soundManager.createSound({
+            id: "oa_region_" + randomID,
+            url: url,
+            volume: volume,
+            from: defaultTime * 1000,
+            autoPlay: true,
+            onplay: function () {
+                soundManager.getSoundById("oa_region_" + randomID).metadata.region = true;
+            },
+            onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
+                }
+            },
+            onerror: function (code, description) {
+                soundManager._writeDebug("oa_region_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.stopRegion();
+                } else {
+                    soundManager._writeDebug("Unable to decode oa_region_" + randomID + ". Well shit.", 3);
+                }
+            }
+        });
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
+    }
+
+    openaudio.stopRegion = function() {
+        fadeIdOut("oa_region_" + randomID );
+    };
+
+
+    openaudio.regionsStop = function() {
+        for (var i = 0; i < listSounds().split(',').length; i++) {
+            listSounds().split(',')[i] = listSounds().split(',')[i].replace(/^\s*/, "").replace(/\s*$/, "");
+            if (listSounds().split(',')[i].indexOf("oa_region_" + randomID) !== -1) {
+                fadeIdOut(listSounds().split(',')[i]);
+            }
+        }
+    };
+};
+
+/*
+* Speaker Handler
+*/
+openaudio.newspeaker = function(url, defaultTime, requestvol) {
+    if (!closedwreason) {
+        var randomID = Math.floor(Math.random() * 60) + 1 + "_"; // MultiShot Disabled Fix to still play multiple sounds without ghost audio
+        soundManager.stop("speaker_ding_" + randomID);
+        soundManager.destroySound("speaker_ding_" + randomID);
+        var speakersound = soundManager.createSound({
+            id: "speaker_ding_" + randomID,
+            url: url,
+            volume: 0,
+            autoPlay: true,
+            from: defaultTime * 1000,
+            onplay: function () {
+                soundManager.getSoundById("speaker_ding_" + randomID, volume).metadata.speaker = true;
+                fadeSpeaker2("speaker_ding_" + randomID, ((requestvol / 100) * volume))
+            }, onfinish: function () {
+                if (!closedwreason) {
+                    this.stream = true;
+                    this.from = 0;
+                    this.play();
+                } else {
+                    console.error("[OpenAudio] An error has occured while loading this function.");
+                }
+            }, onerror: function (code, description) {
+                soundManager._writeDebug("speaker_ding_" + randomID + " failed?", 3, code, description);
+                if (this.loaded) {
+                    openaudio.removeSpeaker();
+                } else {
+                    soundManager._writeDebug("Unable to decode speaker_ding_" + randomID + ". Well shit.", 3);
+                }
+            }
+        });
+    } else {
+        console.error("[OpenAudio] An error has occured while loading this function.");
+    }
+
+    openaudio.removeSpeaker = function(id) {
+        fadeSpeakerOut("speaker_ding_" + randomID);
+    };
 };

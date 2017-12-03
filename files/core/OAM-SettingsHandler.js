@@ -13,8 +13,8 @@
  * the License.
  */
 
-async function editBgImage() {
-    const {value: BgImage} = await swal({
+function editBgImage() {
+    swal({
         title: 'Update Background Image',
         text: langpack.settings.bgimage,
         input: 'text',
@@ -23,35 +23,52 @@ async function editBgImage() {
         inputValidator: (result) => {
             return !result && langpack.settings.bgimage_rejected;
         },
-        allowOutsideClick: false
-    });
-
-    // Runs after SweetAlert is done
-    if (BgImage) {
-        if (BgImage === 'default' || BgImage === 'Default') {
-            delete localStorage.ThemeURL;
-            document.body.background = '';
-            swal({
-                type: 'success',
-                title: langpack.settings.bgimage_default,
-                showCancelButton: false
-            });
-        } else {
-            localStorage.ThemeURL = BgImage;
-            document.body.background = BgImage;
-            // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-            document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
-            swal({
-                type: 'success',
-                title: langpack.settings.bgimage_success,
-                showCancelButton: false
-            });
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        onConfirm: (BgImage) => {
+            if (BgImage) {
+                if (BgImage === 'default' || BgImage === 'Default') {
+                    delete localStorage.ThemeURL;
+                    if (localStorage.defaultTheme) {
+                        document.body.background = localStorage.defaultTheme;
+                        // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                        document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                    } else {
+                        document.body.background = '';
+                    }
+                    swal({
+                        type: 'success',
+                        title: langpack.settings.bgimage_default,
+                        showCancelButton: false
+                    });
+                } else {
+                    $.ajax({ url: BgImage }).done(function() {
+                        localStorage.ThemeURL = BgImage;
+                        document.body.background = BgImage;
+                        // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                        document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                        swal({
+                            type: 'success',
+                            title: langpack.settings.bgimage_success,
+                            showCancelButton: false
+                        });
+                    }).fail(function () {
+                        delete localStorage.ThemeURL;
+                        swal({
+                            type: 'error',
+                            title: "Failed to load theme url:",
+                            text: BgImage,
+                            showCancelButton: false
+                        });
+                    });
+                }
+            }
         }
-    }
+    });
 }
 
-async function editLanguage() {
-    const {value: Language} = await swal({
+function editLanguage() {
+    swal({
         title: 'Update Language',
         text: langpack.settings.language,
         input: 'select',
@@ -70,51 +87,66 @@ async function editLanguage() {
         inputPlaceholder: 'Select language',
         showCancelButton: true,
         showLoaderOnConfirm: true,
+        preConfirm: (Language) => {
+            if (Language === 'Default') {
+                $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.DefaultLanguage + ".js").done(
+                    function () {
+                        delete localStorage.SetLanguage;
+                        if (!closedwreason) {
+                            $('.name').html(langpack.message.welcome.replace("%name%", mcname));
+                        } else {
+                            $('.name').html(langpack.message.notconnected);
+                        }
+                        if (socketclosed) {
+                            $('.name').html(langpack.message.socket_closed);
+                        }
+                        swal({
+                            type: 'success',
+                            title: langpack.settings.language_default.replace('%lang%', localStorage.DefaultLanguage),
+                            showCancelButton: false
+                        });
+                    }).fail(function () {
+                    delete localStorage.SetLanguage;
+                    swal({
+                        type: 'error',
+                        title: "An error has occured switching to default language " + localStorage.DefaultLanguage,
+                        showCancelButton: false
+                    });
+                })
+
+            } else {
+                $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + Language + ".js").done(
+                    function () {
+                        localStorage.SetLanguage = Language;
+                        if (!closedwreason) {
+                            $('.name').html(langpack.message.welcome.replace("%name%", mcname));
+                        } else {
+                            $('.name').html(langpack.message.notconnected);
+                        }
+                        if (socketclosed) {
+                            $('.name').html(langpack.message.socket_closed);
+                        }
+                        swal({
+                            type: 'success',
+                            title: langpack.settings.language_success.replace('%lang%', Language),
+                            showCancelButton: false
+                        });
+                    }).fail(function () {
+                        delete localStorage.SetLanguage;
+                        swal({
+                            type: 'error',
+                            title: "An error has occured switching to language " + Language,
+                            showCancelButton: false
+                        });
+                    })
+            }
+        },
         confirmButtonText: 'Update',
         inputValidator: (result) => {
             return !result && langpack.settings.language_rejected;
         },
         allowOutsideClick: false
     });
-
-    // Runs after SweetAlert is done
-    if (Language) {
-        if (Language === 'Default') {
-            delete localStorage.SetLanguage;
-            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.DefaultLanguage + ".js", function () {
-                if (!closedwreason) {
-                    $('.name').html(langpack.message.welcome.replace("%name%", mcname));
-                } else {
-                    $('.name').html(langpack.message.notconnected);
-                }
-                if (socketclosed) {
-                    $('.name').html(langpack.message.socket_closed);
-                }
-            });
-            swal({
-                type: 'success',
-                title: langpack.settings.language_default.replace('%lang%', localStorage.DefaultLanguage),
-                showCancelButton: false
-            });
-        } else {
-            localStorage.SetLanguage = Language;
-            $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + Language + ".js", function () {
-                if (!closedwreason) {
-                    $('.name').html(langpack.message.welcome.replace("%name%", mcname));
-                } else {
-                    $('.name').html(langpack.message.notconnected);
-                }
-                if (socketclosed) {
-                    $('.name').html(langpack.message.socket_closed);
-                }
-                swal({
-                    type: 'success',
-                    title: langpack.settings.language_success.replace('%lang%', Language),
-                    showCancelButton: false
-                });
-            });
-        }
-    }
 }
 
 async function editColorTemplate() {
@@ -167,9 +199,7 @@ async function editColorTemplate() {
                 title: langpack.settings.color_default,
             });
         } else {
-            localStorage.PrimaryColor = PrimaryColor;
-
-            const {value: SecondaryColor} = await swal({
+            swal({
                 title: 'Update Secondary Color',
                 input: 'select',
                 inputOptions: {
@@ -193,46 +223,59 @@ async function editColorTemplate() {
                 },
                 inputPlaceholder: 'Select Secondary Color',
                 confirmButtonText: 'Update',
+                showLoaderOnConfirm: true,
                 inputValidator: (result) => {
                     return !result && langpack.settings.secondarycolor_rejected;
                 },
-                allowOutsideClick: false
-            });
-
-            // Runs after SweetAlert is done
-            if (SecondaryColor) {
-                if (PrimaryColor === SecondaryColor) {
-                    if (!localStorage.SecondaryColor) {
-                        delete localStorage.PrimaryColor;
+                allowOutsideClick: false,
+                onConfirm: (SecondaryColor) => {
+                    if (PrimaryColor === SecondaryColor) {
+                        if (!localStorage.SecondaryColor) {
+                            delete localStorage.PrimaryColor;
+                        }
+                        swal({
+                            type: 'error',
+                            text: langpack.settings.secondarycolor_rejected_match_primary,
+                            showCancelButton: false
+                        })
+                    } else if (SecondaryColor === 'Default') {
+                        if (localStorage.PrimaryColor) {
+                            delete localStorage.PrimaryColor;
+                        }
+                        if (localStorage.SecondaryColor) {
+                            delete localStorage.SecondaryColor;
+                        }
+                        $('link[title="main"]').attr('href', 'files/css/style.css');
+                        swal({
+                            type: 'success',
+                            title: langpack.settings.color_default,
+                            showCancelButton: false
+                        });
+                    } else {
+                        localStorage.SecondaryColor = SecondaryColor;
+                        $.ajax({
+                            url: 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css'
+                        }).done(function() {
+                            localStorage.PrimaryColor = PrimaryColor;
+                            localStorage.SecondaryColor = SecondaryColor;
+                            $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css');
+                            swal({
+                                type: 'success',
+                                title: langpack.settings.color_success,
+                                showCancelButton: false
+                            });
+                        }).fail(function() {
+                            delete localStorage.PrimaryColor;
+                            delete localStorage.SecondaryColor;
+                            swal({
+                                type: 'error',
+                                title: "Failed to set Primary and Secondary Colors.",
+                                showCancelButton: false
+                            });
+                        })
                     }
-                    swal({
-                        type: 'error',
-                        text: langpack.settings.secondarycolor_rejected_match_primary,
-                        showCancelButton: false
-                    })
-                } else if (SecondaryColor === 'Default') {
-                    if (localStorage.PrimaryColor) {
-                        delete localStorage.PrimaryColor;
-                    }
-                    if (localStorage.SecondaryColor) {
-                        delete localStorage.SecondaryColor;
-                    }
-                    $('link[title="main"]').attr('href', 'files/css/style.css');
-                    swal({
-                        type: 'success',
-                        title: langpack.settings.color_default,
-                        showCancelButton: false
-                    });
-                } else {
-                    localStorage.SecondaryColor = SecondaryColor;
-                    swal({
-                        type: 'success',
-                        title: langpack.settings.color_success,
-                        showCancelButton: false
-                    });
-                    $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css');
                 }
-            }
+            });
         }
     }
 }

@@ -109,3 +109,27 @@ h1 {
 .footer span {
   font-size: 18px;
 }
+
+.mdl-card {
+  background-color: transparent !important;
+  max-width: 348px !important;
+  min-width: 245px !important;
+}
+
+.mdl-card__supporting-text {
+  overflow: auto;
+  max-width: 348px !important;
+  min-width: 245px !important;
+  background-color: white;
+}
+
+.mdl-card__actions {
+  background-color: white !important;
+}
+
+.demo-card-wide > .mdl-card__title {
+  height: 150px;
+  width: auto;
+  background: url('https://plus.openaudiomc.net/img/plus.png') center / cover;
+  background-color: #303030;
+}

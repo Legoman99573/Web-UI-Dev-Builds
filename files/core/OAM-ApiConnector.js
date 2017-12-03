@@ -90,34 +90,74 @@ socketIo.connect = function() {
 
                     if (localStorage.PrimaryColor && localStorage.SecondaryColor) {
                         $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + localStorage.PrimaryColor + '-' + localStorage.SecondaryColor + '.min.css');
-                        console.log("[OpenAudio] Loading Primary and secondary colors based on client settings.");
+                        OpenAudioAPI.logging({
+                            type: 'log',
+                            message: "Loading Primary and secondary colors based on client settings."
+                        });
                     } else if (!localStorage.PrimaryColor && localStorage.SecondaryColor) {
-                        console.warn("[OpenAudio] [settingsException] Primary color has not been set. Primary and Secondary colors will be reset.");
+                        OpenAudioAPI.logging({
+                            type: 'error',
+                            errorType: 'settingsException',
+                            message: "Primary color has not been set. Primary and Secondary colors will be reset."
+                        });
                         delete localStorage.SecondaryColor;
                     } else if (localStorage.PrimaryColor && !localStorage.SecondaryColor) {
-                        console.warn("[OpenAudio] [settingsException] Secondary color has not been set. Primary and Secondary colors will be reset.");
+                        OpenAudioAPI.logging({
+                            type: 'error',
+                            errorType: 'settingsException',
+                            message: "Secondary color has not been set. Primary and Secondary colors will be reset."
+                        });
                         delete localStorage.PrimaryColor;
                     } else {
-                        console.log("[OpenAudio] Loading default colors based on client settings.");
+                        OpenAudioAPI.logging({
+                            type: 'log',
+                            message: "Loading default colors based on client settings."
+                        });
                     }
 
                     if (localStorage.SetLanguage) {
-                        console.log("[OpenAudio] Loading language " + localStorage.SetLanguage + " based on client settings");
-                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.SetLanguage + ".js", function() {
+                        OpenAudioAPI.logging({
+                            type: 'log',
+                            message: "Loading language " + localStorage.SetLanguage + " based on client settings"
+                        });
+                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.SetLanguage + ".js").done(function() {
                             if (!closedwreason) {
                                 $('.name').html(langpack.message.welcome.replace("%name%", mcname));
                             } else {
                                 $('.name').html(langpack.message.notconnected);
                             }
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: 'Loaded language pack ' + localStorage.SetLanguage
+                            });
+                        }).fail(function() {
+                            OpenAudioAPI.logging({
+                                type: 'error',
+                                errorType: 'languagePackException',
+                                message: "Failed to load " + localStorage.SetLanguage + ". Using Webclient as fail safe."
+                            });
                         });
                     } else {
-                        console.log("[OpenAudio] Loading Server default language based on client settings");
-                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js", function() {
+                        OpenAudioAPI.logging({
+                            type: 'log',
+                            message: "Attempting to load language " + settings.language
+                        });
+                        $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + settings.language + ".js").done(function() {
                             if (!closedwreason) {
                                 $('.name').html(langpack.message.welcome.replace("%name%", mcname));
                             } else {
                                 $('.name').html(langpack.message.notconnected);
                             }
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: "Loading language " + settings.language + " based on client settings"
+                            });
+                        }).fail(function() {
+                            OpenAudioAPI.logging({
+                                type: 'error',
+                                errorType: 'languagePackException',
+                                message: "Failed to load " + settings.language + ". Using Webclient as fail safe."
+                            });
                         });
                     }
 
@@ -189,21 +229,82 @@ socketIo.connect = function() {
                     } else {}
                     if (settings.bg === "") {
                         if (localStorage.ThemeURL) {
-                            console.log('[OpenAudioMc] Loaded theme from settings.');
-                            document.body.background = localStorage.ThemeURL;
+                            $.ajax({ url: localStorage.ThemeURL }).done(function() {
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Loaded theme from client settings.'
+                                });
+                                document.body.background = localStorage.ThemeURL;
+                            }).fail(function() {
+                                delete localStorage.ThemeURL;
+                                OpenAudioAPI.logging({
+                                    type: 'error',
+                                    errorType: 'backgroundUrlException',
+                                    message: "Failed to load client theme. No default theme set. Will not load background image."
+                                });
+                            });
                             // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                             document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
                         } else {
-                            console.log('[OpenAudioMc] Detected no default background. Theme wont be set since background image was not configured.');
+                            if (!localStorage.defaultTheme) {
+                                delete localStorage.defaultTheme;
+                            }
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: 'Detected no default background. No background image will be set.'
+                            });
                         }
                     } else {
                         if (!localStorage.ThemeURL) {
-                            console.log('[OpenAudioMc] Detected default background. Using that theme instead.');
-                            document.body.background = settings.bg;
-                            localStorage.defaultTheme = settings.bg;
+                            $.ajax({ url: settings.bg }).done(function() {
+                                localStorage.defaultTheme = settings.bg;
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Detected default background image from server. Applying to background.'
+                                });
+                                document.body.background = settings.bg;
+                            }).fail(function() {
+                                if (!localStorage.defaultTheme) {
+                                    delete localStorage.defaultTheme;
+                                }
+                                OpenAudioAPI.logging({
+                                    type: 'error',
+                                    errorType: 'backgroundUrlException',
+                                    message: "Detected default background, but the URL could not be loaded. No default theme will be set."
+                                });
+                            });
                         } else {
-                            console.log('[OpenAudioMc] Loaded theme from settings.');
-                            document.body.background = localStorage.ThemeURL;
+                            $.ajax({ url: settings.bg }).done(function() {
+                                localStorage.defaultTheme = settings.bg;
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Detected default background image from server, but client has configured a background URL. Attempting to load Client set background.'
+                                });
+                            }).fail(function() {
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Detected broken background image from server, but client has configured a background URL. Attempting to load Client set background.'
+                                });
+                                delete localStorage.defaultTheme
+                            });
+                            $.ajax({ url: localStorage.defaultTheme }).done(function() {
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Loaded theme from client settings.'
+                                });
+                                document.body.background = localStorage.ThemeURL;
+                            }).fail(function() {
+                                delete localStorage.ThemeURL;
+                                if (localStorage.defaultTheme) {
+                                    OpenAudioAPI.logging({
+                                        type: 'error',
+                                        errorType: 'backgroundUrlException',
+                                        message: "Failed to load client background image. Resetting to default background image."
+                                    });
+                                    localStorage.defaultTheme = settings.bg;
+                                    document.body.background = settings.bg;
+                                }
+                            })
                         }
                         // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                         document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
@@ -221,6 +322,7 @@ socketIo.connect = function() {
                         }());
                         document.getElementById("logo").src = settings.logo;
                     }
+                    $('.materialcontainer').fadeOut(200);
                     setTimeout(function() {
                         dev();
                         OpenAudioAPI.getJS({
@@ -234,11 +336,16 @@ socketIo.connect = function() {
                             )
                         }
                     }, 2000);
+                    $('.mdl-layout').fadeIn(200);
                 }
             }, 1000);
         } else {
             closedwreason = true;
-            console.error("[OpenAudio] [clientException] This account is unclaimed. Please follow steps to claim account ID:" + clientID);
+            OpenAudioAPI.logging({
+                type: 'error',
+                errorType: 'clientException',
+                message: "This account is unclaimed. Please follow steps to claim account ID: " + clientID + "."
+            });
             $.getScript("files/pages/unclaimedError.js?v=1.1");
         }
     });
@@ -248,33 +355,45 @@ socketIo.connect = function() {
     socket.on('oaError', function(msg) {
         socketIo.log("Received error.");
         if (msg === "server-offline") {
-            closedwreason = true;
-            console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-            logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
-            $.getScript("files/pages/serverError.js?v=1.1");
+            OpenAudioAPI.logging({
+                type: 'error',
+                errorType: 'clientException',
+                message: "Exit Code status: 4. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+            });
+            logInit("clientError 4: Server appears to be offline.");
         } else if (msg === "kicked") {
             closedwreason = true;
-            console.error("[OpenAudioMc][clientException] Exit Code status: 3. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
-            logInit("clientError 3: Invalid Session. use /audio or /connect to get a new url link");
+            OpenAudioAPI.logging({
+                type: 'error',
+                errorType: 'clientException',
+                message: "Exit Code status: 5. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+            });
+            logInit("clientError 5: Client was kicked most likely due to invalid token.");
             $.getScript("files/pages/urlError.js?v=1.1");
         } else {
             var message = JSON.parse(msg);
 
-            //Whoah, why is thi in the code?
+            //Whoah, why is this in the code?
             //So we can ban servers/users who use openaudio for bad things
             //You can remove it if you wanna :3
 
             if (message.command === "banned") {
+                OpenAudioAPI.logging({
+                    type: 'error',
+                    errorType: 'clientException',
+                    message: "Exit Code status: 6. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+                });
+                logInit("clientError 6: You or the server was banned for the following reason: " + message.message);
                 closedwreason = true;
                 swal({
-                    title: "Oh no, it looks like this server is banned :(",
-                    text: "Ban info: " + message.message,
+                    title: "Oh no, it looks like this server or user is banned :(",
+                    text: "Reason: " + message.message,
                     showCancelButton: false,
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     showConfirmButton: false,
-                    html: "Ban info: " + message.message
-                }, function() {});
+                    html: "Reason: " + message.message
+                });
             }
         }
     });
@@ -288,21 +407,22 @@ socketIo.connect = function() {
         $('.name').html(langpack.message.socket_closed);
         swal({
             text: "Lost Connection to Socket.io Server. Reconnecting...",
-            onOpen: () => {
-                swal.showLoading()
-            }
+            showCancelButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false
         });
     });
 
 
 
     socket.on('connect', function() {
-        swal.close();
         console.info("[Socket.io] Connected!");
         socketIo.log("Connecting as: User: " + mcname + " Id: " + clientID + " Token: " + clientTOKEN);
         closedwreason = false;
         socketclosed = false;
         socket.emit("message", '{"type":"client","clientid":"' + clientID + '","user":"' + mcname + '","key":"' + clientTOKEN + '"}');
         socketIo.log("Message send.");
+        swal.close();
     });
 };

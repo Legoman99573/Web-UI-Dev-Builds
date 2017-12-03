@@ -455,13 +455,11 @@ footer {
   width: 90%;
 }
 
-.mdl-card {
-  background-color: transparent !important;
-}
-
 @media (max-width: 479px) {
   .mdl-snackbar {
     width: 100%;
+    max-width: 348px !important;
+    min-width: 245px !important;
   }
 }
 

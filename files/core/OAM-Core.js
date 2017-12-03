@@ -484,15 +484,16 @@ function openSmallWindow() {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Open mini-audio'
-        }).then(function () {
-            minime = window.open(document.URL+"&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
-            closedwreason = true;
-            openaudio.whisper("eventMinni");
-            minime.onload = function() {
-                $.getScript("files/pages/closeme.js")
+            confirmButtonText: 'Open mini-audio',
+            onConfirm: () => {
+                minime = window.open(document.URL + "&tinyWindow=true", "OpenAudioMc-Mini", "width=561,height=566");
+                closedwreason = true;
+                openaudio.whisper("eventMinni");
+                minime.onload = function() {
+                    $.getScript("files/pages/closeme.js")
+                }
             }
-        })
+        });
     }
 }
 

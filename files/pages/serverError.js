@@ -39,6 +39,7 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "  <!-- CSS -->\n" +
     "  <link href=\"files/css/error.css\" rel=\"stylesheet\" />\n" +
     "  <link href=\"files/css/material.css\" rel=\"stylesheet\" />\n" +
+    "  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.5/sweetalert2.min.css\"/>\n" +
     "  <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/icon?family=Material+Icons\">\n" +
     "\n" +
     "  <!-- META -->\n" +
@@ -77,9 +78,6 @@ $('head').html("  <!-- OpenAudioMC by Mindgamesnl -->\n" +
     "      -webkit-transform: translate(-50%, -50%);\n" +
     "      transform: translate(-50%, -50%);\n" +
     "    }\n" +
-    "    .swal2-container {\n" +
-    "       display: none !important;\n" +
-    "    }\n" +
     "    #soundmanager-debug {\n" +
     "       display: none !important;\n" +
     "    }\n" +
@@ -97,8 +95,9 @@ $('body').html("<!-- Uses a header that scrolls with the text, rather than stayi
     "           <br>\n" +
     "           Either issue is: \n" +
     "           <ol>\n" +
-    "               <li>API Server is offline</li>\n" +
-    "               <li>The Web Client has failed to initialize due to an error in the code</li>\n" +
+    "               <li>API server is offline or unreachable</li>\n" +
+    "               <li>Bad Internet connection</li>\n" +
+    "               <li>Error in the webclient caused this to pop up</li>\n" +
     "           </ol>\n"+
     "           Please try reloading this page and if your problem isnt solved, let us know on Discord.\n" +
     "         </div>\n" +

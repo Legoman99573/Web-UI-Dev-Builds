@@ -328,4 +328,45 @@ OpenAudioAPI.settingsItem = function(options) {
             }
         }
     }
+};
+
+/**
+ * @param {type} options
+ * @param {message} options
+ * @returns {type}
+ * @returns {message}
+ * @description console logs for OpenAudio based functions
+ */
+OpenAudioAPI.logging = function(options) {
+    var defaults = {
+        type: 'log',
+        errorType: null,
+        message: null
+    };
+    var actual = $.extend({}, defaults, options || {});
+    if (actual.type === 'log') {
+        if (actual.message !== null) {
+            console.log('%c[OpenAudio] ' + actual.message, 'background: black; color: #5f5cea');
+        } else {
+            console.warn('[OpenAudioAPI] [errorException] message cannot be empty')
+        }
+    } else if (actual.type === 'warn') {
+        if (actual.errorType !== null && actual.message !== null) {
+            console.log('%c[OpenAudio] [' + actual.errorType + '] ' + actual.message, 'background: black; color: #D9DF1D');
+        } else {
+            if (actual.errorType === null || actal.message === null) {
+                console.warn('[OpenAudioAPI] [errorException] errorType or message cannot be blank');
+            }
+        }
+    }else if (actual.type === 'error') {
+        if (actual.errorType !== null && actual.message !== null) {
+            console.log('%c[OpenAudio] [' + actual.errorType + '] ' + actual.message, 'background: black; color: #D04C34');
+        } else {
+            if (actual.errorType === null || actal.message === null) {
+                console.warn('[OpenAudioAPI] [errorException] errorType or message cannot be blank');
+            }
+        }
+    } else {
+        console.warn('[OpenAudioAPI] [errorException] type ' + actual.type + ' is not an option. Use "log", "warn" or "error"');
+    }
 }

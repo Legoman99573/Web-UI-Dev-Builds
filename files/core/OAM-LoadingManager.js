@@ -13,14 +13,19 @@
  * the License.
  */
 
-console.log('%cWelcome to OpenAudioMc', 'background: blue; color: white; display: block;font-size:40px');
-console.log("%cWARNING FROM DEVELOPERS!", 'background: black; color: RED; display: block;font-size:20px');
-console.log("%cIf someone told you to copy/paste something here you have an 420/69 chance you're being scammed.", 'background: black; color: RED; display: block;font-size:20px');
-logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.");
+function startup() {
+    console.clear('kk');
+    console.log('%cWelcome to OpenAudioMc', 'background: blue; color: white; display: block;font-size:40px');
+    console.log("%cWARNING FROM DEVELOPERS!", 'background: black; color: RED; display: block;font-size:20px');
+    console.log("%cIf someone told you to copy/paste something here you have an 420/69 chance you're being scammed.", 'background: black; color: RED; display: block;font-size:20px');
+    console.log("%cMain Project Developer: Mindgamesnl", 'background: black; color: GOLD; display: block');
+    console.log("%cProject Developers (Includes Java side and Webclient): ApocalypsejeNL, SnowBlinder, Legoman99573", 'background: black; color: GOLD; display: block');
+    logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.");
+}
 
 if (day >= 32 && day <= 46) {
     // Valentines Time
-    LiturkeyColorsInc = ["#601414","#94254c","#d63697","#cf45d0","#f46bfd"]; 110
+    LiturkeyColorsInc = ["#601414","#94254c","#d63697","#cf45d0","#f46bfd"];
 } else if (day >= 60 && day <= 77) {
     // St. Patrick's Day Time
     LiturkeyColorsInc = ["#9ed840","#d9df1d","#099441","#8dc53e","#07693a"];
@@ -129,14 +134,24 @@ function initialize() {
             socketio_client_js = api.clientJS;
             enableMain(api.clientJS);
         } catch (e) {
-            console.error("[OpenAudioMc][clientException] Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+            OpenAudioAPI.logging({
+                type: 'error',
+                errorType: 'clientException',
+                message: "Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+            });
             logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
+            closedwreason = true;
             $.getScript("files/pages/serverError.js?v=1.1");
         }
     } else {
         // Invalid Username
-        console.error("[OpenAudioMc][clientException] Exit Code status: 1. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7");
+        OpenAudioAPI.logging({
+            type: 'error',
+            errorType: 'clientException',
+            message: "Exit Code status: 1. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+        });
         logInit("clientError 1: No Username filled in. use /audio or /connect to get a new url link");
+        closedwreason = true;
         $.getScript("files/pages/urlError.js?v=1.1");
     }
 }
@@ -161,12 +176,7 @@ function enableMain(clientJs) {
 }
 
 function logInit(msg) {
-    console.info("[Init] " + msg);
+    console.info("[Init] %c" + msg, 'color: #d04c34');
 }
 
-if (platform.name === "Microsoft Edge" || platform.name === "IE") {
-    logInit("clientError 6: Using an Unsupported Browser");
-    $.getScript("files/pages/unsupportedError.js?v=1.1");
-} else {
-    initialize();
-}
+startup();

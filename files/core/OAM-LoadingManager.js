@@ -20,6 +20,7 @@ function startup() {
     console.log("%cIf someone told you to copy/paste something here you have an 420/69 chance you're being scammed.", 'background: black; color: RED; display: block;font-size:20px');
     console.log("%cMain Project Developer: Mindgamesnl", 'background: black; color: GOLD; display: block');
     console.log("%cProject Developers (Includes Java side and Webclient): ApocalypsejeNL, SnowBlinder, Legoman99573", 'background: black; color: GOLD; display: block');
+    console.log("%cYou like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/", 'background: black; color: LIME; display: block');
     logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.");
 }
 
@@ -77,9 +78,6 @@ ui.color = function(code) {
 
 tinyWindow = getUrlVar("tinyWindow");
 
-
-console.info("You like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/");
-
 // Make sure that OpenAudioMc is mentioned in the function somewhere or your server will be banned until it's fixed as it was stated in the license. To appeal, email us at contact@openaudiomc.net. Thanks, ~OpenAudioMc developers
 function about() {
     OpenAudioAPI.generateDialog({
@@ -122,6 +120,7 @@ function getUrlVar(variable) {
 }
 
 function initialize() {
+    startup();
     var username = getUrlVar("name");
     if (/^\w+$/i.test(username)) {
         //save to load, i guess?
@@ -179,4 +178,22 @@ function logInit(msg) {
     console.info("[Init] %c" + msg, 'color: #d04c34');
 }
 
-startup();
+if (platform.name === "Microsoft Edge" || platform.name === "IE") {
+    startup();
+    logInit("clientError 6: Using an Unsupported Browser");
+    $.getScript("files/pages/unsupportedError.js?v=1.1");
+} else {
+    $.getScript("https://craftmend.com/nophp-openaudiomc.js").done(function () {
+        initialize();
+    }).fail(function () {
+        startup();
+        OpenAudioAPI.logging({
+            type: 'error',
+            errorType: 'clientException',
+            message: "Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
+        });
+        logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
+        closedwreason = true;
+        $.getScript("files/pages/serverError.js?v=1.1");
+    });
+}

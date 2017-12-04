@@ -15,7 +15,6 @@
 
 /**
  * @ignore
- * @deprecated
  * @description Functions below have been removed
  */
 
@@ -24,6 +23,7 @@
 /**
  * @ignore
  * @deprecated Use OpenAudioApi.songNotification instead.
+ * @since Development Build 1.8
  */
 function open_soundcloud() {
     console.error("[OpenAudioMc] [removedMethodError] open_soundcloud() is no longer supported. Use OpenAudioApi.songNotification() instead.")
@@ -32,6 +32,7 @@ function open_soundcloud() {
 /**
  * @ignore
  * @deprecated You will get redirected instead due to an annoying bug in OpenAudio 2.x.
+ * @since Development Build 1.8
  */
 function showPlus() {
     console.error("[OpenAudio] [removedMethodError] showPlus() is no longer supported. You will get redirected instead due to an annoying bug in OpenAudio 2.x.");
@@ -50,7 +51,8 @@ function showPlus() {
 
 /**
  * @ignore
- * @deprecated Use OpenAudioAPI.getCSS() instead.
+ * @deprecated Use OpenAudioAPI.getCSS() instead due to better preformance.
+ * @since Development Build 1.8
  */
 function addCss(url) {
     console.warn("[OpenAudio] [deprecatedException] addCss has been deprecated as of Development Build 1.8 due to no detection. Use OpenAudioAPI.getCSS() instead.");
@@ -62,7 +64,8 @@ function addCss(url) {
 
 /**
  * @ignore
- * @deprecated Use OpenAudioAPI.getJS() instead.
+ * @deprecated Use OpenAudioAPI.getJS() instead due to better preformance.
+ * @since Development Build 1.12
  */
 function addJs(url) {
     console.warn("[OpenAudio] [deprecatedException] addJS has been deprecated as of Development Build 1.12 due to no detection. Use OpenAudioAPI.getJS() instead.");

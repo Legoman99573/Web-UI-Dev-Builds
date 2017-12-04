@@ -22,7 +22,14 @@ var OpenAudioAPI = {};
  * @param {optionButtonHide} options
  * @param {optionAction} options
  * @param {hideCloseButton} options
- * @returns {dialogLarge} {dialogWidth} {textTitle} {htmlContent} {optionButtonHide} {optionAction} {hideCloseButton}
+ * @returns {dialogLarge}
+ * @returns {dialogWidth}
+ * @requires {textTitle}
+ * @requires {htmlContent}
+ * @returns {optionButtonHide}
+ * @returns {optionAction}
+ * @returns {hideCloseButton}
+ * @since Development Build 1.8
  * @description Generates a custom Bootstrap Modal
  */
 
@@ -84,11 +91,7 @@ OpenAudioAPI.generateDialog = function(options) {
 };
 
 /**
- * @param {icon} icon
- * @param {callback} callback
- * @param {whattocallback} whattocallback
- * @param {iconname} iconname
- * @returns {icon} {callback} {whattocallback} {iconname}
+ * @since Beginning of OpenAudioMc
  * @description Displays options in the left tray item
  */
 function trayItem(icon, callback, whattocallback, iconname) {
@@ -99,7 +102,10 @@ function trayItem(icon, callback, whattocallback, iconname) {
  * @param {onClick} options
  * @param {itemName} options
  * @param {underlineBelow} options
- * @returns {onClick} {itemName} {underlineBelow}
+ * @returns {onClick}
+ * @returns {itemName} {underlineBelow}
+ * @returns {underlineBelow}
+ * @since Development Build 1.8
  * @description Displays an option in the Right Tray Icon
  */
 OpenAudioAPI.rightTrayItem = function(options) {
@@ -129,7 +135,10 @@ OpenAudioAPI.rightTrayItem = function(options) {
  * @param {songTitle} options
  * @param {songImage} options
  * @param {songURL} options
- * @returns {songTitle} {songImage} {songURL}
+ * @returns {songTitle}
+ * @returns {songImage}
+ * @returns {songURL}
+ * @since Development Build 1.8
  * @description Displays Song Notification in Material Snackbar
  */
 OpenAudioAPI.songNotification = function(options) {
@@ -166,6 +175,7 @@ OpenAudioAPI.songNotification = function(options) {
 /**
  * @param {url} options
  * @returns {url}
+ * @since Development Build 1.8
  * @description Loads as a JS Mod
  */
 OpenAudioAPI.getCSS = function(options) {
@@ -192,7 +202,8 @@ OpenAudioAPI.getCSS = function(options) {
 /**
  * @param {url} options
  * @returns {url}
- * @description Loads as a JavaS Mod
+ * @since Development Build 1.12
+ * @description Loads as a JavaScript Mod
  */
 OpenAudioAPI.getJS = function(options) {
     var defaults = {
@@ -218,6 +229,7 @@ OpenAudioAPI.getJS = function(options) {
 
 /**
  * @description Displays Mods enabled/disabled in Mods Menu
+ * @since Development Build 1.8
  */
 OpenAudioAPI.loadMod = function(url, status, type) {
     if (url !== "undefined") {
@@ -255,7 +267,11 @@ OpenAudioAPI.loadMod = function(url, status, type) {
  * @param {currentVersion} options
  * @param {latestVersion} options
  * @param {urlLink} options
- * @returns {modName} {currentVersion} {latestVersion} {urlLink}
+ * @returns {modName}
+ * @returns {currentVersion}
+ * @returns {latestVersion}
+ * @returns {urlLink}
+ * @since Development Build 1.8
  * @description Checks to see if someone is using an outdated JS Mod
  */
 OpenAudioAPI.versionCheckup = function(options) {
@@ -305,7 +321,10 @@ OpenAudioAPI.versionCheckup = function(options) {
  * @param {onClick} options
  * @param {itemName} options
  * @param {underlineBelow} options
- * @returns {onClick} {itemName} {underlineBelow}
+ * @returns {onClick}
+ * @returns {itemName}
+ * @returns {underlineBelow}
+ * @since Development Build 1.12
  * @description Adds an option in Settings Menu
  */
 OpenAudioAPI.settingsItem = function(options) {
@@ -335,6 +354,7 @@ OpenAudioAPI.settingsItem = function(options) {
  * @param {message} options
  * @returns {type}
  * @returns {message}
+ * @since Development Build 1.12
  * @description console logs for OpenAudio based functions
  */
 OpenAudioAPI.logging = function(options) {
@@ -353,18 +373,16 @@ OpenAudioAPI.logging = function(options) {
     } else if (actual.type === 'warn') {
         if (actual.errorType !== null && actual.message !== null) {
             console.log('%c[OpenAudio] [' + actual.errorType + '] ' + actual.message, 'background: black; color: #D9DF1D');
+        } else if (actual.errorType === null || actual.message === null) {
+            console.log('%c[OpenAudio] ' + actual.message, 'background: black; color: #D9DF1D');
         } else {
-            if (actual.errorType === null || actal.message === null) {
-                console.warn('[OpenAudioAPI] [errorException] errorType or message cannot be blank');
-            }
+            console.warn('[OpenAudioAPI] [errorException] message cannot be blank');
         }
-    }else if (actual.type === 'error') {
+    } else if (actual.type === 'error') {
         if (actual.errorType !== null && actual.message !== null) {
             console.log('%c[OpenAudio] [' + actual.errorType + '] ' + actual.message, 'background: black; color: #D04C34');
-        } else {
-            if (actual.errorType === null || actal.message === null) {
-                console.warn('[OpenAudioAPI] [errorException] errorType or message cannot be blank');
-            }
+        } else if (actual.errorType === null || actal.message === null) {
+            console.warn('[OpenAudioAPI] [errorException] errorType or message cannot be blank');
         }
     } else {
         console.warn('[OpenAudioAPI] [errorException] type ' + actual.type + ' is not an option. Use "log", "warn" or "error"');

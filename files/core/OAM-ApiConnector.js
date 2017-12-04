@@ -29,9 +29,7 @@ socketIo.connect = function() {
             type: 'warn',
             message: 'Connected in development mode. We dont recommend this option due to server-offline is cancelled out.'
         });
-        socket.emit('Development-Mode', 'true');
-    } else {
-        socket.emit('Development-Mode', 'false');
+        devmode = true;
     }
 
     closedwreason = false;
@@ -372,15 +370,21 @@ socketIo.connect = function() {
                 message: "Exit Code status: 4. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
             });
             logInit("clientError 4: Server appears to be offline.");
+            if (!devmode === true) {
+                closedwreason = true;
+                $.getScript("files/pages/serverError.js");
+            }
         } else if (msg === "kicked") {
-            closedwreason = true;
             OpenAudioAPI.logging({
                 type: 'error',
                 errorType: 'clientException',
                 message: "Exit Code status: 5. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
             });
             logInit("clientError 5: Client was kicked most likely due to invalid token.");
-            $.getScript("files/pages/urlError.js?v=1.1");
+            if (!devmode === true) {
+                closedwreason = true;
+                $.getScript("files/pages/urlError.js?v=1.1");
+            }
         } else {
             var message = JSON.parse(msg);
 
@@ -412,17 +416,22 @@ socketIo.connect = function() {
 
 
     socket.on('disconnect', function() {
-        socketclosed = true;
-        closedwreason = true;
         socketIo.log("Disconnected!");
         $('.name').html(langpack.message.socket_closed);
-        swal({
-            text: "Lost Connection to Socket.io Server. Reconnecting...",
-            showCancelButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-            showConfirmButton: false
-        });
+        if (devmode === true) {
+            $('.materialcontainer').fadeOut(200);
+            $('.mdl-layout').fadeIn(200);
+        } else {
+            socketclosed = true;
+            closedwreason = true;
+            swal({
+                text: "Lost Connection to Socket.io Server. Reconnecting...",
+                showCancelButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false
+            });
+        }
     });
 
 

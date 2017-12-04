@@ -112,6 +112,7 @@ var settings = false;
 var epilepsyfix = false;
 var date = new Date();
 var month = date.getMonth();
+var devmode = false;
 
 // Date Check
 var start = new Date(date.getFullYear(), 0, 0);

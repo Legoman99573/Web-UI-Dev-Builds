@@ -419,6 +419,68 @@ socketIo.connect = function() {
         socketIo.log("Disconnected!");
         $('.name').html(langpack.message.socket_closed);
         if (devmode === true) {
+            if (localStorage.SetLanguage) {
+                OpenAudioAPI.logging({
+                    type: 'log',
+                    message: "Loading language " + localStorage.SetLanguage + " based on client settings"
+                });
+                $.getScript("https://rawgit.com/OpenAudioMc/Dev-Build-Language-Packs/master/" + localStorage.SetLanguage + ".js").done(function() {
+                    if (!closedwreason) {
+                        $('.name').html(langpack.message.welcome.replace("%name%", mcname));
+                    } else {
+                        $('.name').html(langpack.message.notconnected);
+                    }
+                    OpenAudioAPI.logging({
+                        type: 'log',
+                        message: 'Loaded language pack ' + localStorage.SetLanguage
+                    });
+                }).fail(function() {
+                    OpenAudioAPI.logging({
+                        type: 'error',
+                        errorType: 'languagePackException',
+                        message: "Failed to load " + localStorage.SetLanguage + ". Using Webclient as fail safe."
+                    });
+                });
+            }
+            if (localStorage.PrimaryColor && localStorage.SecondaryColor) {
+                $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + localStorage.PrimaryColor + '-' + localStorage.SecondaryColor + '.min.css');
+                OpenAudioAPI.logging({
+                    type: 'log',
+                    message: "Loading Primary and secondary colors based on client settings."
+                });
+            } else if (!localStorage.PrimaryColor && localStorage.SecondaryColor) {
+                OpenAudioAPI.logging({
+                    type: 'error',
+                    errorType: 'settingsException',
+                    message: "Primary color has not been set. Primary and Secondary colors will be reset."
+                });
+                delete localStorage.SecondaryColor;
+            } else if (localStorage.PrimaryColor && !localStorage.SecondaryColor) {
+                OpenAudioAPI.logging({
+                    type: 'error',
+                    errorType: 'settingsException',
+                    message: "Secondary color has not been set. Primary and Secondary colors will be reset."
+                });
+                delete localStorage.PrimaryColor;
+            }
+            if (localStorage.ThemeURL) {
+                $.ajax({ url: localStorage.ThemeURL }).done(function() {
+                    OpenAudioAPI.logging({
+                        type: 'log',
+                        message: 'Loaded theme from client settings.'
+                    });
+                    document.body.background = localStorage.ThemeURL;
+                }).fail(function() {
+                    delete localStorage.ThemeURL;
+                    OpenAudioAPI.logging({
+                        type: 'error',
+                        errorType: 'backgroundUrlException',
+                        message: "Failed to load client theme. No default theme set. Will not load background image."
+                    });
+                });
+                // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+            }
             $('.materialcontainer').fadeOut(2000);
             $('.mdl-layout').fadeIn(2000);
         } else {

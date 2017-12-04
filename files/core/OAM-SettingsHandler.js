@@ -25,7 +25,7 @@ function editBgImage() {
         },
         showLoaderOnConfirm: true,
         allowOutsideClick: false,
-        onConfirm: (BgImage) => {
+        preConfirm: (BgImage) => {
             if (BgImage) {
                 if (BgImage === 'default' || BgImage === 'Default') {
                     delete localStorage.ThemeURL;
@@ -199,7 +199,7 @@ async function editColorTemplate() {
                 title: langpack.settings.color_default,
             });
         } else {
-            swal({
+            const {value: SecondaryColor} = await swal({
                 title: 'Update Secondary Color',
                 input: 'select',
                 inputOptions: {
@@ -228,54 +228,41 @@ async function editColorTemplate() {
                     return !result && langpack.settings.secondarycolor_rejected;
                 },
                 allowOutsideClick: false,
-                onConfirm: (SecondaryColor) => {
-                    if (PrimaryColor === SecondaryColor) {
-                        if (!localStorage.SecondaryColor) {
-                            delete localStorage.PrimaryColor;
-                        }
-                        swal({
-                            type: 'error',
-                            text: langpack.settings.secondarycolor_rejected_match_primary,
-                            showCancelButton: false
-                        })
-                    } else if (SecondaryColor === 'Default') {
-                        if (localStorage.PrimaryColor) {
-                            delete localStorage.PrimaryColor;
-                        }
-                        if (localStorage.SecondaryColor) {
-                            delete localStorage.SecondaryColor;
-                        }
-                        $('link[title="main"]').attr('href', 'files/css/style.css');
-                        swal({
-                            type: 'success',
-                            title: langpack.settings.color_default,
-                            showCancelButton: false
-                        });
-                    } else {
-                        localStorage.SecondaryColor = SecondaryColor;
-                        $.ajax({
-                            url: 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css'
-                        }).done(function() {
-                            localStorage.PrimaryColor = PrimaryColor;
-                            localStorage.SecondaryColor = SecondaryColor;
-                            $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css');
-                            swal({
-                                type: 'success',
-                                title: langpack.settings.color_success,
-                                showCancelButton: false
-                            });
-                        }).fail(function() {
-                            delete localStorage.PrimaryColor;
-                            delete localStorage.SecondaryColor;
-                            swal({
-                                type: 'error',
-                                title: "Failed to set Primary and Secondary Colors.",
-                                showCancelButton: false
-                            });
-                        })
-                    }
-                }
             });
+            if (SecondaryColor) {
+                if (PrimaryColor === SecondaryColor) {
+                    if (!localStorage.SecondaryColor) {
+                        delete localStorage.PrimaryColor;
+                    }
+                    swal({
+                        type: 'error',
+                        text: langpack.settings.secondarycolor_rejected_match_primary,
+                        showCancelButton: false
+                    })
+                } else if (SecondaryColor === 'Default') {
+                    if (localStorage.PrimaryColor) {
+                        delete localStorage.PrimaryColor;
+                    }
+                    if (localStorage.SecondaryColor) {
+                        delete localStorage.SecondaryColor;
+                    }
+                    $('link[title="main"]').attr('href', 'files/css/style.css');
+                    swal({
+                        type: 'success',
+                        title: langpack.settings.color_default,
+                        showCancelButton: false
+                    });
+                } else {
+                    localStorage.PrimaryColor = PrimaryColor;
+                    localStorage.SecondaryColor = SecondaryColor;
+                    $('link[title="main"]').attr('href', 'https://code.getmdl.io/1.3.0/material.' + PrimaryColor + '-' + SecondaryColor + '.min.css');
+                    swal({
+                        type: 'success',
+                        title: langpack.settings.color_success,
+                        showCancelButton: false
+                    });
+                }
+            }
         }
     }
 }

@@ -78,8 +78,8 @@
       <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="29" column="101" lean-forward="false" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
+            <state relative-caret-position="297">
+              <caret line="422" column="38" lean-forward="false" selection-start-line="422" selection-start-column="38" selection-end-line="422" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -527,14 +527,7 @@
       <workItem from="1511395194911" duration="20000" />
       <workItem from="1511405128610" duration="5471000" />
       <workItem from="1511467612201" duration="41610000" />
-      <workItem from="1511894415749" duration="75426000" />
-    </task>
-    <task id="LOCAL-00048" summary="Dev Build 1.8 Release for 3.0&#10;&#10;Playlist Fixes&#10;&#10;StackStorage.com support&#10;&#10;Bug Report Information&#10;&#10;New Theme (Material Design)&#10;&#10;Fixes for youtu.be links&#10;&#10;Dropped support for IE/Edge browsers (sorry, but they are broken)">
-      <created>1508617233148</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1508617233148</updated>
+      <workItem from="1511894415749" duration="75696000" />
     </task>
     <task id="LOCAL-00049" summary="Oops, forgot to patch a bug =/">
       <created>1508618034548</created>
@@ -872,11 +865,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512420124841</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Updated Message for development mode">
+      <created>1512420279677</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1512420279677</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="799335000" />
+    <option name="totallyTimeSpent" value="799605000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -927,7 +927,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="SA2 Pushed to 7.0.3 + OA Manager Changes&#10;&#10;* init.js is now called OAM-LoadingManager.js&#10;&#10;* bugreport.js is now called OAM-BugReport.js" />
     <MESSAGE value="Reverting SweetAlert2 due to major bugs in latest version" />
     <MESSAGE value="Android App Placeholder" />
     <MESSAGE value="App Placeholder Fix" />
@@ -952,7 +951,8 @@
     <MESSAGE value="Changes + Loading Screen&#10;&#10;* Console messages has been redone + ajax languagepacks and background image&#10;&#10;* Loading screen was added in since the webclient only shows the settings button :/&#10;&#10;* Background Images that 404 will now remove and use the default one, plus notifies that the image is unloadable&#10;&#10;* clientExceptions has been updated so we can narrow down the problem&#10;&#10;* Updated YouTube Delivery Service (Thanks @ApocalypsjeNL for the PR) Closes PR #7 #8 and #9&#10;&#10;* Webclient 3.0.1.12 Release is near ;)" />
     <MESSAGE value="Fixed Development mode" />
     <MESSAGE value="Fixed Development mode (For testing)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Development mode (For testing)" />
+    <MESSAGE value="Updated Message for development mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Message for development mode" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1382,8 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" column="101" lean-forward="false" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
+        <state relative-caret-position="297">
+          <caret line="422" column="38" lean-forward="false" selection-start-line="422" selection-start-column="38" selection-end-line="422" selection-end-column="38" />
           <folding />
         </state>
       </provider>

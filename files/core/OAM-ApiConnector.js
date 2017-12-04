@@ -331,7 +331,7 @@ socketIo.connect = function() {
                         }());
                         document.getElementById("logo").src = settings.logo;
                     }
-                    $('.materialcontainer').fadeOut(200);
+                    $('.materialcontainer').fadeOut(1000);
                     setTimeout(function() {
                         dev();
                         OpenAudioAPI.getJS({
@@ -345,7 +345,7 @@ socketIo.connect = function() {
                             )
                         }
                     }, 2000);
-                    $('.mdl-layout').fadeIn(200);
+                    $('.mdl-layout').fadeIn(1000);
                 }
             }, 1000);
         } else {
@@ -419,8 +419,8 @@ socketIo.connect = function() {
         socketIo.log("Disconnected!");
         $('.name').html(langpack.message.socket_closed);
         if (devmode === true) {
-            $('.materialcontainer').fadeOut(200);
-            $('.mdl-layout').fadeIn(200);
+            $('.materialcontainer').fadeOut(2000);
+            $('.mdl-layout').fadeIn(2000);
         } else {
             socketclosed = true;
             closedwreason = true;

@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-SettingsHandler.js" afterPath="$PROJECT_DIR$/files/core/OAM-SettingsHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -526,14 +523,7 @@
       <workItem from="1511395194911" duration="20000" />
       <workItem from="1511405128610" duration="5471000" />
       <workItem from="1511467612201" duration="41610000" />
-      <workItem from="1511894415749" duration="78300000" />
-    </task>
-    <task id="LOCAL-00050" summary="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be">
-      <created>1508625311760</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1508625311761</updated>
+      <workItem from="1511894415749" duration="78417000" />
     </task>
     <task id="LOCAL-00051" summary="Release 1.9 for OpenAudioMC 3.0&#10;&#10;* Bugfixes with connection issues&#10;* MiniMe button shown as disabled while pressing M&#10;* MiniMe has custom page when minime is opened&#10;* Fixed an issue with Updater showing html code&#10;* SweetAlert2 Updated to 6.11.0&#10;* Some Error pages showing SweetAlert2 when not suppose to be">
       <created>1508625327011</created>
@@ -871,11 +861,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512420548456</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="Fix broken Settings &quot;closed 6&quot;">
+      <created>1512424922669</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1512424922669</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="802209000" />
+    <option name="totallyTimeSpent" value="802326000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -926,7 +923,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Android App Placeholder" />
     <MESSAGE value="App Placeholder Fix" />
     <MESSAGE value="Update Error Pages so themes arent in them." />
     <MESSAGE value="SoundManagers will no longer work while disconnect reason&#10;&#10;This should fix up for error pages :D" />
@@ -951,7 +947,8 @@
     <MESSAGE value="Fixed Development mode (For testing)" />
     <MESSAGE value="Updated Message for development mode" />
     <MESSAGE value="Better fading effect after webclient loads" />
-    <option name="LAST_COMMIT_MESSAGE" value="Better fading effect after webclient loads" />
+    <MESSAGE value="Fix broken Settings &quot;closed 6&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix broken Settings &quot;closed 6&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

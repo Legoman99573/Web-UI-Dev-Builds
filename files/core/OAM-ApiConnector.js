@@ -23,13 +23,15 @@ socketIo.connect = function() {
         secure: true
     });
 
-    // This
+    // This will determine if we need to bypass server-offline
     if (window.location.href.includes('&offline-bypass=true')) {
         OpenAudioAPI.logging({
             type: 'warn',
             message: 'Connected in development mode. We dont recommend this option due to server-offline is cancelled out.'
         });
-        openaudio.whisper('Development-Mode');
+        socket.emit('Development-Mode', 'true');
+    } else {
+        socket.emit('Development-Mode', 'false');
     }
 
     closedwreason = false;

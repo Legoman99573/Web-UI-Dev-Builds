@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="Fixed Development mode (For testing)">
+    <list default="true" id="d981318d-b34f-4ff7-a265-eefc0d14e88d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" afterPath="$PROJECT_DIR$/files/core/OAM-ApiConnector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/core/OAM-Core.js" afterPath="$PROJECT_DIR$/files/core/OAM-Core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/pages/serverError.js" afterPath="$PROJECT_DIR$/files/pages/serverError.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -80,8 +78,8 @@
       <file leaf-file-name="OAM-ApiConnector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6069">
-              <caret line="384" column="37" lean-forward="true" selection-start-line="384" selection-start-column="37" selection-end-line="384" selection-end-column="37" />
+            <state relative-caret-position="238">
+              <caret line="29" column="101" lean-forward="false" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -529,14 +527,7 @@
       <workItem from="1511395194911" duration="20000" />
       <workItem from="1511405128610" duration="5471000" />
       <workItem from="1511467612201" duration="41610000" />
-      <workItem from="1511894415749" duration="75286000" />
-    </task>
-    <task id="LOCAL-00047" summary="Stack Storage Support + Dev Build 1.8 Release">
-      <created>1508614897820</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1508614897820</updated>
+      <workItem from="1511894415749" duration="75426000" />
     </task>
     <task id="LOCAL-00048" summary="Dev Build 1.8 Release for 3.0&#10;&#10;Playlist Fixes&#10;&#10;StackStorage.com support&#10;&#10;Bug Report Information&#10;&#10;New Theme (Material Design)&#10;&#10;Fixes for youtu.be links&#10;&#10;Dropped support for IE/Edge browsers (sorry, but they are broken)">
       <created>1508617233148</created>
@@ -874,11 +865,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512419494479</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Fixed Development mode (For testing)">
+      <created>1512420124841</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1512420124841</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="799195000" />
+    <option name="totallyTimeSpent" value="799335000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -929,7 +927,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Forgot Microsoft Policy&#10;&#10;Required for Windows 10 App in Privacy Policy. OOPSIES" />
     <MESSAGE value="SA2 Pushed to 7.0.3 + OA Manager Changes&#10;&#10;* init.js is now called OAM-LoadingManager.js&#10;&#10;* bugreport.js is now called OAM-BugReport.js" />
     <MESSAGE value="Reverting SweetAlert2 due to major bugs in latest version" />
     <MESSAGE value="Android App Placeholder" />
@@ -954,7 +951,8 @@
     <MESSAGE value="Changes + Loading Screen&#10;&#10;* Console messages has been redone + ajax languagepacks and background image&#10;&#10;* Loading screen was added in since the webclient only shows the settings button :/&#10;&#10;* Background Images that 404 will now remove and use the default one, plus notifies that the image is unloadable&#10;&#10;* clientExceptions has been updated so we can narrow down the problem&#10;&#10;* Webclient 3.0.1.12 Release is near ;)" />
     <MESSAGE value="Changes + Loading Screen&#10;&#10;* Console messages has been redone + ajax languagepacks and background image&#10;&#10;* Loading screen was added in since the webclient only shows the settings button :/&#10;&#10;* Background Images that 404 will now remove and use the default one, plus notifies that the image is unloadable&#10;&#10;* clientExceptions has been updated so we can narrow down the problem&#10;&#10;* Updated YouTube Delivery Service (Thanks @ApocalypsjeNL for the PR) Closes PR #7 #8 and #9&#10;&#10;* Webclient 3.0.1.12 Release is near ;)" />
     <MESSAGE value="Fixed Development mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Development mode" />
+    <MESSAGE value="Fixed Development mode (For testing)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Development mode (For testing)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1384,8 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/files/core/OAM-ApiConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6069">
-          <caret line="384" column="37" lean-forward="true" selection-start-line="384" selection-start-column="37" selection-end-line="384" selection-end-column="37" />
+        <state relative-caret-position="238">
+          <caret line="29" column="101" lean-forward="false" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
           <folding />
         </state>
       </provider>

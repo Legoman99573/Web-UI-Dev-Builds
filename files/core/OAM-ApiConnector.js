@@ -27,7 +27,7 @@ socketIo.connect = function() {
     if (window.location.href.includes('&offline-bypass=true')) {
         OpenAudioAPI.logging({
             type: 'warn',
-            message: 'Connected in development mode. We dont recommend this option due to server-offline is cancelled out.'
+            message: 'Connected in development mode. We dont recommend this option for production use.'
         });
         devmode = true;
     }

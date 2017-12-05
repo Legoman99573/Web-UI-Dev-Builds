@@ -189,7 +189,7 @@ socketIo.connect = function() {
                         ambdelay = settings.ambdelay;
                     }
 
-                    if (development === true) {
+                    if (development === true || devmode === true) {
                         sm_debugger = new trayItem("fa fa-terminal", "soundmanager2_debugger", "", "SoundManager Debugger");
                     }
 
@@ -238,20 +238,11 @@ socketIo.connect = function() {
                     } else {}
                     if (settings.bg === "") {
                         if (localStorage.ThemeURL) {
-                            $.ajax({ url: localStorage.ThemeURL }).done(function() {
-                                OpenAudioAPI.logging({
-                                    type: 'log',
-                                    message: 'Loaded theme from client settings.'
-                                });
-                                document.body.background = localStorage.ThemeURL;
-                            }).fail(function() {
-                                delete localStorage.ThemeURL;
-                                OpenAudioAPI.logging({
-                                    type: 'error',
-                                    errorType: 'backgroundUrlException',
-                                    message: "Failed to load client theme. No default theme set. Will not load background image."
-                                });
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: 'Loaded theme from client settings.'
                             });
+                            document.body.background = localStorage.ThemeURL;
                             // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                             document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
                         } else {
@@ -265,55 +256,18 @@ socketIo.connect = function() {
                         }
                     } else {
                         if (!localStorage.ThemeURL) {
-                            $.ajax({ url: settings.bg }).done(function() {
-                                localStorage.defaultTheme = settings.bg;
-                                OpenAudioAPI.logging({
-                                    type: 'log',
-                                    message: 'Detected default background image from server. Applying to background.'
-                                });
-                                document.body.background = settings.bg;
-                            }).fail(function() {
-                                if (!localStorage.defaultTheme) {
-                                    delete localStorage.defaultTheme;
-                                }
-                                OpenAudioAPI.logging({
-                                    type: 'error',
-                                    errorType: 'backgroundUrlException',
-                                    message: "Detected default background, but the URL could not be loaded. No default theme will be set."
-                                });
+                            localStorage.defaultTheme = settings.bg;
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: 'Detected default background image from server. Applying to background.'
                             });
+                            document.body.background = settings.bg;
                         } else {
-                            $.ajax({ url: settings.bg }).done(function() {
-                                localStorage.defaultTheme = settings.bg;
-                                OpenAudioAPI.logging({
-                                    type: 'log',
-                                    message: 'Detected default background image from server, but client has configured a background URL. Attempting to load Client set background.'
-                                });
-                            }).fail(function() {
-                                OpenAudioAPI.logging({
-                                    type: 'log',
-                                    message: 'Detected broken background image from server, but client has configured a background URL. Attempting to load Client set background.'
-                                });
-                                delete localStorage.defaultTheme
+                            OpenAudioAPI.logging({
+                                type: 'log',
+                                message: 'Detected default background image from server, but client has configured a background URL. Using Client set background instead.'
                             });
-                            $.ajax({ url: localStorage.defaultTheme }).done(function() {
-                                OpenAudioAPI.logging({
-                                    type: 'log',
-                                    message: 'Loaded theme from client settings.'
-                                });
-                                document.body.background = localStorage.ThemeURL;
-                            }).fail(function() {
-                                delete localStorage.ThemeURL;
-                                if (localStorage.defaultTheme) {
-                                    OpenAudioAPI.logging({
-                                        type: 'error',
-                                        errorType: 'backgroundUrlException',
-                                        message: "Failed to load client background image. Resetting to default background image."
-                                    });
-                                    localStorage.defaultTheme = settings.bg;
-                                    document.body.background = settings.bg;
-                                }
-                            })
+                            document.body.background = localStorage.ThemeURL;
                         }
                         // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                         document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
@@ -464,20 +418,11 @@ socketIo.connect = function() {
                 delete localStorage.PrimaryColor;
             }
             if (localStorage.ThemeURL) {
-                $.ajax({ url: localStorage.ThemeURL }).done(function() {
-                    OpenAudioAPI.logging({
-                        type: 'log',
-                        message: 'Loaded theme from client settings.'
-                    });
-                    document.body.background = localStorage.ThemeURL;
-                }).fail(function() {
-                    delete localStorage.ThemeURL;
-                    OpenAudioAPI.logging({
-                        type: 'error',
-                        errorType: 'backgroundUrlException',
-                        message: "Failed to load client theme. No default theme set. Will not load background image."
-                    });
+                OpenAudioAPI.logging({
+                    type: 'log',
+                    message: 'Loaded theme from client settings.'
                 });
+                document.body.background = localStorage.ThemeURL;
                 // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
                 document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
             }

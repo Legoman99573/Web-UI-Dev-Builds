@@ -121,7 +121,7 @@ var oneDay = 1000 * 60 * 60 * 24;
 var day = Math.floor(diff / oneDay);
 
 // Determines if stable or unstable
-var development = true;
+var development = false;
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -432,7 +432,7 @@ openaudio.decode = function(msg) {
 openaudio.whisper = function(message) {
     socket.emit("whisperToServer" , message);
     console.info("[Socket.io] Whisper send.");
-    if (development === true) {
+    if (development === true || devmode === true) {
         console.log("%c[Socket.io] {\"whisperToServer\",\"" + message + "\"}", 'background: #2B547E; color: white');
     }
 };
@@ -567,12 +567,16 @@ function bugreport() {
         "      <td></td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "      <td class=\"mdl-data-table__cell--non-numeric\">Web Client Dev Build Version</td>\n" +
-        "      <td>"+ devBuild +" for "+ devVersion +"</td>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Webclient Version: </td>\n" +
+        "      <td>"+ devVersion +"." + devBuild +"</td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "      <td class=\"mdl-data-table__cell--non-numeric\">Web Client Release Status</td>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Web Client Release Status: </td>\n" +
         "      <td>"+ developmentcheck +"</td>\n" +
+        "    </tr>\n" +
+        "    <tr>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Developer Mode: </td>\n" +
+        "      <td>"+ devmode +"</td>\n" +
         "    </tr>\n" +
         "  </tbody>\n" +
         "</table>",
@@ -648,7 +652,7 @@ $(document).keydown(function(e) {
 
     if (e.which === 68 && e.altKey) {
         // CTRL+D pressed
-        if (!(development !== true)) {
+        if (!(development !== true) || !(devmode !== true)) {
             soundmanager2_debugger();
         } else {
             swal({

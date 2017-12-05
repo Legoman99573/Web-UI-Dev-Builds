@@ -82,8 +82,7 @@ tinyWindow = getUrlVar("tinyWindow");
 function about() {
     OpenAudioAPI.generateDialog({
         textTitle: 'About',
-        htmlContent: '<h6>OpenAudioMc Version: <b id="version">Unable to fetch Version</b></h6>\n' +
-        '<h6>Dev Build #:<b id="build">Unable to fetch Build</b></h6>\n' +
+        htmlContent: '<h6>Webclient Version: <b id="version">0.0</b><b>.</b><b id="build">0.0</b></h6>\n' +
         '<h6>Release Status: <b id="release-status">Unable to fetch Release Status</b></h6>\n' +
         '<h6><b>&#9400;OpenAudioMc 2016-2017</b></h6>',
         dialogWidth: '300px'
@@ -96,7 +95,7 @@ function about() {
     loadVersion();
 }
 
-if (!month === 10 || !month === 11 || !month === 0) {
+if (!(day >= 328 && day <= 362)) {
     $('#snow-settings').hide();
 }
 

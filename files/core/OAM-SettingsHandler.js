@@ -13,8 +13,8 @@
  * the License.
  */
 
-function editBgImage() {
-    swal({
+async function editBgImage() {
+    const {value: BgImage} = await swal({
         title: 'Update Background Image',
         text: langpack.settings.bgimage,
         input: 'text',
@@ -23,48 +23,35 @@ function editBgImage() {
         inputValidator: (result) => {
             return !result && langpack.settings.bgimage_rejected;
         },
-        showLoaderOnConfirm: true,
         allowOutsideClick: false,
-        preConfirm: (BgImage) => {
-            if (BgImage) {
-                if (BgImage === 'default' || BgImage === 'Default') {
-                    delete localStorage.ThemeURL;
-                    if (localStorage.defaultTheme) {
-                        document.body.background = localStorage.defaultTheme;
-                        // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-                        document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
-                    } else {
-                        document.body.background = '';
-                    }
-                    swal({
-                        type: 'success',
-                        title: langpack.settings.bgimage_default,
-                        showCancelButton: false
-                    });
-                } else {
-                    $.ajax({ url: BgImage }).done(function() {
-                        localStorage.ThemeURL = BgImage;
-                        document.body.background = BgImage;
-                        // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-                        document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
-                        swal({
-                            type: 'success',
-                            title: langpack.settings.bgimage_success,
-                            showCancelButton: false
-                        });
-                    }).fail(function () {
-                        delete localStorage.ThemeURL;
-                        swal({
-                            type: 'error',
-                            title: "Failed to load theme url:",
-                            text: BgImage,
-                            showCancelButton: false
-                        });
-                    });
-                }
-            }
-        }
     });
+    if (BgImage) {
+        if (BgImage === 'default' || BgImage === 'Default') {
+            delete localStorage.ThemeURL;
+            if (localStorage.defaultTheme) {
+                document.body.background = localStorage.defaultTheme;
+                // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+            } else {
+                document.body.background = '';
+            }
+            swal({
+                type: 'success',
+                title: langpack.settings.bgimage_default,
+                showCancelButton: false
+            });
+        } else {
+            localStorage.ThemeURL = BgImage;
+            document.body.background = BgImage;
+            // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+            document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+            swal({
+                type: 'success',
+                title: langpack.settings.bgimage_success,
+                showCancelButton: false
+            });
+        }
+    }
 }
 
 function editLanguage() {
@@ -223,7 +210,6 @@ async function editColorTemplate() {
                 },
                 inputPlaceholder: 'Select Secondary Color',
                 confirmButtonText: 'Update',
-                showLoaderOnConfirm: true,
                 inputValidator: (result) => {
                     return !result && langpack.settings.secondarycolor_rejected;
                 },

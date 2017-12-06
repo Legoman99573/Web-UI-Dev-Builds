@@ -22,6 +22,13 @@ function startup() {
     console.log("%cProject Developers (Includes Java side and Webclient): ApocalypsejeNL, SnowBlinder, Legoman99573", 'background: black; color: GOLD; display: block');
     console.log("%cYou like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/", 'background: black; color: LIME; display: block');
     logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.");
+    if (window.location.href.includes('&offline-bypass=true')) {
+        OpenAudioAPI.logging({
+            type: 'warn',
+            message: 'Connected in development mode. We dont recommend this option for production use.'
+        });
+        devmode = true;
+    }
 }
 
 if (day >= 32 && day <= 46) {
@@ -119,7 +126,6 @@ function getUrlVar(variable) {
 }
 
 function initialize() {
-    startup();
     var username = getUrlVar("name");
     if (/^\w+$/i.test(username)) {
         //save to load, i guess?
@@ -177,22 +183,27 @@ function logInit(msg) {
     console.info("[Init] %c" + msg, 'color: #d04c34');
 }
 
+startup();
 if (platform.name === "Microsoft Edge" || platform.name === "IE") {
-    startup();
     logInit("clientError 6: Using an Unsupported Browser");
     $.getScript("files/pages/unsupportedError.js?v=1.1");
 } else {
     $.getScript("https://craftmend.com/nophp-openaudiomc.js").done(function () {
         initialize();
     }).fail(function () {
-        startup();
         OpenAudioAPI.logging({
             type: 'error',
             errorType: 'clientException',
             message: "Exit Code status: 2. Please show in OpenAudioMc Discord https://discord.gg/b44BPv7"
         });
         logInit("clientError 2: Cannot connect to OpenAudio Socket Server.");
-        closedwreason = true;
-        $.getScript("files/pages/serverError.js?v=1.1");
+        // This will determine if we need to bypass server-offline
+        if (devmode === true) {
+            $('.materialcontainer').fadeOut(2000);
+            $('.mdl-layout').fadeIn(2000);
+        } else {
+            closedwreason = true;
+            $.getScript("files/pages/serverError.js?v=1.1");
+        }
     });
 }

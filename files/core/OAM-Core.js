@@ -121,7 +121,7 @@ var oneDay = 1000 * 60 * 60 * 24;
 var day = Math.floor(diff / oneDay);
 
 // Determines if stable or unstable
-var development = false;
+var development = true;
 
 openaudio.color = function(code) {
     $("#footer").animate({
@@ -575,7 +575,7 @@ function bugreport() {
         "      <td>"+ developmentcheck +"</td>\n" +
         "    </tr>\n" +
         "    <tr>\n" +
-        "      <td class=\"mdl-data-table__cell--non-numeric\">Developer Mode: </td>\n" +
+        "      <td class=\"mdl-data-table__cell--non-numeric\">Offline-Server Bypass Mode: </td>\n" +
         "      <td>"+ devmode +"</td>\n" +
         "    </tr>\n" +
         "  </tbody>\n" +

@@ -1,5 +1,5 @@
 // This file is needed for openaudiomc-plus, removing it will resolve in a disabled web client
 {
   "version": "3.0",
-  "build": "1.12"
+  "build": "3.0.1.13"
 }

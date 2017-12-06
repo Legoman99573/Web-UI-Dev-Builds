@@ -23,15 +23,6 @@ socketIo.connect = function() {
         secure: true
     });
 
-    // This will determine if we need to bypass server-offline
-    if (window.location.href.includes('&offline-bypass=true')) {
-        OpenAudioAPI.logging({
-            type: 'warn',
-            message: 'Connected in development mode. We dont recommend this option for production use.'
-        });
-        devmode = true;
-    }
-
     closedwreason = false;
     socket.on('command', function(msg) {
         socketIo.log("Reiceived command.");

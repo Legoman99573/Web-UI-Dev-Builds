@@ -14,7 +14,7 @@
  */
 
 var devVersion = "3.0";
-var devBuild = "1.12";
+var devBuild = "1.13";
 
 function loadVersion() {
     $('#version').text(devVersion);

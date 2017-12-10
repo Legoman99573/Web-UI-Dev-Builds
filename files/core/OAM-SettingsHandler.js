@@ -41,15 +41,23 @@ async function editBgImage() {
                 showCancelButton: false
             });
         } else {
-            localStorage.ThemeURL = BgImage;
-            document.body.background = BgImage;
-            // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-            document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
-            swal({
-                type: 'success',
-                title: langpack.settings.bgimage_success,
-                showCancelButton: false
-            });
+            if (BgImage.contains('file:///')) {
+                swal({
+                    type: 'error',
+                    title: langpack.settings.bgimage_localfile_error,
+                    showCancelButton: false
+                });
+            } else {
+                localStorage.ThemeURL = BgImage;
+                document.body.background = BgImage;
+                // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                swal({
+                    type: 'success',
+                    title: langpack.settings.bgimage_success,
+                    showCancelButton: false
+                });
+            }
         }
     }
 }

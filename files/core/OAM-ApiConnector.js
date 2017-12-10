@@ -229,13 +229,22 @@ socketIo.connect = function() {
                     } else {}
                     if (settings.bg === "") {
                         if (localStorage.ThemeURL) {
-                            OpenAudioAPI.logging({
-                                type: 'log',
-                                message: 'Loaded theme from client settings.'
-                            });
-                            document.body.background = localStorage.ThemeURL;
-                            // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
-                            document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                            if (!localStorage.ThemeURL.contains('file:///')) {
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Loaded theme from client settings.'
+                                });
+                                document.body.background = localStorage.ThemeURL;
+                                // Added since CSS ignores what we set in main.css. This will stay its size even on minimize and maximize :D
+                                document.body.style = "background-attachment: fixed; background-size: cover; background-repeat: no-repeat";
+                            } else {
+                                delete localStorage.ThemeURL;
+                                OpenAudioAPI.logging({
+                                    type: 'error',
+                                    errorType: 'illegalException',
+                                    message: 'OpenAudio is not allowed to load local resources due to security reasons. No background image will be set since there is not one set by the server'
+                                });
+                            }
                         } else {
                             if (!localStorage.defaultTheme) {
                                 delete localStorage.defaultTheme;
@@ -246,13 +255,32 @@ socketIo.connect = function() {
                             });
                         }
                     } else {
-                        if (!localStorage.ThemeURL) {
-                            localStorage.defaultTheme = settings.bg;
+                        if (localStorage.ThemeURL.contains('file:///')) {
+                            delete localStorage.ThemeURL;
                             OpenAudioAPI.logging({
-                                type: 'log',
-                                message: 'Detected default background image from server. Applying to background.'
+                                type: 'error',
+                                errorType: 'illegalException',
+                                message: 'OpenAudio is not allowed to load local resources due to security reasons. OpenAudio will try to load the default background image set by the server.'
                             });
-                            document.body.background = settings.bg;
+                        }
+                        if (!localStorage.ThemeURL) {
+                            if (!settings.bg.contains('file:///')) {
+                                localStorage.defaultTheme = settings.bg;
+                                OpenAudioAPI.logging({
+                                    type: 'log',
+                                    message: 'Detected default background image from server. Applying to background.'
+                                });
+                                document.body.background = settings.bg;
+                            } else {
+                                if (localStorage.defaultTheme) {
+                                    delete localStorage.defaultTheme;
+                                }
+                                OpenAudioAPI.logging({
+                                    type: 'error',
+                                    errorType: 'illegalException',
+                                    message: 'OpenAudio is not allowed to load local resources due to security reasons. No background image will be set and recommend the server owner to get another background image to use.'
+                                });
+                            }
                         } else {
                             OpenAudioAPI.logging({
                                 type: 'log',

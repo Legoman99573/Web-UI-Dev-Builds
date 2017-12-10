@@ -58,6 +58,7 @@ langpack.settings.bgimage = 'Type "Default" to use the default background image 
 langpack.settings.bgimage_rejected = 'URL field cannot be empty';
 langpack.settings.bgimage_default = 'Background image has been reset to default.';
 langpack.settings.bgimage_success = 'Background image has been set.';
+langpack.settings.bgimage_localfile_error = 'Background image cannot be a local file due to security reasons.';
 langpack.settings.language = 'Note that JS addons may not support language changes.';
 langpack.settings.language_rejected = 'Language must be selected.';
 langpack.settings.language_default = 'Language reset to default language, %lang%.';

@@ -14,12 +14,12 @@
  */
 
 function startup() {
-    console.clear('kk');
+    console.clear();
     console.log('%cWelcome to OpenAudioMc', 'background: blue; color: white; display: block;font-size:40px');
     console.log("%cWARNING FROM DEVELOPERS!", 'background: black; color: RED; display: block;font-size:20px');
     console.log("%cIf someone told you to copy/paste something here you have an 420/69 chance you're being scammed.", 'background: black; color: RED; display: block;font-size:20px');
     console.log("%cMain Project Developer: Mindgamesnl", 'background: black; color: GOLD; display: block');
-    console.log("%cProject Developers (Includes Java side and Webclient): ApocalypsejeNL, SnowBlinder, Legoman99573", 'background: black; color: GOLD; display: block');
+    console.log("%cProject Developers (Includes Java side and Webclient): ApocalypsejeNL, SnowBlinder", 'background: black; color: GOLD; display: block');
     console.log("%cYou like to look under the hood? Why not help us ? :-) https://github.com/OpenAudioMc/Web-UI-Dev-Builds/", 'background: black; color: LIME; display: block');
     logInit("You may see a message like '[Violation] Forced reflow while executing JavaScript took Xms', Please ignore it since it is caused by lovely socketio.");
     if (window.location.href.includes('&offline-bypass=true')) {
